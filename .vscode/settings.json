@@ -1,0 +1,7 @@
+{
+  "remote.autoForwardPortsFallback": 0,
+  "IDX.aI.enableInlineCompletion": true,
+  "IDX.aI.enableCodebaseIndexing": true,
+  "editor.formatOnSave": true,
+  "terminal.integrated.defaultProfile.windows": "Git Bash", 
+}
