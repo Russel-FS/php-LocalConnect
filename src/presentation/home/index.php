@@ -7,7 +7,7 @@
 </head>
 <body>
     <div>
-        <h2>Hello World</h2>
+        <h2 class="text-2xl font-bold">Hello World</h2>
     </div>
 </body>
 </html>
