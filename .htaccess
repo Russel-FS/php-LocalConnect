@@ -1,0 +1,21 @@
+RewriteEngine On
+RewriteBase /
+
+# Si el archivo o directorio no existe, redirigir a index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Prevenir acceso directo a archivos .php en el directorio src
+RewriteRule ^src/.*\.php$ - [F,L]
+
+# Prevenir listado de directorios
+Options -Indexes
+
+# Configuración de seguridad básica
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule> 
