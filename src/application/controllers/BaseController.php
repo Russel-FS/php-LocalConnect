@@ -4,7 +4,7 @@ class BaseController
 {
     protected function view($view, $data = [])
     {
-        // se obtiene la informacion del usuario autenticado 
+        // Obtener la información del usuario si está autenticado
         if ($this->isAuthenticated()) {
             $data['user'] = [
                 'id' => $_SESSION['user_id'],
@@ -24,8 +24,11 @@ class BaseController
             throw new Exception("Vista no encontrada: {$view}");
         }
 
-        // Incluir el layout principal
-        require_once __DIR__ . "/../../presentation/layouts/main.php";
+
+        ob_start(); // Capturar la salida de la vista
+        require $viewPath; // Incluir la vista
+        $content = ob_get_clean(); // Obtener el contenido capturado
+        require_once __DIR__ . "/../../presentation/views/main.php"; // Incluir el layout principal
     }
 
     protected function json($data, $statusCode = 200)
