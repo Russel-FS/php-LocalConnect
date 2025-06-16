@@ -20,15 +20,6 @@
             </div>
         </div>
     </div>
-
-    <div x-data="searchComponent">
-        <input x-model="search" placeholder="Search...">
-        <ul>
-            <template x-for="item in filteredItems()" :key="item">
-                <li x-text="item"></li>
-            </template>
-        </ul>
-    </div>
 </body>
 
 </html>
