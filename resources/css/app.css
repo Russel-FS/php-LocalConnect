@@ -9,34 +9,117 @@
     --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
-}
-
-@theme {
-    --color-primary-50: #faf5ff;
-    --color-primary-100: #f3e8ff;
-    --color-primary-200: #e9d5ff;
-    --color-primary-300: #d8b4fe;
-    --color-primary-400: #c084fc;
-    --color-primary-500: #a78bfa;
-    --color-primary-600: #7c3aed; /* Púrpura elegante */
-    --color-primary-700: #6d28d9;
-    --color-primary-800: #5b21b6;
-    --color-primary-900: #4c1d95;
-    --color-primary-950: #2e1065;
+    --color-primary-50: #f7fafc;
+    --color-primary-100: #e3e9ee;
+    --color-primary-200: #c8d4de;
+    --color-primary-300: #a3b8c6;
+    --color-primary-400: #7d9bad;
+    --color-primary-500: #5c7a8a;
+    --color-primary-600: #4f6d7a;
+    --color-primary-700: #3b5360;
+    --color-primary-800: #2a3942;
+    --color-primary-900: #1a232a;
+    --color-primary-950: #10151a;
+    --color-gray-bg: #f7fafc;
+    --color-gray-card: #fff;
+    --color-gray-alt: #f3f6f9;
+    --color-gray-text: #23272f;
 }
 
 body {
-    background: linear-gradient(120deg, #fff 0%, #faf5ff 100%);
+    background: var(--color-gray-bg);
+    font-family: "Inter", "Instrument Sans", ui-sans-serif, system-ui,
+        sans-serif;
 }
 
 .card-apple {
-    @apply bg-white/90 dark:bg-gray-50/90 rounded-3xl shadow-xl hover:shadow-2xl transition-shadow border border-gray-100 dark:border-gray-200;
+    @apply rounded-2xl shadow-md hover:shadow-lg transition-shadow border-0;
+    background: var(--color-gray-card);
+    transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-apple:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 24px 0 rgba(79, 109, 122, 0.1);
 }
 
 .btn-apple {
-    @apply px-7 py-2.5 rounded-full border border-primary-600 text-primary-600 bg-white hover:bg-primary-50 transition-colors font-medium shadow-sm hover:scale-105 active:scale-100 duration-150;
+    @apply px-7 py-2 rounded-full border border-primary-600 text-primary-600 bg-white hover:bg-primary-50 transition-colors font-semibold shadow-sm hover:scale-105 active:scale-100 duration-150;
+    letter-spacing: 0.01em;
+    box-shadow: 0 1px 6px 0 rgba(79, 109, 122, 0.07);
 }
 
 .btn-apple-solid {
-    @apply px-7 py-2.5 rounded-full bg-primary-600 text-white border border-primary-600 hover:bg-primary-700 transition-colors font-medium shadow-sm hover:scale-105 active:scale-100 duration-150;
+    @apply px-7 py-2 rounded-full bg-primary-600 text-white border border-primary-600 hover:bg-primary-700 transition-colors font-semibold shadow-sm hover:scale-105 active:scale-100 duration-150;
+    letter-spacing: 0.01em;
+    box-shadow: 0 2px 10px 0 rgba(79, 109, 122, 0.1);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Inter", "Instrument Sans", ui-sans-serif, system-ui,
+        sans-serif;
+    letter-spacing: -0.01em;
+}
+
+.section-apple {
+    @apply py-24;
+}
+
+.text-apple-muted {
+    @apply text-gray-400;
+}
+
+.navbar-premium {
+    @apply w-full bg-white/90 backdrop-blur border-b border-gray-100 fixed z-50;
+    box-shadow: 0 1px 8px 0 rgba(79, 109, 122, 0.04);
+}
+
+.section-premium {
+    @apply py-28;
+}
+
+.section-alt {
+    background: var(--color-gray-alt);
+}
+
+.feature-icon {
+    @apply mb-6 mx-auto;
+    stroke: var(--color-primary-600);
+}
+
+.card-feature {
+    @apply bg-white rounded-xl shadow-md p-10 text-center transition-transform duration-200 hover:scale-105 hover:shadow-lg;
+}
+
+.card-testimonial {
+    @apply bg-white rounded-xl shadow p-8 flex flex-col items-center text-center transition-transform duration-200 hover:scale-105 hover:shadow-lg;
+    box-shadow: 0 2px 16px 0 rgba(79, 109, 122, 0.07);
+}
+
+.avatar {
+    @apply w-16 h-16 rounded-full mb-4 object-cover border-2 border-primary-100;
+}
+
+.btn-premium {
+    @apply px-8 py-3 rounded-full bg-primary-600 text-white font-semibold shadow-md hover:bg-primary-700 transition-transform transition-shadow duration-200;
+    letter-spacing: 0.01em;
+}
+
+.btn-premium:hover {
+    @apply scale-105 shadow-lg;
+}
+
+.btn-premium-outline {
+    @apply px-8 py-3 rounded-full border border-primary-600 text-primary-600 bg-white font-semibold shadow-md hover:bg-primary-50 transition-transform transition-shadow duration-200;
+    letter-spacing: 0.01em;
+}
+.btn-premium-outline:hover {
+    @apply scale-105 shadow-lg;
+}
+
+.text-premium-muted {
+    @apply text-gray-400;
 }
