@@ -62,17 +62,17 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
             <div class="card-testimonial">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" class="avatar">
-                <h4 class="font-semibold mb-2">Carlos M.</h4>
+                <h4 class="font-semibold mb-2">Canaquiri Susy</h4>
                 <p class="text-premium-muted mb-2 text-sm">"Encontré el mejor taller mecánico a dos cuadras de mi casa. ¡Súper fácil y rápido!"</p>
             </div>
             <div class="card-testimonial">
                 <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar" class="avatar">
-                <h4 class="font-semibold mb-2">Lucía G.</h4>
+                <h4 class="font-semibold mb-2">Palacios Sahel</h4>
                 <p class="text-premium-muted mb-2 text-sm">"Gracias a LocalConnect, mi cafetería recibe nuevos clientes cada semana."</p>
             </div>
             <div class="card-testimonial">
                 <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Avatar" class="avatar">
-                <h4 class="font-semibold mb-2">Javier R.</h4>
+                <h4 class="font-semibold mb-2">Fuertes Betzabet</h4>
                 <p class="text-premium-muted mb-2 text-sm">"La plataforma es muy intuitiva y me ayudó a descubrir servicios que no conocía."</p>
             </div>
         </div>
