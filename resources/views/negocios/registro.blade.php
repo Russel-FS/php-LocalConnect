@@ -3,11 +3,17 @@
 @section('content')
 <div class="min-h-screen bg-gray-50 flex">
     <!-- Sidebar -->
-    <aside class="hidden lg:flex flex-col w-80 bg-white border-r border-gray-100 py-12 px-10 gap-8 fixed left-0 top-16 h-[calc(100vh-4rem)]">
-        <div class="mb-8">
-            <p class="text-gray-500 text-sm">Completa los pasos para registrar tu negocio</p>
+    <aside class="hidden lg:flex flex-col w-80 bg-white rounded-2xl shadow-lg border border-gray-100 py-8 px-8 gap-8 sticky top-28 z-20 h-fit ml-8">
+        <!-- Progreso -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold text-gray-700">Progreso</span>
+                <span id="progress-text" class="text-xs text-primary-600 font-bold">1 de 6</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 16.67%"></div>
+            </div>
         </div>
-
         <ul id="wizard-sidebar" class="space-y-8">
             <li class="wizard-step-item" data-step="1">
                 <div class="flex items-center gap-4">
@@ -16,6 +22,7 @@
                             <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
+
                     <div>
                         <span class="step-label">Datos del negocio</span>
                         <p class="text-xs text-gray-400 mt-1">Información básica</p>
@@ -94,21 +101,10 @@
                 </div>
             </li>
         </ul>
-
-        <!-- Indicador de progreso -->
-        <div class="mt-auto">
-            <div class="flex items-center justify-between text-sm text-gray-500 mb-2">
-                <span>Progreso</span>
-                <span id="progress-text">1 de 6</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2">
-                <div id="progress-bar" class="bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 16.67%"></div>
-            </div>
-        </div>
     </aside>
 
-    <!-- Contenido principal-->
-    <main class="flex-1 lg:ml-80">
+    <!-- Contenido principal -->
+    <main class="flex-1">
         <div class="max-w-4xl mx-auto p-8 lg:p-16">
             <form id="wizard-form" autocomplete="off">
                 <!-- Paso 1: Datos del negocio -->
