@@ -1,177 +1,413 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="section-premium bg-white min-h-[80vh] flex items-center justify-center">
-    <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-10 relative overflow-hidden">
-        <h2 class="text-3xl font-extrabold mb-8 text-center tracking-tight">Registrar Negocio</h2>
-        <form id="wizard-form">
-            <!-- Paso 1: Datos del negocio -->
-            <div id="paso-1">
-                <h3 class="text-xl font-semibold mb-6">Datos del negocio</h3>
-                <div class="space-y-5">
-                    <div>
-                        <label class="block mb-2 text-gray-700">Nombre del negocio</label>
-                        <div class="relative">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-                                    <rect x="4" y="8" width="16" height="10" rx="4" stroke="#4f6d7a" stroke-width="1.5" />
-                                </svg>
-                            </span>
-                            <input type="text" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Panadería San Juan" />
-                        </div>
+<div class="min-h-screen bg-gray-50 flex">
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex flex-col w-80 bg-white border-r border-gray-100 py-12 px-10 gap-8 fixed left-0 top-16 h-[calc(100vh-4rem)]">
+        <div class="mb-8">
+            <p class="text-gray-500 text-sm">Completa los pasos para registrar tu negocio</p>
+        </div>
+
+        <ul id="wizard-sidebar" class="space-y-8">
+            <li class="wizard-step-item" data-step="1">
+                <div class="flex items-center gap-4">
+                    <div class="step-circle">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" class="step-icon">
+                            <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
                     </div>
                     <div>
-                        <label class="block mb-2 text-gray-700">Descripción</label>
-                        <textarea required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" rows="3" placeholder="Describe tu negocio"></textarea>
-                    </div>
-                    <div>
-                        <label class="block mb-2 text-gray-700">Imagen de portada</label>
-                        <input type="file" required class="w-full text-gray-600" />
+                        <span class="step-label">Datos del negocio</span>
+                        <p class="text-xs text-gray-400 mt-1">Información básica</p>
                     </div>
                 </div>
-                <div class="flex justify-end mt-8">
-                    <button class="btn-premium" type="button" onclick="cambiarPaso(1,2)">Siguiente</button>
+            </li>
+
+            <li class="wizard-step-item" data-step="2">
+                <div class="flex items-center gap-4">
+                    <div class="step-circle">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" class="step-icon">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" />
+                            <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="step-label">Ubicación</span>
+                        <p class="text-xs text-gray-400 mt-1">Dirección y coordenadas</p>
+                    </div>
                 </div>
+            </li>
+
+            <li class="wizard-step-item" data-step="3">
+                <div class="flex items-center gap-4">
+                    <div class="step-circle">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" class="step-icon">
+                            <path d="M7 7h.01M7 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="step-label">Categorías</span>
+                        <p class="text-xs text-gray-400 mt-1">Tipo de negocio</p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="wizard-step-item" data-step="4">
+                <div class="flex items-center gap-4">
+                    <div class="step-circle">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" class="step-icon">
+                            <path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="step-label">Servicios</span>
+                        <p class="text-xs text-gray-400 mt-1">Productos y servicios</p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="wizard-step-item" data-step="5">
+                <div class="flex items-center gap-4">
+                    <div class="step-circle">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" class="step-icon">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="step-label">Contacto</span>
+                        <p class="text-xs text-gray-400 mt-1">Información de contacto</p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="wizard-step-item" data-step="6">
+                <div class="flex items-center gap-4">
+                    <div class="step-circle">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" class="step-icon">
+                            <path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="step-label">Resumen</span>
+                        <p class="text-xs text-gray-400 mt-1">Revisar información</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Indicador de progreso -->
+        <div class="mt-auto">
+            <div class="flex items-center justify-between text-sm text-gray-500 mb-2">
+                <span>Progreso</span>
+                <span id="progress-text">1 de 6</span>
             </div>
-            <!-- Paso 2: Ubicación -->
-            <div id="paso-2" class="hidden">
-                <h3 class="text-xl font-semibold mb-6">Ubicación</h3>
-                <div class="space-y-5">
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 16.67%"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contenido principal-->
+    <main class="flex-1 lg:ml-80">
+        <div class="max-w-4xl mx-auto p-8 lg:p-16">
+            <form id="wizard-form" autocomplete="off">
+                <!-- Paso 1: Datos del negocio -->
+                <div id="paso-1">
+                    <h3 class="text-3xl font-bold mb-2 text-gray-900">Datos del negocio</h3>
+                    <p class="text-gray-600 mb-8">Comencemos con la información básica de tu negocio</p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Nombre del negocio</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
+                                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+                                        <rect x="4" y="8" width="16" height="10" rx="4" stroke="#2563eb" stroke-width="1.5" />
+                                    </svg>
+                                </span>
+                                <input type="text" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Panadería San Juan" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Descripción</label>
+                            <textarea required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" rows="3" placeholder="Describe tu negocio"></textarea>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Imagen de portada</label>
+                            <input type="file" required class="w-full text-gray-600" />
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-10">
+                        <button class="btn-premium" type="button" onclick="validarPaso(1,2)">Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- Paso 2: Ubicación -->
+                <div id="paso-2" class="hidden">
+                    <h3 class="text-3xl font-bold mb-2 text-gray-900">Ubicación</h3>
+                    <p class="text-gray-600 mb-8">¿Dónde se encuentra tu negocio?</p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Dirección</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Calle, número, referencia" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Distrito</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Ciudad</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Provincia</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Departamento</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-gray-700 font-medium">País</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" value="Perú" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Latitud</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Longitud</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-10">
+                        <button class="btn-premium-outline" type="button" onclick="cambiarPaso(2,1)">Anterior</button>
+                        <button class="btn-premium" type="button" onclick="validarPaso(2,3)">Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- Paso 3: Categorías -->
+                <div id="paso-3" class="hidden">
+                    <h3 class="text-3xl font-bold mb-2 text-gray-900">Categorías</h3>
+                    <p class="text-gray-600 mb-8">¿Qué tipo de negocio tienes?</p>
+
                     <div>
-                        <label class="block mb-2 text-gray-700">Dirección</label>
-                        <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Calle, número, referencia" />
+                        <label class="block mb-2 text-gray-700 font-medium">Selecciona una o más categorías</label>
+                        <select multiple required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition">
+                            <option>Restaurante</option>
+                            <option>Farmacia</option>
+                            <option>Ferretería</option>
+                            <option>Servicios</option>
+                            <option>Otros</option>
+                        </select>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block mb-2 text-gray-700">Distrito</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-gray-700">Ciudad</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
+                    <div class="flex justify-between mt-10">
+                        <button class="btn-premium-outline" type="button" onclick="cambiarPaso(3,2)">Anterior</button>
+                        <button class="btn-premium" type="button" onclick="validarPaso(3,4)">Siguiente</button>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
+                </div>
+
+                <!-- Paso 4: Servicios -->
+                <div id="paso-4" class="hidden">
+                    <h3 class="text-3xl font-bold mb-2 text-gray-900">Servicios ofrecidos</h3>
+                    <p class="text-gray-600 mb-8">¿Qué servicios o productos ofreces?</p>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-3 gap-4">
+                            <input type="text" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Nombre" />
+                            <input type="text" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Descripción" />
+                            <input type="number" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Precio" />
+                        </div>
+                        <!-- Aquí se pueden agregar más servicios dinámicamente con JS -->
+                    </div>
+                    <div class="flex justify-between mt-10">
+                        <button class="btn-premium-outline" type="button" onclick="cambiarPaso(4,3)">Anterior</button>
+                        <button class="btn-premium" type="button" onclick="validarPaso(4,5)">Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- Paso 5: Horario y contacto -->
+                <div id="paso-5" class="hidden">
+                    <h3 class="text-3xl font-bold mb-2 text-gray-900">Horario y contacto</h3>
+                    <p class="text-gray-600 mb-8">¿Cómo pueden contactarte tus clientes?</p>
+
+                    <div class="space-y-6">
                         <div>
-                            <label class="block mb-2 text-gray-700">Provincia</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            <label class="block mb-2 text-gray-700 font-medium">Horario de atención</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lunes a viernes 8am - 8pm" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Teléfono</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">WhatsApp</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Facebook</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-gray-700 font-medium">Instagram</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            </div>
                         </div>
                         <div>
-                            <label class="block mb-2 text-gray-700">Departamento</label>
+                            <label class="block mb-2 text-gray-700 font-medium">Sitio web</label>
                             <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
                         </div>
                     </div>
-                    <div>
-                        <label class="block mb-2 text-gray-700">País</label>
-                        <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" value="Perú" />
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block mb-2 text-gray-700">Latitud</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-gray-700">Longitud</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
+                    <div class="flex justify-between mt-10">
+                        <button class="btn-premium-outline" type="button" onclick="cambiarPaso(5,4)">Anterior</button>
+                        <button class="btn-premium" type="button" onclick="validarPaso(5,6)">Siguiente</button>
                     </div>
                 </div>
-                <div class="flex justify-between mt-8">
-                    <button class="btn-premium-outline" type="button" onclick="cambiarPaso(2,1)">Anterior</button>
-                    <button class="btn-premium" type="button" onclick="cambiarPaso(2,3)">Siguiente</button>
-                </div>
-            </div>
-            <!-- Paso 3: Categorías -->
-            <div id="paso-3" class="hidden">
-                <h3 class="text-xl font-semibold mb-6">Categorías</h3>
-                <div>
-                    <label class="block mb-2 text-gray-700">Selecciona una o más categorías</label>
-                    <select multiple required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition">
-                        <option>Restaurante</option>
-                        <option>Farmacia</option>
-                        <option>Ferretería</option>
-                        <option>Servicios</option>
-                        <option>Otros</option>
-                    </select>
-                </div>
-                <div class="flex justify-between mt-8">
-                    <button class="btn-premium-outline" type="button" onclick="cambiarPaso(3,2)">Anterior</button>
-                    <button class="btn-premium" type="button" onclick="cambiarPaso(3,4)">Siguiente</button>
-                </div>
-            </div>
-            <!-- Paso 4: Servicios -->
-            <div id="paso-4" class="hidden">
-                <h3 class="text-xl font-semibold mb-6">Servicios ofrecidos</h3>
-                <div class="space-y-4">
-                    <div class="grid grid-cols-3 gap-4">
-                        <input type="text" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Nombre" />
-                        <input type="text" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Descripción" />
-                        <input type="number" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Precio" />
+
+                <!-- Paso 6: Resumen -->
+                <div id="paso-6" class="hidden">
+                    <h3 class="text-3xl font-bold mb-2 text-gray-900">Resumen</h3>
+                    <p class="text-gray-600 mb-8">Revisa que todos los datos sean correctos</p>
+
+                    <div class="bg-gray-50 rounded-lg p-6 text-gray-700">
+                        <!-- Aquí se mostraría el resumen de todos los datos ingresados -->
+                        <p class="text-center">Revisa que todos los datos sean correctos antes de guardar tu negocio.</p>
                     </div>
-                    <!-- Aquí se pueden agregar más servicios dinámicamente con JS -->
-                </div>
-                <div class="flex justify-between mt-8">
-                    <button class="btn-premium-outline" type="button" onclick="cambiarPaso(4,3)">Anterior</button>
-                    <button class="btn-premium" type="button" onclick="cambiarPaso(4,5)">Siguiente</button>
-                </div>
-            </div>
-            <!-- Paso 5: Horario y contacto -->
-            <div id="paso-5" class="hidden">
-                <h3 class="text-xl font-semibold mb-6">Horario y contacto</h3>
-                <div class="space-y-5">
-                    <div>
-                        <label class="block mb-2 text-gray-700">Horario de atención</label>
-                        <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lunes a viernes 8am - 8pm" />
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block mb-2 text-gray-700">Teléfono</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-gray-700">WhatsApp</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block mb-2 text-gray-700">Facebook</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-gray-700">Instagram</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block mb-2 text-gray-700">Sitio web</label>
-                        <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                    <div class="flex justify-between mt-10">
+                        <button class="btn-premium-outline" type="button" onclick="cambiarPaso(6,5)">Anterior</button>
+                        <button class="btn-premium" type="submit">Guardar negocio</button>
                     </div>
                 </div>
-                <div class="flex justify-between mt-8">
-                    <button class="btn-premium-outline" type="button" onclick="cambiarPaso(5,4)">Anterior</button>
-                    <button class="btn-premium" type="button" onclick="cambiarPaso(5,6)">Siguiente</button>
-                </div>
-            </div>
-            <!-- Paso 6: Resumen -->
-            <div id="paso-6" class="hidden">
-                <h3 class="text-xl font-semibold mb-6">Resumen</h3>
-                <div class="bg-gray-50 rounded-lg p-6 text-gray-700">
-                    <!-- Aquí se mostraría el resumen de todos los datos ingresados -->
-                    <p class="text-center">Revisa que todos los datos sean correctos antes de guardar tu negocio.</p>
-                </div>
-                <div class="flex justify-between mt-8">
-                    <button class="btn-premium-outline" type="button" onclick="cambiarPaso(6,5)">Anterior</button>
-                    <button class="btn-premium" type="submit">Guardar negocio</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
+            </form>
+        </div>
+    </main>
+</div>
+
+<style>
+    .wizard-step-item {
+        @apply cursor-pointer transition-all duration-300 select-none;
+        color: #9ca3af;
+    }
+
+    .wizard-step-item.active {
+        color: #2563eb;
+    }
+
+    .wizard-step-item.completed {
+        color: #4f6d7a;
+    }
+
+    .step-circle {
+        @apply w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 bg-white transition-all duration-300;
+    }
+
+    .wizard-step-item.active .step-circle {
+        @apply border-primary-600 bg-primary-600 text-white shadow-lg;
+    }
+
+    .wizard-step-item.completed .step-circle {
+        @apply border-primary-600 bg-white text-primary-600;
+    }
+
+    .wizard-step-item.completed .step-circle::after {
+        content: '✓';
+        @apply text-primary-600 font-bold;
+    }
+
+    .step-icon {
+        @apply transition-all duration-300;
+    }
+
+    .wizard-step-item.active .step-icon {
+        @apply text-white;
+    }
+
+    .wizard-step-item.completed .step-icon {
+        @apply hidden;
+    }
+
+    .step-label {
+        @apply font-semibold text-base;
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 1024px) {
+        .wizard-step-item {
+            @apply text-sm;
+        }
+
+        .step-circle {
+            @apply w-8 h-8;
+        }
+
+        .step-icon {
+            width: 14px;
+            height: 14px;
+        }
+    }
+</style>
+
 <script>
+    let pasoActual = 1;
+    const totalPasos = 6;
+
     function cambiarPaso(actual, siguiente) {
         document.getElementById('paso-' + actual).classList.add('hidden');
         document.getElementById('paso-' + siguiente).classList.remove('hidden');
+        pasoActual = siguiente;
+        actualizarSidebar();
+        actualizarProgreso();
     }
+
+    function validarPaso(actual, siguiente) {
+        const pasoDiv = document.getElementById('paso-' + actual);
+        const inputs = pasoDiv.querySelectorAll('input, textarea, select');
+        let valido = true;
+        inputs.forEach(input => {
+            if (input.hasAttribute('required') && !input.value) {
+                input.classList.add('border-red-400');
+                valido = false;
+            } else {
+                input.classList.remove('border-red-400');
+            }
+        });
+        if (valido) {
+            cambiarPaso(actual, siguiente);
+        }
+    }
+
+    function actualizarSidebar() {
+        const items = document.querySelectorAll('.wizard-step-item');
+        items.forEach((item, idx) => {
+            item.classList.remove('active', 'completed');
+            const step = parseInt(item.getAttribute('data-step'));
+            if (step < pasoActual) {
+                item.classList.add('completed');
+            } else if (step === pasoActual) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    function actualizarProgreso() {
+        const porcentaje = (pasoActual / totalPasos) * 100;
+        document.getElementById('progress-bar').style.width = porcentaje + '%';
+        document.getElementById('progress-text').textContent = pasoActual + ' de ' + totalPasos;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        actualizarSidebar();
+        actualizarProgreso();
+    });
 </script>
 @endsection
