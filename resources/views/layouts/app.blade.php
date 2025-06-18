@@ -19,8 +19,15 @@
         <div class="mx-auto max-w-7xl px-6 flex justify-between h-16 items-center">
             <a href="/" class="text-2xl font-extrabold tracking-tight text-primary-600 select-none">LocalConnect</a>
             <div class="flex items-center space-x-2">
-                <a href="#" class="btn-premium-outline">Iniciar sesión</a>
-                <a href="#" class="btn-premium">Registrarse</a>
+                @if(Auth::check())
+                <form method="POST" action="{{ url('/logout') }}">
+                    @csrf
+                    <button type="submit" class="btn-premium-outline">Cerrar sesión</button>
+                </form>
+                @else
+                <a href="{{ route('login') }}" class="btn-premium-outline">Iniciar sesión</a>
+                <a href="{{ route('register') }}" class="btn-premium">Registrarse</a>
+                @endif
             </div>
         </div>
     </nav>

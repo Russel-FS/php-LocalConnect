@@ -18,11 +18,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        return back()->with('status', 'Funcionalidad de login aún no implementada.');
+        return back()->with('status', 'Funcionalidad de login assún no implementada.');
     }
 
     public function register(Request $request)
     {
-        return back()->with('status', 'Funcionalidad de registro aún no implementada.');
+        return back()->with('status', 'Funcionalidad de registro asssún no implementada.');
     }
 }
