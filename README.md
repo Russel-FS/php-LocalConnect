@@ -84,15 +84,14 @@ php artisan migrate --seed
 
 > Si tienes un archivo `database.sql`, también puedes importarlo manualmente si lo prefieres.
 
+
 ### 9. Compilar los assets frontend
 
 ```bash
-npm run dev
-```
-o para producción:
-```bash
 npm run build
 ```
+
+> Nota: Usa solo `npm run build` para compilar los assets. En este entorno, `npm run dev` puede no funcionar correctamente.
 
 ### 10. Levantar el servidor de desarrollo
 
