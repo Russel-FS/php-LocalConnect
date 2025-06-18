@@ -84,7 +84,7 @@
     <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-4xl font-bold mb-6">¿Tienes un negocio local?</h2>
         <p class="text-xl text-gray-600 mb-10">Únete a LocalConnect y haz crecer tu presencia digital en tu comunidad.</p>
-        <a href="#" class="btn-premium text-lg">Registrar mi negocio</a>
+        <a href="{{ route('negocios.registro') }}" class="btn-premium text-lg">Registrar mi negocio</a>
     </div>
 </section>
 @endsection
