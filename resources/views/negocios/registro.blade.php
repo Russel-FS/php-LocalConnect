@@ -14,6 +14,7 @@
                 <div id="progress-bar" class="bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 16.67%"></div>
             </div>
         </div>
+
         <ul id="wizard-sidebar" class="space-y-8">
             <li class="wizard-step-item" data-step="1">
                 <div class="flex items-center gap-4">
@@ -22,7 +23,6 @@
                             <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
-
                     <div>
                         <span class="step-label">Datos del negocio</span>
                         <p class="text-xs text-gray-400 mt-1">Información básica</p>
@@ -130,7 +130,7 @@
                         </div>
                         <div>
                             <label class="block mb-2 text-gray-700 font-medium">Imagen de portada</label>
-                            <input type="file" required class="w-full text-gray-600" />
+                            <input type="file" accept="image/*" required class="w-full text-gray-600" />
                         </div>
                     </div>
                     <div class="flex justify-end mt-10">
@@ -288,122 +288,4 @@
         </div>
     </main>
 </div>
-
-<style>
-    .wizard-step-item {
-        @apply cursor-pointer transition-all duration-300 select-none;
-        color: #9ca3af;
-    }
-
-    .wizard-step-item.active {
-        color: #2563eb;
-    }
-
-    .wizard-step-item.completed {
-        color: #4f6d7a;
-    }
-
-    .step-circle {
-        @apply w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 bg-white transition-all duration-300;
-    }
-
-    .wizard-step-item.active .step-circle {
-        @apply border-primary-600 bg-primary-600 text-white shadow-lg;
-    }
-
-    .wizard-step-item.completed .step-circle {
-        @apply border-primary-600 bg-white text-primary-600;
-    }
-
-    .wizard-step-item.completed .step-circle::after {
-        content: '✓';
-        @apply text-primary-600 font-bold;
-    }
-
-    .step-icon {
-        @apply transition-all duration-300;
-    }
-
-    .wizard-step-item.active .step-icon {
-        @apply text-white;
-    }
-
-    .wizard-step-item.completed .step-icon {
-        @apply hidden;
-    }
-
-    .step-label {
-        @apply font-semibold text-base;
-    }
-
-    /* Responsive para móviles */
-    @media (max-width: 1024px) {
-        .wizard-step-item {
-            @apply text-sm;
-        }
-
-        .step-circle {
-            @apply w-8 h-8;
-        }
-
-        .step-icon {
-            width: 14px;
-            height: 14px;
-        }
-    }
-</style>
-
-<script>
-    let pasoActual = 1;
-    const totalPasos = 6;
-
-    function cambiarPaso(actual, siguiente) {
-        document.getElementById('paso-' + actual).classList.add('hidden');
-        document.getElementById('paso-' + siguiente).classList.remove('hidden');
-        pasoActual = siguiente;
-        actualizarSidebar();
-        actualizarProgreso();
-    }
-
-    function validarPaso(actual, siguiente) {
-        const pasoDiv = document.getElementById('paso-' + actual);
-        const inputs = pasoDiv.querySelectorAll('input, textarea, select');
-        let valido = true;
-        inputs.forEach(input => {
-            if (input.hasAttribute('required') && !input.value) {
-                input.classList.add('border-red-400');
-                valido = false;
-            } else {
-                input.classList.remove('border-red-400');
-            }
-        });
-        if (valido) {
-            cambiarPaso(actual, siguiente);
-        }
-    }
-
-    function actualizarSidebar() {
-        const items = document.querySelectorAll('.wizard-step-item');
-        items.forEach((item, idx) => {
-            item.classList.remove('active', 'completed');
-            const step = parseInt(item.getAttribute('data-step'));
-            if (step < pasoActual) {
-                item.classList.add('completed');
-            } else if (step === pasoActual) {
-                item.classList.add('active');
-            }
-        });
-    }
-
-    function actualizarProgreso() {
-        const porcentaje = (pasoActual / totalPasos) * 100;
-        document.getElementById('progress-bar').style.width = porcentaje + '%';
-        document.getElementById('progress-text').textContent = pasoActual + ' de ' + totalPasos;
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        actualizarSidebar();
-        actualizarProgreso();
-    });
-</script>
 @endsection

@@ -1,0 +1,63 @@
+/* Estilos para el Wizard de Registro de Negocios */
+
+.wizard-step-item {
+    @apply cursor-pointer transition-all duration-300 select-none;
+    color: #9ca3af;
+}
+
+.wizard-step-item.active {
+    color: #17806e; /* primary-600 */
+}
+
+.wizard-step-item.completed {
+    color: #15655a; /* primary-700 */
+}
+
+.step-circle {
+    @apply w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 bg-white transition-all duration-300;
+}
+
+.wizard-step-item.active .step-circle {
+    @apply border-primary-600 bg-primary-600 text-white shadow-lg;
+}
+
+.wizard-step-item.completed .step-circle {
+    @apply border-primary-600 bg-white text-primary-600;
+}
+
+.wizard-step-item.completed .step-circle::after {
+    content: "✓";
+    @apply text-primary-600 font-bold;
+}
+
+.step-icon {
+    @apply transition-all duration-300;
+}
+
+.wizard-step-item.active .step-icon {
+    @apply text-white;
+}
+
+.wizard-step-item.completed .step-icon {
+    @apply hidden;
+}
+
+.step-label {
+    @apply font-semibold text-base;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .wizard-step-item {
+        @apply text-sm;
+    }
+
+    .step-circle {
+        @apply w-8 h-8;
+    }
+
+    .step-icon {
+        width: 14px;
+        height: 14px;
+    }
+}
