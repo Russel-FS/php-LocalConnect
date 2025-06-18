@@ -10,11 +10,11 @@ LocalConnect es una plataforma digital para conectar negocios locales con reside
 
 ## Requisitos Previos
 
-- PHP >= 8.1
-- Composer
-- MySQL
-- Node.js y npm (para assets frontend)
-- Git
+-   PHP >= 8.1
+-   Composer
+-   MySQL
+-   Node.js y npm (para assets frontend)
+-   Git
 
 ---
 
@@ -84,16 +84,21 @@ php artisan migrate --seed
 
 > Si tienes un archivo `database.sql`, también puedes importarlo manualmente si lo prefieres.
 
-
 ### 9. Compilar los assets frontend
 
+Durante el desarrollo, **NO uses `npm run build` para ver cambios en tiempo real**. En su lugar, ejecuta el siguiente comando en una terminal separada:
+
 ```bash
-npm run build
+npm run dev
 ```
 
-> Nota: Usa solo `npm run build` para compilar los assets. En este entorno, `npm run dev` puede no funcionar correctamente.
+Esto iniciará el servidor de desarrollo de Vite, que detecta automáticamente los cambios en tus archivos CSS/JS y recarga el navegador al instante.
 
-### 10. Levantar el servidor de desarrollo
+> **Importante:** Mantén este comando corriendo mientras desarrollas para ver los cambios de diseño sin tener que recompilar manualmente.
+
+### 10. Levantar el servidor de desarrollo de Laravel
+
+En otra terminal, ejecuta:
 
 ```bash
 php artisan serve
@@ -103,27 +108,45 @@ Accede a la aplicación en [http://localhost:8000](http://localhost:8000)
 
 ---
 
+## Flujo de desarrollo recomendado
+
+1. Abre **dos terminales**:
+    - En la primera, ejecuta:
+        ```bash
+        php artisan serve
+        ```
+    - En la segunda, ejecuta:
+        ```bash
+        npm run dev
+        ```
+2. Haz tus cambios en archivos Blade, CSS o JS.
+3. Recarga el navegador (o se actualizará solo) y verás los cambios de inmediato.
+
+> Usa `npm run build` **solo** cuando vayas a desplegar en producción.
+
+---
+
 ## Comandos útiles
 
-- Ejecutar pruebas:
-  ```bash
-  php artisan test
-  ```
-- Limpiar cachés:
-  ```bash
-  php artisan config:clear
-  php artisan cache:clear
-  php artisan route:clear
-  php artisan view:clear
-  ```
+-   Ejecutar pruebas:
+    ```bash
+    php artisan test
+    ```
+-   Limpiar cachés:
+    ```bash
+    php artisan config:clear
+    php artisan cache:clear
+    php artisan route:clear
+    php artisan view:clear
+    ```
 
 ---
 
 ## Recursos
 
-- [Documentación de Laravel](https://laravel.com/docs)
-- [Documentación de Composer](https://getcomposer.org/doc/)
-- [Documentación de MySQL](https://dev.mysql.com/doc/)
+-   [Documentación de Laravel](https://laravel.com/docs)
+-   [Documentación de Composer](https://getcomposer.org/doc/)
+-   [Documentación de MySQL](https://dev.mysql.com/doc/)
 
 ---
 
