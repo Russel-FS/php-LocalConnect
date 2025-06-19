@@ -182,12 +182,7 @@
                         <div>
                             <label class="block mb-2 text-gray-700 font-medium">Selecciona la ubicación en el mapa</label>
                             <div class="relative">
-                                <input
-                                    type="text"
-                                    id="buscador-mapa"
-                                    placeholder="Buscar dirección o lugar..."
-                                    class="z-50 absolute top-3 right-3 w-64 px-4 py-2 rounded-full border border-gray-200 bg-white shadow focus:outline-none text-sm placeholder-gray-400 focus:border-primary-400 transition"
-                                    autocomplete="off" />
+                                <x-sugerencia> </x-sugerencia>
                                 <div id="map" class="w-full h-64 rounded-lg border border-gray-200 z-40"></div>
                             </div>
                             <p class="text-sm text-gray-500 mt-2">Haz clic en el mapa para marcar la ubicación exacta de tu negocio</p>
