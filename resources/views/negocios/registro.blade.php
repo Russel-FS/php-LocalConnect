@@ -279,7 +279,23 @@
                         <div class="space-y-6">
                             <div>
                                 <label class="block mb-2 text-gray-700 font-medium">Horario de atención</label>
-                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lunes a viernes 8am - 8pm" />
+                                <p class="text-xs text-gray-500 mb-4">Selecciona los días y horarios de atención. Los horarios se almacenarán en UTC y se mostrarán en la zona horaria local del usuario.</p>
+                                <div class="space-y-2">
+                                    @php
+                                    $dias = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+                                    @endphp
+                                    @foreach($dias as $i => $dia)
+                                    <div class="flex items-center gap-2">
+                                        <label class="w-24">{{ $dia }}</label>
+                                        <input type="time" name="horarios[{{ $i }}][inicio]" class="border rounded px-2 py-1" />
+                                        <span>a</span>
+                                        <input type="time" name="horarios[{{ $i }}][fin]" class="border rounded px-2 py-1" />
+                                        <label class="ml-4 flex items-center gap-1 text-sm">
+                                            <input type="checkbox" name="horarios[{{ $i }}][cerrado]" onchange="toggleCerrado(this)"> Cerrado
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
@@ -362,5 +378,12 @@
     </div>
 </div>
 
+<script>
+    function toggleCerrado(checkbox) {
+        const row = checkbox.closest('div.flex');
+        const inputs = row.querySelectorAll('input[type="time"]');
+        inputs.forEach(inp => inp.disabled = checkbox.checked);
+    }
+</script>
 
 @endsection
