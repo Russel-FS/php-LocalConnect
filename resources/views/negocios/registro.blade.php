@@ -248,12 +248,19 @@
                         <!-- Servicios predefinidos -->
                         <div>
                             <label class="block mb-4 text-gray-700 font-medium">Servicios predefinidos</label>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 @foreach($serviciosPredefinidos as $servicio)
-                                <label class="flex items-center gap-2">
-                                    <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}">
-                                    <span>{{ $servicio->nombre_servicio }}</span>
-                                    <span class="text-xs text-gray-400">{{ $servicio->descripcion }}</span>
+                                <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
+                                    <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}"
+                                        class="peer absolute left-4 top-4 w-5 h-5 accent-primary-600 rounded focus:ring-2 focus:ring-primary-200 transition" />
+                                    <div class="pl-8">
+                                        <span class="block font-semibold text-gray-900 group-hover:text-primary-600 transition">{{ $servicio->nombre_servicio }}</span>
+                                        <span class="block text-xs text-gray-500 mt-1">{{ $servicio->descripcion }}</span>
+                                    </div>
+                                    <span class="absolute left-4 top-4 w-5 h-5 border-2 border-primary-300 rounded bg-white peer-checked:bg-primary-600 peer-checked:border-primary-600 transition"></span>
+                                    <svg class="absolute left-4 top-4 w-5 h-5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
                                 </label>
                                 @endforeach
                             </div>
