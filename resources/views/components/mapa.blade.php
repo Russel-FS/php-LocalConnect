@@ -31,6 +31,7 @@
                 const mapContainer = document.getElementById("map");
                 mapContainer.classList.remove("border-red-400", "border-2");
                 map.setView([lat, lng], 17);
+                window.actualizarMapaConCoordenadas(lat, lng);
             });
             marker.on("dragend", function(e) {
                 const lat = e.target.getLatLng().lat;
@@ -39,6 +40,7 @@
                 document.getElementById("longitud").value = lng.toFixed(6);
                 const mapContainer = document.getElementById("map");
                 mapContainer.classList.remove("border-red-400", "border-2");
+                window.actualizarMapaConCoordenadas(lat, lng);
             });
         }
         setTimeout(() => {
@@ -70,7 +72,7 @@
     // funcion para obtener direccion de las coordenadas
     function obtenerDireccionDesdeCoordenadas(lat, lng) {
         const mapboxKey = 'pk.eyJ1IjoicnVzc2VsLWZzIiwiYSI6ImNtYTJ5djZ3NDFidzcybHNmZjl6dTEweGkifQ.L1_wuZGVMGSOmSKazwjxJg';
-        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxKey}&language=es&country=PE`)
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxKey}&language=es`)
             .then(res => res.json())
             .then(data => {
                 if (data.features && data.features.length > 0) {

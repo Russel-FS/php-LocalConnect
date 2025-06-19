@@ -30,7 +30,7 @@
             resultados.style.display = 'none';
             return;
         }
-        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(valor)}.json?access_token=${mapboxKey}&autocomplete=true&limit=5&language=es&country=PE`)
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(valor)}.json?access_token=${mapboxKey}&autocomplete=true&limit=5&language=es`)
             .then(res => res.json())
             .then(data => {
                 if (data.features && data.features.length > 0) {
