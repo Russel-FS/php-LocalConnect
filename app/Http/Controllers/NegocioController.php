@@ -15,6 +15,17 @@ class ServicioPredefinido
     }
 }
 
+class Categoria
+{
+    public $id_categoria;
+    public $nombre_categoria;
+    public function __construct($id, $nombre)
+    {
+        $this->id_categoria = $id;
+        $this->nombre_categoria = $nombre;
+    }
+}
+
 class NegocioController extends Controller
 {
     public function showRegistro()
@@ -24,6 +35,14 @@ class NegocioController extends Controller
             new ServicioPredefinido(2, 'Almuerzo', 'Servicio de almuerzo'),
             new ServicioPredefinido(3, 'Delivery', 'Entrega a domicilio'),
         ];
-        return view('negocios.registro', compact('serviciosPredefinidos'));
+        $categorias = [
+            new Categoria(1, 'Restaurante'),
+            new Categoria(2, 'Farmacia'),
+            new Categoria(3, 'Ferretería'),
+            new Categoria(4, 'Servicios'),
+            new Categoria(5, 'Comercio'),
+            new Categoria(6, 'Otros'),
+        ];
+        return view('negocios.registro', compact('serviciosPredefinidos', 'categorias'));
     }
 }
