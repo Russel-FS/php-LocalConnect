@@ -61,7 +61,7 @@ CREATE TABLE negocio_categoria (
 );
 
 -- Servicios ofrecidos por cada negocio
-CREATE TABLE servicios (
+CREATE TABLE servicios_personalizados (
     id_servicio INT PRIMARY KEY AUTO_INCREMENT,
     id_negocio INT NOT NULL,
     nombre_servicio VARCHAR(100),
@@ -69,6 +69,44 @@ CREATE TABLE servicios (
     precio DECIMAL(10, 2),
     disponible BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (id_negocio) REFERENCES negocios (id_negocio)
+);
+
+CREATE TABLE servicios_predefinidos (
+    id_servicio_predefinido INT PRIMARY KEY AUTO_INCREMENT,
+    id_categoria INT NOT NULL,
+    nombre_servicio VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(255),
+    FOREIGN KEY (id_categoria) REFERENCES categorias (id_categoria)
+);
+
+CREATE TABLE negocio_servicio (
+    id_negocio INT,
+    id_servicio_predefinido INT,
+    PRIMARY KEY (
+        id_negocio,
+        id_servicio_predefinido
+    ),
+    FOREIGN KEY (id_negocio) REFERENCES negocios (id_negocio),
+    FOREIGN KEY (id_servicio_predefinido) REFERENCES servicios_predefinidos (id_servicio_predefinido)
+);
+
+CREATE TABLE caracteristicas (
+    id_caracteristica INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    constraint unique_nombre UNIQUE (nombre),
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE negocio_caracteristica (
+    id_negocio INT,
+    id_caracteristica INT,
+    PRIMARY KEY (id_negocio, id_caracteristica),
+    FOREIGN KEY (id_negocio) REFERENCES negocios (id_negocio),
+    FOREIGN KEY (id_caracteristica) REFERENCES caracteristicas (id_caracteristica),
+    UNIQUE (id_negocio, id_caracteristica)
 );
 
 -- Promociones de negocios
