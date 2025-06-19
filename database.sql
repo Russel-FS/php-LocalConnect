@@ -58,7 +58,11 @@ CREATE TABLE negocios (
 -- Categorías y su relación N:M con negocios
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_categoria VARCHAR(100) NOT NULL
+    nombre_categoria VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE negocio_categoria (
@@ -174,3 +178,57 @@ CREATE TABLE logs_admin (
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_admin) REFERENCES usuarios (id_usuario)
 );
+
+--datos de de prueba categoria
+
+INSERT INTO
+    categorias (
+        nombre_categoria,
+        descripcion,
+        estado
+    )
+VALUES (
+        'Restaurantes',
+        'Negocios dedicados a la venta de alimentos y bebidas preparados.',
+        'activo'
+    ),
+    (
+        'Tiendas de abarrotes',
+        'Comercios que venden productos de consumo básico y alimentos envasados.',
+        'activo'
+    ),
+    (
+        'Servicios de limpieza',
+        'Empresas o personas que ofrecen limpieza de hogares, oficinas o locales.',
+        'activo'
+    ),
+    (
+        'Salones de belleza',
+        'Negocios enfocados en el cuidado personal, peluquería y estética.',
+        'activo'
+    ),
+    (
+        'Tecnología y electrónica',
+        'Tiendas y servicios relacionados con productos electrónicos y tecnología.',
+        'activo'
+    ),
+    (
+        'Salud y bienestar',
+        'Negocios enfocados en la salud física y mental, como farmacias, gimnasios, etc.',
+        'activo'
+    ),
+    (
+        'Educación y formación',
+        'Instituciones y personas que ofrecen servicios educativos o de capacitación.',
+        'activo'
+    ),
+    (
+        'Transporte y logística',
+        'Empresas dedicadas al traslado de personas o mercancías.',
+        'activo'
+    ),
+    (
+        'Eventos y entretenimiento',
+        'Negocios que organizan o proveen servicios para eventos y actividades recreativas.',
+        'activo'
+    );
