@@ -3,6 +3,8 @@
 let pasoActual = 1;
 const totalPasos = 6;
 let contadorServicios = 1;
+let map = null;
+let marker = null;
 
 // Funciones para cambiar de paso
 window.cambiarPaso = function (actual, siguiente) {
@@ -11,6 +13,11 @@ window.cambiarPaso = function (actual, siguiente) {
     pasoActual = siguiente;
     actualizarSidebar();
     actualizarProgreso();
+
+    // Inicializar mapa cuando se llegue al paso 2
+    if (siguiente === 2) {
+        inicializarMapa();
+    }
 };
 
 // Funciones para validar el paso
@@ -73,6 +80,22 @@ window.validarPaso = function (actual, siguiente) {
 
         if (!serviciosValidos) {
             valido = false;
+        }
+    }
+
+    // Validación para ubicación - paso 2
+    if (actual === 2) {
+        const latitud = document.getElementById("latitud").value;
+        const longitud = document.getElementById("longitud").value;
+
+        if (!latitud || !longitud) {
+            // Mostrar error en el mapa
+            const mapContainer = document.getElementById("map");
+            mapContainer.classList.add("border-red-400", "border-2");
+            valido = false;
+        } else {
+            const mapContainer = document.getElementById("map");
+            mapContainer.classList.remove("border-red-400", "border-2");
         }
     }
 
@@ -153,6 +176,7 @@ window.agregarServicio = function () {
     // Actualizar numeración de servicios
     actualizarNumeracionServicios();
 };
+
 // Función para eliminar un servicio
 window.eliminarServicio = function (boton) {
     const servicioItem = boton.closest(".servicio-item");
@@ -164,6 +188,7 @@ window.eliminarServicio = function (boton) {
         actualizarNumeracionServicios();
     }
 };
+
 // Función para actualizar la numeración de los servicios
 function actualizarNumeracionServicios() {
     const servicios = document.querySelectorAll(".servicio-item");
@@ -171,6 +196,73 @@ function actualizarNumeracionServicios() {
         const titulo = servicio.querySelector("h4");
         titulo.textContent = `Servicio #${index + 1}`;
     });
+}
+
+// Funciones para el mapa
+function inicializarMapa() {
+    // Coordenadas por defecto en mi cerro xd.
+    const latitudDefault = -12.0464;
+    const longitudDefault = -77.0428;
+
+    // Crear el mapa si no existe
+    if (!map) {
+        map = L.map("map").setView([latitudDefault, longitudDefault], 13);
+
+        // Agregar capa de OpenStreetMap
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "© OpenStreetMap contributors",
+        }).addTo(map);
+
+        // Crear marcador personalizado
+        const iconoPersonalizado = L.divIcon({
+            className: "marcador-negocio",
+            html: '<div class="w-6 h-6 bg-primary-600 rounded-full border-2 border-white shadow-lg flex items-center justify-center"><div class="w-2 h-2 bg-white rounded-full"></div></div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+        });
+
+        // Agregar marcador inicial
+        marker = L.marker([latitudDefault, longitudDefault], {
+            icon: iconoPersonalizado,
+            draggable: true,
+        }).addTo(map);
+
+        // Evento al hacer clic en el mapaa
+        map.on("click", function (e) {
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+
+            // Actualizar posición del marcador
+            marker.setLatLng([lat, lng]);
+
+            // Actualizar campos de coordenadas
+            document.getElementById("latitud").value = lat.toFixed(6);
+            document.getElementById("longitud").value = lng.toFixed(6);
+
+            // Limpiar error visual si existe
+            const mapContainer = document.getElementById("map");
+            mapContainer.classList.remove("border-red-400", "border-2");
+        });
+
+        // Evento al arrastrar el marcadorr
+        marker.on("dragend", function (e) {
+            const lat = e.target.getLatLng().lat;
+            const lng = e.target.getLatLng().lng;
+
+            // Actualizar campos de coordenadas
+            document.getElementById("latitud").value = lat.toFixed(6);
+            document.getElementById("longitud").value = lng.toFixed(6);
+
+            // Limpiar error visual
+            const mapContainer = document.getElementById("map");
+            mapContainer.classList.remove("border-red-400", "border-2");
+        });
+    }
+
+    // Asegurar que el mapa se renderice correctamente
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 100);
 }
 
 // Funciones para actualizar el sidebar

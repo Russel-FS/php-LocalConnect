@@ -1,80 +1,192 @@
 /* Estilos para el Wizard de Registro de Negocios */
 
+/* Sidebar del wizard */
+.wizard-sidebar {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+/* Progreso */
+.progress-container {
+    background: #f3f4f6;
+    border-radius: 9999px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #10b981, #059669);
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+}
+
+/* Pasos del wizard */
 .wizard-step-item {
-    @apply cursor-pointer transition-all duration-300 select-none;
-    color: #9ca3af;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f3f4f6;
+    transition: all 0.3s ease;
+}
+
+.wizard-step-item:last-child {
+    border-bottom: none;
 }
 
 .wizard-step-item.active {
-    color: #17806e; /* primary-600 */
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    margin: 0 -2rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
 }
 
 .wizard-step-item.completed {
-    color: #15655a; /* primary-700 */
+    opacity: 0.7;
 }
 
+/* Círculos de los pasos */
 .step-circle {
-    @apply w-10 h-10 flex items-center justify-center rounded-full border-2 border-gray-200 bg-white transition-all duration-300;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
 }
 
 .wizard-step-item.active .step-circle {
-    @apply border-primary-600 bg-primary-600 text-white shadow-lg;
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+    transform: scale(1.1);
 }
 
 .wizard-step-item.completed .step-circle {
-    @apply border-primary-600 bg-white text-primary-600;
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
 }
 
-.wizard-step-item.completed .step-circle::after {
-    content: "✓";
-    @apply text-primary-600 font-bold;
-}
-
+/* Iconos de los pasos */
 .step-icon {
-    @apply transition-all duration-300;
+    width: 20px;
+    height: 20px;
+    color: #6b7280;
+    transition: color 0.3s ease;
 }
 
-.wizard-step-item.active .step-icon {
-    @apply text-white;
-}
-
+.wizard-step-item.active .step-icon,
 .wizard-step-item.completed .step-icon {
-    @apply hidden;
+    color: white;
 }
 
+/* Labels de los pasos */
 .step-label {
-    @apply font-semibold text-base;
+    font-weight: 600;
+    color: #374151;
+    transition: color 0.3s ease;
 }
 
-/* Estilos para checkboxes de categorías */
+.wizard-step-item.active .step-label {
+    color: #10b981;
+}
+
+/* Botones premium */
+.btn-premium {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-premium-outline {
+    background: transparent;
+    color: #10b981;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 2px solid #10b981;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-premium-outline:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Checkboxes de categorías */
 .categoria-checkbox input:checked + div {
-    @apply border-primary-600 bg-primary-50;
+    border-color: #10b981;
+    background: #f0fdf4;
 }
 
 .categoria-checkbox input:checked + div .w-5 {
-    @apply border-primary-600 bg-primary-600;
+    background: #10b981;
+    border-color: #10b981;
 }
 
-.categoria-checkbox input:checked + div .w-5 svg {
-    @apply block;
+.categoria-checkbox input:checked + div .w-3 {
+    display: block !important;
 }
 
-.categoria-checkbox:hover div {
-    @apply border-primary-300;
+/* Estilos para el mapa */
+#map {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+#map.border-red-400 {
+    border-color: #f87171;
+    border-width: 2px;
+}
+
+/* Marcador personalizado del mapa */
+.marcador-negocio {
+    background: transparent !important;
+    border: none !important;
+}
+
+.marcador-negocio div {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.marcador-negocio:hover div {
+    transform: scale(1.2);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .wizard-step-item {
-        @apply text-sm;
+    .wizard-sidebar {
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
     }
 
-    .step-circle {
-        @apply w-8 h-8;
-    }
-
-    .step-icon {
-        width: 14px;
-        height: 14px;
+    .wizard-step-item.active {
+        margin: 0 -1rem;
+        padding: 1rem;
     }
 }
