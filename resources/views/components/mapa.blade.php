@@ -83,22 +83,31 @@
                     let departamento = '';
                     let pais = '';
 
-                    // filtrar los datos encontrados
-                    data.features.forEach(f => {
-                        if (f.place_type.includes('address')) direccion = f.place_name;
-                        if (f.place_type.includes('place')) ciudad = f.text;
-                        if (f.place_type.includes('region')) departamento = f.text;
-                        if (f.place_type.includes('district')) distrito = f.text;
-                        if (f.place_type.includes('locality')) provincia = f.text;
-                        if (f.place_type.includes('country')) pais = f.text;
-                    });
+                    const feature = data.features[0];
+                    direccion = feature.place_name || '';
 
-                    // datos encontrados mostrar al input 
+                    if (feature.context) {
+                        feature.context.forEach(ctx => {
+                            if (ctx.id.startsWith('locality.')) distrito = ctx.text;
+                            if (ctx.id.startsWith('place.')) ciudad = ctx.text;
+                            if (ctx.id.startsWith('region.')) provincia = ctx.text;
+                            if (ctx.id.startsWith('country.')) pais = ctx.text;
+                        });
+                    }
+
+                    if (feature.id.startsWith('locality.')) distrito = feature.text;
+                    if (feature.id.startsWith('place.')) ciudad = feature.text;
+                    if (feature.id.startsWith('region.')) provincia = feature.text;
+                    if (feature.id.startsWith('country.')) pais = feature.text;
+
+                    if (provincia === distrito) provincia = '';
+
+                    //campos del formulario si existen
                     if (document.getElementById('direccion')) document.getElementById('direccion').value = direccion;
                     if (document.getElementById('distrito')) document.getElementById('distrito').value = distrito;
                     if (document.getElementById('ciudad')) document.getElementById('ciudad').value = ciudad;
                     if (document.getElementById('provincia')) document.getElementById('provincia').value = provincia;
-                    if (document.getElementById('departamento')) document.getElementById('departamento').value = departamento;
+                    if (document.getElementById('departamento')) document.getElementById('departamento').value = '';
                     if (document.getElementById('pais')) document.getElementById('pais').value = pais;
                 }
             });

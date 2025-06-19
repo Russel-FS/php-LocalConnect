@@ -64,6 +64,5 @@
         if (document.getElementById('longitud')) {
             document.getElementById('longitud').value = feature.center[0].toFixed(6);
         }
-        console.log('Sugerencia seleccionada:', JSON.stringify(feature, null, 2));
     }
 </script>
