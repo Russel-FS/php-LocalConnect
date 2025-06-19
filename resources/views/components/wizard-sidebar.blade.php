@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <ul id="wizard-sidebar" class="space-y-8">
+    <ul id="wizard-sidebar" class="space-y-4">
         <li class="wizard-step-item" data-step="1">
             <div class="flex items-center gap-4 step-link" style="cursor:pointer;">
                 <div class="step-circle">
