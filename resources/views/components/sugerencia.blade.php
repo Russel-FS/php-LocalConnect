@@ -1,4 +1,4 @@
-<div class="absolute right-3 top-2 w-full max-w-xs mx-auto z-50">
+<div class="absolute right-3 top-2 w-full max-w-xs mx-auto z-20">
     <input
         type="text"
         id="input-sugerencia"

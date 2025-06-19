@@ -1,4 +1,4 @@
-<div id="map" class="w-full h-64 rounded-lg border border-gray-200 z-40"></div>
+<div id="map" class="w-full h-64 rounded-lg border border-gray-200 z-10"></div>
 <script>
     let map = null;
     let marker = null;
