@@ -232,3 +232,89 @@ VALUES (
         'Negocios que organizan o proveen servicios para eventos y actividades recreativas.',
         'activo'
     );
+
+--categoria de servicios predefinidos
+
+INSERT INTO
+    categorias_servicio (
+        nombre_categoria_servicio,
+        descripcion,
+        estado
+    )
+VALUES (
+        'Limpieza',
+        'Servicios relacionados con la limpieza de espacios.',
+        'activo'
+    ),
+    (
+        'Mantenimiento',
+        'Servicios de mantenimiento general y reparaciones.',
+        'activo'
+    ),
+    (
+        'Cuidado personal',
+        'Servicios de estética, peluquería y cuidado personal.',
+        'activo'
+    ),
+    (
+        'Tecnología',
+        'Servicios relacionados con la reparación y mantenimiento de dispositivos electrónicos.',
+        'activo'
+    ),
+    (
+        'Educación',
+        'Clases particulares y servicios educativos.',
+        'activo'
+    );
+-- Servicios predefinidos
+INSERT INTO
+    servicios_predefinidos (
+        id_categoria_servicio,
+        nombre_servicio,
+        descripcion
+    )
+VALUES (
+        1,
+        'Limpieza profunda',
+        'Servicio de limpieza a fondo de hogares y oficinas.'
+    ),
+    (
+        1,
+        'Limpieza regular',
+        'Servicio de limpieza semanal o mensual para mantener el orden.'
+    ),
+    (
+        2,
+        'Mantenimiento eléctrico',
+        'Reparación y mantenimiento de instalaciones eléctricas.'
+    ),
+    (
+        2,
+        'Mantenimiento de plomería',
+        'Servicios de reparación y mantenimiento de sistemas de plomería.'
+    ),
+    (
+        3,
+        'Corte de cabello',
+        'Servicio de peluquería para cortes y estilos de cabello.'
+    ),
+    (
+        3,
+        'Manicura y pedicura',
+        'Servicios de cuidado de manos y pies.'
+    ),
+    (
+        4,
+        'Reparación de computadoras',
+        'Servicio técnico para reparación y mantenimiento de computadoras.'
+    ),
+    (
+        4,
+        'Reparación de teléfonos móviles',
+        'Servicio técnico para reparación de teléfonos móviles.'
+    ),
+    (
+        5,
+        'Clases particulares',
+        'Clases personalizadas en diversas materias académicas.'
+    );
