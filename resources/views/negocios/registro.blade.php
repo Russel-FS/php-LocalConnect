@@ -7,7 +7,7 @@
 
     <!-- Contenido principal -->
     <main class="flex-1">
-        <div class="max-w-4xl mx-auto p-8 lg:p-16">
+        <div class="max-w-5xl mx-auto p-8 lg:p-16">
             <form id="wizard-form" autocomplete="off">
                 <!-- Paso 1: Datos del negocio -->
                 <div id="paso-1">
