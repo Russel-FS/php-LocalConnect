@@ -279,20 +279,36 @@
                         <div class="space-y-6">
                             <div>
                                 <label class="block mb-2 text-gray-700 font-medium">Horario de atención</label>
-                                <p class="text-xs text-gray-500 mb-4">Selecciona los días y horarios de atención. Los horarios se almacenarán en UTC y se mostrarán en la zona horaria local del usuario.</p>
-                                <div class="space-y-2">
+                                <p class="text-xs text-gray-500 mb-4">Selecciona los días y horarios de atención</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     @php
                                     $dias = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
                                     @endphp
                                     @foreach($dias as $i => $dia)
-                                    <div class="flex items-center gap-2">
-                                        <label class="w-24">{{ $dia }}</label>
-                                        <input type="time" name="horarios[{{ $i }}][inicio]" class="border rounded px-2 py-1" />
-                                        <span>a</span>
-                                        <input type="time" name="horarios[{{ $i }}][fin]" class="border rounded px-2 py-1" />
-                                        <label class="ml-4 flex items-center gap-1 text-sm">
-                                            <input type="checkbox" name="horarios[{{ $i }}][cerrado]" onchange="toggleCerrado(this)"> Cerrado
-                                        </label>
+                                    <div class="bg-white border border-gray-200 rounded-lg p-3 flex flex-col gap-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-medium text-gray-700">{{ $dia }}</span>
+                                            <label class="flex items-center gap-2 text-xs select-none cursor-pointer relative">
+                                                <span class="text-gray-400">Cerrado</span>
+                                                <input type="checkbox" name="horarios[{{ $i }}][cerrado]" class="sr-only peer" onchange="toggleCerrado(this)">
+                                                <!--cuerpo-->
+                                                <div class="w-8 h-4 bg-gray-200 rounded-full relative transition peer-checked:bg-primary-400">
+                                                </div>
+                                                <!--circulo-->
+                                                <span class="absolute left-14.5 top-1 w-2 h-2 bg-white rounded-full shadow transition peer-checked:translate-x-4"></span>
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center gap-2 mt-1">
+                                            <span class="text-gray-300">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                                </svg>
+                                            </span>
+                                            <input type="time" name="horarios[{{ $i }}][inicio]" class="border border-gray-200 rounded px-2 py-1 focus:ring-1 focus:ring-primary-100 focus:border-primary-400 transition text-xs" />
+                                            <span class="mx-1 text-gray-300">a</span>
+                                            <input type="time" name="horarios[{{ $i }}][fin]" class="border border-gray-200 rounded px-2 py-1 focus:ring-1 focus:ring-primary-100 focus:border-primary-400 transition text-xs" />
+                                        </div>
                                     </div>
                                     @endforeach
                                 </div>
@@ -380,8 +396,8 @@
 
 <script>
     function toggleCerrado(checkbox) {
-        const row = checkbox.closest('div.flex');
-        const inputs = row.querySelectorAll('input[type="time"]');
+        const card = checkbox.closest('.flex.flex-col');
+        const inputs = card.querySelectorAll('input[type="time"]');
         inputs.forEach(inp => inp.disabled = checkbox.checked);
     }
 </script>
