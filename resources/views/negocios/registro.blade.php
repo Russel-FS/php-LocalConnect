@@ -202,6 +202,15 @@
                                 </svg>
                                 Selecciona servicios predefinidos para que tu negocio sea más fácil de encontrar en las búsquedas.
                             </p>
+                            @if($serviciosPredefinidos->isEmpty())
+                            <div class="flex flex-col items-center justify-center p-8 bg-gray-50 border border-gray-200 rounded-xl text-center text-gray-500 shadow-sm">
+                                <svg class="w-12 h-12 mb-3 text-primary-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
+                                </svg>
+                                <span class="block text-lg font-semibold mb-1">No hay servicios predefinidos disponibles</span>
+                                <span class="text-sm">Por favor, contacta al administrador o intenta más tarde.</span>
+                            </div>
+                            @else
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 @foreach($serviciosPredefinidos as $servicio)
                                 <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
@@ -218,6 +227,7 @@
                                 </label>
                                 @endforeach
                             </div>
+                            @endif
                         </div>
 
                         <!-- Servicios personalizados -->
