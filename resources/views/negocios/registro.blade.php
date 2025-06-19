@@ -248,6 +248,12 @@
                         <!-- Servicios predefinidos -->
                         <div>
                             <label class="block mb-4 text-gray-700 font-medium">Servicios predefinidos</label>
+                            <p class="text-xs text-primary-600 mb-2 flex items-center gap-2">
+                                <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 17l-4 4m0 0l-4-4m4 4V3" />
+                                </svg>
+                                Selecciona servicios predefinidos para que tu negocio sea más fácil de encontrar en las búsquedas.
+                            </p>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 @foreach($serviciosPredefinidos as $servicio)
                                 <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
@@ -272,7 +278,10 @@
                             <div class="space-y-4" id="personalizados-lista">
                                 <!-- Aquí se agregan dinámicamente los campos -->
                             </div>
-                            <button type="button" onclick="agregarServicioPersonalizado(this)" class="btn-premium-outline mt-2">Agregar servicio personalizado</button>
+                            <button type="button" onclick="agregarServicioPersonalizado(this)" class="btn-premium-outline mt-2 flex items-center gap-2">
+                                @include('components.icons.plus')
+                                <span>Agregar servicio personalizado</span>
+                            </button>
                         </div>
                     </div>
 
