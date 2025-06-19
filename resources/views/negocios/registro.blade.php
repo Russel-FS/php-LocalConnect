@@ -150,7 +150,7 @@
                             <span class="text-sm">Por favor, contacta al administrador o intenta más tarde.</span>
                         </div>
                         @else
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             @foreach($categorias as $categoria)
                             <label class="categoria-checkbox">
                                 <input type="checkbox" name="categorias[]" value="{{ $categoria->id_categoria }}" class="hidden" />
@@ -211,32 +211,32 @@
                                 <span class="text-sm">Por favor, contacta al administrador o intenta más tarde.</span>
                             </div>
                             @else
-                            @foreach($categoriasServicio as $catServ)
-                            <div class="mb-6">
-                                <h4 class="text-lg font-bold text-primary-700 mb-2">{{ $catServ->nombre_categoria_servicio }}</h4>
-                                <p class="text-sm text-gray-500 mb-3">{{ $catServ->descripcion }}</p>
-                                @if($catServ->serviciosPredefinidos->isEmpty())
-                                <div class="text-gray-400 italic">No hay servicios en esta categoría.</div>
-                                @else
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    @foreach($catServ->serviciosPredefinidos as $servicio)
-                                    <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
-                                        <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}"
-                                            class="peer absolute left-4 top-4 w-5 h-5 accent-primary-600 rounded focus:ring-2 focus:ring-primary-200 transition" aria-label="Seleccionar {{ $servicio->nombre_servicio }}" />
-                                        <div class="pl-8">
-                                            <span class="block font-semibold text-gray-900 group-hover:text-primary-600 transition">{{ $servicio->nombre_servicio }}</span>
-                                            <span class="block text-xs text-gray-500 mt-1">{{ $servicio->descripcion }}</span>
-                                        </div>
-                                        <span class="absolute left-4 top-4 w-5 h-5 border-2 border-primary-300 rounded bg-white peer-checked:bg-primary-600 peer-checked:border-primary-600 transition"></span>
-                                        <svg class="absolute left-4 top-4 w-5 h-5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </label>
-                                    @endforeach
+                            <div class="max-h-96 max-w-full overflow-auto pr-2">
+                                @foreach($categoriasServicio as $catServ)
+                                @if($catServ->serviciosPredefinidos->isNotEmpty())
+                                <div class="mb-6">
+                                    <h4 class="text-lg font-bold text-primary-700 mb-2">{{ $catServ->nombre_categoria_servicio }}</h4>
+                                    <p class="text-sm text-gray-500 mb-3">{{ $catServ->descripcion }}</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        @foreach($catServ->serviciosPredefinidos as $servicio)
+                                        <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
+                                            <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}"
+                                                class="peer absolute left-4 top-4 w-5 h-5 accent-primary-600 rounded focus:ring-2 focus:ring-primary-200 transition" aria-label="Seleccionar {{ $servicio->nombre_servicio }}" />
+                                            <div class="pl-8">
+                                                <span class="block font-semibold text-gray-900 group-hover:text-primary-600 transition">{{ $servicio->nombre_servicio }}</span>
+                                                <span class="block text-xs text-gray-500 mt-1">{{ $servicio->descripcion }}</span>
+                                            </div>
+                                            <span class="absolute left-4 top-4 w-5 h-5 border-2 border-primary-300 rounded bg-white peer-checked:bg-primary-600 peer-checked:border-primary-600 transition"></span>
+                                            <svg class="absolute left-4 top-4 w-5 h-5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </label>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 @endif
+                                @endforeach
                             </div>
-                            @endforeach
                             @endif
                         </div>
 
