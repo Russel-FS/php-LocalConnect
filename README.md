@@ -13,7 +13,7 @@ LocalConnect es una plataforma digital para conectar negocios locales con reside
 -   PHP >= 8.1
 -   Composer
 -   MySQL
--   Node.js y npm (para assets frontend)
+-   Node.js y npm ([descargar aquí](https://nodejs.org/))
 -   Git
 
 ---
@@ -38,6 +38,8 @@ composer install
 ```
 
 ### 4. Instalar dependencias de Node.js
+
+Asegúrate de tener instalado Node.js y npm antes de continuar. Si no los tienes, descárgalos desde [nodejs.org](https://nodejs.org/).
 
 ```bash
 npm install
