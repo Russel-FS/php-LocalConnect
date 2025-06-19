@@ -49,4 +49,18 @@
             inicializarMapa();
         }
     });
+
+    //funcion global para actualizar el mapa con coordenadas 
+    window.actualizarMapaConCoordenadas = function(lat, lng) {
+        if (map && marker) {
+            marker.setLatLng([lat, lng]);
+            map.setView([lat, lng], 17);
+            if (document.getElementById('latitud')) {
+                document.getElementById('latitud').value = lat.toFixed(6);
+            }
+            if (document.getElementById('longitud')) {
+                document.getElementById('longitud').value = lng.toFixed(6);
+            }
+        }
+    }
 </script>
