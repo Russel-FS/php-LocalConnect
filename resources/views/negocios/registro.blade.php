@@ -184,9 +184,9 @@
                             <div class="relative">
                                 <input
                                     type="text"
-                                    id="map-search"
+                                    id="buscador-mapa"
                                     placeholder="Buscar dirección o lugar..."
-                                    class="z-50 absolute top-3 right-3 w-64 px-4 py-2 rounded-full border border-gray-200 bg-white shadow focus:outline-none focus:ring-2 focus:ring-primary-100 text-sm"
+                                    class="z-50 absolute top-3 right-3 w-64 px-4 py-2 rounded-full border border-gray-200 bg-white shadow focus:outline-none text-sm placeholder-gray-400 focus:border-primary-400 transition"
                                     autocomplete="off" />
                                 <div id="map" class="w-full h-64 rounded-lg border border-gray-200 z-40"></div>
                             </div>
