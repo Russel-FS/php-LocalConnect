@@ -321,31 +321,56 @@
                     <div class="space-y-6">
                         <div>
                             <label class="block mb-2 text-gray-700 font-medium">Horario de atención</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lunes a viernes 8am - 8pm" />
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lunes a viernes 8am - 8pm" />
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block mb-2 text-gray-700 font-medium">Teléfono</label>
-                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
+                                        <x-icons.phone />
+                                    </span>
+                                    <input type="text" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Teléfono" />
+                                </div>
                             </div>
                             <div>
                                 <label class="block mb-2 text-gray-700 font-medium">WhatsApp</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
+                                        <x-icons.whatsapp />
+                                    </span>
+                                    <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="WhatsApp" />
+                                </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block mb-2 text-gray-700 font-medium">Facebook</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
+                                        <x-icons.facebook />
+                                    </span>
+                                    <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Facebook" />
+                                </div>
                             </div>
                             <div>
                                 <label class="block mb-2 text-gray-700 font-medium">Instagram</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                                <div class="relative">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
+                                        <x-icons.instagram />
+                                    </span>
+                                    <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Instagram" />
+                                </div>
                             </div>
                         </div>
                         <div>
                             <label class="block mb-2 text-gray-700 font-medium">Sitio web</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
+                                    <x-icons.globe />
+                                </span>
+                                <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Sitio web" />
+                            </div>
                         </div>
                     </div>
                     <div class="flex justify-between mt-10">
