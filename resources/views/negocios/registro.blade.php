@@ -154,7 +154,7 @@
                             @foreach($categorias as $categoria)
                             <label class="categoria-checkbox">
                                 <input type="checkbox" name="categorias[]" value="{{ $categoria->id_categoria }}" class="hidden" />
-                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors">
+                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors bg-white shadow-sm">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center transition-colors">
                                         <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
@@ -162,6 +162,7 @@
                                     </div>
                                     <div>
                                         <span class="font-medium text-gray-900">{{ $categoria->nombre_categoria }}</span>
+                                        <p class="text-xs text-gray-500 mt-1">{{ $categoria->descripcion }}</p>
                                     </div>
                                 </div>
                             </label>
