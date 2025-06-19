@@ -14,25 +14,26 @@ class User extends Authenticatable
     protected $primaryKey = 'id_usuario';
 
     protected $fillable = [
-        'nombre',
+        'name',
         'email',
-        'contraseña',
+        'email_verified_at',
+        'password',
+        'remember_token',
         'telefono',
         'tipo',
-        'estado'
+        'estado',
     ];
 
     protected $hidden = [
-        'contraseña',
+        'password',
         'remember_token',
     ];
 
     protected $casts = [
-        'fecha_registro' => 'datetime',
-        'contraseña' => 'hashed',
+        'email_verified_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'tipo' => 'string',
-        'estado' => 'string'
+        'estado' => 'string',
     ];
-
-
 }

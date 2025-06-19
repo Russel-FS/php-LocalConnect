@@ -21,17 +21,24 @@ CREATE TABLE ubicaciones (
 -- Usuarios (residentes, negocios y administradores)
 CREATE TABLE usuarios (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    contraseña VARCHAR(255) NOT NULL,
+    email_verified_at DATETIME NULL,
+    password VARCHAR(255) NOT NULL,
+    remember_token VARCHAR(100) NULL,
     telefono VARCHAR(20),
     tipo ENUM(
         'residente',
         'negocio',
         'admin'
     ) NOT NULL,
-    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    estado ENUM('activo', 'suspendido') DEFAULT 'activo'
+    estado ENUM(
+        'activo',
+        'suspendido',
+        'eliminado'
+    ) DEFAULT 'activo',
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL
 );
 
 -- Negocios, referenciando a usuarios y a ubicaciones
