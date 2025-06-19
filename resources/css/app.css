@@ -27,6 +27,9 @@
     --color-gray-text: #23272f;
 }
 
+@theme {
+}
+
 body {
     background: var(--color-gray-bg);
     font-family: "Inter", "Instrument Sans", ui-sans-serif, system-ui,
