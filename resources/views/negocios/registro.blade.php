@@ -249,7 +249,7 @@
                         <div>
                             <label class="block mb-4 text-gray-700 font-medium">Servicios predefinidos</label>
                             <div class="grid grid-cols-2 gap-4">
-                                @foreach($serviciosPredefinidos ?? [] as $servicio)
+                                @foreach($serviciosPredefinidos as $servicio)
                                 <label class="flex items-center gap-2">
                                     <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}">
                                     <span>{{ $servicio->nombre_servicio }}</span>
