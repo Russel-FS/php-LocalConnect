@@ -202,31 +202,41 @@
                                 </svg>
                                 Selecciona servicios predefinidos para que tu negocio sea más fácil de encontrar en las búsquedas.
                             </p>
-                            @if($serviciosPredefinidos->isEmpty())
+                            @if($categoriasServicio->isEmpty())
                             <div class="flex flex-col items-center justify-center p-8 bg-gray-50 border border-gray-200 rounded-xl text-center text-gray-500 shadow-sm">
                                 <svg class="w-12 h-12 mb-3 text-primary-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
                                 </svg>
-                                <span class="block text-lg font-semibold mb-1">No hay servicios predefinidos disponibles</span>
+                                <span class="block text-lg font-semibold mb-1">No hay categorías de servicios disponibles</span>
                                 <span class="text-sm">Por favor, contacta al administrador o intenta más tarde.</span>
                             </div>
                             @else
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                @foreach($serviciosPredefinidos as $servicio)
-                                <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
-                                    <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}"
-                                        class="peer absolute left-4 top-4 w-5 h-5 accent-primary-600 rounded focus:ring-2 focus:ring-primary-200 transition" aria-label="Seleccionar {{ $servicio->nombre_servicio }}" />
-                                    <div class="pl-8">
-                                        <span class="block font-semibold text-gray-900 group-hover:text-primary-600 transition">{{ $servicio->nombre_servicio }}</span>
-                                        <span class="block text-xs text-gray-500 mt-1">{{ $servicio->descripcion }}</span>
-                                    </div>
-                                    <span class="absolute left-4 top-4 w-5 h-5 border-2 border-primary-300 rounded bg-white peer-checked:bg-primary-600 peer-checked:border-primary-600 transition"></span>
-                                    <svg class="absolute left-4 top-4 w-5 h-5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </label>
-                                @endforeach
+                            @foreach($categoriasServicio as $catServ)
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold text-primary-700 mb-2">{{ $catServ->nombre_categoria_servicio }}</h4>
+                                <p class="text-sm text-gray-500 mb-3">{{ $catServ->descripcion }}</p>
+                                @if($catServ->serviciosPredefinidos->isEmpty())
+                                <div class="text-gray-400 italic">No hay servicios en esta categoría.</div>
+                                @else
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    @foreach($catServ->serviciosPredefinidos as $servicio)
+                                    <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
+                                        <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}"
+                                            class="peer absolute left-4 top-4 w-5 h-5 accent-primary-600 rounded focus:ring-2 focus:ring-primary-200 transition" aria-label="Seleccionar {{ $servicio->nombre_servicio }}" />
+                                        <div class="pl-8">
+                                            <span class="block font-semibold text-gray-900 group-hover:text-primary-600 transition">{{ $servicio->nombre_servicio }}</span>
+                                            <span class="block text-xs text-gray-500 mt-1">{{ $servicio->descripcion }}</span>
+                                        </div>
+                                        <span class="absolute left-4 top-4 w-5 h-5 border-2 border-primary-300 rounded bg-white peer-checked:bg-primary-600 peer-checked:border-primary-600 transition"></span>
+                                        <svg class="absolute left-4 top-4 w-5 h-5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </label>
+                                    @endforeach
+                                </div>
+                                @endif
                             </div>
+                            @endforeach
                             @endif
                         </div>
 

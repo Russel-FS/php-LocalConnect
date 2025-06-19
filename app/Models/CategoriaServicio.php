@@ -20,4 +20,9 @@ class CategoriaServicio extends Model
 
     const CREATED_AT = 'creado_en';
     const UPDATED_AT = 'actualizado_en';
+
+    public function serviciosPredefinidos()
+    {
+        return $this->hasMany(\App\Models\ServicioPredefinido::class, 'id_categoria_servicio', 'id_categoria_servicio');
+    }
 }
