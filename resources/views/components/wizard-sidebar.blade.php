@@ -1,4 +1,4 @@
-<aside class="hidden lg:flex flex-col w-80 bg-white rounded-2xl shadow-lg border border-gray-100 py-8 px-8 gap-8 sticky top-28 z-20 h-fit ml-8">
+<aside class="hidden lg:flex flex-col w-80 bg-white rounded-2xl shadow-lg border border-gray-100 py-8 px-8 gap-8 sticky top-28 z-20 h-fit ml-12">
     <!-- Progreso -->
     <div class="mb-4">
         <div class="flex items-center justify-between mb-2">
