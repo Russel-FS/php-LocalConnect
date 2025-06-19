@@ -5,7 +5,7 @@
         placeholder="Buscar dirección o lugar..."
         class="w-full px-4 py-2 rounded-full border border-gray-200 bg-white shadow focus:outline-none text-sm placeholder-gray-400 focus:border-primary-400 transition"
         autocomplete="off" />
-    <div id="resultados-sugerencia" class="absolute  right-0 mt-2 bg-white rounded-xl shadow-lg z-50 overflow-hidden border border-gray-100">
+    <div id="resultados-sugerencia" class="custom-scroll scroll-smooth absolute  right-0 mt-2 bg-white rounded-xl shadow-lg z-50 overflow-y-auto max-h-32 border border-gray-100 ">
 
     </div>
     {{ $slot }}
