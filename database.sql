@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS localconnect;
+
 CREATE DATABASE IF NOT EXISTS localconnect;
 
 USE localconnect;
@@ -71,15 +73,24 @@ CREATE TABLE servicios_personalizados (
     FOREIGN KEY (id_negocio) REFERENCES negocios (id_negocio)
 );
 
-CREATE TABLE servicios_predefinidos (
-    id_servicio_predefinido INT PRIMARY KEY AUTO_INCREMENT,
-    id_categoria INT NOT NULL,
-    nombre_servicio VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(255),
-    FOREIGN KEY (id_categoria) REFERENCES categorias (id_categoria)
+CREATE TABLE categorias_servicio (
+    id_categoria_servicio INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_categoria_servicio VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE negocio_servicio (
+CREATE TABLE servicios_predefinidos (
+    id_servicio_predefinido INT PRIMARY KEY AUTO_INCREMENT,
+    id_categoria_servicio INT NOT NULL,
+    nombre_servicio VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(255),
+    FOREIGN KEY (id_categoria_servicio) REFERENCES categorias_servicio (id_categoria_servicio)
+);
+
+CREATE TABLE negocio_servicio_prefenidos (
     id_negocio INT,
     id_servicio_predefinido INT,
     PRIMARY KEY (
