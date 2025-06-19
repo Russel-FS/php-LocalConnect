@@ -150,7 +150,7 @@
                             <span class="text-sm">Por favor, contacta al administrador o intenta más tarde.</span>
                         </div>
                         @else
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[420px] overflow-x-auto custom-scroll scroll-smooth">
                             @foreach($categorias as $categoria)
                             <label class="categoria-checkbox">
                                 <input type="checkbox" name="categorias[]" value="{{ $categoria->id_categoria }}" class="hidden" />
@@ -211,7 +211,7 @@
                                 <span class="text-sm">Por favor, contacta al administrador o intenta más tarde.</span>
                             </div>
                             @else
-                            <div class="max-h-96 max-w-full overflow-auto pr-2">
+                            <div class="max-h-96 max-w-full overflow-auto pr-2 custom-scroll scroll-smooth">
                                 @foreach($categoriasServicio as $catServ)
                                 @if($catServ->serviciosPredefinidos->isNotEmpty())
                                 <div class="mb-6">
