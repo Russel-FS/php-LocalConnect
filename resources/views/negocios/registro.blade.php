@@ -141,6 +141,15 @@
 
                     <div>
                         <label class="block mb-4 text-gray-700 font-medium">Selecciona una o más categorías</label>
+                        @if($categorias->isEmpty())
+                        <div class="flex flex-col items-center justify-center p-8 bg-gray-50 border border-gray-200 rounded-xl text-center text-gray-500 shadow-sm">
+                            <svg class="w-12 h-12 mb-3 text-primary-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
+                            </svg>
+                            <span class="block text-lg font-semibold mb-1">No hay categorías disponibles</span>
+                            <span class="text-sm">Por favor, contacta al administrador o intenta más tarde.</span>
+                        </div>
+                        @else
                         <div class="grid grid-cols-2 gap-4">
                             @foreach($categorias as $categoria)
                             <label class="categoria-checkbox">
@@ -158,6 +167,7 @@
                             </label>
                             @endforeach
                         </div>
+                        @endif
                     </div>
                     <div class="flex justify-between mt-10">
                         <button class="btn-premium-outline" type="button" onclick="cambiarPaso(3,2)">Anterior</button>
