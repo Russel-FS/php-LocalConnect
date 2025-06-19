@@ -11,6 +11,9 @@ window.cambiarPaso = function (actual, siguiente) {
     pasoActual = siguiente;
     actualizarSidebar();
     actualizarProgreso();
+    if (pasoActual === 2) {
+        inicializarMapa();
+    }
 };
 
 // Funciones para validar el paso

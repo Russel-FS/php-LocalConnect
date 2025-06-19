@@ -29,6 +29,7 @@
                 document.getElementById("longitud").value = lng.toFixed(6);
                 const mapContainer = document.getElementById("map");
                 mapContainer.classList.remove("border-red-400", "border-2");
+                map.setView([lat, lng], 17);
             });
             marker.on("dragend", function(e) {
                 const lat = e.target.getLatLng().lat;
