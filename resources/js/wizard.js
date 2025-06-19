@@ -9,6 +9,7 @@ window.cambiarPaso = function (actual, siguiente) {
     document.getElementById("paso-" + actual).classList.add("hidden");
     document.getElementById("paso-" + siguiente).classList.remove("hidden");
     pasoActual = siguiente;
+    window.pasoActual = siguiente; // para que sea accesible globalmente
     actualizarSidebar();
     actualizarProgreso();
     if (pasoActual === 2) {
