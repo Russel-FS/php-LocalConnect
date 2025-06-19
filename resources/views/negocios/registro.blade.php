@@ -333,14 +333,42 @@
                     <h3 class="text-3xl font-bold mb-2 text-gray-900">Servicios ofrecidos</h3>
                     <p class="text-gray-600 mb-8">¿Qué servicios o productos ofreces?</p>
 
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-3 gap-4">
-                            <input type="text" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Nombre" />
-                            <input type="text" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Descripción" />
-                            <input type="number" required class="col-span-1 px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Precio" />
+                    <div class="space-y-6">
+                        <!-- Contenedor de servicios -->
+                        <div id="servicios-container">
+                            <!-- Servicio inicial -->
+                            <div class="servicio-item bg-gray-50 rounded-lg p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-lg font-semibold text-gray-900">Servicio #1</h4>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block mb-2 text-gray-700 font-medium">Nombre del servicio</label>
+                                        <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Corte de cabello" />
+                                    </div>
+                                    <div>
+                                        <label class="block mb-2 text-gray-700 font-medium">Descripción</label>
+                                        <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Descripción breve" />
+                                    </div>
+                                    <div>
+                                        <label class="block mb-2 text-gray-700 font-medium">Precio (S/)</label>
+                                        <input type="number" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="0.00" min="0" step="0.01" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Aquí se pueden agregar más servicios dinámicamente con JS -->
+
+                        <!-- Botón para añadir nuevo servicio -->
+                        <div class="flex justify-center">
+                            <button type="button" onclick="agregarServicio()" class="flex items-center space-x-2 px-6 py-3 bg-primary-50 text-primary-600 border border-primary-200 rounded-lg hover:bg-primary-100 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                <span class="font-medium">Agregar otro servicio</span>
+                            </button>
+                        </div>
                     </div>
+
                     <div class="flex justify-between mt-10">
                         <button class="btn-premium-outline" type="button" onclick="cambiarPaso(4,3)">Anterior</button>
                         <button class="btn-premium" type="button" onclick="validarPaso(4,5)">Siguiente</button>

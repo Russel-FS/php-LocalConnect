@@ -2,6 +2,7 @@
 
 let pasoActual = 1;
 const totalPasos = 6;
+let contadorServicios = 1;
 
 // Funciones para cambiar de paso
 window.cambiarPaso = function (actual, siguiente) {
@@ -27,14 +28,14 @@ window.validarPaso = function (actual, siguiente) {
         }
     });
 
-    // Validación especial para checkboxes de categorías (paso 3)
+    // Validación especial para checkboxes de categorías - paso 3
     if (actual === 3) {
         const checkboxes = pasoDiv.querySelectorAll(
             'input[type="checkbox"]:checked'
         );
         if (checkboxes.length === 0) {
-            // Mostrar error visual en las categorías
             const categoriaContainer = pasoDiv.querySelector(".grid");
+            // error visual
             categoriaContainer.classList.add(
                 "border-red-400",
                 "border-2",
@@ -50,6 +51,28 @@ window.validarPaso = function (actual, siguiente) {
                 "rounded-lg",
                 "p-4"
             );
+        }
+    }
+
+    // valicacioon para servicios - paso 4
+    if (actual === 4) {
+        const servicios = pasoDiv.querySelectorAll(".servicio-item");
+        let serviciosValidos = true;
+
+        servicios.forEach((servicio) => {
+            const inputs = servicio.querySelectorAll("input[required]");
+            inputs.forEach((input) => {
+                if (!input.value.trim()) {
+                    input.classList.add("border-red-400");
+                    serviciosValidos = false;
+                } else {
+                    input.classList.remove("border-red-400");
+                }
+            });
+        });
+
+        if (!serviciosValidos) {
+            valido = false;
         }
     }
 
@@ -77,6 +100,7 @@ window.mostrarVistaPrevia = function (input) {
         reader.readAsDataURL(file);
     }
 };
+
 // funcion que quita la imagen de la vista previa
 window.eliminarImagen = function () {
     const input = document.getElementById("imagen-portada");
@@ -91,6 +115,63 @@ window.eliminarImagen = function () {
     container.classList.add("hidden");
     inputContainer.classList.remove("hidden");
 };
+
+// Funciones para manejo de servicios
+window.agregarServicio = function () {
+    contadorServicios++;
+    const container = document.getElementById("servicios-container");
+
+    const nuevoServicio = document.createElement("div");
+    nuevoServicio.className = "servicio-item bg-gray-50 rounded-lg p-6";
+    nuevoServicio.innerHTML = `
+        <div class="flex items-center justify-between mb-4">
+            <h4 class="text-lg font-semibold text-gray-900">Servicio #${contadorServicios}</h4>
+            <button type="button" onclick="eliminarServicio(this)" class="text-red-500 hover:text-red-700 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label class="block mb-2 text-gray-700 font-medium">Nombre del servicio</label>
+                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Corte de cabello" />
+            </div>
+            <div>
+                <label class="block mb-2 text-gray-700 font-medium">Descripción</label>
+                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Descripción breve" />
+            </div>
+            <div>
+                <label class="block mb-2 text-gray-700 font-medium">Precio (S/)</label>
+                <input type="number" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="0.00" min="0" step="0.01" />
+            </div>
+        </div>
+    `;
+
+    container.appendChild(nuevoServicio);
+
+    // Actualizar numeración de servicios
+    actualizarNumeracionServicios();
+};
+// Función para eliminar un servicio
+window.eliminarServicio = function (boton) {
+    const servicioItem = boton.closest(".servicio-item");
+    const container = document.getElementById("servicios-container");
+
+    if (container.children.length > 1) {
+        servicioItem.remove();
+        contadorServicios--;
+        actualizarNumeracionServicios();
+    }
+};
+// Función para actualizar la numeración de los servicios
+function actualizarNumeracionServicios() {
+    const servicios = document.querySelectorAll(".servicio-item");
+    servicios.forEach((servicio, index) => {
+        const titulo = servicio.querySelector("h4");
+        titulo.textContent = `Servicio #${index + 1}`;
+    });
+}
 
 // Funciones para actualizar el sidebar
 function actualizarSidebar() {
@@ -158,7 +239,7 @@ function configurarCategorias() {
     });
 }
 
-// Inicialización cuando el DOM esté listo
+// evento para inicializar el wizard al cargar la página
 document.addEventListener("DOMContentLoaded", function () {
     actualizarSidebar();
     actualizarProgreso();
