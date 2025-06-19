@@ -378,33 +378,5 @@
     </main>
 </div>
 
-<script>
-    // Mostrar resumen de servicios seleccionados en el paso 6
-    function mostrarResumenServicios() {
-        const predefinidos = Array.from(document.querySelectorAll('input[name="servicios_predefinidos[]"]:checked')).map(el => el.closest('label').querySelector('span.block').textContent.trim());
-        const personalizados = Array.from(document.querySelectorAll('#personalizados-lista input[name^="servicios_personalizados[nombre]"]')).map(el => el.value.trim()).filter(Boolean);
-        const lista = document.getElementById('resumen-servicios');
-        lista.innerHTML = '';
-        predefinidos.forEach(nombre => {
-            const li = document.createElement('li');
-            li.textContent = nombre + ' (predefinido)';
-            lista.appendChild(li);
-        });
-        personalizados.forEach(nombre => {
-            const li = document.createElement('li');
-            li.textContent = nombre + ' (personalizado)';
-            lista.appendChild(li);
-        });
-    }
-    // Llama a mostrarResumenServicios cuando llegues al paso 6
-    window.cambiarPaso = (function(orig) {
-        return function(actual, siguiente) {
-            orig(actual, siguiente);
-            if (siguiente === 6) {
-                mostrarResumenServicios();
-            }
-        }
-    })(window.cambiarPaso);
-</script>
 
 @endsection
