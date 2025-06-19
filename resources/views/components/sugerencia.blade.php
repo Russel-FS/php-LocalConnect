@@ -48,8 +48,6 @@
         input.value = feature.place_name;
         resultados.innerHTML = '';
         resultados.style.display = 'none';
-        if (window.moverMarcadorMapa) {
-            window.moverMarcadorMapa(feature.center[1], feature.center[0]);
-        }
+        console.log('Sugerencia seleccionada:', feature);
     }
 </script>
