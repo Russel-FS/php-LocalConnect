@@ -3,6 +3,7 @@
 let pasoActual = 1;
 const totalPasos = 6;
 
+// Funciones para cambiar de paso
 window.cambiarPaso = function (actual, siguiente) {
     document.getElementById("paso-" + actual).classList.add("hidden");
     document.getElementById("paso-" + siguiente).classList.remove("hidden");
@@ -11,6 +12,7 @@ window.cambiarPaso = function (actual, siguiente) {
     actualizarProgreso();
 };
 
+// Funciones para validar el paso
 window.validarPaso = function (actual, siguiente) {
     const pasoDiv = document.getElementById("paso-" + actual);
     const inputs = pasoDiv.querySelectorAll("input, textarea, select");
@@ -30,9 +32,44 @@ window.validarPaso = function (actual, siguiente) {
     }
 };
 
+// Funciones para manejo de imagen
+window.mostrarVistaPrevia = function (input) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const vistaPrevia = document.getElementById("vista-previa");
+            const container = document.getElementById("vista-previa-container");
+            const inputContainer = document.querySelector(
+                'label[for="imagen-portada"]'
+            );
+
+            vistaPrevia.src = e.target.result;
+            container.classList.remove("hidden");
+            inputContainer.classList.add("hidden");
+        };
+        reader.readAsDataURL(file);
+    }
+};
+// funcion que quita la imagen de la vista previa
+window.eliminarImagen = function () {
+    const input = document.getElementById("imagen-portada");
+    const vistaPrevia = document.getElementById("vista-previa");
+    const container = document.getElementById("vista-previa-container");
+    const inputContainer = document.querySelector(
+        'label[for="imagen-portada"]'
+    );
+
+    input.value = "";
+    vistaPrevia.src = "";
+    container.classList.add("hidden");
+    inputContainer.classList.remove("hidden");
+};
+
+// Funciones para actualizar el sidebar
 function actualizarSidebar() {
     const items = document.querySelectorAll(".wizard-step-item");
-    items.forEach((item, idx) => {
+    items.forEach((item) => {
         item.classList.remove("active", "completed");
         const step = parseInt(item.getAttribute("data-step"));
         if (step < pasoActual) {
@@ -43,6 +80,7 @@ function actualizarSidebar() {
     });
 }
 
+// Funciones para actualizar el progreso
 function actualizarProgreso() {
     const porcentaje = (pasoActual / totalPasos) * 100;
     const progressBar = document.getElementById("progress-bar");
@@ -57,7 +95,20 @@ function actualizarProgreso() {
     }
 }
 
+// Configurar el input de imagen
+function configurarInputImagen() {
+    const input = document.getElementById("imagen-portada");
+
+    if (input) {
+        input.addEventListener("change", function () {
+            mostrarVistaPrevia(this);
+        });
+    }
+}
+
+// Inicialización cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", function () {
     actualizarSidebar();
     actualizarProgreso();
+    configurarInputImagen();
 });
