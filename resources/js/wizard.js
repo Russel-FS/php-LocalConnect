@@ -142,30 +142,15 @@ window.agregarServicio = function () {
     const container = document.getElementById("servicios-container");
 
     const nuevoServicio = document.createElement("div");
-    nuevoServicio.className = "servicio-item bg-gray-50 rounded-lg p-6";
+    nuevoServicio.className =
+        "relative bg-white rounded-xl shadow border border-gray-200 p-4 flex flex-col sm:flex-row gap-4 items-center";
     nuevoServicio.innerHTML = `
-        <div class="flex items-center justify-between mb-4">
-            <h4 class="text-lg font-semibold text-gray-900">Servicio #${contadorServicios}</h4>
-            <button type="button" onclick="eliminarServicio(this)" class="text-red-500 hover:text-red-700 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                </svg>
-            </button>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-                <label class="block mb-2 text-gray-700 font-medium">Nombre del servicio</label>
-                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Corte de cabello" />
-            </div>
-            <div>
-                <label class="block mb-2 text-gray-700 font-medium">Descripción</label>
-                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Descripción breve" />
-            </div>
-            <div>
-                <label class="block mb-2 text-gray-700 font-medium">Precio (S/)</label>
-                <input type="number" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="0.00" min="0" step="0.01" />
-            </div>
-        </div>
+        <input type="text" required class="w-full sm:w-1/4 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 transition" placeholder="Nombre del servicio" />
+        <input type="text" required class="w-full sm:w-2/4 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 transition" placeholder="Descripción breve" />
+        <input type="number" required class="w-full sm:w-1/6 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 transition" placeholder="0.00" min="0" step="0.01" />
+        <button type="button" onclick="eliminarServicio(this)" class="absolute top-2 right-2 text-red-500 hover:text-red-700 bg-red-50 rounded-full p-1 transition" title="Quitar">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
     `;
 
     container.appendChild(nuevoServicio);
