@@ -145,7 +145,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                                             </svg>
                                             <p class="mb-2 text-sm text-gray-500">
-                                                <span class="font-semibold">Haz clic para subir</span> o arrastra y suelta
+                                                <span class="font-semibold">Haz clic para subir</span>
                                             </p>
                                             <p class="text-xs text-gray-500">PNG, JPG, GIF hasta 10MB</p>
                                         </div>
@@ -229,14 +229,98 @@
                     <p class="text-gray-600 mb-8">¿Qué tipo de negocio tienes?</p>
 
                     <div>
-                        <label class="block mb-2 text-gray-700 font-medium">Selecciona una o más categorías</label>
-                        <select multiple required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition">
-                            <option>Restaurante</option>
-                            <option>Farmacia</option>
-                            <option>Ferretería</option>
-                            <option>Servicios</option>
-                            <option>Otros</option>
-                        </select>
+                        <label class="block mb-4 text-gray-700 font-medium">Selecciona una o más categorías</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="categoria-checkbox">
+                                <input type="checkbox" name="categorias[]" value="restaurante" class="hidden" />
+                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center transition-colors">
+                                        <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-900">Restaurante</span>
+                                        <p class="text-sm text-gray-500">Comida y bebidas</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="categoria-checkbox">
+                                <input type="checkbox" name="categorias[]" value="farmacia" class="hidden" />
+                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center transition-colors">
+                                        <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-900">Farmacia</span>
+                                        <p class="text-sm text-gray-500">Medicamentos y salud</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="categoria-checkbox">
+                                <input type="checkbox" name="categorias[]" value="ferreteria" class="hidden" />
+                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center transition-colors">
+                                        <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-900">Ferretería</span>
+                                        <p class="text-sm text-gray-500">Herramientas y materiales</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="categoria-checkbox">
+                                <input type="checkbox" name="categorias[]" value="servicios" class="hidden" />
+                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center transition-colors">
+                                        <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-900">Servicios</span>
+                                        <p class="text-sm text-gray-500">Servicios profesionales</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="categoria-checkbox">
+                                <input type="checkbox" name="categorias[]" value="comercio" class="hidden" />
+                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center transition-colors">
+                                        <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-900">Comercio</span>
+                                        <p class="text-sm text-gray-500">Tiendas y retail</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="categoria-checkbox">
+                                <input type="checkbox" name="categorias[]" value="otros" class="hidden" />
+                                <div class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 transition-colors">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center transition-colors">
+                                        <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-900">Otros</span>
+                                        <p class="text-sm text-gray-500">Otras categorías</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
                     </div>
                     <div class="flex justify-between mt-10">
                         <button class="btn-premium-outline" type="button" onclick="cambiarPaso(3,2)">Anterior</button>

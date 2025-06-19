@@ -27,6 +27,32 @@ window.validarPaso = function (actual, siguiente) {
         }
     });
 
+    // Validación especial para checkboxes de categorías (paso 3)
+    if (actual === 3) {
+        const checkboxes = pasoDiv.querySelectorAll(
+            'input[type="checkbox"]:checked'
+        );
+        if (checkboxes.length === 0) {
+            // Mostrar error visual en las categorías
+            const categoriaContainer = pasoDiv.querySelector(".grid");
+            categoriaContainer.classList.add(
+                "border-red-400",
+                "border-2",
+                "rounded-lg",
+                "p-4"
+            );
+            valido = false;
+        } else {
+            const categoriaContainer = pasoDiv.querySelector(".grid");
+            categoriaContainer.classList.remove(
+                "border-red-400",
+                "border-2",
+                "rounded-lg",
+                "p-4"
+            );
+        }
+    }
+
     if (valido) {
         cambiarPaso(actual, siguiente);
     }
@@ -106,9 +132,36 @@ function configurarInputImagen() {
     }
 }
 
+// Configurar checkboxes de categorías
+function configurarCategorias() {
+    const checkboxes = document.querySelectorAll(
+        '.categoria-checkbox input[type="checkbox"]'
+    );
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+            const paso3 = document.getElementById("paso-3");
+            const categoriaContainer = paso3.querySelector(".grid");
+            const checkedBoxes = paso3.querySelectorAll(
+                'input[type="checkbox"]:checked'
+            );
+
+            if (checkedBoxes.length > 0) {
+                categoriaContainer.classList.remove(
+                    "border-red-400",
+                    "border-2",
+                    "rounded-lg",
+                    "p-4"
+                );
+            }
+        });
+    });
+}
+
 // Inicialización cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", function () {
     actualizarSidebar();
     actualizarProgreso();
     configurarInputImagen();
+    configurarCategorias();
 });

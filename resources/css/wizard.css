@@ -46,6 +46,23 @@
     @apply font-semibold text-base;
 }
 
+/* Estilos para checkboxes de categorías */
+.categoria-checkbox input:checked + div {
+    @apply border-primary-600 bg-primary-50;
+}
+
+.categoria-checkbox input:checked + div .w-5 {
+    @apply border-primary-600 bg-primary-600;
+}
+
+.categoria-checkbox input:checked + div .w-5 svg {
+    @apply block;
+}
+
+.categoria-checkbox:hover div {
+    @apply border-primary-300;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .wizard-step-item {
