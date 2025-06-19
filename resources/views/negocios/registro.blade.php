@@ -217,7 +217,7 @@
                                 <label class="block mb-2 text-gray-700 font-medium">País</label>
                                 <input type="text" id="pais" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" value="Perú" />
                             </div>
-                            <!-- Oculto: latitud y longitud -->
+                            <!-- Oculto latitud y longitud -->
                             <input type="hidden" id="latitud" name="latitud" />
                             <input type="hidden" id="longitud" name="longitud" />
                         </div>
