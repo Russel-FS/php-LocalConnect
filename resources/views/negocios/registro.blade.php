@@ -242,41 +242,30 @@
                 <!-- Paso 4: Servicios -->
                 <div id="paso-4" class="hidden">
                     <h3 class="text-3xl font-bold mb-2 text-gray-900">Servicios ofrecidos</h3>
-                    <p class="text-gray-600 mb-8">¿Qué servicios o productos ofreces?</p>
+                    <p class="text-gray-600 mb-8">Selecciona los servicios predefinidos y/o agrega servicios personalizados.</p>
 
-                    <div class="space-y-6">
-                        <!-- Contenedor de servicios -->
-                        <div id="servicios-container">
-                            <!-- Servicio inicial -->
-                            <div class="servicio-item bg-gray-50 rounded-lg p-6">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h4 class="text-lg font-semibold text-gray-900">Servicio #1</h4>
-                                </div>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div>
-                                        <label class="block mb-2 text-gray-700 font-medium">Nombre del servicio</label>
-                                        <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Corte de cabello" />
-                                    </div>
-                                    <div>
-                                        <label class="block mb-2 text-gray-700 font-medium">Descripción</label>
-                                        <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Descripción breve" />
-                                    </div>
-                                    <div>
-                                        <label class="block mb-2 text-gray-700 font-medium">Precio (S/)</label>
-                                        <input type="number" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="0.00" min="0" step="0.01" />
-                                    </div>
-                                </div>
+                    <div class="space-y-8">
+                        <!-- Servicios predefinidos -->
+                        <div>
+                            <label class="block mb-4 text-gray-700 font-medium">Servicios predefinidos</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                @foreach($serviciosPredefinidos ?? [] as $servicio)
+                                <label class="flex items-center gap-2">
+                                    <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}">
+                                    <span>{{ $servicio->nombre_servicio }}</span>
+                                    <span class="text-xs text-gray-400">{{ $servicio->descripcion }}</span>
+                                </label>
+                                @endforeach
                             </div>
                         </div>
 
-                        <!-- Botón para añadir nuevo servicio -->
-                        <div class="flex justify-center">
-                            <button type="button" onclick="agregarServicio()" class="flex items-center space-x-2 px-6 py-3 bg-primary-50 text-primary-600 border border-primary-200 rounded-lg hover:bg-primary-100 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                <span class="font-medium">Agregar otro servicio</span>
-                            </button>
+                        <!-- Servicios personalizados -->
+                        <div id="servicios-personalizados">
+                            <label class="block mb-4 text-gray-700 font-medium">Servicios personalizados</label>
+                            <div class="space-y-4" id="personalizados-lista">
+                                <!-- Aquí se agregan dinámicamente los campos -->
+                            </div>
+                            <button type="button" onclick="agregarServicioPersonalizado()" class="btn-premium-outline mt-2">Agregar servicio personalizado</button>
                         </div>
                     </div>
 
@@ -345,4 +334,19 @@
         </div>
     </main>
 </div>
+
+<script>
+    function agregarServicioPersonalizado() {
+        const lista = document.getElementById('personalizados-lista');
+        const div = document.createElement('div');
+        div.className = 'flex gap-2 mb-2';
+        div.innerHTML = `
+        <input type="text" name="servicios_personalizados[nombre][]" placeholder="Nombre del servicio" class="w-full px-4 py-2 rounded-lg border border-gray-200" required>
+        <input type="text" name="servicios_personalizados[descripcion][]" placeholder="Descripción" class="w-full px-4 py-2 rounded-lg border border-gray-200">
+        <input type="number" name="servicios_personalizados[precio][]" placeholder="Precio" class="w-32 px-4 py-2 rounded-lg border border-gray-200" min="0" step="0.01">
+        <button type="button" onclick="this.parentNode.remove()" class="text-red-500 hover:text-red-700">Quitar</button>
+    `;
+        lista.appendChild(div);
+    }
+</script>
 @endsection
