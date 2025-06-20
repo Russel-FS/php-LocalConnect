@@ -17,6 +17,15 @@ class NegocioController extends Controller
 
     public function guardar(Request $request)
     {
-        dd($request->all());
+        echo '<h2>Datos recibidos del formulario:</h2>';
+        echo '<pre>';
+        print_r($request->except(['_token']));
+        echo '</pre>';
+
+        if ($request->hasFile('imagen_portada')) {
+            echo '<h3>Archivo imagen_portada:</h3>';
+            print_r($request->file('imagen_portada')->getClientOriginalName());
+        }
+        exit;
     }
 }
