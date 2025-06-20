@@ -6,12 +6,8 @@ function toggleCerrado(checkbox) {
 
 function mostrarResumen() {
     // 1. Datos del negocio
-    const nombre = document.querySelector(
-        'input[placeholder="Ej: Panadería San Juan"]'
-    ).value;
-    const descripcion = document.querySelector(
-        'textarea[placeholder^="Describe tu negocio"]'
-    ).value;
+    const nombre = document.getElementById("nombre-negocio").value;
+    const descripcion = document.getElementById("descripcion-negocio").value;
     const img = document.getElementById("vista-previa")?.src || "";
     // 2. Ubicación
     const direccion = document.getElementById("direccion").value;
