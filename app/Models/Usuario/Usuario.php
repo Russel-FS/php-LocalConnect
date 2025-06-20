@@ -2,6 +2,7 @@
 
 namespace App\Models\Usuario;
 
+use App\Models\Negocio\Negocio;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,4 +37,9 @@ class Usuario extends Authenticatable
         'tipo' => 'string',
         'estado' => 'string',
     ];
+
+    public function negocios()
+    {
+        return $this->hasMany(Negocio::class, 'id_usuario');
+    }
 }

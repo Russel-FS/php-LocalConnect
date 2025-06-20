@@ -8,6 +8,7 @@ use App\Models\Negocio\Ubicacion;
 use App\Models\Negocio\HorarioAtencion;
 use App\Models\Negocio\ServicioPersonalizado;
 use App\Models\ServicioPredefinido;
+use App\Models\Usuario\Usuario;
 
 class Negocio extends Model
 {
@@ -23,6 +24,12 @@ class Negocio extends Model
         'verificado',
         'imagen_portada'
     ];
+
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'id_usuario');
+    }
     /**
      * Relación uno a muchos con Ubicacion
      * 
