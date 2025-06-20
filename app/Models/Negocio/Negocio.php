@@ -2,13 +2,13 @@
 
 namespace App\Models\Negocio;
 
-use App\Models\Categoria;
+use App\Models\Negocio\Categoria;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Negocio\Ubicacion;
 use App\Models\Negocio\HorarioAtencion;
 use App\Models\Negocio\ServicioPersonalizado;
-use App\Models\ServicioPredefinido;
-use App\Models\Usuario\Usuario;
+use App\Models\Negocio\ServicioPredefinido;
+use App\Models\User;
 
 class Negocio extends Model
 {
@@ -28,7 +28,7 @@ class Negocio extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'id_usuario');
+        return $this->belongsTo(User::class, 'id_usuario');
     }
     /**
      * Relación uno a muchos con Ubicacion

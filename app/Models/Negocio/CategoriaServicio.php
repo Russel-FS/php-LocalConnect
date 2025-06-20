@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Negocio;
 
+use App\Models\Negocio\ServicioPredefinido;
 use Illuminate\Database\Eloquent\Model;
 
 class CategoriaServicio extends Model

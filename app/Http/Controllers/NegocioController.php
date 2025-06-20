@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
-use App\Models\CategoriaServicio;
+use App\Models\Negocio\Categoria;
+use App\Models\Negocio\CategoriaServicio;
 use Illuminate\Http\Request;
 
 class NegocioController extends Controller
