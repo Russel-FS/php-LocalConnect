@@ -45,7 +45,7 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
                         <x-icons.phone />
                     </span>
-                    <input type="text" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Teléfono" />
+                    <input type="text" id="contacto-telefono" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Teléfono" />
                 </div>
             </div>
             <div>
@@ -54,7 +54,7 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
                         <x-icons.whatsapp />
                     </span>
-                    <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="WhatsApp" />
+                    <input type="text" id="contacto-whatsapp" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="WhatsApp" />
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
                         <x-icons.facebook />
                     </span>
-                    <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Facebook" />
+                    <input type="text" id="contacto-facebook" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Facebook" />
                 </div>
             </div>
             <div>
@@ -74,7 +74,7 @@
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
                         <x-icons.instagram />
                     </span>
-                    <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Instagram" />
+                    <input type="text" id="contacto-instagram" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Instagram" />
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
                     <x-icons.globe />
                 </span>
-                <input type="text" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Sitio web" />
+                <input type="text" id="contacto-web" class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Sitio web" />
             </div>
         </div>
     </div>

@@ -66,11 +66,11 @@ function mostrarResumen() {
         }</td></tr>`;
     });
     // 7. Contacto
-    const tel = document.querySelector('input[placeholder="Teléfono"]').value;
-    const wa = document.querySelector('input[placeholder="WhatsApp"]').value;
-    const fb = document.querySelector('input[placeholder="Facebook"]').value;
-    const ig = document.querySelector('input[placeholder="Instagram"]').value;
-    const web = document.querySelector('input[placeholder="Sitio web"]').value;
+    const tel = document.getElementById("contacto-telefono").value;
+    const wa = document.getElementById("contacto-whatsapp").value;
+    const fb = document.getElementById("contacto-facebook").value;
+    const ig = document.getElementById("contacto-instagram").value;
+    const web = document.getElementById("contacto-web").value;
     // Mapa estático de Mapbox
     let mapaImg = "";
     if (lat && lng) {
