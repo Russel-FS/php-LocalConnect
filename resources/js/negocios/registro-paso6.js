@@ -76,6 +76,7 @@ function mostrarResumen() {
     if (lat && lng) {
         mapaImg = `<img src='https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s+2851e1(${lng},${lat})/${lng},${lat},16/400x200?access_token=pk.eyJ1IjoicnVzc2VsLWZzIiwiYSI6ImNtYTJ5djZ3NDFidzcybHNmZjl6dTEweGkifQ.L1_wuZGVMGSOmSKazwjxJg' class='w-full h-40 object-cover rounded-lg border mb-2 mt-6' alt='Mapa' />`;
     }
+    // elementos HTML
     let html = `
     <div class="bg-white rounded-xl shadow p-8 flex flex-col sm:flex-row gap-8 items-center">
         ${
