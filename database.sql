@@ -73,6 +73,23 @@ CREATE TABLE negocio_categoria (
     FOREIGN KEY (id_categoria) REFERENCES categorias (id_categoria)
 );
 
+CREATE TABLE horarios_atencion (
+    id_horario INT PRIMARY KEY AUTO_INCREMENT,
+    id_negocio INT NOT NULL,
+    dia_semana ENUM(
+        'lunes',
+        'martes',
+        'miércoles',
+        'jueves',
+        'viernes',
+        'sábado',
+        'domingo'
+    ) NOT NULL,
+    hora_apertura TIME NOT NULL,
+    hora_cierre TIME NOT NULL,
+    cerrado BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (id_negocio) REFERENCES negocios (id_negocio)
+);
 -- Servicios ofrecidos por cada negocio
 CREATE TABLE servicios_personalizados (
     id_servicio INT PRIMARY KEY AUTO_INCREMENT,
