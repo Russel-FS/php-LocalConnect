@@ -18,6 +18,11 @@ class ServicioPersonalizado extends Model
         'disponible'
     ];
 
+    /**
+     * Relación uno a muchos con Negocio
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function negocio()
     {
         return $this->belongsTo(Negocio::class, 'id_negocio');

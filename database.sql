@@ -55,7 +55,7 @@ CREATE TABLE negocios (
     FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones (id_ubicacion)
 );
 
--- Categorías y su relación N:M con negocios
+-- Categorías y su relación con negocios
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
     nombre_categoria VARCHAR(100) NOT NULL,

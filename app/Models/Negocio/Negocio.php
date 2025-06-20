@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Negocio\Ubicacion;
 use App\Models\Negocio\HorarioAtencion;
 use App\Models\Negocio\ServicioPersonalizado;
+use App\Models\ServicioPredefinido;
 
 class Negocio extends Model
 {
@@ -22,24 +23,58 @@ class Negocio extends Model
         'verificado',
         'imagen_portada'
     ];
-
+    /**
+     * Relación uno a muchos con Ubicacion
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function ubicacion()
     {
         return $this->belongsTo(Ubicacion::class, 'id_ubicacion');
     }
-
-    public function categorias()
-    {
-        return $this->belongsToMany(Categoria::class, 'negocio_categoria', 'id_negocio', 'id_categoria');
-    }
-
+    /**
+     * Relación uno a muchos con HorarioAtencion
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function horarios()
     {
         return $this->hasMany(HorarioAtencion::class, 'id_negocio');
     }
 
+
+    /**
+     *  Relación de muchos a muchos con Categoria
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function categorias()
+    {
+        return $this->belongsToMany(Categoria::class, 'negocio_categoria', 'id_negocio', 'id_categoria');
+    }
+
+    /**
+     * Relación uno a muchos con ServicioPersonalizado
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function serviciosPersonalizados()
     {
         return $this->hasMany(ServicioPersonalizado::class, 'id_negocio');
+    }
+
+    /**
+     * Relación muchos a muchos con ServicioPredefinido
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function serviciosPredefinidos()
+    {
+        return $this->belongsToMany(
+            ServicioPredefinido::class,
+            'negocio_servicio_prefenidos',
+            'id_negocio',
+            'id_servicio_predefinido'
+        );
     }
 }
