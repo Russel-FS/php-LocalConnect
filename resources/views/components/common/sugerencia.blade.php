@@ -15,7 +15,6 @@
     </div>
     <div id="resultados-sugerencia" class="custom-scroll scroll-smooth absolute right-0 mt-2 bg-white rounded-xl shadow-lg z-50 overflow-y-auto max-h-60 border border-gray-100 w-full min-w-[250px]" style="display:none;">
     </div>
-    {{ $slot }}
 </div>
 
 <script>

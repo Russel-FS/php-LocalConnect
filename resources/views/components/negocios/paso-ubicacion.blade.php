@@ -6,8 +6,8 @@
         <div>
             <label class="block mb-2 text-gray-700 font-medium">Selecciona la ubicación en el mapa</label>
             <div class="relative w-full h-full">
-                <x-sugerencia></x-sugerencia>
-                <x-mapa />
+                <x-common.sugerencia />
+                <x-common.mapa />
             </div>
             <p class="text-sm text-gray-500 mt-2">Haz clic en el mapa para marcar la ubicación exacta de tu negocio</p>
         </div>

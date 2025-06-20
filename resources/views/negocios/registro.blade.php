@@ -4,7 +4,7 @@
 <div class="min-h-screen bg-gray-50 ">
     <div class=" flex">
         <!-- Sidebar -->
-        <x-wizard-sidebar />
+        <x-common.wizard-sidebar />
 
         <!-- Contenido principal -->
         <main class="flex-1">
