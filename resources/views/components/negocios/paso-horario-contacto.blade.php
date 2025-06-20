@@ -1,7 +1,7 @@
 <div id="paso-5" class="hidden">
     <h3 class="text-3xl font-bold mb-2 text-gray-900">Horario y contacto</h3>
     <p class="text-gray-600 mb-8">¿Cómo pueden contactarte tus clientes?</p>
-    <div class="space-y-6 bg-gray-50 rounded-xl border border-gray-200 shadow-sm p-6">
+    <div class="space-y-6">
         <div>
             <label class="block mb-2 text-gray-700 font-medium">Horario de atención</label>
             <p class="text-xs text-gray-500 mb-4">Selecciona los días y horarios de atención</p>
