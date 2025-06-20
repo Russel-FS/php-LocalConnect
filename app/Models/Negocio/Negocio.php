@@ -2,9 +2,9 @@
 
 namespace App\Models\Negocio;
 
+use App\Models\Categoria;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Negocio\Ubicacion;
-use App\Models\Negocio\Categoria;
 use App\Models\Negocio\HorarioAtencion;
 use App\Models\Negocio\ServicioPersonalizado;
 
