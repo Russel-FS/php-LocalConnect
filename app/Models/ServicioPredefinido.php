@@ -18,6 +18,6 @@ class ServicioPredefinido extends Model
 
     public function categoriaServicio()
     {
-        return $this->belongsTo(\App\Models\CategoriaServicio::class, 'id_categoria_servicio', 'id_categoria_servicio');
+        return $this->belongsTo(CategoriaServicio::class, 'id_categoria_servicio', 'id_categoria_servicio');
     }
 }

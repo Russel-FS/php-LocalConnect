@@ -23,6 +23,6 @@ class CategoriaServicio extends Model
 
     public function serviciosPredefinidos()
     {
-        return $this->hasMany(\App\Models\ServicioPredefinido::class, 'id_categoria_servicio', 'id_categoria_servicio');
+        return $this->hasMany(ServicioPredefinido::class, 'id_categoria_servicio', 'id_categoria_servicio');
     }
 }
