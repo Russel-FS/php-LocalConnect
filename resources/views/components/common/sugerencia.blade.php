@@ -10,7 +10,7 @@
             type="text"
             id="input-sugerencia"
             placeholder="Buscar dirección o lugar..."
-            class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-200 bg-white shadow focus:outline-none text-sm placeholder-gray-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 transition"
+            class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-200 bg-white shadow focus:outline-none text-sm placeholder-gray-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 transition focus:bg-primary-50"
             autocomplete="off" />
     </div>
     <div id="resultados-sugerencia" class="custom-scroll scroll-smooth absolute right-0 mt-2 bg-white rounded-xl shadow-lg z-50 overflow-y-auto max-h-60 border border-gray-100 w-full min-w-[250px]" style="display:none;">
