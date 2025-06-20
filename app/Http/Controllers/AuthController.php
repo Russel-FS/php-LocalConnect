@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AuthService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    protected $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
     public function showLogin()
     {
         return view('auth.login');
@@ -18,11 +28,52 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        return back()->with('status', 'Funcionalidad de login assún no implementada.');
+        try {
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|string'
+            ]);
+
+            $user = $this->authService->login($credentials);
+
+            // Redirigir según el tipo de usuario
+            if ($user->tipo === 'negocio') {
+                return redirect()->route('negocios.registro')->with('success', '¡Bienvenido! Completa el registro de tu negocio.');
+            } else {
+                return redirect()->route('home')->with('success', '¡Bienvenido!');
+            }
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage())->withInput();
+        }
     }
 
     public function register(Request $request)
     {
-        return back()->with('status', 'Funcionalidad de registro asssún no implementada.');
+        try {
+            $data = $request->all();
+            $data['tipo'] = $request->input('tipo', 'residente');
+
+            $user = $this->authService->register($data); // registro de usuario
+            auth()->login($user); // iniciar sesión automáticamente
+
+            // Redirigir según el tipo de usuario
+            if ($user->tipo === 'negocio') {
+                return redirect()->route('negocios.registro')->with('success', '¡Cuenta creada exitosamente! Completa el registro de tu negocio.');
+            } else {
+                return redirect()->route('home')->with('success', '¡Cuenta creada exitosamente!');
+            }
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage())->withInput();
+        }
+    }
+
+    public function logout()
+    {
+        $this->authService->logout();
+        return redirect()->route('home')->with('success', 'Sesión cerrada exitosamente.');
     }
 }
