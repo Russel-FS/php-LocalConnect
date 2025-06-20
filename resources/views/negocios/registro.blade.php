@@ -9,7 +9,8 @@
         <!-- Contenido principal -->
         <main class="flex-1">
             <div class="max-w-4xl mx-auto p-8 lg:p-10">
-                <form id="wizard-form" autocomplete="off">
+                <form id="wizard-form" method="POST" action="{{ route('negocios.guardar') }}" enctype="multipart/form-data">
+                    @csrf
                     <!-- Paso 1 Datos del negocio -->
                     <x-negocios.paso-datos-basicos />
                     <!-- Paso 2 Ubicación -->

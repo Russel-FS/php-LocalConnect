@@ -15,31 +15,31 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
                 <label class="block mb-2 text-gray-700 font-medium">Dirección <span class="text-red-500">*</span></label>
-                <input type="text" id="direccion" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Calle, número, referencia" />
+                <input type="text" id="direccion" name="direccion" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Calle, número, referencia" />
             </div>
             <div>
                 <label class="block mb-2 text-gray-700 font-medium">Distrito <span class="text-gray-400 text-xs">(opcional)</span></label>
-                <input type="text" id="distrito" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Miraflores" />
+                <input type="text" id="distrito" name="distrito" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Miraflores" />
             </div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
                 <label class="block mb-2 text-gray-700 font-medium">Ciudad <span class="text-gray-400 text-xs">(opcional)</span></label>
-                <input type="text" id="ciudad" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lima" />
+                <input type="text" id="ciudad" name="ciudad" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lima" />
             </div>
             <div>
                 <label class="block mb-2 text-gray-700 font-medium">Provincia <span class="text-gray-400 text-xs">(opcional)</span></label>
-                <input type="text" id="provincia" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lima" />
+                <input type="text" id="provincia" name="provincia" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lima" />
             </div>
             <div>
                 <label class="block mb-2 text-gray-700 font-medium">Departamento <span class="text-gray-400 text-xs">(opcional)</span></label>
-                <input type="text" id="departamento" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lima" />
+                <input type="text" id="departamento" name="departamento" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Lima" />
             </div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
                 <label class="block mb-2 text-gray-700 font-medium">País <span class="text-red-500">*</span></label>
-                <input type="text" id="pais" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" value="Perú" />
+                <input type="text" id="pais" name="pais" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" value="Perú" />
             </div>
             <!-- Oculto latitud y longitud -->
             <input type="hidden" id="latitud" name="latitud" />

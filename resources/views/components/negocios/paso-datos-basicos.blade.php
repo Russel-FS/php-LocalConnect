@@ -11,13 +11,13 @@
                         <rect x="4" y="8" width="16" height="10" rx="4" stroke="currentColor" stroke-width="1.5" />
                     </svg>
                 </span>
-                <input type="text" id="nombre-negocio" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Panadería San Juan" />
+                <input type="text" id="nombre-negocio" name="nombre_negocio" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Ej: Panadería San Juan" />
             </div>
         </div>
         <!-- Descripción -->
         <div>
             <label class="block mb-2 text-gray-700 font-medium">Descripción</label>
-            <textarea id="descripcion-negocio" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" rows="3" placeholder="Describe tu negocio, qué productos o servicios ofreces, tu historia, etc."></textarea>
+            <textarea id="descripcion-negocio" name="descripcion_negocio" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" rows="3" placeholder="Describe tu negocio, qué productos o servicios ofreces, tu historia, etc."></textarea>
         </div>
         <!-- Imagen de portada -->
         <div>
@@ -25,7 +25,7 @@
             <div class="space-y-4">
                 <!-- Input file-->
                 <div class="relative">
-                    <input type="file" id="imagen-portada" accept="image/*" required class="hidden" />
+                    <input type="file" id="imagen-portada" name="imagen_portada" accept="image/*" required class="hidden" />
                     <label for="imagen-portada" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                             <svg class="w-8 h-8 mb-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
