@@ -74,9 +74,7 @@
                 </span>
             </label>
             <div class="space-y-4" id="personalizados-lista">
-                <input type="text" name="servicios_personalizados[nombre][]" placeholder="Nombre del servicio" class="w-full sm:w-1/4 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 transition" required>
-                <input type="text" name="servicios_personalizados[descripcion][]" placeholder="Descripción" class="w-full sm:w-2/4 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 transition">
-                <input type="number" name="servicios_personalizados[precio][]" placeholder="Precio" class="w-full sm:w-1/6 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 transition" min="0" step="0.01">
+                <!-- aqui se agregan mediante js -->
             </div>
             <button type="button" onclick="agregarServicioPersonalizado(this)" class="btn-premium-outline mt-2 flex items-center gap-2">
                 <x-icons.plus></x-icons.plus>
