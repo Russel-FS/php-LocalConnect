@@ -149,7 +149,6 @@ function mostrarResumen() {
     document.getElementById("resumen-negocio").innerHTML = html;
 }
 
-// Sobrescribe cambiarPaso
 const cambiarPasoOriginal = window.cambiarPaso;
 window.cambiarPaso = function (actual, siguiente) {
     if (siguiente === 6) mostrarResumen();
