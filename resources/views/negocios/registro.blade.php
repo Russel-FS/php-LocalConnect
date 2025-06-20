@@ -28,6 +28,14 @@
     </div>
 </div>
 
-@vite(['resources/js/negocios/registro-negocio.js'])
+@vite([
+'resources/js/wizard.js',
+'resources/js/negocios/registro-paso1.js',
+'resources/js/negocios/registro-paso2.js',
+'resources/js/negocios/registro-paso3.js',
+'resources/js/negocios/registro-paso4.js',
+'resources/js/negocios/registro-paso5.js',
+'resources/js/negocios/registro-paso6.js',
+])
 
 @endsection

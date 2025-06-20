@@ -1,2 +1,2 @@
 import "./bootstrap";
-import "./wizard.js";
+import "./negocios/wizard";
