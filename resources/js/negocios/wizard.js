@@ -75,7 +75,9 @@ window.validarPaso = function (actual, siguiente) {
             'input[type="checkbox"]:checked'
         );
         if (checkboxes.length === 0) {
-            const categoriaContainer = pasoDiv.querySelector(".grid");
+            const categoriaContainer = pasoDiv.querySelector(
+                "#categoria-contenedor"
+            );
             // error visual
             categoriaContainer.classList.add(
                 "border-red-400",
@@ -85,7 +87,9 @@ window.validarPaso = function (actual, siguiente) {
             );
             valido = false;
         } else {
-            const categoriaContainer = pasoDiv.querySelector(".grid");
+            const categoriaContainer = pasoDiv.querySelector(
+                "#categoria-contenedor"
+            );
             categoriaContainer.classList.remove(
                 "border-red-400",
                 "border-2",

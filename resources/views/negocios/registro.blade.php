@@ -29,7 +29,7 @@
 </div>
 
 @vite([
-'resources/js/wizard.js',
+'resources/js/negocios/wizard.js',
 'resources/js/negocios/registro-paso1.js',
 'resources/js/negocios/registro-paso2.js',
 'resources/js/negocios/registro-paso3.js',

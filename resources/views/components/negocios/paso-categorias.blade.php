@@ -1,10 +1,10 @@
 <div id="paso-3" class="hidden">
     <h3 class="text-3xl font-bold mb-2 text-gray-900">Categorías</h3>
     <p class="text-gray-600 mb-8">¿Qué tipo de negocio tienes?</p>
-    <div>
-        <label class="block mb-4 text-gray-700 font-medium">Selecciona una o más categorías</label>
+    <div class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm p-6 " id="categoria-contenedor">
+        <label class="block mb-4 text-gray-700 font-medium">Selecciona una o más categorías <span class="text-red-500">*</span></label>
         @if($categorias->isEmpty())
-        <div class="flex flex-col items-center justify-center p-8 bg-gray-50 border border-gray-200 rounded-xl text-center text-gray-500 shadow-sm">
+        <div class="flex flex-col items-center justify-center p-8 bg-gray-100 border border-gray-200 rounded-xl text-center text-gray-500 shadow-sm">
             <svg class="w-12 h-12 mb-3 text-primary-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
             </svg>
