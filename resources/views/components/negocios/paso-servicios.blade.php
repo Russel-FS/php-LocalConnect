@@ -3,8 +3,8 @@
     <p class="text-gray-600 mb-8">Selecciona los servicios predefinidos y/o agrega servicios personalizados.</p>
     <div class="space-y-8">
         <!-- Servicios predefinidos -->
-        <div>
-            <label class=" mb-4 text-gray-700 font-medium flex items-center gap-2">Servicios predefinidos
+        <div class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm p-6">
+            <label class="mb-4 text-gray-700 font-medium flex items-center gap-2">Servicios predefinidos
                 <span class="relative group">
                     <svg class="w-4 h-4 text-primary-400 cursor-pointer" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" />
@@ -23,7 +23,7 @@
                 Selecciona servicios predefinidos para que tu negocio sea más fácil de encontrar en las búsquedas.
             </p>
             @if($categoriasServicio->isEmpty())
-            <div class="flex flex-col items-center justify-center p-8 bg-gray-50 border border-gray-200 rounded-xl text-center text-gray-500 shadow-sm">
+            <div class="flex flex-col items-center justify-center p-8 bg-gray-100 border border-gray-200 rounded-xl text-center text-gray-500 shadow-sm">
                 <svg class="w-12 h-12 mb-3 text-primary-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
                 </svg>
@@ -60,8 +60,8 @@
             @endif
         </div>
         <!-- Servicios personalizados -->
-        <div id="servicios-personalizados">
-            <label class=" mb-4 text-gray-700 font-medium flex items-center gap-2">Servicios personalizados
+        <div id="servicios-personalizados" class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm p-6">
+            <label class="mb-4 text-gray-700 font-medium flex items-center gap-2">Servicios personalizados
                 <span class="relative group">
                     <svg class="w-4 h-4 text-primary-400 cursor-pointer" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" />
