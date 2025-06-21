@@ -23,6 +23,17 @@ class AuthService
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:usuarios,email',
             'password' => 'required|string|min:8|confirmed'
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.string' => 'El nombre debe ser texto.',
+            'name.max' => 'El nombre no puede tener más de 100 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El formato del correo electrónico no es válido.',
+            'email.unique' => 'Este correo electrónico ya está registrado.',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.string' => 'La contraseña debe ser texto.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed' => 'La confirmación de contraseña no coincide.'
         ]);
 
         if ($validator->fails()) {
@@ -60,6 +71,11 @@ class AuthService
         $validator = Validator::make($credentials, [
             'email' => 'required|email',
             'password' => 'required|string'
+        ], [
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El formato del correo electrónico no es válido.',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.string' => 'La contraseña debe ser texto.'
         ]);
 
         if ($validator->fails()) {
