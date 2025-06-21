@@ -37,8 +37,17 @@ window.eliminarImagen = function () {
 window.validarPaso1 = function () {
     const nombre = document.getElementById("nombre-negocio");
     const descripcion = document.getElementById("descripcion-negocio");
+    const imagen = document.getElementById("imagen-portada");
+
     let valido = true;
     let mensajeError = "";
+
+    // Validar imagen de portada
+    if (!imagen.files.length) {
+        mensajeError = "La imagen de portada es obligatoria";
+        valido = false;
+        imagen.classList.add("border-red-400");
+    }
 
     // Validar nombre del negocio
     if (!nombre.value.trim()) {
