@@ -9,13 +9,19 @@
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-400">
                     <x-icons.form.email />
                 </span>
-                <input type="text" id="nombre-negocio" name="nombre_negocio" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" placeholder="Ej: Panadería San Juan" />
+                <input type="text" id="nombre-negocio" name="nombre_negocio" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" placeholder="Ej: Panadería San Juan" value="{{ old('nombre_negocio') }}" />
             </div>
+            @if($errors->has('nombre_negocio'))
+            <span class="text-red-500 text-xs mt-1 block">{{ $errors->first('nombre_negocio') }}</span>
+            @endif
         </div>
         <!-- Descripción -->
         <div>
             <label class="block mb-2 text-primary-600 font-medium">Descripción</label>
-            <textarea id="descripcion-negocio" name="descripcion_negocio" required class="w-full px-4 py-3 rounded-lg border border-primary-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" rows="3" placeholder="Describe tu negocio, qué productos o servicios ofreces, tu historia, etc."></textarea>
+            <textarea id="descripcion-negocio" name="descripcion_negocio" required class="w-full px-4 py-3 rounded-lg border border-primary-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" rows="3" placeholder="Describe tu negocio, qué productos o servicios ofreces, tu historia, etc.">{{ old('descripcion_negocio') }}</textarea>
+            @if($errors->has('descripcion_negocio'))
+            <span class="text-red-500 text-xs mt-1 block">{{ $errors->first('descripcion_negocio') }}</span>
+            @endif
         </div>
         <!-- Imagen de portada -->
         <div>
