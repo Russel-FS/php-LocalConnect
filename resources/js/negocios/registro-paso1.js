@@ -33,6 +33,31 @@ window.eliminarImagen = function () {
     inputContainer.classList.remove("hidden");
 };
 
+// Validación específica del paso 1
+window.validarPaso1 = function () {
+    const nombre = document.getElementById("nombre-negocio");
+    const descripcion = document.getElementById("descripcion-negocio");
+    let valido = true;
+
+    // Validar nombre del negocio
+    if (!nombre.value.trim()) {
+        nombre.classList.add("border-red-400");
+        valido = false;
+    } else {
+        nombre.classList.remove("border-red-400");
+    }
+
+    // Validar descripción del negocio
+    if (!descripcion.value.trim()) {
+        descripcion.classList.add("border-red-400");
+        valido = false;
+    } else {
+        descripcion.classList.remove("border-red-400");
+    }
+
+    return valido;
+};
+
 function configurarInputImagen() {
     const input = document.getElementById("imagen-portada");
     if (input) {

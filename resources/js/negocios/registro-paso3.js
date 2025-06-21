@@ -1,4 +1,4 @@
-// Paso 3: Validación y manejo de categorías
+// Paso 3 Validación y manejo de categorías
 
 function configurarCategorias() {
     const checkboxes = document.querySelectorAll(
@@ -22,6 +22,35 @@ function configurarCategorias() {
         });
     });
 }
+
+// Validación específica del paso 3
+window.validarPaso3 = function () {
+    const paso3 = document.getElementById("paso-3");
+    const checkboxes = paso3.querySelectorAll('input[type="checkbox"]:checked');
+    const categoriaContainer = paso3.querySelector("#categoria-contenedor");
+    let valido = true;
+
+    if (checkboxes.length === 0) {
+        // Mostrar error visual
+        categoriaContainer.classList.add(
+            "border-red-400",
+            "border-2",
+            "rounded-lg",
+            "p-4"
+        );
+        valido = false;
+    } else {
+        // Limpiar error visual
+        categoriaContainer.classList.remove(
+            "border-red-400",
+            "border-2",
+            "rounded-lg",
+            "p-4"
+        );
+    }
+
+    return valido;
+};
 
 document.addEventListener("DOMContentLoaded", function () {
     configurarCategorias();

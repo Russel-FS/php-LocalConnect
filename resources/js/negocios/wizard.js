@@ -53,91 +53,80 @@ function actualizarProgreso() {
     }
 }
 
-// validaciones .
-// Funciones para validar el paso
+// Función principal de validación que llama a las validaciones específicas
 window.validarPaso = function (actual, siguiente) {
-    const pasoDiv = document.getElementById("paso-" + actual);
-    const inputs = pasoDiv.querySelectorAll("input, textarea, select");
     let valido = true;
 
-    inputs.forEach((input) => {
-        if (input.hasAttribute("required") && !input.value) {
-            input.classList.add("border-red-400");
-            valido = false;
-        } else {
-            input.classList.remove("border-red-400");
-        }
-    });
-
-    // Validación especial para checkboxes de categorías - paso 3
-    if (actual === 3) {
-        const checkboxes = pasoDiv.querySelectorAll(
-            'input[type="checkbox"]:checked'
-        );
-        if (checkboxes.length === 0) {
-            const categoriaContainer = pasoDiv.querySelector(
-                "#categoria-contenedor"
+    // Llamar a la validación específica de cada paso
+    switch (actual) {
+        case 1:
+            if (typeof window.validarPaso1 === "function") {
+                valido = window.validarPaso1();
+            }
+            break;
+        case 2:
+            if (typeof window.validarPaso2 === "function") {
+                valido = window.validarPaso2();
+            }
+            break;
+        case 3:
+            if (typeof window.validarPaso3 === "function") {
+                valido = window.validarPaso3();
+            }
+            break;
+        case 4:
+            if (typeof window.validarPaso4 === "function") {
+                valido = window.validarPaso4();
+            }
+            break;
+        case 5:
+            if (typeof window.validarPaso5 === "function") {
+                valido = window.validarPaso5();
+            }
+            break;
+        case 6:
+            if (typeof window.validarPaso6 === "function") {
+                valido = window.validarPaso6();
+            }
+            break;
+        default:
+            // Validación básica para campos requeridos
+            const pasoDiv = document.getElementById("paso-" + actual);
+            const inputs = pasoDiv.querySelectorAll(
+                "input[required], textarea[required], select[required]"
             );
-            // error visual
-            categoriaContainer.classList.add(
-                "border-red-400",
-                "border-2",
-                "rounded-lg",
-                "p-4"
-            );
-            valido = false;
-        } else {
-            const categoriaContainer = pasoDiv.querySelector(
-                "#categoria-contenedor"
-            );
-            categoriaContainer.classList.remove(
-                "border-red-400",
-                "border-2",
-                "rounded-lg",
-                "p-4"
-            );
-        }
-    }
-
-    // valicacioon para servicios - paso 4
-    if (actual === 4) {
-        const servicios = pasoDiv.querySelectorAll(".servicio-item");
-        let serviciosValidos = true;
-
-        servicios.forEach((servicio) => {
-            const inputs = servicio.querySelectorAll("input[required]");
             inputs.forEach((input) => {
                 if (!input.value.trim()) {
                     input.classList.add("border-red-400");
-                    serviciosValidos = false;
+                    valido = false;
                 } else {
                     input.classList.remove("border-red-400");
                 }
             });
-        });
-
-        if (!serviciosValidos) {
-            valido = false;
-        }
-    }
-
-    // Validación para ubicación - paso 2
-    if (actual === 2) {
-        const latitud = document.getElementById("latitud").value;
-        const longitud = document.getElementById("longitud").value;
-
-        if (!latitud || !longitud) {
-            // Mostrar error en el mapa
-            const mapContainer = document.getElementById("map");
-            mapContainer.classList.add("border-red-400", "border-2");
-            valido = false;
-        } else {
-            const mapContainer = document.getElementById("map");
-            mapContainer.classList.remove("border-red-400", "border-2");
-        }
+            break;
     }
 
     if (valido) {
         cambiarPaso(actual, siguiente);
     }
 };
+
+// personalizacion del toaster
+window.notyf =
+    window.notyf ||
+    new Notyf({
+        duration: 6000,
+        position: { x: "right", y: "top" },
+        types: [
+            {
+                type: "error",
+                background: "var(--color-primary-700)",
+                icon: false,
+            },
+            {
+                type: "success",
+                background: "var(--color-secondary-500)",
+                icon: false,
+            },
+        ],
+    });

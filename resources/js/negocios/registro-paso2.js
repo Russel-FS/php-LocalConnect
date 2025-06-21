@@ -1,16 +1,38 @@
-// Paso 2: Validación de ubicación
-
-window.validarUbicacion = function () {
-    const latitud = document.getElementById("latitud").value;
-    const longitud = document.getElementById("longitud").value;
+// Validación específica del paso 2
+window.validarPaso2 = function () {
+    const latitud = document.getElementById("latitud");
+    const longitud = document.getElementById("longitud");
+    const direccion = document.getElementById("direccion");
+    const distrito = document.getElementById("distrito");
+    const ciudad = document.getElementById("ciudad");
+    const provincia = document.getElementById("provincia");
+    const pais = document.getElementById("pais");
     const mapContainer = document.getElementById("map");
-    if (!latitud || !longitud) {
-        if (mapContainer)
+    let valido = true;
+
+    // Validar campos requeridos de ubicación
+    const camposRequeridos = [direccion, pais];
+    camposRequeridos.forEach((campo) => {
+        if (!campo.value.trim()) {
+            campo.classList.add("border-red-400");
+            valido = false;
+        } else {
+            campo.classList.remove("border-red-400");
+        }
+    });
+
+    // Validar coordenadas del mapa
+    if (!latitud.value || !longitud.value) {
+        if (mapContainer) {
             mapContainer.classList.add("border-red-400", "border-2");
-        return false;
+        }
+        valido = false;
     } else {
-        if (mapContainer)
+        // Limpiar error del mapa
+        if (mapContainer) {
             mapContainer.classList.remove("border-red-400", "border-2");
-        return true;
+        }
     }
+
+    return valido;
 };

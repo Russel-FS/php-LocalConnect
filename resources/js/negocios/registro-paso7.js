@@ -1,3 +1,5 @@
+// Paso 7: Resumen del negocio
+
 function mostrarResumen() {
     //  Datos del negocio
     const nombre = document.getElementById("nombre-negocio").value;
@@ -180,9 +182,12 @@ function mostrarResumen() {
     document.getElementById("resumen-negocio").innerHTML = html;
 }
 
+// Sobrescribir la función cambiarPaso para mostrar el resumen cuando se llega al paso 7
 const cambiarPasoOriginal = window.cambiarPaso;
 window.cambiarPaso = function (actual, siguiente) {
-    if (siguiente === 7) mostrarResumen();
+    if (siguiente === 7) {
+        mostrarResumen();
+    }
     if (typeof cambiarPasoOriginal === "function") {
         cambiarPasoOriginal(actual, siguiente);
     }

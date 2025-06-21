@@ -41,3 +41,88 @@ function actualizarNumeracionServicios() {
         titulo.textContent = `Servicio #${index + 1}`;
     });
 }
+
+// Paso 4: Validación de servicios
+
+// Validación específica del paso 4
+window.validarPaso4 = function () {
+    const paso4 = document.getElementById("paso-4");
+    const servicios = paso4.querySelectorAll(".servicio-item");
+    let valido = true;
+
+    // Validar servicios predefinidos seleccionados
+    const serviciosPredefinidos = paso4.querySelectorAll(
+        'input[name="servicios_predefinidos[]"]:checked'
+    );
+    if (serviciosPredefinidos.length === 0) {
+        const serviciosContainer = paso4.querySelector(
+            "#servicios-predefinidos-contenedor"
+        );
+        if (serviciosContainer) {
+            serviciosContainer.classList.add(
+                "border-red-400",
+                "border-2",
+                "rounded-lg",
+                "p-4"
+            );
+        }
+        valido = false;
+    } else {
+        // Limpiar error visual
+        const serviciosContainer = paso4.querySelector(
+            "#servicios-predefinidos-contenedor"
+        );
+        if (serviciosContainer) {
+            serviciosContainer.classList.remove(
+                "border-red-400",
+                "border-2",
+                "rounded-lg",
+                "p-4"
+            );
+        }
+    }
+
+    // Validar servicios personalizados
+    servicios.forEach((servicio) => {
+        const inputs = servicio.querySelectorAll("input[required]");
+        inputs.forEach((input) => {
+            if (!input.value.trim()) {
+                input.classList.add("border-red-400");
+                valido = false;
+            } else {
+                input.classList.remove("border-red-400");
+            }
+        });
+    });
+
+    return valido;
+};
+
+// Función para agregar nuevo servicio personalizado
+window.agregarServicioPersonalizado = function () {
+    const contenedor = document.getElementById("servicios-personalizados");
+    const nuevoServicio = document.createElement("div");
+    nuevoServicio.className = "servicio-item bg-gray-50 p-4 rounded-lg mb-4";
+    nuevoServicio.innerHTML = `
+        <div class="flex items-center gap-4">
+            <div class="flex-1">
+                <input type="text" name="servicio_personalizado[]" placeholder="Nombre del servicio" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" required>
+            </div>
+            <div class="flex-1">
+                <input type="text" name="descripcion_servicio[]" placeholder="Descripción del servicio" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" required>
+            </div>
+            <button type="button" onclick="eliminarServicioPersonalizado(this)" 
+                    class="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                Eliminar
+            </button>
+        </div>
+    `;
+    contenedor.appendChild(nuevoServicio);
+};
+
+// Función para eliminar servicio personalizado
+window.eliminarServicioPersonalizado = function (boton) {
+    boton.closest(".servicio-item").remove();
+};
