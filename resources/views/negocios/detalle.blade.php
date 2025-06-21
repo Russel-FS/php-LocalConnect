@@ -107,26 +107,30 @@
 
             <!-- Horarios de atención -->
             @if($negocio->horarios->isNotEmpty())
-            <div class="bg-white rounded-2xl shadow p-8">
-                <h2 class="text-2xl font-semibold text-primary-700 mb-4 flex items-center gap-2">
-                    <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white rounded-xl shadow-sm p-4 max-w-md mx-auto mt-6 mb-2">
+                <div class="flex items-center gap-2 mb-2 justify-center">
+                    <svg class="w-4 h-4 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
                         <path stroke-linecap="round" stroke-width="2" d="M12 8v4l3 3" />
                     </svg>
-                    Horarios de atención
-                </h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @foreach($negocio->horarios as $horario)
-                    <div class="flex justify-between items-center bg-primary-50 rounded-xl p-3">
-                        <span class="font-medium text-primary-700 capitalize">{{ $horario->dia_semana }}</span>
-                        @if($horario->cerrado)
-                        <span class="text-red-500 text-sm font-semibold">Cerrado</span>
-                        @else
-                        <span class="text-primary-400 text-sm">{{ $horario->hora_apertura }} - {{ $horario->hora_cierre }}</span>
-                        @endif
-                    </div>
-                    @endforeach
+                    <span class="text-base font-semibold text-primary-600">Horarios de atención</span>
                 </div>
+                <table class="w-full text-left border-separate border-spacing-y-1">
+                    <tbody>
+                        @foreach($negocio->horarios as $horario)
+                        <tr class="hover:bg-primary-50 transition rounded-lg">
+                            <td class="py-1 px-2 font-medium text-primary-600 capitalize w-1/3 text-sm">{{ $horario->dia_semana }}</td>
+                            <td class="py-1 px-2">
+                                @if($horario->cerrado)
+                                <span class="text-red-400 text-xs font-semibold rounded-full px-2 py-0.5 bg-red-50">Cerrado</span>
+                                @else
+                                <span class="text-primary-500 text-xs font-medium rounded-full px-2 py-0.5 bg-primary-100">{{ $horario->hora_apertura }} - {{ $horario->hora_cierre }}</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
             @endif
 
