@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen bg-primary-50 py-12">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         @if(session('error'))
         <div class="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
             {{ session('error') }}
