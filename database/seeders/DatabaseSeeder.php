@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+        $this->call([
+            RolSeeder::class,
+        ]);
 
         // Insertar roles básicos
         DB::table('roles')->insert([

@@ -24,6 +24,7 @@
             <a href="/" class="text-2xl font-extrabold tracking-tight text-primary-600 select-none">LocalConnect</a>
             <div class="flex items-center space-x-2">
                 @if(Auth::check())
+                <a href="{{ route('negocios.mis-negocios') }}" class="btn-premium-outline">Mis Negocios</a>
                 <form method="POST" action="{{ url('/logout') }}">
                     @csrf
                     <button type="submit" class="btn-premium-outline">Cerrar sesión</button>

@@ -15,5 +15,13 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/negocios/registro', [NegocioController::class, 'showRegistro'])->name('negocios.registro');
-Route::post('/negocios/guardar', [NegocioController::class, 'guardar'])->name('negocios.guardar');
+
+// rutas para negocios - se requiere autenticación
+Route::middleware('auth')->group(function () {
+    Route::get('/negocios/registro', [NegocioController::class, 'showRegistro'])->name('negocios.registro');
+    Route::post('/negocios/guardar', [NegocioController::class, 'guardar'])->name('negocios.guardar');
+    Route::get('/negocios/mis-negocios', [NegocioController::class, 'misNegocios'])->name('negocios.mis-negocios');
+});
+
+// rutas públicas para ver negocios
+Route::get('/negocios/{id}', [NegocioController::class, 'mostrarNegocio'])->name('negocios.mostrar');

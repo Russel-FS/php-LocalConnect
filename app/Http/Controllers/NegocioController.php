@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Negocio\Categoria;
 use App\Models\Negocio\CategoriaServicio;
+use App\Services\NegocioService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Exception;
+use Illuminate\Validation\ValidationException;
 
 class NegocioController extends Controller
 {
+    protected $negocioService;
+
+    public function __construct(NegocioService $negocioService)
+    {
+        $this->negocioService = $negocioService;
+    }
+
     public function showRegistro()
     {
         $categorias = Categoria::all();
@@ -17,15 +28,48 @@ class NegocioController extends Controller
 
     public function guardar(Request $request)
     {
-        echo '<h2>Datos recibidos del formulario:</h2>';
-        echo '<pre>';
-        print_r($request->except(['_token']));
-        echo '</pre>';
+        try {
+            // Verificar que el usuario esté autenticado
+            if (!Auth::check()) {
+                return redirect()->route('login')->with('error', 'Debe iniciar sesión para registrar un negocio.');
+            }
 
-        if ($request->hasFile('imagen_portada')) {
-            echo '<h3>Archivo imagen_portada:</h3>';
-            print_r($request->file('imagen_portada')->getClientOriginalName());
+            $userId = Auth::id();
+
+            // Registrar el negocio usando el servicio
+            $negocio = $this->negocioService->registrarNegocio($request->all(), $userId);
+
+            return redirect()->route('home')->with('success', '¡Negocio registrado exitosamente! Pronto será verificado por nuestro equipo.');
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (Exception $e) {
+            return back()->with('error', 'Error al registrar el negocio: ' . $e->getMessage())->withInput();
         }
-        exit;
+    }
+
+    /**
+     * Mostrar lista de negocios del usuario
+     */
+    public function misNegocios()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $negocios = $this->negocioService->obtenerNegociosUsuario(Auth::id());
+        return view('negocios.mis-negocios', compact('negocios'));
+    }
+
+    /**
+     * Mostrar detalles de un negocio específico
+     */
+    public function mostrarNegocio($id)
+    {
+        try {
+            $negocio = $this->negocioService->obtenerNegocio($id);
+            return view('negocios.detalle', compact('negocio'));
+        } catch (Exception $e) {
+            return back()->with('error', 'Negocio no encontrado.');
+        }
     }
 }

@@ -84,4 +84,14 @@ class Negocio extends Model
             'id_servicio_predefinido'
         );
     }
+
+    /**
+     * Relación con contactos del negocio
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contactos()
+    {
+        return $this->hasMany(\App\Models\Negocio\Contacto::class, 'id_negocio');
+    }
 }
