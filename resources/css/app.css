@@ -145,6 +145,7 @@ h4 {
     border: 2px solid var(--color-primary-100);
 }
 
+/* personalizacion scroll*/
 .custom-scroll::-webkit-scrollbar {
     width: 8px;
     background: #f3f4f6;
@@ -161,4 +162,26 @@ h4 {
 .custom-scroll {
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 #f3f4f6;
+}
+
+/* personalizacion de toaster */
+#toast-container > .toast-error {
+    background-color: var(--color-primary-700);
+    color: #fff;
+    border-left: 6px solid var(--color-secondary-500);
+    font-family: "Inter", sans-serif;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px 0 rgba(52, 64, 84, 0.1);
+}
+#toast-container > .toast-success {
+    background-color: var(--color-secondary-500);
+    color: #fff;
+    border-left: 6px solid var(--color-primary-500);
+    font-family: "Inter", sans-serif;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px 0 rgba(52, 64, 84, 0.1);
+}
+#toast-container > div {
+    font-size: 1rem;
+    padding: 1.25rem 2rem;
 }

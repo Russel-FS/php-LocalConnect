@@ -1,3 +1,22 @@
+window.notyf =
+    window.notyf ||
+    new Notyf({
+        duration: 6000,
+        position: { x: "right", y: "top" },
+        types: [
+            {
+                type: "error",
+                background: "var(--color-primary-700)",
+                icon: false,
+            },
+            {
+                type: "success",
+                background: "var(--color-secondary-500)",
+                icon: false,
+            },
+        ],
+    });
+
 // Paso 5: Horario de atención
 window.toggleCerrado = function (checkbox) {
     const card = checkbox.closest(".flex.flex-col");
@@ -34,7 +53,11 @@ window.validarHorarios = function () {
         }
     });
     if (!valido) {
-        alert(mensajes.join("\n"));
+        window.notyf.dismissAll();
+        window.notyf.open({
+            type: "error",
+            message: mensajes.join("<br>"),
+        });
     }
     return valido;
 };
