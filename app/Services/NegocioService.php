@@ -22,9 +22,6 @@ class NegocioService
      */
     public function registrarNegocio(array $data, $userId)
     {
-        // Prepara los datos antes de la validación
-        $data = $this->prepararDatosParaValidacion($data);
-
         // Validar datos de entrada
         $validator = Validator::make($data, [
             'nombre_negocio' => 'required|string|max:100',
@@ -58,7 +55,7 @@ class NegocioService
             'horarios' => 'required|array|size:7',
             'horarios.*.inicio' => 'required_without:horarios.*.cerrado|nullable|date_format:H:i',
             'horarios.*.fin' => 'required_without:horarios.*.cerrado|nullable|date_format:H:i|after:horarios.*.inicio',
-            'horarios.*.cerrado' => 'nullable|boolean',
+            'horarios.*.cerrado' => 'nullable|in:true,false',
 
             // Contactos
             'telefono' => 'required|string|max:20',
@@ -180,7 +177,7 @@ class NegocioService
 
         foreach ($dias as $index => $dia) {
             $horario = $horariosData[$index] ?? [];
-            $cerrado = isset($horario['cerrado']) && $horario['cerrado'];
+            $cerrado = isset($horario['cerrado']) && $horario['cerrado'] === 'true';
 
             HorarioAtencion::create([
                 'id_negocio' => $negocioId,
@@ -239,21 +236,5 @@ class NegocioService
         return Negocio::with(['ubicacion', 'categorias'])
             ->where('id_usuario', $userId)
             ->get();
-    }
-
-    /**
-     * Prepara los datos crudos del request para que pasen la validación.
-     */
-    private function prepararDatosParaValidacion(array $data): array
-    {
-        // Convertir el valor del checkbox 'cerrado' a un booleano real
-        if (isset($data['horarios']) && is_array($data['horarios'])) {
-            foreach ($data['horarios'] as $key => $horario) {
-                // Si el checkbox 'cerrado' fue marcado, su key existirá.
-                $data['horarios'][$key]['cerrado'] = isset($horario['cerrado']);
-            }
-        }
-
-        return $data;
     }
 }

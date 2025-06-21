@@ -15,7 +15,9 @@
                         <span class="font-medium text-gray-700">{{ $dia }}</span>
                         <label class="flex items-center gap-2 text-xs select-none cursor-pointer relative">
                             <span class="text-gray-400">Cerrado</span>
-                            <input type="checkbox" name="horarios[{{ $i }}][cerrado]" class="sr-only peer" onchange="toggleCerrado(this)">
+                            <input type="checkbox" name="horarios[{{ $i }}][cerrado]" value="true" class="sr-only peer" data-dia="{{ $i }}" onchange="toggleCerrado(this)">
+                            <!-- Campo hidden para enviar false cuando no está marcado -->
+                            <input type="hidden" name="horarios[{{ $i }}][cerrado_hidden]" value="false">
                             <!--cuerpo-->
                             <div class="w-8 h-4 bg-gray-200 rounded-full relative transition peer-checked:bg-primary-400">
                             </div>
