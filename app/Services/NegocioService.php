@@ -9,6 +9,7 @@ use App\Models\Negocio\ServicioPersonalizado;
 use App\Models\Negocio\Categoria;
 use App\Models\Negocio\ServicioPredefinido;
 use App\Models\Negocio\CategoriaServicio;
+use App\Models\Negocio\Caracteristica;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -50,6 +51,10 @@ class NegocioService
             'servicios_personalizados.descripcion.*' => 'nullable|string',
             'servicios_personalizados.precio' => 'nullable|array',
             'servicios_personalizados.precio.*' => 'nullable|numeric|min:0',
+
+            // Características
+            'caracteristicas' => 'nullable|array',
+            'caracteristicas.*' => 'exists:caracteristicas,id_caracteristica',
 
             // Horarios
             'horarios' => 'required|array|size:7',
@@ -129,13 +134,18 @@ class NegocioService
                 $this->crearServiciosPersonalizados($negocio->id_negocio, $data['servicios_personalizados']);
             }
 
+            //Asociar características
+            if (isset($data['caracteristicas']) && !empty($data['caracteristicas'])) {
+                $negocio->caracteristicas()->attach($data['caracteristicas']);
+            }
+
             //Crear horarios de atención
             $this->crearHorariosAtencion($negocio->id_negocio, $data['horarios']);
 
             // Crear contactos
             $this->crearContactos($negocio->id_negocio, $data);
 
-            return $negocio->load(['ubicacion', 'categorias', 'serviciosPredefinidos', 'serviciosPersonalizados', 'horarios']);
+            return $negocio->load(['ubicacion', 'categorias', 'serviciosPredefinidos', 'serviciosPersonalizados', 'caracteristicas', 'horarios']);
         });
     }
 
@@ -227,6 +237,7 @@ class NegocioService
             'categorias',
             'serviciosPredefinidos',
             'serviciosPersonalizados',
+            'caracteristicas',
             'horarios',
             'contactos'
         ])->findOrFail($id);
