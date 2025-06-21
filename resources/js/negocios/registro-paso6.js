@@ -1,9 +1,3 @@
-function toggleCerrado(checkbox) {
-    const card = checkbox.closest(".flex.flex-col");
-    const inputs = card.querySelectorAll('input[type="time"]');
-    inputs.forEach((inp) => (inp.disabled = checkbox.checked));
-}
-
 function mostrarResumen() {
     // 1. Datos del negocio
     const nombre = document.getElementById("nombre-negocio").value;

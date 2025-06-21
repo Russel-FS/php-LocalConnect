@@ -38,3 +38,14 @@ window.validarHorarios = function () {
     }
     return valido;
 };
+
+const validarPasoOriginal = window.validarPaso;
+window.validarPaso = function (actual, siguiente) {
+    if (actual === 5) {
+        if (window.validarHorarios()) {
+            validarPasoOriginal(actual, siguiente);
+        }
+    } else {
+        validarPasoOriginal(actual, siguiente);
+    }
+};
