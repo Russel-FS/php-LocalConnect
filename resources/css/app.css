@@ -7,53 +7,74 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
-    --color-primary-50: #f3fcfa;
-    --color-primary-100: #d6f7ef;
-    --color-primary-200: #b0ecde;
-    --color-primary-300: #7fdac7;
-    --color-primary-400: #4cc6b0;
-    --color-primary-500: #1fa48d;
-    --color-primary-600: #17806e;
-    --color-primary-700: #15655a;
-    --color-primary-800: #124a43;
-    --color-primary-900: #0c2d28;
-    --color-primary-950: #06201b;
-    --color-gray-bg: #f7fafc;
+    --color-primary-500: #23272f;
+    --color-primary-600: #1a1d22;
+    --color-primary-700: #13161a;
+    --color-primary-50: #f6f7fa;
+    --color-primary-100: #e9ebf0;
+    --color-primary-200: #d3d6de;
+    --color-primary-300: #b5bac7;
+    --color-primary-400: #7c8296;
+
+    --color-gray-bg: #f5f5f7;
     --color-gray-card: #fff;
     --color-gray-alt: #f3f6f9;
-    --color-gray-text: #23272f;
+    --color-gray-text: #1d1d1f;
+    --color-gray-muted: #86868b;
+    --color-gray-border: #e5e5ea;
+
+    --color-accent: #007aff;
 }
 
 body {
     background: var(--color-gray-bg);
+    color: var(--color-gray-text);
     font-family: "Inter", "Instrument Sans", ui-sans-serif, system-ui,
         sans-serif;
 }
 
 .card-apple {
-    @apply rounded-2xl shadow-md hover:shadow-lg transition-shadow border-0;
+    border-radius: 1.25rem;
     background: var(--color-gray-card);
-    transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 16px 0 rgba(35, 39, 47, 0.04);
+    border: 1px solid var(--color-gray-border);
+    transition: box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-apple:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 6px 24px 0 rgba(79, 109, 122, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(35, 39, 47, 0.08);
 }
 
 .btn-apple {
-    @apply px-7 py-2 rounded-full border border-primary-600 text-primary-600 bg-white hover:bg-primary-50 transition-colors font-semibold shadow-sm hover:scale-105 active:scale-100 duration-150;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-primary-500);
+    color: var(--color-primary-500);
+    background: #fff;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    box-shadow: 0 1px 6px 0 rgba(35, 39, 47, 0.07);
     letter-spacing: 0.01em;
-    box-shadow: 0 1px 6px 0 rgba(79, 109, 122, 0.07);
+}
+.btn-apple:hover {
+    background: var(--color-primary-50);
+    color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
 }
 
 .btn-apple-solid {
-    @apply px-7 py-2 rounded-full bg-primary-600 text-white border border-primary-600 hover:bg-primary-700 transition-colors font-semibold shadow-sm hover:scale-105 active:scale-100 duration-150;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    background: var(--color-primary-500);
+    color: #fff;
+    border: 1px solid var(--color-primary-500);
+    font-weight: 600;
+    transition: background 0.2s, border 0.2s;
+    box-shadow: 0 2px 10px 0 rgba(35, 39, 47, 0.08);
     letter-spacing: 0.01em;
-    box-shadow: 0 2px 10px 0 rgba(79, 109, 122, 0.1);
+}
+.btn-apple-solid:hover {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
 }
 
 h1,
@@ -66,16 +87,21 @@ h4 {
 }
 
 .section-apple {
-    @apply py-24;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
 }
 
 .text-apple-muted {
-    @apply text-gray-400;
+    color: var(--color-gray-muted);
 }
 
 .navbar-premium {
-    @apply w-full bg-white/90 backdrop-blur border-b border-gray-100 fixed z-50;
-    box-shadow: 0 1px 8px 0 rgba(79, 109, 122, 0.04);
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid var(--color-gray-border);
+    position: fixed;
+    z-index: 50;
+    box-shadow: 0 1px 8px 0 rgba(35, 39, 47, 0.04);
 }
 
 .section-premium {
@@ -87,12 +113,22 @@ h4 {
 }
 
 .feature-icon {
-    @apply mb-6 mx-auto;
-    stroke: var(--color-primary-600);
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    stroke: var(--color-primary-500);
 }
 
 .card-feature {
-    @apply bg-white rounded-xl shadow-md p-10 text-center transition-transform duration-200 hover:scale-105 hover:shadow-lg;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px 0 rgba(35, 39, 47, 0.04);
+    padding: 2.5rem;
+    text-align: center;
+    transition: box-shadow 0.2s;
+}
+.card-feature:hover {
+    box-shadow: 0 8px 32px 0 rgba(35, 39, 47, 0.08);
 }
 
 .card-testimonial {
@@ -101,7 +137,12 @@ h4 {
 }
 
 .avatar {
-    @apply w-16 h-16 rounded-full mb-4 object-cover border-2 border-primary-100;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    border: 2px solid var(--color-primary-100);
 }
 
 .btn-premium {
