@@ -62,9 +62,9 @@ function mostrarResumen() {
         const fin = document.querySelector(
             `input[name='horarios[${i}][fin]']`
         ).value;
-        horarios += `<tr><td class='py-1 px-2 font-medium text-gray-700'>${dia}</td><td class='py-1 px-2 text-xs'>${
+        horarios += `<tr><td class='py-1 px-2 font-medium text-primary-700'>${dia}</td><td class='py-1 px-2 text-xs'>${
             cerrado
-                ? "<span class='text-red-500 font-semibold'>Cerrado</span>"
+                ? "<span class='text-primary-600 font-semibold'>Cerrado</span>"
                 : `${inicio} - ${fin}`
         }</td></tr>`;
     });
@@ -140,17 +140,17 @@ function mostrarResumen() {
             </div>
         </div>
         <div class="bg-white rounded-2xl shadow p-8 flex-1">
-            <h5 class="font-semibold text-2xl mb-3 flex items-center gap-2 text-green-500"><svg class='w-5 h-5 text-green-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'/></svg> Características</h5>
+            <h5 class="font-semibold text-2xl mb-3 flex items-center gap-2 text-secondary-500"><svg class='w-5 h-5 text-secondary-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'/></svg> Características</h5>
             <div class="flex flex-wrap gap-2">
                 ${
                     caracteristicas.length > 0
                         ? caracteristicas
                               .map(
                                   (car) =>
-                                      `<span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium">${car}</span>`
+                                      `<span class="px-3 py-1 bg-secondary-50 text-secondary-700 rounded-full text-xs font-medium">${car}</span>`
                               )
                               .join("")
-                        : '<span class="text-gray-400 text-sm">No se seleccionaron características</span>'
+                        : '<span class="text-primary-400 text-sm">No se seleccionaron características</span>'
                 }
             </div>
         </div>
