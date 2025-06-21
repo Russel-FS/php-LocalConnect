@@ -47,19 +47,19 @@
             <div>
                 <label class="block mb-2 text-primary-700 font-medium">Teléfono</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <x-icons.phone />
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-400">
+                        <x-icons.outline.phone class="w-4 h-4" />
                     </span>
-                    <input type="text" id="contacto-telefono" name="telefono" required class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Teléfono" value="{{ old('telefono') }}" />
+                    <input type="text" id="contacto-telefono" name="telefono" required class="w-full pl-9 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Teléfono" value="{{ old('telefono') }}" />
                 </div>
             </div>
             <div>
                 <label class="block mb-2 text-primary-700 font-medium">WhatsApp</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <x-icons.whatsapp />
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-secondary-500">
+                        <x-icons.solid.whatsapp class="w-4 h-4" />
                     </span>
-                    <input type="text" id="contacto-whatsapp" name="whatsapp" class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="WhatsApp" value="{{ old('whatsapp') }}" />
+                    <input type="text" id="contacto-whatsapp" name="whatsapp" class="w-full pl-9 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="WhatsApp" value="{{ old('whatsapp') }}" />
                 </div>
             </div>
         </div>
@@ -67,29 +67,29 @@
             <div>
                 <label class="block mb-2 text-primary-700 font-medium">Facebook</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <x-icons.facebook />
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-blue-600">
+                        <x-icons.solid.facebook class="w-4 h-4" />
                     </span>
-                    <input type="text" id="contacto-facebook" name="facebook" class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Facebook" value="{{ old('facebook') }}" />
+                    <input type="text" id="contacto-facebook" name="facebook" class="w-full pl-9 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Facebook" value="{{ old('facebook') }}" />
                 </div>
             </div>
             <div>
                 <label class="block mb-2 text-primary-700 font-medium">Instagram</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <x-icons.instagram />
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-pink-600">
+                        <x-icons.solid.instagram class="w-4 h-4" />
                     </span>
-                    <input type="text" id="contacto-instagram" name="instagram" class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Instagram" value="{{ old('instagram') }}" />
+                    <input type="text" id="contacto-instagram" name="instagram" class="w-full pl-9 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Instagram" value="{{ old('instagram') }}" />
                 </div>
             </div>
         </div>
         <div>
             <label class="block mb-2 text-primary-700 font-medium">Sitio web</label>
             <div class="relative">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                    <x-icons.globe />
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-400">
+                    <x-icons.outline.globe class="w-4 h-4" />
                 </span>
-                <input type="text" id="contacto-web" name="web" class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Sitio web" value="{{ old('web') }}" />
+                <input type="text" id="contacto-web" name="web" class="w-full pl-9 pr-4 py-3 rounded-lg border border-primary-200 bg-white focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" placeholder="Sitio web" value="{{ old('web') }}" />
             </div>
         </div>
     </div>
