@@ -36,7 +36,7 @@ class AuthController extends Controller
 
             $user = $this->authService->login($credentials);
 
-            // Redirigir al home (todos los usuarios van al mismo lugar inicialmente)
+            // redirigir al inicio
             return redirect()->route('home')->with('success', '¡Bienvenido!');
         } catch (ValidationException $e) {
             return back()->withErrors($e->errors())->withInput();
