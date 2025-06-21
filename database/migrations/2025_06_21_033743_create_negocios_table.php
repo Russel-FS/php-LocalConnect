@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('id_ubicacion')->nullable()->constrained('ubicaciones', 'id_ubicacion');
             $table->string('nombre_negocio', 100);
             $table->text('descripcion')->nullable();
-            $table->string('horario_atencion', 100)->nullable();
             $table->boolean('verificado')->default(false);
             $table->string('imagen_portada', 255)->nullable();
             $table->timestamps();
