@@ -56,7 +56,7 @@ window.validarHorarios = function () {
         window.notyf.dismissAll();
         window.notyf.open({
             type: "error",
-            message: mensajes.join("<br>"),
+            message: mensajes[0] || "Corrige los horarios antes de continuar.",
         });
     }
     return valido;
