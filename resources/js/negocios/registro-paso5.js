@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     };
 
-    // Guardar datos del paso 5
     window.guardarPaso5 = function () {
         const caracteristicas = [];
         paso5
@@ -48,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .querySelectorAll('input[name="caracteristicas[]"]')
         .forEach((checkbox) => {
             checkbox.addEventListener("change", function () {
-                // Actualizar el contador de características seleccionadas si es necesario
                 const caracteristicasSeleccionadas = paso5.querySelectorAll(
                     'input[name="caracteristicas[]"]:checked'
                 ).length;
