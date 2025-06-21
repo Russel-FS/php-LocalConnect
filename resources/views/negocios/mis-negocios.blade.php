@@ -4,8 +4,8 @@
 <div class="min-h-screen bg-gray-50 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Mis Negocios</h1>
-            <p class="mt-2 text-gray-600">Gestiona todos tus negocios registrados</p>
+            <h1 class="text-3xl font-bold text-primary-700">Mis Negocios</h1>
+            <p class="mt-2 text-primary-400">Gestiona todos tus negocios registrados</p>
         </div>
 
         @if(session('success'))
@@ -21,8 +21,8 @@
         @endif
 
         <div class="mb-6">
-            <a href="{{ route('negocios.registro') }}" class="btn-premium">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="{{ route('negocios.registro') }}" class="btn-solid flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
                 Registrar nuevo negocio
@@ -63,7 +63,7 @@
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
                         <h3 class="text-lg font-semibold text-gray-900">{{ $negocio->nombre_negocio }}</h3>
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $negocio->verificado ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $negocio->verificado ? 'bg-secondary-100 text-secondary-800' : 'bg-yellow-100 text-yellow-800' }}">
                             {{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}
                         </span>
                     </div>
@@ -89,7 +89,7 @@
                             </span>
                             @endforeach
                             @if($negocio->categorias->count() > 3)
-                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
                                 +{{ $negocio->categorias->count() - 3 }} más
                             </span>
                             @endif
@@ -99,7 +99,7 @@
 
                     <div class="flex justify-between items-center">
                         <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}"
-                            class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                            class="btn-outline text-sm font-medium px-4 py-2">
                             Ver detalles
                         </a>
                         <button class="text-gray-400 hover:text-gray-600">
