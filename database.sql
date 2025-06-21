@@ -18,6 +18,17 @@ CREATE TABLE ubicaciones (
     actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Tabla de roles
+CREATE TABLE roles (
+    id_rol INT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Usuarios (residentes, negocios y administradores)
 CREATE TABLE usuarios (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -27,18 +38,15 @@ CREATE TABLE usuarios (
     password VARCHAR(255) NOT NULL,
     remember_token VARCHAR(100) NULL,
     telefono VARCHAR(20),
-    tipo ENUM(
-        'residente',
-        'negocio',
-        'admin'
-    ) NOT NULL,
+    id_rol INT NOT NULL,
     estado ENUM(
         'activo',
         'suspendido',
         'eliminado'
     ) DEFAULT 'activo',
     created_at TIMESTAMP NULL DEFAULT NULL,
-    updated_at TIMESTAMP NULL DEFAULT NULL
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    FOREIGN KEY (id_rol) REFERENCES roles (id_rol)
 );
 
 -- Negocios, referenciando a usuarios y a ubicaciones
@@ -195,6 +203,33 @@ CREATE TABLE logs_admin (
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_admin) REFERENCES usuarios (id_usuario)
 );
+
+-- Datos de prueba para roles
+INSERT INTO
+    roles (
+        code,
+        name,
+        descripcion,
+        estado
+    )
+VALUES (
+        'residente',
+        'Residente',
+        'Usuarios que viven en la comunidad y buscan servicios locales',
+        'activo'
+    ),
+    (
+        'negocio',
+        'Negocio',
+        'Empresas y comercios que ofrecen servicios en la comunidad',
+        'activo'
+    ),
+    (
+        'admin',
+        'Administrador',
+        'Usuarios con permisos administrativos del sistema',
+        'activo'
+    );
 
 --datos de de prueba categoria
 
