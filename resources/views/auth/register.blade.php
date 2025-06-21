@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="section-premium bg-white min-h-[70vh] flex items-center justify-center">
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-10 relative overflow-hidden">
-        <h2 class="text-3xl font-extrabold mb-8 text-center tracking-tight">Crear cuenta</h2>
+<section class="section-padded bg-gray-alt flex items-center justify-center">
+    <div class="w-full max-w-md bg-white rounded-2xl card-apple p-10">
+        <h2 class="text-3xl font-extrabold mb-8 text-center tracking-tight text-primary-700">Crear cuenta</h2>
 
         @if(session('success'))
         <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
@@ -21,12 +21,12 @@
             @csrf
 
             <div>
-                <label for="name" class="block mb-2 text-gray-700">Nombre completo *</label>
+                <label for="name" class="block mb-2 text-primary-600 font-medium">Nombre completo *</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-                            <circle cx="12" cy="8" r="4" stroke="#4f6d7a" stroke-width="1.5" />
-                            <path d="M4 19c0-2.5 3.5-4 8-4s8 1.5 8 4" stroke="#4f6d7a" stroke-width="1.5" />
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-400">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M4 19c0-2.5 3.5-4 8-4s8 1.5 8 4" />
                         </svg>
                     </span>
                     <input
@@ -36,7 +36,7 @@
                         value="{{ old('name') }}"
                         required
                         autofocus
-                        class="w-full pl-11 pr-4 py-3 rounded-lg border @error('name') border-red-500 @else border-gray-200 @enderror focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                        class="w-full pl-11 pr-4 py-3 rounded-lg border @error('name') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('name')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -44,12 +44,12 @@
             </div>
 
             <div>
-                <label for="email" class="block mb-2 text-gray-700">Correo electrónico *</label>
+                <label for="email" class="block mb-2 text-primary-600 font-medium">Correo electrónico *</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-                            <rect x="3" y="5" width="18" height="14" rx="4" stroke="#4f6d7a" stroke-width="1.5" />
-                            <path d="M3 7l9 6 9-6" stroke="#4f6d7a" stroke-width="1.5" />
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-400">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="5" width="18" height="14" rx="4" />
+                            <path d="M3 7l9 6 9-6" />
                         </svg>
                     </span>
                     <input
@@ -58,7 +58,7 @@
                         type="email"
                         value="{{ old('email') }}"
                         required
-                        class="w-full pl-11 pr-4 py-3 rounded-lg border @error('email') border-red-500 @else border-gray-200 @enderror focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                        class="w-full pl-11 pr-4 py-3 rounded-lg border @error('email') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('email')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -66,12 +66,12 @@
             </div>
 
             <div>
-                <label for="password" class="block mb-2 text-gray-700">Contraseña *</label>
+                <label for="password" class="block mb-2 text-primary-600 font-medium">Contraseña *</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-                            <rect x="5" y="11" width="14" height="7" rx="3.5" stroke="#4f6d7a" stroke-width="1.5" />
-                            <circle cx="12" cy="14.5" r="1.5" fill="#4f6d7a" />
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-400">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <rect x="5" y="11" width="14" height="7" rx="3.5" />
+                            <path d="M8.5 11V8.5C8.5 6.01472 10.0147 4 12.5 4C14.9853 4 16.5 6.01472 16.5 8.5V11" />
                         </svg>
                     </span>
                     <input
@@ -79,7 +79,7 @@
                         name="password"
                         type="password"
                         required
-                        class="w-full pl-11 pr-4 py-3 rounded-lg border @error('password') border-red-500 @else border-gray-200 @enderror focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                        class="w-full pl-11 pr-4 py-3 rounded-lg border @error('password') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('password')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -87,12 +87,12 @@
             </div>
 
             <div>
-                <label for="password_confirmation" class="block mb-2 text-gray-700">Confirmar contraseña *</label>
+                <label for="password_confirmation" class="block mb-2 text-primary-600 font-medium">Confirmar contraseña *</label>
                 <div class="relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-                            <rect x="5" y="11" width="14" height="7" rx="3.5" stroke="#4f6d7a" stroke-width="1.5" />
-                            <circle cx="12" cy="14.5" r="1.5" fill="#4f6d7a" />
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-400">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <rect x="5" y="11" width="14" height="7" rx="3.5" />
+                            <path d="M8.5 11V8.5C8.5 6.01472 10.0147 4 12.5 4C14.9853 4 16.5 6.01472 16.5 8.5V11" />
                         </svg>
                     </span>
                     <input
@@ -100,15 +100,15 @@
                         name="password_confirmation"
                         type="password"
                         required
-                        class="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-200 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition" />
+                        class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
             </div>
 
-            <button type="submit" class="btn-premium w-full">Crear cuenta</button>
+            <button type="submit" class="btn-solid w-full text-base font-semibold py-3">Crear cuenta</button>
         </form>
 
-        <div class="mt-8 text-center text-gray-500 text-sm">
-            ¿Ya tienes cuenta? <a href="{{ route('login') }}" class="text-primary-600 hover:underline">Inicia sesión</a>
+        <div class="mt-8 text-center text-primary-500 text-sm">
+            ¿Ya tienes cuenta? <a href="{{ route('login') }}" class="text-secondary-600 hover:underline font-semibold">Inicia sesión</a>
         </div>
     </div>
 </section>
