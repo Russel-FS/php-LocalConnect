@@ -24,6 +24,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // Obtener el rol de residente por defecto
         $rolResidente = Rol::where('code', 'residente')->first();
 
         return [
@@ -33,7 +34,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'telefono' => fake()->phoneNumber(),
-            'id_rol' => $rolResidente ? $rolResidente->id_rol : 1,
+            'id_rol' => $rolResidente ? $rolResidente->id_rol : 1, // Rol residente por defecto
             'estado' => 'activo',
         ];
     }
