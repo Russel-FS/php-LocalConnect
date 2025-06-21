@@ -12,8 +12,11 @@ class Contacto extends Model
 
     protected $fillable = [
         'id_negocio',
-        'tipo',
-        'valor_contacto'
+        'tipo_contacto',
+        'valor_contacto',
+        'activo',
+        'creado_en',
+        'actualizado_en',
     ];
 
     /**

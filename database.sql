@@ -184,14 +184,11 @@ CREATE TABLE valoraciones (
 CREATE TABLE contactos (
     id_contacto INT PRIMARY KEY AUTO_INCREMENT,
     id_negocio INT NOT NULL,
-    tipo ENUM(
-        'telefono',
-        'whatsapp',
-        'facebook',
-        'instagram',
-        'web'
-    ),
-    valor_contacto VARCHAR(150),
+    tipo_contacto VARCHAR(50),
+    valor_contacto VARCHAR(255),
+    activo BOOLEAN DEFAULT TRUE,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_negocio) REFERENCES negocios (id_negocio)
 );
 

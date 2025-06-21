@@ -208,8 +208,9 @@ class NegocioService
             if (!empty($valor)) {
                 DB::table('contactos')->insert([
                     'id_negocio' => $negocioId,
-                    'tipo' => $tipo,
-                    'valor_contacto' => $valor
+                    'tipo_contacto' => $tipo,
+                    'valor_contacto' => $valor,
+                    'activo' => true,
                 ]);
             }
         }
