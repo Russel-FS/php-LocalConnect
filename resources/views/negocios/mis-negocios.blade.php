@@ -21,11 +21,11 @@
         @endif
 
         <div class="mb-6">
-            <a href="{{ route('negocios.registro') }}" class="btn-solid flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="{{ route('negocios.registro') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-secondary-500 hover:bg-secondary-600 transition shadow">
+                <svg class="w-5 h-5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
-                Registrar nuevo negocio
+                <span>Registrar nuevo negocio</span>
             </a>
         </div>
 
