@@ -93,8 +93,8 @@ CREATE TABLE horarios_atencion (
         'sábado',
         'domingo'
     ) NOT NULL,
-    hora_apertura TIME NOT NULL,
-    hora_cierre TIME NOT NULL,
+    hora_apertura TIME NULL,
+    hora_cierre TIME NULL,
     cerrado BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_negocio) REFERENCES negocios (id_negocio)
 );

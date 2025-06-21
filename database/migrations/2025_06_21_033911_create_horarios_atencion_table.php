@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_horario');
             $table->foreignId('id_negocio')->constrained('negocios', 'id_negocio');
             $table->enum('dia_semana', ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']);
-            $table->time('hora_apertura');
-            $table->time('hora_cierre');
+            $table->time('hora_apertura')->nullable();
+            $table->time('hora_cierre')->nullable();
             $table->boolean('cerrado')->default(false);
         });
     }
