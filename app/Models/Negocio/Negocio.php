@@ -79,7 +79,7 @@ class Negocio extends Model
     {
         return $this->belongsToMany(
             ServicioPredefinido::class,
-            'negocio_servicio_prefenidos',
+            'negocio_servicio_predefinidos',
             'id_negocio',
             'id_servicio_predefinido'
         );
