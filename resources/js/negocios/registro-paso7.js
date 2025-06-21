@@ -182,7 +182,7 @@ function mostrarResumen() {
     document.getElementById("resumen-negocio").innerHTML = html;
 }
 
-// Sobrescribir la función cambiarPaso para mostrar el resumen cuando se llega al paso 7
+// Sobrescribir la función cambiarPaso
 const cambiarPasoOriginal = window.cambiarPaso;
 window.cambiarPaso = function (actual, siguiente) {
     if (siguiente === 7) {

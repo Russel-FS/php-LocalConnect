@@ -38,6 +38,15 @@ window.validarPaso3 = function () {
             "rounded-lg",
             "p-4"
         );
+
+        // Mostrar mensaje de error
+        if (window.notyf) {
+            window.notyf.dismissAll();
+            window.notyf.open({
+                type: "error",
+                message: "Debes seleccionar al menos una categoría",
+            });
+        }
         valido = false;
     } else {
         // Limpiar error visual

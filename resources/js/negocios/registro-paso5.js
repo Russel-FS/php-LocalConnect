@@ -1,75 +1,61 @@
 // Paso 5: Características
-document.addEventListener("DOMContentLoaded", function () {
-    const paso5 = document.querySelector('[data-step="5"]');
-    if (!paso5) return;
 
-    // Validación específica del paso 5
-    window.validarPaso5 = function () {
-        const caracteristicasSeleccionadas = paso5.querySelectorAll(
-            'input[name="caracteristicas[]"]:checked'
-        );
-        const caracteristicasContainer = paso5.querySelector(
-            "#caracteristicas-contenedor"
-        );
-        let valido = true;
+// Validación específica del paso 5
+window.validarPaso5 = function () {
+    console.log("Ejecutando validación del paso 5");
 
-        if (caracteristicasSeleccionadas.length === 0) {
-            // Mostrar error visual
-            if (caracteristicasContainer) {
-                caracteristicasContainer.classList.add(
-                    "border-red-400",
-                    "border-2",
-                    "rounded-lg",
-                    "p-4"
-                );
-            }
-            // Mostrar mensaje de error
-            if (window.notyf) {
-                window.notyf.dismissAll();
-                window.notyf.open({
-                    type: "error",
-                    message: "Debes seleccionar al menos una característica.",
-                });
-            }
-            valido = false;
-        } else {
-            // Limpiar error visual
-            if (caracteristicasContainer) {
-                caracteristicasContainer.classList.remove(
-                    "border-red-400",
-                    "border-2",
-                    "rounded-lg",
-                    "p-4"
-                );
-            }
+    const paso5 = document.getElementById("paso-5");
+    if (!paso5) {
+        console.error("No se encontró el elemento paso-5");
+        return false;
+    }
+
+    const caracteristicasSeleccionadas = paso5.querySelectorAll(
+        'input[name="caracteristicas[]"]:checked'
+    );
+    console.log(
+        "Características seleccionadas:",
+        caracteristicasSeleccionadas.length
+    );
+
+    if (caracteristicasSeleccionadas.length === 0) {
+        // Mostrar error visual
+        const contenedores = paso5.querySelectorAll(
+            ".border.border-gray-200.rounded-xl"
+        );
+        if (contenedores.length > 0) {
+            contenedores[0].classList.add("border-red-400", "border-2");
         }
 
-        return valido;
-    };
+        // Mostrar mensaje de error
+        if (window.notyf) {
+            window.notyf.dismissAll();
+            window.notyf.open({
+                type: "error",
+                message:
+                    "Debes seleccionar al menos una característica para tu negocio",
+            });
+        }
 
-    window.guardarPaso5 = function () {
-        const caracteristicas = [];
+        console.log("Validación fallida: no hay características seleccionadas");
+        return false;
+    } else {
+        // Limpiar error visuall
         paso5
-            .querySelectorAll('input[name="caracteristicas[]"]:checked')
-            .forEach((checkbox) => {
-                caracteristicas.push(checkbox.value);
+            .querySelectorAll(".border.border-gray-200.rounded-xl")
+            .forEach((contenedor) => {
+                contenedor.classList.remove("border-red-400", "border-2");
             });
 
-        window.wizardData.caracteristicas = caracteristicas;
-    };
+        console.log("Validación exitosa");
+        return true;
+    }
+};
 
-    window.cargarPaso5 = function () {
-        if (window.wizardData.caracteristicas) {
-            window.wizardData.caracteristicas.forEach((caracteristicaId) => {
-                const checkbox = paso5.querySelector(
-                    `input[name="caracteristicas[]"][value="${caracteristicaId}"]`
-                );
-                if (checkbox) {
-                    checkbox.checked = true;
-                }
-            });
-        }
-    };
+// Configurar eventos cuando el DOM esté listo
+document.addEventListener("DOMContentLoaded", function () {
+    const paso5 = document.getElementById("paso-5");
+    if (!paso5) return;
 
     // Configurar eventos para limpiar errores cuando se selecciona una característica
     paso5
@@ -82,17 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Limpiar error visual si hay selecciones
                 if (caracteristicasSeleccionadas > 0) {
-                    const caracteristicasContainer = paso5.querySelector(
-                        "#caracteristicas-contenedor"
-                    );
-                    if (caracteristicasContainer) {
-                        caracteristicasContainer.classList.remove(
-                            "border-red-400",
-                            "border-2",
-                            "rounded-lg",
-                            "p-4"
-                        );
-                    }
+                    paso5
+                        .querySelectorAll(".border.border-gray-200.rounded-xl")
+                        .forEach((contenedor) => {
+                            contenedor.classList.remove(
+                                "border-red-400",
+                                "border-2"
+                            );
+                        });
                 }
 
                 console.log(

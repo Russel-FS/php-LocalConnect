@@ -38,21 +38,33 @@ window.validarPaso1 = function () {
     const nombre = document.getElementById("nombre-negocio");
     const descripcion = document.getElementById("descripcion-negocio");
     let valido = true;
+    let mensajeError = "";
 
     // Validar nombre del negocio
     if (!nombre.value.trim()) {
         nombre.classList.add("border-red-400");
+        mensajeError = "El nombre del negocio es obligatorio";
         valido = false;
     } else {
         nombre.classList.remove("border-red-400");
     }
 
-    // Validar descripción del negocio
-    if (!descripcion.value.trim()) {
+    // Validar descripción del negocio (solo si el nombre está bien)
+    if (valido && !descripcion.value.trim()) {
         descripcion.classList.add("border-red-400");
+        mensajeError = "La descripción del negocio es obligatoria";
         valido = false;
     } else {
         descripcion.classList.remove("border-red-400");
+    }
+
+    // Mostrar mensaje de error si hay problemas
+    if (!valido && window.notyf) {
+        window.notyf.dismissAll();
+        window.notyf.open({
+            type: "error",
+            message: mensajeError,
+        });
     }
 
     return valido;

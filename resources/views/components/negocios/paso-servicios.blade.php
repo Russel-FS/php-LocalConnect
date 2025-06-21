@@ -3,7 +3,7 @@
     <p class="text-primary-400 mb-8">Selecciona los servicios predefinidos y/o agrega servicios personalizados.</p>
     <div class="space-y-8">
         <!-- Servicios predefinidos -->
-        <div class="bg-primary-50 rounded-xl border border-primary-200 shadow-sm p-6">
+        <div class="bg-primary-50 rounded-xl border border-primary-200 shadow-sm p-6" id="servicios-predefinidos-contenedor">
             <label class="mb-4 text-primary-700 font-medium flex items-center gap-2">Servicios predefinidos
                 <span class="relative group">
                     <svg class="w-4 h-4 text-secondary-500 cursor-pointer" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

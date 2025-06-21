@@ -42,13 +42,12 @@ function actualizarNumeracionServicios() {
     });
 }
 
-// Paso 4: Validación de servicios
-
 // Validación específica del paso 4
 window.validarPaso4 = function () {
     const paso4 = document.getElementById("paso-4");
     const servicios = paso4.querySelectorAll(".servicio-item");
     let valido = true;
+    let mensajeError = "";
 
     // Validar servicios predefinidos seleccionados
     const serviciosPredefinidos = paso4.querySelectorAll(
@@ -66,9 +65,9 @@ window.validarPaso4 = function () {
                 "p-4"
             );
         }
+        mensajeError = "Debes seleccionar al menos un servicio predefinido";
         valido = false;
     } else {
-        // Limpiar error visual
         const serviciosContainer = paso4.querySelector(
             "#servicios-predefinidos-contenedor"
         );
@@ -82,18 +81,33 @@ window.validarPaso4 = function () {
         }
     }
 
-    // Validar servicios personalizados
-    servicios.forEach((servicio) => {
-        const inputs = servicio.querySelectorAll("input[required]");
-        inputs.forEach((input) => {
-            if (!input.value.trim()) {
-                input.classList.add("border-red-400");
-                valido = false;
-            } else {
-                input.classList.remove("border-red-400");
+    // Validar servicios personalizados (solo si los predefinidos están bien)
+    if (valido) {
+        for (let servicio of servicios) {
+            const inputs = servicio.querySelectorAll("input[required]");
+            for (let input of inputs) {
+                if (!input.value.trim()) {
+                    input.classList.add("border-red-400");
+                    mensajeError =
+                        "Completa todos los campos de servicios personalizados";
+                    valido = false;
+                    break;
+                } else {
+                    input.classList.remove("border-red-400");
+                }
             }
+            if (!valido) break;
+        }
+    }
+
+    // Mostrar mensaje de error si hay problemas
+    if (!valido && window.notyf) {
+        window.notyf.dismissAll();
+        window.notyf.open({
+            type: "error",
+            message: mensajeError,
         });
-    });
+    }
 
     return valido;
 };
