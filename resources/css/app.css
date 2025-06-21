@@ -181,3 +181,22 @@ h4 {
 .notyf__toast--success {
     border-left-color: var(--color-secondary-500) !important;
 }
+
+/* Contactos minimalista */
+.contactos-minimalista {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    gap: 2.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.contactos-minimalista svg {
+    transition: transform 0.18s;
+}
+.contactos-minimalista svg:hover {
+    transform: scale(1.12);
+}
+.contactos-minimalista .text-sm {
+    font-size: 0.97rem;
+    letter-spacing: 0.01em;
+}
