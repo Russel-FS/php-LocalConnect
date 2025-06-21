@@ -10,10 +10,10 @@
             type="text"
             id="input-sugerencia"
             placeholder="Buscar dirección o lugar..."
-            class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-200 bg-white shadow focus:outline-none text-sm placeholder-gray-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 transition focus:bg-primary-50"
+            class="w-full pl-10 pr-4 py-2 rounded-full border border-primary-200 bg-white shadow-sm focus:outline-none text-sm placeholder-primary-400 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 transition"
             autocomplete="off" />
     </div>
-    <div id="resultados-sugerencia" class="custom-scroll scroll-smooth absolute right-0 mt-2 bg-white rounded-xl shadow-lg z-50 overflow-y-auto max-h-60 border border-gray-100 w-full min-w-[250px]" style="display:none;">
+    <div id="resultados-sugerencia" class="custom-scroll scroll-smooth absolute right-0 mt-2 bg-white rounded-xl shadow-lg z-50 overflow-y-auto max-h-60 border border-primary-100 w-full min-w-[250px]" style="display:none;">
     </div>
 </div>
 
@@ -33,18 +33,26 @@
             .then(res => res.json())
             .then(data => {
                 if (data.features && data.features.length > 0) {
-                    resultados.innerHTML = data.features.map(f =>
-                        `<button type='button' class='w-full text-left px-5 py-3 hover:bg-primary-50 focus:bg-primary-100 transition-colors flex items-center gap-2 border-b last:border-b-0 border-gray-100 text-gray-700 font-medium text-sm' onclick='seleccionarSugerencia(${JSON.stringify(f)})'>
-                           <svg class="w-5 h-5 text-primary-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                              <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2" />
-                           </svg>
-                            <span>${f.place_name}</span>
+                    resultados.innerHTML = data.features.map(f => {
+                        const mainText = f.text;
+                        const contextText = f.context ? f.context.map(c => c.text).join(', ') : '';
+
+                        return `<button type='button' class='w-full text-left px-4 py-3 hover:bg-primary-50 focus:bg-primary-50 focus:outline-none transition-colors flex items-center gap-4 border-b last:border-b-0 border-primary-100' onclick='seleccionarSugerencia(${JSON.stringify(f)})'>
+                           <div class="flex-shrink-0">
+                               <svg class="w-5 h-5 text-secondary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                                  <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2" />
+                               </svg>
+                           </div>
+                           <div class="text-sm overflow-hidden">
+                                <p class="font-semibold text-primary-700 truncate">${mainText}</p>
+                                <p class="text-primary-500 truncate">${contextText}</p>
+                           </div>
                         </button>`
-                    ).join('');
+                    }).join('');
                     resultados.style.display = 'block';
                 } else {
-                    resultados.innerHTML = '<div class="px-5 py-3 text-gray-400 text-sm">Sin resultados</div>';
+                    resultados.innerHTML = '<div class="px-5 py-3 text-primary-400 text-sm">Sin resultados</div>';
                     resultados.style.display = 'block';
                 }
             });

@@ -1,4 +1,4 @@
-<div id="map" class="w-full h-64 rounded-lg border border-gray-200 shadow-md z-10"></div>
+<div id="map" class="w-full h-64 rounded-lg z-10"></div>
 <script>
     let map = null;
     let marker = null;
@@ -14,7 +14,7 @@
             }).addTo(map);
             const iconoPersonalizado = L.divIcon({
                 className: "marcador-negocio",
-                html: '<div class="w-6 h-6 bg-primary-600 rounded-full border-2 border-white shadow-lg flex items-center justify-center"><div class="w-2 h-2 bg-white rounded-full"></div></div>',
+                html: '<div class="w-6 h-6 bg-secondary-600 rounded-full border-2 border-white shadow-lg flex items-center justify-center"><div class="w-2 h-2 bg-white rounded-full"></div></div>',
                 iconSize: [24, 24],
                 iconAnchor: [12, 12],
             });
