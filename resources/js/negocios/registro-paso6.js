@@ -1,6 +1,6 @@
 // Paso 6 Horario de atención
 window.toggleCerrado = function (checkbox) {
-    const card = checkbox.closest(".flex.flex-col");
+    const card = checkbox.closest(".bg-primary-50");
     const inputs = card.querySelectorAll('input[type="time"]');
     inputs.forEach((inp) => (inp.disabled = checkbox.checked));
 };
@@ -9,7 +9,13 @@ window.toggleCerrado = function (checkbox) {
 window.validarPaso6 = function () {
     let valido = true;
     let mensajeError = "";
-
+    // Validar telefónos
+    const telefono = document.getElementById("contacto-telefono");
+    if (!telefono || telefono.value.trim() === "") {
+        mensajeError = "El número de teléfono es obligatorio.";
+        valido = false;
+    }
+    // Validar horarios
     const dias = [
         "Lunes",
         "Martes",
@@ -21,10 +27,11 @@ window.validarPaso6 = function () {
     ];
 
     for (let i = 0; i < 7; i++) {
-        const card = document.querySelector(
-            `#paso-6 .flex.flex-col:nth-child(${i + 1})`
-        );
-        if (!card) continue;
+        const card = document.getElementById(`horario-dia-${i}`);
+        if (!card) {
+            console.error(`No se encontró el elemento horario-dia-${i}`);
+            continue;
+        }
 
         const cerrado = card.querySelector(
             'input[type="checkbox"][name^="horarios"]'

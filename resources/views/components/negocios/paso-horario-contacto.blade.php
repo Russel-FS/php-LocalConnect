@@ -10,7 +10,7 @@
                 $dias = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
                 @endphp
                 @foreach($dias as $i => $dia)
-                <div class="bg-primary-50 border border-primary-200 rounded-lg p-3 flex flex-col gap-1">
+                <div id="horario-dia-{{ $i }}" class="bg-primary-50 border border-primary-200 rounded-lg p-3 flex flex-col gap-1">
                     <div class="flex items-center justify-between">
                         <span class="font-medium text-primary-700">{{ $dia }}</span>
                         <label class="flex items-center gap-2 text-xs select-none cursor-pointer relative">
