@@ -8,6 +8,7 @@ use App\Models\Negocio\Ubicacion;
 use App\Models\Negocio\HorarioAtencion;
 use App\Models\Negocio\ServicioPersonalizado;
 use App\Models\Negocio\ServicioPredefinido;
+use App\Models\Negocio\Caracteristica;
 use App\Models\User;
 
 class Negocio extends Model
@@ -93,5 +94,15 @@ class Negocio extends Model
     public function contactos()
     {
         return $this->hasMany(\App\Models\Negocio\Contacto::class, 'id_negocio');
+    }
+
+    /**
+     * Relación muchos a muchos con Caracteristica
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function caracteristicas()
+    {
+        return $this->belongsToMany(Caracteristica::class, 'negocio_caracteristica', 'id_negocio', 'id_caracteristica');
     }
 }
