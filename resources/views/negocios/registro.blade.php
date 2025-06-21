@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gray-50 ">
-    <div class=" flex">
+<div class="min-h-screen bg-gray-alt">
+    <div class="max-w-screen-xl mx-auto lg:grid lg:grid-cols-[320px_1fr] lg:gap-12 px-6 py-10">
         <!-- Sidebar -->
         <x-common.wizard-sidebar />
 
         <!-- Contenido principal -->
-        <main class="flex-1">
-            <div class="max-w-4xl mx-auto p-8 lg:p-10">
+        <main>
+            <div class="bg-white p-8 lg:p-10 rounded-2xl card-apple">
                 <form id="wizard-form" method="POST" action="{{ route('negocios.guardar') }}" enctype="multipart/form-data">
                     @csrf
 

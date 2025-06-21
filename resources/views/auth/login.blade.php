@@ -24,10 +24,7 @@
                 <label for="email" class="block mb-2 text-primary-600 font-medium">Correo electrónico *</label>
                 <div class="relative">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-400">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <rect x="3" y="5" width="18" height="14" rx="4" />
-                            <path d="M3 7l9 6 9-6" />
-                        </svg>
+                        <x-icons.form.email />
                     </span>
                     <input
                         id="email"
@@ -47,10 +44,7 @@
                 <label for="password" class="block mb-2 text-primary-600 font-medium">Contraseña *</label>
                 <div class="relative">
                     <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-primary-400">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <rect x="5" y="11" width="14" height="7" rx="3.5" />
-                            <path d="M8.5 11V8.5C8.5 6.01472 10.0147 4 12.5 4C14.9853 4 16.5 6.01472 16.5 8.5V11" />
-                        </svg>
+                        <x-icons.form.lock />
                     </span>
                     <input
                         id="password"

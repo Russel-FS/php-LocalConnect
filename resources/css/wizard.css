@@ -3,8 +3,7 @@
 /* Sidebar del wizard */
 .wizard-sidebar {
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 1rem;
     padding: 2rem;
     position: sticky;
     top: 2rem;
@@ -20,6 +19,14 @@
     margin-bottom: 2rem;
 }
 
+.progress-bar-container {
+    background-color: var(--color-primary-100);
+}
+
+#progress-bar {
+    background-color: var(--color-secondary-600);
+}
+
 .progress-bar {
     background: linear-gradient(90deg, #10b981, #059669);
     height: 100%;
@@ -31,7 +38,7 @@
 .wizard-step-item {
     padding: 0.5rem 0;
     border-bottom: 1px solid #f3f4f6;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease-in-out;
 }
 
 .wizard-step-item:last-child {
@@ -57,21 +64,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f3f4f6;
-    border: 2px solid #e5e7eb;
-    transition: all 0.3s ease;
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-primary-100);
+    transition: all 0.2s ease-in-out;
+    color: var(--color-primary-400);
 }
 
 .wizard-step-item.active .step-circle {
-    background: #10b981;
-    border-color: #10b981;
+    background: var(--color-secondary-500);
+    border-color: var(--color-secondary-500);
     color: white;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .wizard-step-item.completed .step-circle {
-    background: #10b981;
-    border-color: #10b981;
+    background: var(--color-secondary-500);
+    border-color: var(--color-secondary-500);
     color: white;
 }
 
@@ -79,24 +87,20 @@
 .step-icon {
     width: 20px;
     height: 20px;
-    color: #6b7280;
-    transition: color 0.3s ease;
-}
-
-.wizard-step-item.active .step-icon,
-.wizard-step-item.completed .step-icon {
-    color: white;
 }
 
 /* Labels de los pasos */
 .step-label {
-    font-weight: 600;
-    color: #374151;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    color: var(--color-primary-600);
+    transition: color 0.2s ease-in-out;
 }
 
-.wizard-step-item.active .step-label {
-    color: #10b981;
+.step-link:hover .step-label {
+    color: var(--color-secondary-600);
+}
+.step-link:hover .step-circle {
+    border-color: var(--color-secondary-200);
 }
 
 /* Botones  */
@@ -136,17 +140,13 @@
 
 /* Checkboxes de categorías */
 .categoria-checkbox input:checked + div {
-    border-color: #10b981;
-    background: #f0fdf4;
+    border-color: var(--color-secondary-500);
+    background: var(--color-secondary-500);
+    color: white;
 }
 
-.categoria-checkbox input:checked + div .w-5 {
-    background: #10b981;
-    border-color: #10b981;
-}
-
-.categoria-checkbox input:checked + div .w-3 {
-    display: block !important;
+.categoria-checkbox input:checked + div .check-icon {
+    display: block;
 }
 
 /* Estilos para el mapa */
@@ -154,6 +154,7 @@
     border-radius: 12px;
     overflow: hidden;
     transition: border-color 0.3s ease;
+    border: 1px solid var(--color-primary-200);
 }
 
 #map.border-red-400 {
