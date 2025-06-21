@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen bg-gray-alt">
-    <div class="max-w-screen-xl mx-auto lg:grid lg:grid-cols-[320px_1fr] lg:gap-12 px-6 py-10">
+    <div class="max-w-[1440px] mx-auto lg:grid lg:grid-cols-[320px_1fr] lg:gap-12 px-6 py-10">
         <!-- Sidebar -->
         <x-common.wizard-sidebar />
 
