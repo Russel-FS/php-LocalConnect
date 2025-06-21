@@ -4,11 +4,11 @@
 <div class="min-h-screen bg-primary-50 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-10">
-            <div>
+            <div class="flex items-center gap-4">
                 <h1 class="text-4xl font-bold text-primary-700 tracking-tight">Mis Negocios</h1>
-                <p class="mt-2 text-lg text-primary-400">Gestiona y visualiza todos tus negocios registrados.</p>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 ml-2">{{ $negocios->count() }}</span>
             </div>
-            <a href="{{ route('negocios.registro') }}" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition focus:outline-none focus:ring-2 focus:ring-primary-200">
+            <a href="{{ route('negocios.registro') }}" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition focus:outline-none focus:ring-2 focus:ring-primary-200">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5" fill="white" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8" />
@@ -16,6 +16,13 @@
                 <span>Nuevo Negocio</span>
             </a>
         </div>
+        <!-- Boton flotante movil    -->
+        <a href="{{ route('negocios.registro') }}" class="md:hidden fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-white border border-primary-200 shadow-lg hover:bg-primary-50 transition group">
+            <svg class="w-7 h-7 text-primary-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5" fill="white" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8" />
+            </svg>
+        </a>
 
         @if(session('success'))
         <div class="mb-6 p-4 bg-secondary-100 border border-secondary-200 text-secondary-800 rounded-xl">
@@ -45,13 +52,13 @@
         @else
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($negocios as $negocio)
-            <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="group block bg-white rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-lg transition-all duration-300 ease-in-out">
+            <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="group block bg-white rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-lg transition-all duration-300 ease-in-out fade-in-card focus:outline-none focus:ring-2 focus:ring-primary-200" tabindex="0">
                 <div class="relative">
                     @if($negocio->imagen_portada)
                     <div class="h-48 bg-primary-100 rounded-t-2xl overflow-hidden">
                         <img src="{{ asset('storage/' . $negocio->imagen_portada) }}"
                             alt="{{ $negocio->nombre_negocio }}"
-                            class="w-full h-full object-cover">
+                            class="w-full h-full object-cover" loading="lazy">
                     </div>
                     @else
                     <div class="h-48 bg-primary-100 rounded-t-2xl flex items-center justify-center">
@@ -61,7 +68,7 @@
                     </div>
                     @endif
                     <div class="absolute top-3 right-3">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold {{ $negocio->verificado ? 'bg-secondary-500/10 text-secondary-600 backdrop-blur-sm' : 'bg-yellow-500/10 text-yellow-600 backdrop-blur-sm' }}">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold {{ $negocio->verificado ? 'bg-secondary-500/10 text-secondary-600 backdrop-blur-sm' : 'bg-yellow-500/10 text-yellow-600 backdrop-blur-sm' }}" @if(!$negocio->verificado) title="Pendiente de verificación. Completa los datos y espera la revisión del equipo." @endif>
                             <span class="w-2 h-2 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
                             {{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}
                         </span>
