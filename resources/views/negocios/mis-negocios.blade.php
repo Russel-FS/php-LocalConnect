@@ -8,9 +8,10 @@
                 <h1 class="text-4xl font-bold text-primary-700 tracking-tight">Mis Negocios</h1>
                 <p class="mt-2 text-lg text-primary-400">Gestiona y visualiza todos tus negocios registrados.</p>
             </div>
-            <a href="{{ route('negocios.registro') }}" class="btn-solid hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            <a href="{{ route('negocios.registro') }}" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition focus:outline-none focus:ring-2 focus:ring-primary-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5" fill="white" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8" />
                 </svg>
                 <span>Nuevo Negocio</span>
             </a>
@@ -99,11 +100,11 @@
                     @endif
                 </div>
                 <div class="p-5 pt-0 mt-2 border-t border-primary-100 flex justify-between items-center">
-                    <span class="text-sm font-semibold text-secondary-600 group-hover:text-secondary-700">
+                    <span class="text-sm font-semibold text-secondary-600">
                         Ver detalles
                     </span>
-                    <svg class="w-5 h-5 text-secondary-500 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    <svg class="w-5 h-5 text-secondary-500 transition-transform group-hover:translate-x-1 group-hover:scale-110" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                 </div>
             </a>
