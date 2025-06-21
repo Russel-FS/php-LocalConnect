@@ -126,7 +126,7 @@ CREATE TABLE servicios_predefinidos (
     FOREIGN KEY (id_categoria_servicio) REFERENCES categorias_servicio (id_categoria_servicio)
 );
 
-CREATE TABLE negocio_servicio_prefenidos (
+CREATE TABLE negocio_servicio_predefinidos (
     id_negocio INT,
     id_servicio_predefinido INT,
     PRIMARY KEY (

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             RolSeeder::class,
         ]);
 
-        // Insertar roles básicos
+        // roles básicos
         DB::table('roles')->insert([
             [
                 'code' => 'residente',
