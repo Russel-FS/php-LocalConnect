@@ -53,9 +53,9 @@ class NegocioService
 
             // Horarios
             'horarios' => 'required|array|size:7',
-            'horarios.*.inicio' => 'required_without:horarios.*.cerrado|nullable|date_format:H:i',
-            'horarios.*.fin' => 'required_without:horarios.*.cerrado|nullable|date_format:H:i|after:horarios.*.inicio',
-            'horarios.*.cerrado' => 'nullable|in:true,false',
+            'horarios.*.inicio' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i',
+            'horarios.*.fin' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i|after:horarios.*.inicio',
+            'horarios.*.cerrado' => 'required|boolean',
 
             // Contactos
             'telefono' => 'required|string|max:20',
@@ -79,6 +79,8 @@ class NegocioService
             'horarios.required' => 'Debe configurar los horarios de atención.',
             'horarios.size' => 'Debe configurar los horarios para todos los días de la semana.',
             'web.url' => 'El sitio web debe ser una URL válida (ej: https://mi-negocio.com).',
+            'horarios.*.inicio.required_if' => 'Debes ingresar la hora de inicio para cada día abierto.',
+            'horarios.*.fin.required_if' => 'Debes ingresar la hora de fin para cada día abierto.',
         ]);
 
         if ($validator->fails()) {
@@ -177,7 +179,7 @@ class NegocioService
 
         foreach ($dias as $index => $dia) {
             $horario = $horariosData[$index] ?? [];
-            $cerrado = isset($horario['cerrado']) && $horario['cerrado'] === 'true';
+            $cerrado = filter_var($horario['cerrado'] ?? false, FILTER_VALIDATE_BOOLEAN);
 
             HorarioAtencion::create([
                 'id_negocio' => $negocioId,
