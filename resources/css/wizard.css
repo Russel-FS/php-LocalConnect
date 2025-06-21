@@ -140,13 +140,26 @@
 
 /* Checkboxes de categorías */
 .categoria-checkbox input:checked + div {
-    border-color: var(--color-secondary-500);
-    background: var(--color-secondary-500);
-    color: white;
+    border-color: var(--color-primary-500);
+    background: #fff !important;
+    color: var(--color-primary-700);
 }
 
 .categoria-checkbox input:checked + div .check-icon {
-    display: block;
+    display: block !important;
+}
+
+.categoria-checkbox input:checked + div > div:first-child {
+    border-color: var(--color-primary-500);
+    background: var(--color-primary-500) !important;
+}
+
+.categoria-checkbox input:checked + div span {
+    color: var(--color-primary-700);
+}
+
+.categoria-checkbox input:checked + div p {
+    color: var(--color-primary-400);
 }
 
 /* Estilos para el mapa */
