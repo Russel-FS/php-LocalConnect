@@ -33,6 +33,7 @@
                         value="{{ old('name') }}"
                         required
                         autofocus
+                        placeholder="Ingresa tu nombre completo"
                         class="w-full pl-11 pr-4 py-3 rounded-lg border @error('name') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('name')
@@ -52,6 +53,7 @@
                         type="email"
                         value="{{ old('email') }}"
                         required
+                        placeholder="tu.correo@ejemplo.com"
                         class="w-full pl-11 pr-4 py-3 rounded-lg border @error('email') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('email')
@@ -70,6 +72,7 @@
                         name="password"
                         type="password"
                         required
+                        placeholder="Ingresa tu contraseña"
                         class="w-full pl-11 pr-4 py-3 rounded-lg border @error('password') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('password')
@@ -88,6 +91,7 @@
                         name="password_confirmation"
                         type="password"
                         required
+                        placeholder="Confirma tu contraseña"
                         class="w-full pl-11 pr-4 py-3 rounded-lg border border-primary-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
             </div>

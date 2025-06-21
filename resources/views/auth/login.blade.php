@@ -33,6 +33,7 @@
                         value="{{ old('email') }}"
                         required
                         autofocus
+                        placeholder="tu.correo@ejemplo.com"
                         class="w-full pl-11 pr-4 py-3 rounded-lg border @error('email') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('email')
@@ -51,6 +52,7 @@
                         name="password"
                         type="password"
                         required
+                        placeholder="Ingresa tu contraseña"
                         class="w-full pl-11 pr-4 py-3 rounded-lg border @error('password') border-red-500 @else border-primary-200 @enderror focus:border-secondary-500 focus:ring-2 focus:ring-secondary-500/20 outline-none transition" />
                 </div>
                 @error('password')
