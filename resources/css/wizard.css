@@ -103,42 +103,7 @@
     border-color: var(--color-secondary-200);
 }
 
-/* Botones  */
-.btn-premium {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    padding: 0.75rem 2rem;
-    border-radius: 12px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-.btn-premium:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-}
-
-.btn-premium-outline {
-    background: transparent;
-    color: #10b981;
-    padding: 0.75rem 2rem;
-    border-radius: 12px;
-    font-weight: 600;
-    border: 2px solid #10b981;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-premium-outline:hover {
-    background: #10b981;
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* Checkboxes de categorías */
+/* diseño para los check boxx categoria*/
 .categoria-checkbox input:checked + div {
     border-color: var(--color-primary-500);
     background: #fff !important;
@@ -159,6 +124,30 @@
 }
 
 .categoria-checkbox input:checked + div p {
+    color: var(--color-primary-400);
+}
+
+/* Checkboxes de servicios predefinidos */
+.servicio-checkbox input:checked + div {
+    border-color: var(--color-primary-500);
+    background: #fff !important;
+    color: var(--color-primary-700);
+}
+
+.servicio-checkbox input:checked + div .check-icon {
+    display: block !important;
+}
+
+.servicio-checkbox input:checked + div > div:first-child {
+    border-color: var(--color-primary-500);
+    background: var(--color-primary-500) !important;
+}
+
+.servicio-checkbox input:checked + div span {
+    color: var(--color-primary-700);
+}
+
+.servicio-checkbox input:checked + div p {
     color: var(--color-primary-400);
 }
 
@@ -203,4 +192,26 @@
         margin: 0 -1rem;
         padding: 1rem;
     }
+}
+
+.btn-agregar-servicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    border: 2px solid var(--color-primary-200);
+    color: var(--color-primary-600);
+    background: #fff;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 2px 8px 0 rgba(100, 116, 139, 0.04);
+    transition: background 0.18s, border 0.18s, box-shadow 0.18s, color 0.18s;
+}
+.btn-agregar-servicio:hover,
+.btn-agregar-servicio:focus {
+    background: var(--color-primary-50);
+    border-color: var(--color-primary-400);
+    color: var(--color-primary-700);
+    box-shadow: 0 4px 16px 0 rgba(100, 116, 139, 0.1);
 }

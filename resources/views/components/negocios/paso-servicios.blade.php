@@ -39,12 +39,12 @@
                     <p class="text-sm text-gray-500 mb-3">{{ $catServ->descripcion }}</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         @foreach($catServ->serviciosPredefinidos as $servicio)
-                        <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-gray-200 cursor-pointer transition hover:border-primary-400 group">
+                        <label class="relative flex items-center p-4 bg-white rounded-xl shadow border border-primary-200 cursor-pointer transition hover:border-primary-400 group">
                             <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}"
                                 class="peer absolute left-4 top-4 w-5 h-5 accent-primary-600 rounded focus:ring-2 focus:ring-primary-200 transition" aria-label="Seleccionar {{ $servicio->nombre_servicio }}" />
                             <div class="pl-8">
-                                <span class="block font-semibold text-gray-900 group-hover:text-primary-600 transition">{{ $servicio->nombre_servicio }}</span>
-                                <span class="block text-xs text-gray-500 mt-1">{{ $servicio->descripcion }}</span>
+                                <span class="block font-semibold text-primary-700 group-hover:text-primary-600 transition">{{ $servicio->nombre_servicio }}</span>
+                                <span class="block text-xs text-primary-400 mt-1">{{ $servicio->descripcion }}</span>
                             </div>
                             <span class="absolute left-4 top-4 w-5 h-5 border-2 border-primary-300 rounded bg-white peer-checked:bg-primary-600 peer-checked:border-primary-600 transition"></span>
                             <svg class="absolute left-4 top-4 w-5 h-5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -76,14 +76,14 @@
             <div class="space-y-4" id="personalizados-lista">
                 <!-- aqui se agregan mediante js -->
             </div>
-            <button type="button" onclick="agregarServicioPersonalizado(this)" class="btn-premium-outline mt-2 flex items-center gap-2">
-                <x-icons.plus></x-icons.plus>
+            <button type="button" onclick="agregarServicioPersonalizado(this)" class="btn-agregar-servicio mt-2 flex items-center gap-2">
+                <x-icons.plus class="w-5 h-5 text-primary-500" />
                 <span>Agregar servicio personalizado</span>
             </button>
         </div>
     </div>
     <div class="flex justify-between mt-10">
-        <button class="btn-premium-outline" type="button" onclick="cambiarPaso(4,3)">Anterior</button>
-        <button class="btn-premium" type="button" onclick="validarPaso(4,5)">Siguiente</button>
+        <button class="btn-outline" type="button" onclick="cambiarPaso(4,3)">Anterior</button>
+        <button class="btn-solid" type="button" onclick="validarPaso(4,5)">Siguiente</button>
     </div>
 </div>
