@@ -19,7 +19,7 @@
 
 <body class="font-sans antialiased bg-gray-bg text-gray-900">
     <!-- Navbar -->
-    <nav class="navbar-premium">
+    <nav class="navbar-main">
         <div class="mx-auto max-w-7xl px-6 flex justify-between h-16 items-center">
             <a href="/" class="text-2xl font-extrabold tracking-tight text-primary-600 select-none">LocalConnect</a>
             <div class="flex items-center space-x-2">
@@ -43,7 +43,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-24 text-gray-400 bg-white/90 border-t border-gray-100">
+    <footer class="mt-24 text-primary-400 bg-white/90 border-t border-gray-100">
         <div class="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="text-lg font-semibold text-primary-600 select-none">LocalConnect</div>
             <div class="flex space-x-6 text-sm">
