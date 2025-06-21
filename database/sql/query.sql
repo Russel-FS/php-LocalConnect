@@ -1,5 +1,7 @@
 --datos de prueba categoria
 
+USE localconnect;
+
 INSERT INTO
     categorias (
         nombre_categoria,
@@ -125,148 +127,138 @@ VALUES
         'El negocio ofrece opciones de pago en cuotas sin intereses',
         'activo'
     ),
-
--- Infraestructura
-(
-    2,
-    'Tiene estacionamiento',
-    'El negocio cuenta con estacionamiento para clientes',
-    'activo'
-),
-(
-    2,
-    'Tiene estacionamiento gratuito',
-    'El negocio ofrece estacionamiento gratuito',
-    'activo'
-),
-(
-    2,
-    'Es accesible para discapacitados',
-    'El negocio tiene acceso adaptado para personas con discapacidad',
-    'activo'
-),
-(
-    2,
-    'Tiene rampa de acceso',
-    'El negocio cuenta con rampa de acceso',
-    'activo'
-),
-(
-    2,
-    'Tiene ascensor',
-    'El negocio cuenta con ascensor',
-    'activo'
-),
-(
-    2,
-    'Tiene aire acondicionado',
-    'El negocio cuenta con aire acondicionado',
-    'activo'
-),
-(
-    2,
-    'Tiene terraza',
-    'El negocio cuenta con terraza o área al aire libre',
-    'activo'
-),
-
--- Tecnología y Comunicación
-(
-    3,
-    'Tiene WiFi gratuito',
-    'El negocio ofrece conexión WiFi gratuita',
-    'activo'
-),
-(
-    3,
-    'Tiene WiFi de pago',
-    'El negocio ofrece conexión WiFi con costo',
-    'activo'
-),
-(
-    3,
-    'Tiene aplicación móvil',
-    'El negocio cuenta con aplicación móvil propia',
-    'activo'
-),
-(
-    3,
-    'Acepta pedidos online',
-    'El negocio acepta pedidos a través de internet',
-    'activo'
-),
-(
-    3,
-    'Tiene sistema de reservas',
-    'El negocio cuenta con sistema de reservas online',
-    'activo'
-),
-
--- Horarios y Servicio
-(
-    4,
-    'Es 24/7',
-    'El negocio está abierto las 24 horas del día',
-    'activo'
-),
-(
-    4,
-    'Tiene servicio nocturno',
-    'El negocio ofrece servicio durante la noche',
-    'activo'
-),
-(
-    4,
-    'Tiene delivery',
-    'El negocio ofrece servicio de entrega a domicilio',
-    'activo'
-),
-(
-    4,
-    'Tiene take away',
-    'El negocio ofrece servicio para llevar',
-    'activo'
-),
-(
-    4,
-    'Tiene servicio a domicilio',
-    'El negocio ofrece servicios en el domicilio del cliente',
-    'activo'
-),
-
--- Políticas Especiales
-(
-    5,
-    'Acepta mascotas',
-    'El negocio permite la entrada de mascotas',
-    'activo'
-),
-(
-    5,
-    'Es pet-friendly',
-    'El negocio es amigable con mascotas',
-    'activo'
-),
-(
-    5,
-    'Tiene área para niños',
-    'El negocio cuenta con área especial para niños',
-    'activo'
-),
-(
-    5,
-    'Es familiar',
-    'El negocio está orientado a familias',
-    'activo'
-),
-(
-    5,
-    'Es para adultos',
-    'El negocio está orientado exclusivamente a adultos',
-    'activo'
-);
-
---categoria de servicios predefinidos
+    (
+        2,
+        'Tiene estacionamiento',
+        'El negocio cuenta con estacionamiento para clientes',
+        'activo'
+    ),
+    (
+        2,
+        'Tiene estacionamiento gratuito',
+        'El negocio ofrece estacionamiento gratuito',
+        'activo'
+    ),
+    (
+        2,
+        'Es accesible para discapacitados',
+        'El negocio tiene acceso adaptado para personas con discapacidad',
+        'activo'
+    ),
+    (
+        2,
+        'Tiene rampa de acceso',
+        'El negocio cuenta con rampa de acceso',
+        'activo'
+    ),
+    (
+        2,
+        'Tiene ascensor',
+        'El negocio cuenta con ascensor',
+        'activo'
+    ),
+    (
+        2,
+        'Tiene aire acondicionado',
+        'El negocio cuenta con aire acondicionado',
+        'activo'
+    ),
+    (
+        2,
+        'Tiene terraza',
+        'El negocio cuenta con terraza o área al aire libre',
+        'activo'
+    ),
+    (
+        3,
+        'Tiene WiFi gratuito',
+        'El negocio ofrece conexión WiFi gratuita',
+        'activo'
+    ),
+    (
+        3,
+        'Tiene WiFi de pago',
+        'El negocio ofrece conexión WiFi con costo',
+        'activo'
+    ),
+    (
+        3,
+        'Tiene aplicación móvil',
+        'El negocio cuenta con aplicación móvil propia',
+        'activo'
+    ),
+    (
+        3,
+        'Acepta pedidos online',
+        'El negocio acepta pedidos a través de internet',
+        'activo'
+    ),
+    (
+        3,
+        'Tiene sistema de reservas',
+        'El negocio cuenta con sistema de reservas online',
+        'activo'
+    ),
+    (
+        4,
+        'Es 24/7',
+        'El negocio está abierto las 24 horas del día',
+        'activo'
+    ),
+    (
+        4,
+        'Tiene servicio nocturno',
+        'El negocio ofrece servicio durante la noche',
+        'activo'
+    ),
+    (
+        4,
+        'Tiene delivery',
+        'El negocio ofrece servicio de entrega a domicilio',
+        'activo'
+    ),
+    (
+        4,
+        'Tiene take away',
+        'El negocio ofrece servicio para llevar',
+        'activo'
+    ),
+    (
+        4,
+        'Tiene servicio a domicilio',
+        'El negocio ofrece servicios en el domicilio del cliente',
+        'activo'
+    ),
+    (
+        5,
+        'Acepta mascotas',
+        'El negocio permite la entrada de mascotas',
+        'activo'
+    ),
+    (
+        5,
+        'Es pet-friendly',
+        'El negocio es amigable con mascotas',
+        'activo'
+    ),
+    (
+        5,
+        'Tiene área para niños',
+        'El negocio cuenta con área especial para niños',
+        'activo'
+    ),
+    (
+        5,
+        'Es familiar',
+        'El negocio está orientado a familias',
+        'activo'
+    ),
+    (
+        5,
+        'Es para adultos',
+        'El negocio está orientado exclusivamente a adultos',
+        'activo'
+    );
 
 INSERT INTO
     categorias_servicio (
