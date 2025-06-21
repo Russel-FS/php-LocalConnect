@@ -24,14 +24,14 @@
             <a href="/" class="text-2xl font-extrabold tracking-tight text-primary-600 select-none">LocalConnect</a>
             <div class="flex items-center space-x-2">
                 @if(Auth::check())
-                <a href="{{ route('negocios.mis-negocios') }}" class="btn-premium-outline">Mis Negocios</a>
+                <a href="{{ route('negocios.mis-negocios') }}" class="btn-outline">Mis Negocios</a>
                 <form method="POST" action="{{ url('/logout') }}">
                     @csrf
-                    <button type="submit" class="btn-premium-outline">Cerrar sesión</button>
+                    <button type="submit" class="btn-outline">Cerrar sesión</button>
                 </form>
                 @else
-                <a href="{{ route('login') }}" class="btn-premium-outline">Iniciar sesión</a>
-                <a href="{{ route('register') }}" class="btn-premium">Registrarse</a>
+                <a href="{{ route('login') }}" class="btn-outline">Iniciar sesión</a>
+                <a href="{{ route('register') }}" class="btn-solid">Registrarse</a>
                 @endif
             </div>
         </div>
