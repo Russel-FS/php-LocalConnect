@@ -38,7 +38,7 @@
     </nav>
 
     <!-- contenido principal -->
-    <main class="pt-24 min-h-[80vh]">
+    <main class="pt-24 min-h-screen">
         @yield('content')
     </main>
 
