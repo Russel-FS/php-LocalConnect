@@ -36,12 +36,8 @@ class AuthController extends Controller
 
             $user = $this->authService->login($credentials);
 
-            // Redirigir según el tipo de usuario
-            if ($user->tipo === 'negocio') {
-                return redirect()->route('negocios.registro')->with('success', '¡Bienvenido! Completa el registro de tu negocio.');
-            } else {
-                return redirect()->route('home')->with('success', '¡Bienvenido!');
-            }
+            // Redirigir al home (todos los usuarios van al mismo lugar inicialmente)
+            return redirect()->route('home')->with('success', '¡Bienvenido!');
         } catch (ValidationException $e) {
             return back()->withErrors($e->errors())->withInput();
         } catch (Exception $e) {
@@ -53,17 +49,12 @@ class AuthController extends Controller
     {
         try {
             $data = $request->all();
-            $data['tipo'] = $request->input('tipo', 'residente');
 
-            $user = $this->authService->register($data); // registro de usuario
+            $user = $this->authService->register($data); // registro de usuario como residente
             auth()->login($user); // iniciar sesión automáticamente
 
-            // Redirigir según el tipo de usuario
-            if ($user->tipo === 'negocio') {
-                return redirect()->route('negocios.registro')->with('success', '¡Cuenta creada exitosamente! Completa el registro de tu negocio.');
-            } else {
-                return redirect()->route('home')->with('success', '¡Cuenta creada exitosamente!');
-            }
+            // Redirigir al home  
+            return redirect()->route('home')->with('success', '¡Cuenta creada exitosamente!');
         } catch (ValidationException $e) {
             return back()->withErrors($e->errors())->withInput();
         } catch (Exception $e) {

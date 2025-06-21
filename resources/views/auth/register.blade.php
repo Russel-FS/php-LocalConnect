@@ -66,22 +66,6 @@
             </div>
 
             <div>
-                <label for="tipo" class="block mb-2 text-gray-700">Tipo de cuenta *</label>
-                <select
-                    id="tipo"
-                    name="tipo"
-                    required
-                    class="w-full px-4 py-3 rounded-lg border @error('tipo') border-red-500 @else border-gray-200 @enderror focus:border-primary-600 focus:ring-2 focus:ring-primary-100 outline-none transition">
-                    <option value="">Selecciona un tipo</option>
-                    <option value="residente" {{ old('tipo') == 'residente' ? 'selected' : '' }}>Residente</option>
-                    <option value="negocio" {{ old('tipo') == 'negocio' ? 'selected' : '' }}>Negocio</option>
-                </select>
-                @error('tipo')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div>
                 <label for="password" class="block mb-2 text-gray-700">Contraseña *</label>
                 <div class="relative">
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-600">

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Rol;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 class AuthService
 {
     /**
-     * Registrar un nuevo usuario
+     * Registrar un nuevo usuario (siempre como residente por defecto)
      */
     public function register(array $data)
     {
@@ -20,8 +21,7 @@ class AuthService
         $validator = Validator::make($data, [
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:usuarios,email',
-            'password' => 'required|string|min:8|confirmed',
-            'tipo' => 'required|in:residente,negocio,admin'
+            'password' => 'required|string|min:8|confirmed'
         ]);
 
         if ($validator->fails()) {
@@ -29,11 +29,17 @@ class AuthService
         }
 
         return DB::transaction(function () use ($data) {
+
+            $rolResidente = Rol::findByCode('residente');
+            if (!$rolResidente) {
+                throw new \Exception('Error en la configuración del sistema.');
+            }
+
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']), // se encripta la contraseña
-                'tipo' => $data['tipo'] ?? 'residente',
+                'id_rol' => $rolResidente->id_rol, // rol por defecto
                 'estado' => 'activo'
             ]);
 
@@ -59,8 +65,7 @@ class AuthService
         // Intentar autenticación
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
-            // Verificar si el usuario está activo
+            // verificacion estado de cuenta
             if ($user->estado !== 'activo') {
                 Auth::logout();
                 throw new \Exception('Tu cuenta está suspendida o eliminada.');
