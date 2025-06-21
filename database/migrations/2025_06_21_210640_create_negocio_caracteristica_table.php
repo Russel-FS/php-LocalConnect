@@ -12,9 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('negocio_caracteristica', function (Blueprint $table) {
-            $table->foreignId('id_negocio')->constrained('negocios', 'id_negocio');
-            $table->foreignId('id_caracteristica')->constrained('caracteristicas', 'id_caracteristica');
+            $table->unsignedBigInteger('id_negocio');
+            $table->unsignedBigInteger('id_caracteristica');
+
+            // Clave primaria compuesta
             $table->primary(['id_negocio', 'id_caracteristica']);
+
+            // Claves foráneas
+            $table->foreign('id_negocio')
+                ->references('id_negocio')
+                ->on('negocios')
+                ->onDelete('cascade');
+
+            $table->foreign('id_caracteristica')
+                ->references('id_caracteristica')
+                ->on('caracteristicas')
+                ->onDelete('cascade');
         });
     }
 

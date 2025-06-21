@@ -13,11 +13,19 @@ return new class extends Migration
     {
         Schema::create('caracteristicas', function (Blueprint $table) {
             $table->id('id_caracteristica');
-            $table->string('nombre_caracteristica', 100);
+            $table->unsignedBigInteger('id_categoria_caracteristica')->nullable();
+            $table->string('nombre', 100);
             $table->text('descripcion')->nullable();
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamp('creado_en')->useCurrent();
             $table->timestamp('actualizado_en')->useCurrent()->useCurrentOnUpdate();
+
+            // Índices y restricciones
+            $table->unique('nombre');
+            $table->foreign('id_categoria_caracteristica')
+                ->references('id_categoria_caracteristica')
+                ->on('categorias_caracteristica')
+                ->onDelete('set null');
         });
     }
 
