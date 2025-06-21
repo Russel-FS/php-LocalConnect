@@ -3,10 +3,10 @@
     <div class="mb-4">
         <div class="flex items-center justify-between mb-2">
             <span class="text-sm font-semibold text-primary-700">Progreso</span>
-            <span id="progress-text" class="text-xs text-secondary-600 font-bold">1 de 6</span>
+            <span id="progress-text" class="text-xs text-secondary-600 font-bold">1 de 7</span>
         </div>
         <div class="w-full rounded-full h-2 progress-bar-container">
-            <div id="progress-bar" class="h-2 rounded-full transition-all duration-300" style="width: 16.67%"></div>
+            <div id="progress-bar" class="h-2 rounded-full transition-all duration-300" style="width: 14.29%"></div>
         </div>
     </div>
 
@@ -58,6 +58,17 @@
         <li class="wizard-step-item" data-step="5">
             <div class="flex items-center gap-4 step-link" style="cursor:pointer;">
                 <div class="step-circle">
+                    <x-icons.wizard.check />
+                </div>
+                <div>
+                    <span class="step-label">Características</span>
+                    <p class="text-xs text-primary-400 mt-1">Atributos del negocio</p>
+                </div>
+            </div>
+        </li>
+        <li class="wizard-step-item" data-step="6">
+            <div class="flex items-center gap-4 step-link" style="cursor:pointer;">
+                <div class="step-circle">
                     <x-icons.wizard.phone />
                 </div>
                 <div>
@@ -66,7 +77,7 @@
                 </div>
             </div>
         </li>
-        <li class="wizard-step-item" data-step="6">
+        <li class="wizard-step-item" data-step="7">
             <div class="flex items-center gap-4 step-link" style="cursor:pointer;">
                 <div class="step-circle">
                     <x-icons.wizard.summary />

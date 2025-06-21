@@ -1,7 +1,7 @@
 // Funcionalidad global del Wizard de Registro de Negocios
 
 let pasoActual = 1;
-const totalPasos = 6;
+const totalPasos = 7;
 let contadorServicios = 1;
 
 // Funciones para cambiar de paso

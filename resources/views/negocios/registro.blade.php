@@ -38,9 +38,11 @@
                     <x-negocios.paso-categorias :categorias="$categorias" />
                     <!-- Paso 4 Servicios -->
                     <x-negocios.paso-servicios :categoriasServicio="$categoriasServicio" />
-                    <!-- Paso 5 Horario y contacto -->
+                    <!-- Paso 5 Características -->
+                    <x-negocios.paso-caracteristicas :categoriasCaracteristica="$categoriasCaracteristica" />
+                    <!-- Paso 6 Horario y contacto -->
                     <x-negocios.paso-horario-contacto />
-                    <!-- Paso 6 Resumen -->
+                    <!-- Paso 7 Resumen -->
                     <x-negocios.paso-resumen />
                 </form>
             </div>
@@ -56,6 +58,7 @@
 'resources/js/negocios/registro-paso4.js',
 'resources/js/negocios/registro-paso5.js',
 'resources/js/negocios/registro-paso6.js',
+'resources/js/negocios/registro-paso7.js',
 ])
 
 @endsection

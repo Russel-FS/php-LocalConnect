@@ -1,4 +1,4 @@
-<div id="paso-5" class="hidden">
+<div id="paso-6" class="hidden">
     <h3 class="text-3xl font-bold mb-2 text-primary-700">Horario y contacto</h3>
     <p class="text-primary-400 mb-8">¿Cómo pueden contactarte tus clientes?</p>
     <div class="space-y-6">
@@ -94,7 +94,7 @@
         </div>
     </div>
     <div class="flex justify-between mt-10">
-        <button class="btn-outline" type="button" onclick="cambiarPaso(5,4)">Anterior</button>
-        <button class="btn-solid" type="button" onclick="validarPaso(5,6)">Siguiente</button>
+        <button class="btn-outline" type="button" onclick="cambiarPaso(6,5)">Anterior</button>
+        <button class="btn-solid" type="button" onclick="validarPaso(6,7)">Siguiente</button>
     </div>
 </div>

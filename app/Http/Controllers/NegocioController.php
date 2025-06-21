@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Negocio\Categoria;
 use App\Models\Negocio\CategoriaServicio;
+use App\Models\Negocio\CategoriaCaracteristica;
 use App\Services\NegocioService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,8 @@ class NegocioController extends Controller
     {
         $categorias = Categoria::all();
         $categoriasServicio = CategoriaServicio::with('serviciosPredefinidos')->get();
-        return view('negocios.registro', compact('categorias', 'categoriasServicio'));
+        $categoriasCaracteristica = CategoriaCaracteristica::with('caracteristicas')->get();
+        return view('negocios.registro', compact('categorias', 'categoriasServicio', 'categoriasCaracteristica'));
     }
 
     public function guardar(Request $request)
