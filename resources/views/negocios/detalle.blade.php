@@ -107,24 +107,24 @@
 
             <!-- Horarios de atención -->
             @if($negocio->horarios->isNotEmpty())
-            <div class="bg-white rounded-xl shadow-sm p-4 max-w-md mx-auto mt-6 mb-2">
-                <div class="flex items-center gap-2 mb-2 justify-center">
-                    <svg class="w-4 h-4 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-                        <path stroke-linecap="round" stroke-width="2" d="M12 8v4l3 3" />
+            <div class="bg-white rounded-xl shadow-sm p-6 mt-6 mb-2">
+                <div class="flex items-center gap-2 mb-4 justify-center">
+                    <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+                        <path stroke-linecap="round" stroke-width="1.5" d="M12 8v4l2.5 2.5" />
                     </svg>
                     <span class="text-base font-semibold text-primary-600">Horarios de atención</span>
                 </div>
-                <table class="w-full text-left border-separate border-spacing-y-1">
+                <table class="w-full max-w-md mx-auto text-sm">
                     <tbody>
                         @foreach($negocio->horarios as $horario)
-                        <tr class="hover:bg-primary-50 transition rounded-lg">
-                            <td class="py-1 px-2 font-medium text-primary-600 capitalize w-1/3 text-sm">{{ $horario->dia_semana }}</td>
-                            <td class="py-1 px-2">
+                        <tr class="border-b border-primary-100 last:border-b-0">
+                            <td class="py-3 px-2 font-medium text-primary-700 capitalize">{{ $horario->dia_semana }}</td>
+                            <td class="py-3 px-2 text-right">
                                 @if($horario->cerrado)
-                                <span class="text-red-400 text-xs font-semibold rounded-full px-2 py-0.5 bg-red-50">Cerrado</span>
+                                <span class="font-medium text-red-500">Cerrado</span>
                                 @else
-                                <span class="text-primary-500 text-xs font-medium rounded-full px-2 py-0.5 bg-primary-100">{{ $horario->hora_apertura }} - {{ $horario->hora_cierre }}</span>
+                                <span class="font-mono text-primary-500">{{ \Carbon\Carbon::parse($horario->hora_apertura)->format('H:i') }} - {{ \Carbon\Carbon::parse($horario->hora_cierre)->format('H:i') }}</span>
                                 @endif
                             </td>
                         </tr>
