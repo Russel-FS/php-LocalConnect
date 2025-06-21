@@ -164,24 +164,20 @@ h4 {
     scrollbar-color: #cbd5e1 #f3f4f6;
 }
 
-/* personalizacion de toaster */
-#toast-container > .toast-error {
-    background-color: var(--color-primary-700);
-    color: #fff;
-    border-left: 6px solid var(--color-secondary-500);
-    font-family: "Inter", sans-serif;
-    border-radius: 1rem;
-    box-shadow: 0 4px 24px 0 rgba(52, 64, 84, 0.1);
+/* personalizacion de notyf */
+.notyf__toast {
+    border-radius: 1.25rem !important;
+    font-family: "Inter", sans-serif !important;
+    font-size: 1rem !important;
+    box-shadow: 0 8px 32px 0 rgba(52, 64, 84, 0.14) !important;
+    padding: 1.25rem 2rem 1.25rem 1.5rem !important;
+    border-left: 8px solid var(--color-primary-700) !important;
+    min-width: 320px;
+    max-width: 400px;
 }
-#toast-container > .toast-success {
-    background-color: var(--color-secondary-500);
-    color: #fff;
-    border-left: 6px solid var(--color-primary-500);
-    font-family: "Inter", sans-serif;
-    border-radius: 1rem;
-    box-shadow: 0 4px 24px 0 rgba(52, 64, 84, 0.1);
+.notyf__toast--error {
+    border-left-color: var(--color-primary-700) !important;
 }
-#toast-container > div {
-    font-size: 1rem;
-    padding: 1.25rem 2rem;
+.notyf__toast--success {
+    border-left-color: var(--color-secondary-500) !important;
 }

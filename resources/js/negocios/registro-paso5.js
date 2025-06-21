@@ -41,13 +41,13 @@ window.validarHorarios = function () {
             if (!inicio.value) {
                 valido = false;
                 mensajes.push(
-                    `Debes ingresar la hora de inicio para el día #${i + 1}`
+                    `Completa el horario o marca el día como cerrado.`
                 );
             }
             if (!fin.value) {
                 valido = false;
                 mensajes.push(
-                    `Debes ingresar la hora de fin para el día #${i + 1}`
+                    `Completa el horario o marca el día como cerrado.`
                 );
             }
         }
@@ -56,7 +56,9 @@ window.validarHorarios = function () {
         window.notyf.dismissAll();
         window.notyf.open({
             type: "error",
-            message: mensajes[0] || "Corrige los horarios antes de continuar.",
+            message:
+                mensajes[0] ||
+                "Completa el horario o marca el día como cerrado.",
         });
     }
     return valido;
