@@ -38,16 +38,17 @@ window.validarHorarios = function () {
             'input[name^="horarios"][name$="[fin]"]'
         );
         if (!cerrado) {
-            if (!inicio.value) {
+            if (!inicio.value || !fin.value) {
                 valido = false;
                 mensajes.push(
                     `Completa el horario o marca el día como cerrado.`
                 );
-            }
-            if (!fin.value) {
+            } else if (inicio.value >= fin.value) {
                 valido = false;
                 mensajes.push(
-                    `Completa el horario o marca el día como cerrado.`
+                    `La hora de fin debe ser mayor que la de inicio para el día #${
+                        i + 1
+                    }.`
                 );
             }
         }

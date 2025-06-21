@@ -38,11 +38,11 @@ class NegocioService
             'categorias' => 'required|array|min:1',
             'categorias.*' => 'exists:categorias,id_categoria',
 
-            // Servicios predefinidos (opcional)
+            // Servicios predefinidos  
             'servicios_predefinidos' => 'nullable|array',
             'servicios_predefinidos.*' => 'exists:servicios_predefinidos,id_servicio_predefinido',
 
-            // Servicios personalizados (opcional)
+            // Servicios personalizados  
             'servicios_personalizados' => 'nullable|array',
             'servicios_personalizados.nombre' => 'nullable|array',
             'servicios_personalizados.nombre.*' => 'string|max:100',
