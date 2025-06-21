@@ -33,16 +33,10 @@
 
     <div class="flex justify-between mt-8">
         <button type="button" class="btn-outline" onclick="cambiarPaso(5, 4)">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
             Anterior
         </button>
         <button type="button" class="btn-solid" onclick="cambiarPaso(5, 6)">
             Siguiente
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
         </button>
     </div>
 </div>
