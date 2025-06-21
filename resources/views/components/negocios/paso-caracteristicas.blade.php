@@ -35,7 +35,7 @@
         <button type="button" class="btn-outline" onclick="cambiarPaso(5, 4)">
             Anterior
         </button>
-        <button type="button" class="btn-solid" onclick="cambiarPaso(5, 6)">
+        <button type="button" class="btn-solid" onclick="validarPaso(5, 6)">
             Siguiente
         </button>
     </div>
