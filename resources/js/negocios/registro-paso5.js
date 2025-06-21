@@ -23,8 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "p-4"
                 );
             }
-
-            // Mostrar notificación si está disponible
+            // Mostrar mensaje de error
             if (window.notyf) {
                 window.notyf.dismissAll();
                 window.notyf.open({
