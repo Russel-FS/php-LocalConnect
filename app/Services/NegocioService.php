@@ -81,6 +81,7 @@ class NegocioService
             'web.url' => 'El sitio web debe ser una URL válida (ej: https://mi-negocio.com).',
             'horarios.*.inicio.required_if' => 'Debes ingresar la hora de inicio para cada día abierto.',
             'horarios.*.fin.required_if' => 'Debes ingresar la hora de fin para cada día abierto.',
+            'horarios.*.fin.after' => 'La hora de fin debe ser mayor que la de inicio para cada día abierto.',
         ]);
 
         if ($validator->fails()) {
