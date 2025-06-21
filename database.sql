@@ -204,33 +204,6 @@ CREATE TABLE logs_admin (
     FOREIGN KEY (id_admin) REFERENCES usuarios (id_usuario)
 );
 
--- Datos de prueba para roles
-INSERT INTO
-    roles (
-        code,
-        name,
-        descripcion,
-        estado
-    )
-VALUES (
-        'residente',
-        'Residente',
-        'Usuarios que viven en la comunidad y buscan servicios locales',
-        'activo'
-    ),
-    (
-        'negocio',
-        'Negocio',
-        'Empresas y comercios que ofrecen servicios en la comunidad',
-        'activo'
-    ),
-    (
-        'admin',
-        'Administrador',
-        'Usuarios con permisos administrativos del sistema',
-        'activo'
-    );
-
 --datos de de prueba categoria
 
 INSERT INTO

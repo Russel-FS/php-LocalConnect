@@ -7,6 +7,7 @@ use App\Models\Rol;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -31,8 +32,11 @@ class AuthService
         return DB::transaction(function () use ($data) {
 
             $rolResidente = Rol::findByCode('residente');
+
+            // Debug: verificar si se encuentra el rol
             if (!$rolResidente) {
-                throw new \Exception('Error en la configuración del sistema.');
+                Log::error('Rol residente no encontrado en la base de datos');
+                throw new \Exception('Error en la configuración del sistema: Rol residente no encontrado.');
             }
 
             $user = User::create([
