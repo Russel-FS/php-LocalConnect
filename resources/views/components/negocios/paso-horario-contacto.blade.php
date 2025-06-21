@@ -22,7 +22,7 @@
                             <input type="checkbox" name="horarios[{{ $i }}][cerrado]" value="1" class="sr-only peer" onchange="toggleCerrado(this)">
 
                             <!--cuerpo-->
-                            <div class="w-8 h-4 bg-primary-100 rounded-full relative transition peer-checked:bg-primary-400">
+                            <div class="w-8 h-4 bg-primary-100 rounded-full relative transition peer-checked:bg-secondary-500">
                             </div>
                             <!--circulo-->
                             <span class="absolute left-14.5 top-1 w-2 h-2 bg-white rounded-full shadow transition peer-checked:translate-x-4"></span>
