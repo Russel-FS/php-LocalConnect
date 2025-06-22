@@ -89,19 +89,41 @@
             <!-- Servicios -->
             @if($negocio->serviciosPredefinidos->isNotEmpty() || $negocio->serviciosPersonalizados->isNotEmpty())
             <div class="space-y-8">
-                <h2 class="text-3xl font-bold text-primary-700">Servicios</h2>
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-primary-700 mb-4">Nuestros Servicios</h2>
+                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">Descubre todo lo que tenemos para ofrecerte con la mejor calidad y atención</p>
+                </div>
 
                 <!-- Servicios predefinidos -->
                 @if($negocio->serviciosPredefinidos->isNotEmpty())
-                <div class="bg-white rounded-2xl p-8 border border-primary-100">
-                    <h3 class="text-xl font-semibold text-primary-600 mb-6">Servicios predefinidos</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gradient-to-br from-white to-primary-50/30 rounded-3xl p-8 border border-primary-100 shadow-sm">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-primary-700">Servicios Estándar</h3>
+                            <p class="text-primary-500">Servicios que ofrecemos de manera regular</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($negocio->serviciosPredefinidos as $servicio)
-                        <div class="bg-primary-50 rounded-xl p-4 border border-primary-200">
-                            <div class="font-semibold text-primary-700">{{ $servicio->nombre_servicio }}</div>
-                            @if($servicio->descripcion)
-                            <div class="text-primary-500 text-sm mt-1">{{ $servicio->descripcion }}</div>
-                            @endif
+                        <div class="group bg-white rounded-2xl p-6 border border-primary-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center group-hover:bg-primary-200 transition-colors">
+                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-primary-700 text-lg mb-2">{{ $servicio->nombre_servicio }}</h4>
+                                    @if($servicio->descripcion)
+                                    <p class="text-primary-500 text-sm leading-relaxed">{{ $servicio->descripcion }}</p>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         @endforeach
                     </div>
@@ -110,20 +132,42 @@
 
                 <!-- Servicios personalizados -->
                 @if($negocio->serviciosPersonalizados->isNotEmpty())
-                <div class="bg-white rounded-2xl p-8 border border-primary-100">
-                    <h3 class="text-xl font-semibold text-primary-600 mb-6">Servicios personalizados</h3>
+                <div class="bg-gradient-to-br from-white to-secondary-50/30 rounded-3xl p-8 border border-secondary-100 shadow-sm">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-secondary-100 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-secondary-700">Servicios Personalizados</h3>
+                            <p class="text-secondary-500">Servicios adaptados a tus necesidades específicas</p>
+                        </div>
+                    </div>
                     <div class="space-y-4">
                         @foreach($negocio->serviciosPersonalizados as $servicio)
-                        <div class="bg-secondary-50 rounded-xl p-4 border border-secondary-200 flex justify-between items-center">
-                            <div>
-                                <div class="font-semibold text-secondary-700">{{ $servicio->nombre_servicio }}</div>
-                                @if($servicio->descripcion)
-                                <div class="text-secondary-500 text-sm mt-1">{{ $servicio->descripcion }}</div>
+                        <div class="group bg-white rounded-2xl p-6 border border-secondary-200 hover:border-secondary-300 hover:shadow-lg transition-all duration-300">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-start gap-4 flex-1">
+                                    <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors">
+                                        <svg class="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-secondary-700 text-lg mb-2">{{ $servicio->nombre_servicio }}</h4>
+                                        @if($servicio->descripcion)
+                                        <p class="text-secondary-500 text-sm leading-relaxed">{{ $servicio->descripcion }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                @if($servicio->precio)
+                                <div class="text-right ml-4">
+                                    <div class="text-2xl font-bold text-secondary-600">S/ {{ number_format($servicio->precio, 2) }}</div>
+                                    <div class="text-secondary-400 text-sm">Precio</div>
+                                </div>
                                 @endif
                             </div>
-                            @if($servicio->precio)
-                            <span class="text-lg font-semibold text-secondary-600 shrink-0 ml-4">S/ {{ number_format($servicio->precio, 2) }}</span>
-                            @endif
                         </div>
                         @endforeach
                     </div>
@@ -135,22 +179,26 @@
             <!-- Características del negocio -->
             @if($negocio->caracteristicas->isNotEmpty())
             <div class="space-y-8">
-                <h2 class="text-3xl font-bold text-primary-700">Características</h2>
-                <div class="bg-white rounded-2xl p-8 border border-primary-100">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-primary-700 mb-4">Lo que ofrecemos</h2>
+                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">Características y servicios que nos distinguen</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-white to-primary-50/30 rounded-3xl p-8 border border-primary-100 shadow-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         @foreach($negocio->caracteristicas as $caracteristica)
-                        <div class="bg-primary-50 rounded-xl p-4 border border-primary-200">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
-                                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="group bg-white rounded-2xl p-6 border border-primary-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+                                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <div class="font-semibold text-primary-700">{{ $caracteristica->nombre }}</div>
+                                <h4 class="font-bold text-primary-700 text-lg mb-2">{{ $caracteristica->nombre }}</h4>
+                                @if($caracteristica->descripcion)
+                                <p class="text-primary-500 text-sm leading-relaxed">{{ $caracteristica->descripcion }}</p>
+                                @endif
                             </div>
-                            @if($caracteristica->categoria)
-                            <div class="text-primary-500 text-sm mt-1">{{ $caracteristica->categoria->nombre_categoria }}</div>
-                            @endif
                         </div>
                         @endforeach
                     </div>
