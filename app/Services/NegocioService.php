@@ -169,12 +169,12 @@ class NegocioService
         $precios = $serviciosData['precio'] ?? [];
 
         foreach ($nombres as $index => $nombre) {
-            if (!empty($nombre)) {
+            if (!empty(trim($nombre))) {
                 ServicioPersonalizado::create([
                     'id_negocio' => $negocioId,
-                    'nombre_servicio' => $nombre,
-                    'descripcion' => $descripciones[$index] ?? null,
-                    'precio' => $precios[$index] ?? null,
+                    'nombre_servicio' => trim($nombre),
+                    'descripcion' => !empty($descripciones[$index]) ? trim($descripciones[$index]) : null,
+                    'precio' => !empty($precios[$index]) ? (float) $precios[$index] : null,
                     'disponible' => true
                 ]);
             }

@@ -59,26 +59,31 @@
             </div>
             @endif
         </div>
+
         <!-- Servicios personalizados -->
-        <div id="servicios-personalizados" class="bg-primary-50 rounded-xl border border-primary-200 shadow-sm p-6">
-            <label class="mb-4 text-primary-700 font-medium flex items-center gap-2">Servicios personalizados
-                <span class="relative group">
-                    <svg class="w-4 h-4 text-secondary-500 cursor-pointer" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01" />
+        <div class="bg-secondary-50 rounded-xl border border-secondary-200 shadow-sm p-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 bg-secondary-100 rounded-2xl flex items-center justify-center">
+                    <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                     </svg>
-                    <!-- Tooltip -->
-                    <span class="absolute left-6 top-0 z-10 hidden group-hover:block bg-white border border-secondary-200 rounded-lg shadow px-3 py-2 text-xs text-secondary-700 w-56  group-hover:opacity-100 opacity-0 transition-opacity duration-300">
-                        Agrega servicios únicos que no estén en la lista predefinida para destacar tu negocio.
-                    </span>
-                </span>
-            </label>
-            <div class="space-y-4" id="personalizados-lista">
-                <!-- aqui se agregan mediante js -->
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-secondary-700">Servicios Personalizados</h3>
+                    <p class="text-secondary-500">Agrega servicios únicos que no estén en la lista predefinida</p>
+                </div>
             </div>
-            <button type="button" onclick="agregarServicioPersonalizado(this)" class="btn-agregar-servicio mt-2 flex items-center gap-2">
-                <x-icons.plus class="w-5 h-5 text-primary-500" />
-                <span>Agregar servicio personalizado</span>
+
+            <div id="servicios-personalizados" class="space-y-4">
+                <!-- Los servicios personalizados se agregarán aquí mediante JavaScript -->
+            </div>
+
+            <button type="button" onclick="agregarServicioPersonalizado()"
+                class="mt-6 w-full flex items-center justify-center gap-3 px-6 py-3 bg-secondary-100 border border-secondary-200 text-secondary-700 rounded-xl hover:bg-secondary-200 hover:border-secondary-300 transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                <span class="font-medium">Agregar servicio personalizado</span>
             </button>
         </div>
     </div>
