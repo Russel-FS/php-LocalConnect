@@ -21,9 +21,9 @@
                 </span>
             </div>
 
-            <!-- Buscador y Filtros en la parte superior -->
+            <!-- Buscador y Filtros -->
             <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="space-y-6">
-                <!-- Fila 1: Buscador principal -->
+                <!--  Buscador principal -->
                 <div class="relative max-w-2xl">
                     <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                         <x-icons.navigation.search class="h-5 w-5 text-primary-400" />
@@ -39,7 +39,7 @@
                     </button>
                 </div>
 
-                <!-- Fila 2 Filtros dropdown -->
+                <!--  Filtros dropdown -->
                 <div class="flex flex-wrap gap-4">
                     <!-- Dropdown Categorías -->
                     <div class="relative group">
