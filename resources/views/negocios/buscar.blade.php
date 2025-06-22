@@ -133,32 +133,6 @@
                         </div>
                     </div>
 
-                    <!-- Dropdown Estado -->
-                    <div class="relative group">
-                        <button type="button" class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border-2 border-primary-200 rounded-xl shadow-sm hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.61-2.596a1 1 0 00-1.414 0L9 12l2 2 4-4m5.61-2.596a1 1 0 00-1.414 0L9 12l2 2 4-4" />
-                            </svg>
-                            Estado
-                            @if(request('verificado'))
-                            <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
-                            @endif
-                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div class="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm border border-primary-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                            <div class="p-4">
-                                <label class="flex items-center p-2 hover:bg-green-50 rounded-lg transition-colors duration-200 cursor-pointer">
-                                    <input type="checkbox" name="verificado" value="1"
-                                        class="rounded border-green-300 text-green-600 focus:ring-green-500"
-                                        {{ request('verificado') ? 'checked' : '' }}>
-                                    <span class="ml-2 text-sm text-green-700">Solo verificados</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Botones de acción -->
                     <div class="flex gap-2">
                         <button type="submit" class="flex items-center gap-2 px-4 py-2 bg-secondary-600 hover:bg-secondary-700 text-white rounded-xl font-semibold transition-all duration-300">

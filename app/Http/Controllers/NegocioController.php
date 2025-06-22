@@ -108,6 +108,7 @@ class NegocioController extends Controller
         if ($request->filled('q')) {
             $searchTerm = $request->q;
             $query->where(function ($q) use ($searchTerm) {
+
                 $q->where('nombre_negocio', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('descripcion', 'LIKE', "%{$searchTerm}%")
                     ->orWhereHas('categorias', function ($q) use ($searchTerm) {
@@ -143,10 +144,8 @@ class NegocioController extends Controller
             });
         }
 
-        // Filtro por verificación
-        if ($request->filled('verificado')) {
-            $query->where('verificado', true);
-        }
+        // Siempre filtrar solo negocios verificados
+        $query->where('verificado', true);
 
         // Obtener datos para filtros
         $categorias = Categoria::where('estado', 'activo')->get();
