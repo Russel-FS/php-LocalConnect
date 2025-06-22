@@ -10,7 +10,7 @@
         </div>
         @endif
 
-        <!-- Hero Section - Estilo Apple -->
+        <!-- Hero Section-->
         <div class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-white rounded-3xl mb-16">
             <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/5 to-primary-500/5"></div>
             <div class="relative p-12 lg:p-20">
@@ -155,7 +155,13 @@
                                         </svg>
                                     </div>
                                     <div class="flex-1">
-                                        <h4 class="font-bold text-secondary-700 text-lg mb-2">{{ $servicio->nombre_servicio }}</h4>
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h4 class="font-bold text-secondary-700 text-lg">{{ $servicio->nombre_servicio }}</h4>
+                                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium {{ $servicio->disponible ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
+                                                <span class="w-1.5 h-1.5 rounded-full {{ $servicio->disponible ? 'bg-green-500' : 'bg-red-500' }}"></span>
+                                                {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
+                                            </span>
+                                        </div>
                                         @if($servicio->descripcion)
                                         <p class="text-secondary-500 text-sm leading-relaxed">{{ $servicio->descripcion }}</p>
                                         @endif
