@@ -215,7 +215,16 @@
 
                         <!-- Horario de hoy -->
                         @php
-                        $hoy = strtolower(date('l'));
+                        $diasEspanol = [
+                        'monday' => 'lunes',
+                        'tuesday' => 'martes',
+                        'wednesday' => 'miércoles',
+                        'thursday' => 'jueves',
+                        'friday' => 'viernes',
+                        'saturday' => 'sábado',
+                        'sunday' => 'domingo'
+                        ];
+                        $hoy = $diasEspanol[strtolower(date('l'))];
                         $horarioHoy = $negocio->horarios->where('dia_semana', $hoy)->first();
                         @endphp
                         @if($horarioHoy)
