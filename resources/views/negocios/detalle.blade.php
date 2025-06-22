@@ -88,40 +88,42 @@
         <div class="space-y-16">
             <!-- Servicios -->
             @if($negocio->serviciosPredefinidos->isNotEmpty() || $negocio->serviciosPersonalizados->isNotEmpty())
-            <div class="space-y-8">
+            <div class="space-y-12">
                 <div class="text-center">
-                    <h2 class="text-4xl font-bold text-primary-700 mb-4">Nuestros Servicios</h2>
-                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">Descubre todo lo que tenemos para ofrecerte con la mejor calidad y atención</p>
+                    <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Nuestros Servicios</h2>
+                    <p class="text-xl text-primary-500 max-w-3xl mx-auto leading-relaxed">Descubre todo lo que tenemos para ofrecerte con la mejor calidad y atención personalizada</p>
                 </div>
 
                 <!-- Servicios predefinidos -->
                 @if($negocio->serviciosPredefinidos->isNotEmpty())
-                <div class="bg-gradient-to-br from-white to-primary-50/30 rounded-3xl p-8 border border-primary-100 shadow-sm">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                    <div class="flex items-center gap-6 mb-10">
+                        <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-primary-700">Servicios Estándar</h3>
-                            <p class="text-primary-500">Servicios que ofrecemos de manera regular</p>
+                            <h3 class="text-3xl font-bold text-primary-700">Servicios Estándar</h3>
+                            <p class="text-lg text-primary-500">Servicios que ofrecemos de manera regular con la máxima calidad</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach($negocio->serviciosPredefinidos as $servicio)
-                        <div class="group bg-white rounded-2xl p-6 border border-primary-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center group-hover:bg-primary-200 transition-colors">
-                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold text-primary-700 text-lg mb-2">{{ $servicio->nombre_servicio }}</h4>
-                                    @if($servicio->descripcion)
-                                    <p class="text-primary-500 text-sm leading-relaxed">{{ $servicio->descripcion }}</p>
-                                    @endif
+                        <div class="group relative">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                <div class="flex items-start gap-6">
+                                    <div class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
+                                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-primary-700 text-xl mb-3">{{ $servicio->nombre_servicio }}</h4>
+                                        @if($servicio->descripcion)
+                                        <p class="text-primary-500 text-sm leading-relaxed">{{ $servicio->descripcion }}</p>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,44 +134,46 @@
 
                 <!-- Servicios personalizados -->
                 @if($negocio->serviciosPersonalizados->isNotEmpty())
-                <div class="bg-gradient-to-br from-white to-primary-50/30 rounded-3xl p-8 border border-primary-100 shadow-sm">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                    <div class="flex items-center gap-6 mb-10">
+                        <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-primary-700">Servicios Personalizados</h3>
-                            <p class="text-primary-500">Servicios adaptados a tus necesidades específicas</p>
+                            <h3 class="text-3xl font-bold text-primary-700">Servicios Personalizados</h3>
+                            <p class="text-lg text-primary-500">Servicios adaptados a tus necesidades específicas y requerimientos únicos</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach($negocio->serviciosPersonalizados as $servicio)
-                        <div class="group bg-white rounded-2xl p-6 border border-primary-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center group-hover:bg-primary-200 transition-colors">
-                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <h4 class="font-bold text-primary-700 text-lg">{{ $servicio->nombre_servicio }}</h4>
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium {{ $servicio->disponible ? 'bg-secondary-100 text-secondary-600' : 'bg-red-100 text-red-600' }}">
-                                            <span class="w-1.5 h-1.5 rounded-full {{ $servicio->disponible ? 'bg-secondary-500' : 'bg-red-500' }}"></span>
-                                            {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
-                                        </span>
+                        <div class="group relative">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                <div class="flex items-start gap-6">
+                                    <div class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
+                                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                                        </svg>
                                     </div>
-                                    @if($servicio->descripcion)
-                                    <p class="text-primary-500 text-sm leading-relaxed mb-3">{{ $servicio->descripcion }}</p>
-                                    @endif
-                                    @if($servicio->precio)
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-lg font-bold text-primary-600">S/ {{ number_format($servicio->precio, 2) }}</span>
-                                        <span class="text-primary-400 text-sm">Precio</span>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-4 mb-3">
+                                            <h4 class="font-bold text-primary-700 text-xl">{{ $servicio->nombre_servicio }}</h4>
+                                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium {{ $servicio->disponible ? 'bg-secondary-100 text-secondary-600 border border-secondary-200' : 'bg-red-100 text-red-600 border border-red-200' }}">
+                                                <span class="w-2 h-2 rounded-full {{ $servicio->disponible ? 'bg-secondary-500' : 'bg-red-500' }}"></span>
+                                                {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
+                                            </span>
+                                        </div>
+                                        @if($servicio->descripcion)
+                                        <p class="text-primary-500 text-sm leading-relaxed mb-4">{{ $servicio->descripcion }}</p>
+                                        @endif
+                                        @if($servicio->precio)
+                                        <div class="flex items-center gap-3">
+                                            <span class="text-2xl font-bold text-primary-600">S/ {{ number_format($servicio->precio, 2) }}</span>
+                                            <span class="text-primary-400 text-sm font-medium">Precio</span>
+                                        </div>
+                                        @endif
                                     </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
