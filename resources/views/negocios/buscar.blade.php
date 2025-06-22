@@ -209,7 +209,7 @@
                             <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
                                 <x-icons.outline.location-marker class="w-3 h-3 text-primary-600" />
                             </div>
-                            <span class="truncate font-medium">{{ $negocio->ubicacion->distrito }}, {{ $negocio->ubicacion->ciudad }}</span>
+                            <span class="truncate font-medium">{{ $negocio->ubicacion->direccion }}, {{ $negocio->ubicacion->distrito }}</span>
                         </div>
                         @endif
 
