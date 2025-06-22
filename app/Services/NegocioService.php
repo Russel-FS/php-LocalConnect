@@ -26,7 +26,7 @@ class NegocioService
         // Validar datos de entrada
         $validator = Validator::make($data, [
             'nombre_negocio' => 'required|string|max:100',
-            'descripcion_negocio' => 'required|string',
+            'descripcion_negocio' => 'required|string|max:500',
             'imagen_portada' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
 
             // Ubicación

@@ -1,10 +1,21 @@
-// Paso 7: Resumen del negocio
+// Paso 7 Resumen del negocio
+
+// Función para truncar texto con ellipsis
+function truncateText(text, maxLength) {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+}
 
 function mostrarResumen() {
     //  Datos del negocio
     const nombre = document.getElementById("nombre-negocio").value;
     const descripcion = document.getElementById("descripcion-negocio").value;
     const img = document.getElementById("vista-previa")?.src || "";
+
+    // Truncar título y descripción
+    const nombreTruncado = truncateText(nombre, 50);
+    const descripcionTruncada = truncateText(descripcion, 120);
+
     // Ubicación
     const direccion = document.getElementById("direccion").value;
     const distrito = document.getElementById("distrito").value;
@@ -90,11 +101,11 @@ function mostrarResumen() {
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div class="space-y-8">
                         <div class="space-y-4">
-                            <h1 class="text-5xl lg:text-6xl font-bold text-primary-700 leading-tight tracking-tight">
-                                ${nombre}
+                            <h1 class="text-5xl lg:text-6xl font-bold text-primary-700 leading-tight tracking-tight" title="${nombre}">
+                                ${nombreTruncado}
                             </h1>
-                            <p class="text-xl text-primary-500 leading-relaxed max-w-lg">
-                                ${descripcion}
+                            <p class="text-xl text-primary-500 leading-relaxed max-w-lg" title="${descripcion}">
+                                ${descripcionTruncada}
                             </p>
                         </div>
                         
