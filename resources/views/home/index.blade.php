@@ -22,7 +22,7 @@
                         class="w-full pl-6 pr-32 py-4 sm:py-5 text-lg sm:text-xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm focus:border-slate-300 focus:ring-2 focus:ring-slate-100 transition-all duration-300 placeholder-slate-400"
                         value="{{ request('q') }}">
                     <div class="absolute right-2">
-                        <button type="submit" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 hover:shadow-md">
+                        <button type="submit" class="flex items-center gap-2 bg-primary-800 hover:bg-primary-700 text-white px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 hover:shadow-md">
                             <x-icons.navigation.search class="h-5 w-5 text-white" />
                             Buscar
                         </button>

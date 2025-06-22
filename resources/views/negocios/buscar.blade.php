@@ -7,7 +7,7 @@
         <div class="mb-8 sm:mb-12">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6 mb-8 sm:mb-10">
                 <div>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-700 tracking-tight mb-3">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-800 tracking-tight mb-3">
                         Resultados de búsqueda
                     </h1>
                     @if(request('q'))
@@ -34,7 +34,7 @@
                         placeholder="Buscar negocios..."
                         class="w-full pl-14 pr-24 py-4 text-base bg-white border border-primary-200 rounded-full shadow-sm focus:border-secondary-400 focus:ring-2 focus:ring-secondary-100 transition-all duration-200 placeholder-primary-400 focus:bg-white"
                         value="{{ request('q') }}">
-                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-secondary-600 hover:bg-secondary-700 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-200 shadow-sm">
+                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-800 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-200 shadow-sm">
                         Buscar
                     </button>
                 </div>
@@ -121,11 +121,11 @@
 
                     <!-- Botones de acción -->
                     <div class="flex gap-3">
-                        <button type="submit" class="flex items-center gap-2.5 px-6 py-3 bg-secondary-600 hover:bg-secondary-700 text-white rounded-full font-semibold transition-all duration-200 shadow-sm">
+                        <button type="submit" class="flex items-center gap-2.5 px-6 py-3 bg-primary-800 hover:bg-primary-700 text-white rounded-full font-medium transition-all duration-200 shadow-sm">
                             <x-icons.actions.filter class="w-4 h-4" />
                             Aplicar
                         </button>
-                        <a href="{{ route('negocios.buscar') }}" class="flex items-center gap-2.5 px-6 py-3 bg-white border border-primary-200 text-primary-700 rounded-full font-semibold transition-all duration-200 shadow-sm hover:bg-primary-50">
+                        <a href="{{ route('negocios.buscar') }}" class="flex items-center gap-2.5 px-6 py-3 bg-white border border-primary-200 text-primary-700 rounded-full font-medium transition-all duration-200 shadow-sm hover:bg-primary-50">
                             <x-icons.actions.refresh class="w-4 h-4" />
                             Limpiar
                         </a>
@@ -141,9 +141,9 @@
                 <div class="w-24 h-24 sm:w-28 sm:h-28 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-8">
                     <x-icons.navigation.search class="w-12 h-12 sm:w-14 sm:h-14 text-primary-400" />
                 </div>
-                <h3 class="text-2xl sm:text-3xl font-bold text-primary-700 mb-4">No se encontraron resultados</h3>
+                <h3 class="text-2xl sm:text-3xl font-bold text-primary-800 mb-4">No se encontraron resultados</h3>
                 <p class="text-lg text-primary-600 mb-10 max-w-md mx-auto">Intenta con otros términos de búsqueda o ajusta los filtros para encontrar lo que buscas.</p>
-                <a href="{{ route('negocios.buscar') }}" class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold bg-secondary-600 text-white shadow-sm hover:bg-secondary-700 transition-all duration-200">
+                <a href="{{ route('negocios.buscar') }}" class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-medium bg-primary-800 text-white shadow-sm hover:bg-primary-700 transition-all duration-200">
                     <x-icons.actions.refresh class="w-5 h-5" />
                     <span>Nueva búsqueda</span>
                 </a>
@@ -160,7 +160,7 @@
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         </div>
                         @else
-                        <div class="h-48 sm:h-52 lg:h-56 bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-3xl flex items-center justify-center">
+                        <div class="h-48 sm:h-52 lg:h56 bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-3xl flex items-center justify-center">
                             <x-icons.ui.business class="h-12 w-12 sm:h-14 sm:w-14 text-primary-400 group-hover:text-primary-500 transition-colors duration-300" />
                         </div>
                         @endif
