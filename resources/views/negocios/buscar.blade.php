@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 sm:py-12 lg:py-16 busqueda-page">
+<div class="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-8 sm:py-12 lg:py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header con buscador -->
         <div class="mb-8 sm:mb-12">
@@ -32,7 +32,7 @@
                         type="text"
                         name="q"
                         placeholder="Buscar negocios..."
-                        class="busqueda-input w-full pl-14 pr-24 py-4 text-base rounded-2xl shadow-sm focus:ring-2 focus:ring-secondary-100/50 transition-all duration-300 placeholder-primary-400"
+                        class="w-full pl-14 pr-24 py-4 text-base bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-sm focus:border-secondary-400 focus:ring-2 focus:ring-secondary-100/50 transition-all duration-300 placeholder-primary-400 focus:bg-white/95"
                         value="{{ request('q') }}">
                     <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary-800 to-primary-700 hover:from-primary-700 hover:to-primary-600 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-300 shadow-sm hover:shadow-md">
                         Buscar
@@ -43,7 +43,7 @@
                 <div class="flex flex-wrap gap-4">
                     <!-- Dropdown Categorías -->
                     <div class="relative group">
-                        <button type="button" class="filtro-btn flex items-center gap-3 px-5 py-3 rounded-full shadow-sm hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
+                        <button type="button" class="flex items-center gap-3 px-5 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-full shadow-sm hover:bg-white hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
                             <x-icons.content.category class="w-4 h-4" />
                             Categorías
                             @if(request('categorias'))
@@ -51,8 +51,8 @@
                             @endif
                             <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform group-hover:rotate-180" />
                         </button>
-                        <div class="filtro-dropdown absolute top-full left-0 mt-2 w-72 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                            <div class="p-5 max-h-64 overflow-y-auto filtros-dropdown">
+                        <div class="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="p-5 max-h-64 overflow-y-auto custom-scroll">
                                 <div class="space-y-2">
                                     @foreach($categorias as $categoria)
                                     <label class="flex items-center p-3 hover:bg-primary-50/80 rounded-xl transition-colors duration-200 cursor-pointer">
@@ -69,7 +69,7 @@
 
                     <!-- Dropdown Características -->
                     <div class="relative group">
-                        <button type="button" class="filtro-btn flex items-center gap-3 px-5 py-3 rounded-full shadow-sm hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
+                        <button type="button" class="flex items-center gap-3 px-5 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-full shadow-sm hover:bg-white hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
                             <x-icons.content.check-circle class="w-4 h-4" />
                             Características
                             @if(request('caracteristicas'))
@@ -77,8 +77,8 @@
                             @endif
                             <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform group-hover:rotate-180" />
                         </button>
-                        <div class="filtro-dropdown absolute top-full left-0 mt-2 w-72 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                            <div class="p-5 max-h-64 overflow-y-auto filtros-dropdown">
+                        <div class="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="p-5 max-h-64 overflow-y-auto custom-scroll">
                                 <div class="space-y-2">
                                     @foreach($caracteristicas as $caracteristica)
                                     <label class="flex items-center p-3 hover:bg-primary-50/80 rounded-xl transition-colors duration-200 cursor-pointer">
@@ -95,7 +95,7 @@
 
                     <!-- Dropdown Servicios Predefinidos -->
                     <div class="relative group">
-                        <button type="button" class="filtro-btn flex items-center gap-3 px-5 py-3 rounded-full shadow-sm hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
+                        <button type="button" class="flex items-center gap-3 px-5 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-full shadow-sm hover:bg-white hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
                             <x-icons.content.lightning class="w-4 h-4" />
                             Servicios
                             @if(request('servicios'))
@@ -103,8 +103,8 @@
                             @endif
                             <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform group-hover:rotate-180" />
                         </button>
-                        <div class="filtro-dropdown absolute top-full left-0 mt-2 w-72 rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                            <div class="p-5 max-h-64 overflow-y-auto filtros-dropdown">
+                        <div class="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="p-5 max-h-64 overflow-y-auto custom-scroll">
                                 <div class="space-y-2">
                                     @foreach($serviciosPredefinidos as $servicio)
                                     <label class="flex items-center p-3 hover:bg-primary-50/80 rounded-xl transition-colors duration-200 cursor-pointer">
@@ -125,7 +125,7 @@
                             <x-icons.actions.filter class="w-4 h-4" />
                             Aplicar
                         </button>
-                        <a href="{{ route('negocios.buscar') }}" class="filtro-btn flex items-center gap-2.5 px-6 py-3 text-primary-700 rounded-full font-medium transition-all duration-300 shadow-sm hover:border-primary-400">
+                        <a href="{{ route('negocios.buscar') }}" class="flex items-center gap-2.5 px-6 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 text-primary-700 rounded-full font-medium transition-all duration-300 shadow-sm hover:bg-white hover:border-primary-400">
                             <x-icons.actions.refresh class="w-4 h-4" />
                             Limpiar
                         </a>
@@ -137,8 +137,8 @@
         <!-- Resultados -->
         <div class="w-full">
             @if($negocios->isEmpty())
-            <div class="estado-vacio text-center py-20 sm:py-24 rounded-3xl shadow-sm">
-                <div class="icono-busqueda w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center mx-auto mb-8">
+            <div class="text-center py-20 sm:py-24 bg-white/90 backdrop-blur-md rounded-3xl border border-primary-200/60 shadow-sm">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center mx-auto mb-8">
                     <x-icons.navigation.search class="w-12 h-12 sm:w-14 sm:h-14 text-primary-400" />
                 </div>
                 <h3 class="text-2xl sm:text-3xl font-bold text-primary-800 mb-4">No se encontraron resultados</h3>
@@ -151,26 +151,24 @@
             @else
             <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 @foreach($negocios as $negocio)
-                <div class="negocio-card group bg-white/90 backdrop-blur-md rounded-2xl border border-primary-200/60 shadow-sm hover:shadow-lg hover:border-primary-300/80 transition-all duration-300 overflow-hidden">
+                <div class="group bg-white/90 backdrop-blur-md rounded-2xl border border-primary-200/60 shadow-sm hover:shadow-lg hover:border-primary-300/80 transition-all duration-300 overflow-hidden hover:-translate-y-1">
                     <!-- Header con imagen y estado -->
                     <div class="relative">
                         @if($negocio->imagen_portada)
-                        <div class="imagen-negocio h-48 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
+                        <div class="h-48 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
                             <img src="{{ asset('storage/' . $negocio->imagen_portada) }}"
                                 alt="{{ $negocio->nombre_negocio }}"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                loading="lazy"
-                                onload="this.parentElement.classList.add('loaded')">
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                         </div>
                         @else
-                        <div class="imagen-negocio h-48 bg-gradient-to-br from-primary-100 via-primary-200 to-secondary-100 flex items-center justify-center">
+                        <div class="h-48 bg-gradient-to-br from-primary-100 via-primary-200 to-secondary-100 flex items-center justify-center">
                             <x-icons.ui.business class="h-12 w-12 text-primary-400 group-hover:text-primary-500 transition-colors duration-300" />
                         </div>
                         @endif
 
                         <!-- Estado de verificación -->
                         <div class="absolute top-3 right-3">
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium {{ $negocio->verificado ? 'badge-verificado' : 'badge-pendiente' }}" @if(!$negocio->verificado) title="Pendiente de verificación" @endif>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium {{ $negocio->verificado ? 'bg-secondary-100/90 backdrop-blur-sm text-secondary-700 border border-secondary-200/60' : 'bg-yellow-100/90 backdrop-blur-sm text-yellow-700 border border-yellow-200/60' }}" @if(!$negocio->verificado) title="Pendiente de verificación" @endif>
                                 <span class="w-1.5 h-1.5 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
                                 {{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}
                             </span>
@@ -179,13 +177,13 @@
                         <!-- Contador de características y servicios -->
                         <div class="absolute bottom-3 left-3 flex gap-2">
                             @if($negocio->caracteristicas->count() > 0)
-                            <span class="contador-badge inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium text-primary-700">
+                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-primary-100/90 backdrop-blur-sm text-primary-700 border border-primary-200/60">
                                 <x-icons.content.check-circle class="w-3 h-3" />
                                 {{ $negocio->caracteristicas->count() }}
                             </span>
                             @endif
                             @if($negocio->serviciosPredefinidos->count() > 0 || $negocio->serviciosPersonalizados->count() > 0)
-                            <span class="contador-badge inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium text-secondary-700">
+                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-secondary-100/90 backdrop-blur-sm text-secondary-700 border border-secondary-200/60">
                                 <x-icons.content.lightning class="w-3 h-3" />
                                 {{ $negocio->serviciosPredefinidos->count() + $negocio->serviciosPersonalizados->count() }}
                             </span>
@@ -283,11 +281,11 @@
                         <div class="flex items-center gap-2 mb-4">
                             @foreach($negocio->contactos->where('activo', true)->take(2) as $contacto)
                             @if($contacto->tipo_contacto === 'whatsapp')
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contacto->valor_contacto) }}" target="_blank" class="contacto-btn w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center hover:from-green-200 hover:to-green-300 transition-all duration-300 shadow-sm hover:shadow-md" title="WhatsApp">
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contacto->valor_contacto) }}" target="_blank" class="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center hover:from-green-200 hover:to-green-300 transition-all duration-300 shadow-sm hover:shadow-md" title="WhatsApp">
                                 <x-icons.solid.whatsapp class="w-4 h-4 text-green-600" />
                             </a>
                             @elseif($contacto->tipo_contacto === 'telefono')
-                            <a href="tel:{{ $contacto->valor_contacto }}" class="contacto-btn w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center hover:from-blue-200 hover:to-blue-300 transition-all duration-300 shadow-sm hover:shadow-md" title="Llamar">
+                            <a href="tel:{{ $contacto->valor_contacto }}" class="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center hover:from-blue-200 hover:to-blue-300 transition-all duration-300 shadow-sm hover:shadow-md" title="Llamar">
                                 <x-icons.outline.phone class="w-4 h-4 text-blue-600" />
                             </a>
                             @endif
