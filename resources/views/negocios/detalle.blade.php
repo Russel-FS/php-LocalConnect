@@ -60,7 +60,7 @@
                                     <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
                                     <span class="hidden md:inline">{{ $negocio->verificado ? 'Verificado' : 'Pendiente de verificación' }}</span>
                                     <span class="hidden sm:inline md:hidden">{{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}</span>
-                                    <span class="sm:hidden">{{ $negocio->verificado ? '✓' : '⏳' }}</span>
+                                    <span class="sm:hidden">{{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}</span>
                                 </span>
                             </div>
                         </div>
@@ -236,23 +236,24 @@
                     </div>
 
                     <div class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                             @foreach($negocio->horarios as $horario)
-                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-300">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-300">
                                 <div class="text-center">
-                                    <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </div>
-                                    <h3 class="font-bold text-primary-700 text-lg mb-2 capitalize">{{ $horario->dia_semana }}</h3>
+                                    <h3 class="font-bold text-primary-700 text-sm sm:text-lg mb-2 capitalize">{{ $horario->dia_semana }}</h3>
                                     @if($horario->cerrado)
-                                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-red-50 text-red-600 border border-red-200">
-                                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                                        Cerrado
+                                    <span class="inline-flex items-center gap-1 sm:gap-2 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-red-50 text-red-600 border border-red-200">
+                                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500"></span>
+                                        <span class="hidden sm:inline">Cerrado</span>
+                                        <span class="sm:hidden">Cerrado</span>
                                     </span>
                                     @else
-                                    <div class="text-primary-600 font-semibold text-lg">
+                                    <div class="text-primary-600 font-semibold text-sm sm:text-lg">
                                         {{ \Carbon\Carbon::parse($horario->hora_apertura)->format('H:i') }} - {{ \Carbon\Carbon::parse($horario->hora_cierre)->format('H:i') }}
                                     </div>
                                     @endif
