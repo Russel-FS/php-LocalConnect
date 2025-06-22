@@ -39,7 +39,7 @@
                     </button>
                 </div>
 
-                <!-- Fila 2: Filtros dropdown -->
+                <!-- Fila 2 Filtros dropdown -->
                 <div class="flex flex-wrap gap-4">
                     <!-- Dropdown Categorías -->
                     <div class="relative group">

@@ -14,19 +14,19 @@
         <!-- Buscador -->
         <div class="max-w-4xl mx-auto mb-8 sm:mb-12">
             <form action="{{ route('negocios.buscar') }}" method="GET" class="relative">
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                        <x-icons.navigation.search class="h-6 w-6 text-primary-400" />
-                    </div>
+                <div class="relative flex items-center">
                     <input
                         type="text"
                         name="q"
                         placeholder="¿Qué estás buscando? (ej: peluquería, restaurante, taller...)"
-                        class="w-full pl-16 pr-6 py-4 sm:py-5 text-lg sm:text-xl bg-white/80 backdrop-blur-sm border-2 border-primary-200 rounded-2xl shadow-lg focus:border-secondary-400 focus:ring-4 focus:ring-secondary-100 transition-all duration-300 placeholder-primary-400"
+                        class="w-full pl-6 pr-32 py-4 sm:py-5 text-lg sm:text-xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm focus:border-slate-300 focus:ring-2 focus:ring-slate-100 transition-all duration-300 placeholder-slate-400"
                         value="{{ request('q') }}">
-                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-secondary-600 hover:bg-secondary-700 text-white px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg">
-                        Buscar
-                    </button>
+                    <div class="absolute right-2">
+                        <button type="submit" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 hover:shadow-md">
+                            <x-icons.navigation.search class="h-5 w-5 text-white" />
+                            Buscar
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
