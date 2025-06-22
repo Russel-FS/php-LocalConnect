@@ -60,7 +60,7 @@
         @else
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             @foreach($negocios as $negocio)
-            <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="group block bg-white/80 backdrop-blur-sm rounded-3xl border border-primary-100/50 shadow-sm hover:shadow-xl hover:border-primary-200 transition-all duration-500 ease-in-out hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-primary-200" tabindex="0">
+            <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="group block bg-white/80 backdrop-blur-sm rounded-3xl border border-primary-100/50 shadow-sm hover:shadow-xl hover:border-primary-200 transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-200" tabindex="0">
                 <div class="relative">
                     @if($negocio->imagen_portada)
                     <div class="h-40 sm:h-44 lg:h-48 bg-primary-100 rounded-t-3xl overflow-hidden">
