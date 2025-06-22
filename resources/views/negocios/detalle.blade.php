@@ -308,6 +308,47 @@
                 </div>
                 @endif
             </div>
+
+            <!-- Ubicación con mapa -->
+            @if($negocio->ubicacion)
+            <div class="space-y-8">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-primary-700 mb-4">Ubicación</h2>
+                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">Encuentra fácilmente nuestro negocio</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 border border-primary-100 shadow-sm">
+                    <div class="grid lg:grid-cols-2 gap-8 items-start">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center">
+                                    <x-icons.outline.location-marker class="w-6 h-6 text-primary-600" />
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-primary-700">Dirección</h3>
+                                    <p class="text-primary-500">Ubicación exacta del negocio</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="text-primary-700 font-medium text-lg">{{ $negocio->ubicacion->direccion }}</div>
+                                @if($negocio->ubicacion->distrito)
+                                <div class="text-primary-500">{{ $negocio->ubicacion->distrito }}, {{ $negocio->ubicacion->ciudad }}</div>
+                                @endif
+                                @if($negocio->ubicacion->provincia)
+                                <div class="text-primary-500">{{ $negocio->ubicacion->provincia }}</div>
+                                @endif
+                                <div class="text-primary-500">{{ $negocio->ubicacion->pais }}</div>
+                            </div>
+                        </div>
+
+                        <div class="h-80">
+                            <x-common.mapa-ubicacion :negocio="$negocio" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
 
         <!-- Botón de regreso -->
