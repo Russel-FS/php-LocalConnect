@@ -26,9 +26,7 @@
                 <!-- Fila 1: Buscador principal -->
                 <div class="relative max-w-2xl">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                        <x-icons.navigation.search class="h-5 w-5 text-primary-400" />
                     </div>
                     <input
                         type="text"
@@ -46,16 +44,12 @@
                     <!-- Dropdown Categorías -->
                     <div class="relative group">
                         <button type="button" class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border-2 border-primary-200 rounded-xl shadow-sm hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                            </svg>
+                            <x-icons.content.category class="w-4 h-4" />
                             Categorías
                             @if(request('categorias'))
                             <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
                             @endif
-                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
+                            <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform group-hover:rotate-180" />
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-sm border border-primary-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="p-4 max-h-60 overflow-y-auto">
@@ -76,16 +70,12 @@
                     <!-- Dropdown Características -->
                     <div class="relative group">
                         <button type="button" class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border-2 border-primary-200 rounded-xl shadow-sm hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <x-icons.content.check-circle class="w-4 h-4" />
                             Características
                             @if(request('caracteristicas'))
                             <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
                             @endif
-                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
+                            <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform group-hover:rotate-180" />
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-sm border border-primary-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="p-4 max-h-60 overflow-y-auto">
@@ -106,16 +96,12 @@
                     <!-- Dropdown Servicios Predefinidos -->
                     <div class="relative group">
                         <button type="button" class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border-2 border-primary-200 rounded-xl shadow-sm hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
+                            <x-icons.content.lightning class="w-4 h-4" />
                             Servicios
                             @if(request('servicios'))
                             <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
                             @endif
-                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
+                            <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform group-hover:rotate-180" />
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-sm border border-primary-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="p-4 max-h-60 overflow-y-auto">
@@ -136,15 +122,11 @@
                     <!-- Botones de acción -->
                     <div class="flex gap-2">
                         <button type="submit" class="flex items-center gap-2 px-4 py-2 bg-secondary-600 hover:bg-secondary-700 text-white rounded-xl font-semibold transition-all duration-300">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
-                            </svg>
+                            <x-icons.actions.filter class="w-4 h-4" />
                             Aplicar
                         </button>
                         <a href="{{ route('negocios.buscar') }}" class="flex items-center gap-2 px-4 py-2 bg-primary-100 hover:bg-primary-200 text-primary-700 rounded-xl font-semibold transition-all duration-300">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
+                            <x-icons.actions.refresh class="w-4 h-4" />
                             Limpiar
                         </a>
                     </div>

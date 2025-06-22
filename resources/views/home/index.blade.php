@@ -16,9 +16,7 @@
             <form action="{{ route('negocios.buscar') }}" method="GET" class="relative">
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                        <svg class="h-6 w-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                        <x-icons.navigation.search class="h-6 w-6 text-primary-400" />
                     </div>
                     <input
                         type="text"
@@ -35,15 +33,11 @@
 
         <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
             <a href="{{ route('negocios.registro') }}" class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold bg-primary-600 text-white shadow-lg hover:bg-primary-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
+                <x-icons.actions.plus class="w-5 h-5" />
                 <span>Registrar mi negocio</span>
             </a>
             <a href="{{ route('negocios.buscar') }}" class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold border-2 border-primary-200 bg-white/80 backdrop-blur-sm text-primary-700 shadow-lg hover:bg-primary-50 hover:border-primary-400 transition-all duration-300 hover:-translate-y-1">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+                <x-icons.navigation.search class="w-5 h-5" />
                 <span>Explorar todos</span>
             </a>
         </div>
@@ -57,29 +51,21 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
             <div class="text-center p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-primary-100/50 shadow-sm hover:shadow-lg transition-all duration-300">
                 <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <circle cx="12" cy="12" r="10" stroke-width="1.5" />
-                        <path d="M8 12l2 2 4-4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <x-icons.content.check-circle class="w-8 h-8 text-primary-600" />
                 </div>
                 <h3 class="text-xl font-semibold mb-4 text-primary-700">Confiable</h3>
                 <p class="text-primary-500 leading-relaxed">Negocios verificados y reseñas reales de la comunidad.</p>
             </div>
             <div class="text-center p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-primary-100/50 shadow-sm hover:shadow-lg transition-all duration-300">
                 <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
+                    <x-icons.outline.location-marker class="w-8 h-8 text-primary-600" />
                 </div>
                 <h3 class="text-xl font-semibold mb-4 text-primary-700">Cerca de ti</h3>
                 <p class="text-primary-500 leading-relaxed">Encuentra servicios y productos a pocos minutos de tu ubicación.</p>
             </div>
             <div class="text-center p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-primary-100/50 shadow-sm hover:shadow-lg transition-all duration-300">
                 <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                    <x-icons.content.lightning class="w-8 h-8 text-primary-600" />
                 </div>
                 <h3 class="text-xl font-semibold mb-4 text-primary-700">Fácil y rápido</h3>
                 <p class="text-primary-500 leading-relaxed">Interfaz intuitiva y resultados inmediatos.</p>
@@ -118,9 +104,7 @@
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-primary-700">¿Tienes un negocio local?</h2>
         <p class="text-xl sm:text-2xl text-primary-500 mb-8 sm:mb-12 leading-relaxed">Únete a LocalConnect y haz crecer tu presencia digital en tu comunidad.</p>
         <a href="{{ route('negocios.registro') }}" class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold bg-primary-600 text-white shadow-lg hover:bg-primary-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
+            <x-icons.actions.plus class="w-5 h-5" />
             <span>Registrar mi negocio</span>
         </a>
     </div>
