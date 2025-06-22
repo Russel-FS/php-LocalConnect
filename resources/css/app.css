@@ -203,11 +203,11 @@ h4 {
     letter-spacing: 0.01em;
 }
 
-/* animacion para tarjeta de negocio*/
+/* animacion para tarjeta de negocio - simplificada */
 .fade-in-card {
     opacity: 0;
-    transform: translateY(16px);
-    animation: fadeInCard 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transform: translateY(8px);
+    animation: fadeInCard 0.4s ease-out forwards;
 }
 @keyframes fadeInCard {
     to {
