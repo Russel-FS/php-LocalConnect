@@ -11,69 +11,78 @@
         @endif
 
         <!-- Hero Section-->
-        <div class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-white rounded-3xl mb-16">
+        <div class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-white rounded-xl sm:rounded-2xl lg:rounded-3xl mb-8 sm:mb-12 lg:mb-16 xl:mb-20">
             <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/5 to-primary-500/5"></div>
-            <div class="relative p-12 lg:p-20">
-                <div class="max-w-4xl mx-auto">
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div class="space-y-8">
-                            <div class="space-y-4">
-                                <h1 class="text-5xl lg:text-6xl font-bold text-primary-700 leading-tight tracking-tight">
+            <div class="relative p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-24">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
+                        <div class="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
+                            <div class="space-y-3 sm:space-y-4 md:space-y-6">
+                                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-primary-700 leading-tight tracking-tight">
                                     {{ $negocio->nombre_negocio }}
                                 </h1>
-                                <p class="text-xl text-primary-500 leading-relaxed max-w-lg">
+                                <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-primary-500 leading-relaxed max-w-xl">
                                     {{ $negocio->descripcion }}
                                 </p>
                             </div>
 
-                            <div class="flex flex-wrap gap-3">
+                            <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
                                 @foreach($negocio->categorias as $categoria)
-                                <span class="px-4 py-2 bg-white/80 backdrop-blur-sm border border-primary-200 text-primary-700 rounded-full text-sm font-medium shadow-sm">
+                                <span class="px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 bg-white/90 backdrop-blur-sm border border-primary-200 text-primary-700 rounded-full text-xs sm:text-sm md:text-base font-semibold shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
                                     {{ $categoria->nombre_categoria }}
                                 </span>
                                 @endforeach
                             </div>
 
-                            <div class="flex items-center gap-3 text-primary-500">
+                            <div class="flex items-start gap-2 sm:gap-3 md:gap-4 text-primary-500">
                                 @if($negocio->ubicacion)
-                                <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <span class="text-lg">
-                                    <span class="font-semibold text-primary-700">{{ $negocio->ubicacion->direccion }}</span>
+                                <div class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-primary-100 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
+                                    <svg class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-primary-700 truncate">
+                                        {{ $negocio->ubicacion->direccion }}
+                                    </div>
                                     @if($negocio->ubicacion->distrito)
-                                    , {{ $negocio->ubicacion->distrito }}, {{ $negocio->ubicacion->ciudad }}
+                                    <div class="text-xs sm:text-sm md:text-base lg:text-lg text-primary-500 truncate">
+                                        {{ $negocio->ubicacion->distrito }}, {{ $negocio->ubicacion->ciudad }}
+                                    </div>
                                     @endif
-                                </span>
+                                </div>
                                 @endif
                             </div>
 
-                            <div class="flex items-center gap-3">
-                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold {{ $negocio->verificado ? 'bg-secondary-500/10 text-secondary-600 border border-secondary-200' : 'bg-yellow-500/10 text-yellow-600 border border-yellow-200' }}">
-                                    <span class="w-2.5 h-2.5 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
-                                    {{ $negocio->verificado ? 'Verificado' : 'Pendiente de verificación' }}
+                            <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
+                                <span class="inline-flex items-center gap-1.5 sm:gap-2 md:gap-3 px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold {{ $negocio->verificado ? 'bg-secondary-500/10 text-secondary-600 border border-secondary-200' : 'bg-yellow-500/10 text-yellow-600 border border-yellow-200' }}">
+                                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
+                                    <span class="hidden md:inline">{{ $negocio->verificado ? 'Verificado' : 'Pendiente de verificación' }}</span>
+                                    <span class="hidden sm:inline md:hidden">{{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}</span>
+                                    <span class="sm:hidden">{{ $negocio->verificado ? '✓' : '⏳' }}</span>
                                 </span>
                             </div>
                         </div>
 
                         @if($negocio->imagen_portada)
-                        <div class="relative">
-                            <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl">
+                        <div class="relative group order-first lg:order-last">
+                            <div class="aspect-square rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl group-hover:shadow-2xl sm:group-hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-1 sm:group-hover:-translate-y-1.5 md:group-hover:-translate-y-2">
                                 <img src="{{ asset('storage/' . $negocio->imagen_portada) }}"
                                     alt="{{ $negocio->nombre_negocio }}"
-                                    class="w-full h-full object-cover">
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    loading="lazy">
                             </div>
-                            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-secondary-500 rounded-2xl shadow-lg flex items-center justify-center">
-                                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-3 md:-bottom-4 md:-right-4 lg:-bottom-5 lg:-right-5 xl:-bottom-6 xl:-right-6 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 2xl:w-28 2xl:h-28 bg-secondary-500 rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-3xl shadow-md sm:shadow-lg md:shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                             </div>
                         </div>
                         @else
-                        <div class="relative">
-                            <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-                                <svg class="w-32 h-32 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="relative group order-first lg:order-last">
+                            <div class="aspect-square rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center group-hover:shadow-2xl sm:group-hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-1 sm:group-hover:-translate-y-1.5 md:group-hover:-translate-y-2">
+                                <svg class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-36 xl:h-36 2xl:w-40 2xl:h-40 text-primary-400 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                             </div>
