@@ -24,4 +24,5 @@ Route::middleware('auth')->group(function () {
 });
 
 // rutas públicas para ver negocios
+Route::get('/negocios/buscar', [NegocioController::class, 'buscar'])->name('negocios.buscar');
 Route::get('/negocios/{id}', [NegocioController::class, 'mostrarNegocio'])->name('negocios.mostrar');

@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
+use App\Models\Negocio\Negocio;
+use App\Models\Negocio\Caracteristica;
+use App\Models\Negocio\ServicioPredefinido;
 
 class NegocioController extends Controller
 {
@@ -86,5 +89,73 @@ class NegocioController extends Controller
         } catch (Exception $e) {
             return back()->with('error', 'Negocio no encontrado.');
         }
+    }
+
+    /**
+     * Buscar negocios con filtros
+     */
+    public function buscar(Request $request)
+    {
+        $query = Negocio::with([
+            'categorias',
+            'caracteristicas',
+            'serviciosPredefinidos',
+            'serviciosPersonalizados',
+            'ubicacion'
+        ]);
+
+        // Búsqueda por texto
+        if ($request->filled('q')) {
+            $searchTerm = $request->q;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('nombre_negocio', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('descripcion', 'LIKE', "%{$searchTerm}%")
+                    ->orWhereHas('categorias', function ($q) use ($searchTerm) {
+                        $q->where('nombre_categoria', 'LIKE', "%{$searchTerm}%");
+                    })
+                    ->orWhereHas('serviciosPredefinidos', function ($q) use ($searchTerm) {
+                        $q->where('nombre_servicio', 'LIKE', "%{$searchTerm}%");
+                    })
+                    ->orWhereHas('serviciosPersonalizados', function ($q) use ($searchTerm) {
+                        $q->where('nombre_servicio', 'LIKE', "%{$searchTerm}%");
+                    });
+            });
+        }
+
+        // Filtro por categorías
+        if ($request->filled('categorias')) {
+            $query->whereHas('categorias', function ($q) use ($request) {
+                $q->whereIn('id_categoria', $request->categorias);
+            });
+        }
+
+        // Filtro por características
+        if ($request->filled('caracteristicas')) {
+            $query->whereHas('caracteristicas', function ($q) use ($request) {
+                $q->whereIn('id_caracteristica', $request->caracteristicas);
+            });
+        }
+
+        // Filtro por servicios predefinidos
+        if ($request->filled('servicios')) {
+            $query->whereHas('serviciosPredefinidos', function ($q) use ($request) {
+                $q->whereIn('id_servicio_predefinido', $request->servicios);
+            });
+        }
+
+        // Filtro por verificación
+        if ($request->filled('verificado')) {
+            $query->where('verificado', true);
+        }
+
+        // Obtener datos para filtros
+        $categorias = Categoria::where('estado', 'activo')->get();
+        $caracteristicas = Caracteristica::where('estado', 'activo')->get();
+        $serviciosPredefinidos = ServicioPredefinido::all();
+
+        // Paginar resultados
+        $negocios = $query->paginate(12);
+
+        return view('negocios.buscar', compact('negocios', 'categorias', 'caracteristicas', 'serviciosPredefinidos'));
     }
 }
