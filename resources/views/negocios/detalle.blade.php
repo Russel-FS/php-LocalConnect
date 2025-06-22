@@ -132,47 +132,45 @@
 
                 <!-- Servicios personalizados -->
                 @if($negocio->serviciosPersonalizados->isNotEmpty())
-                <div class="bg-gradient-to-br from-white to-secondary-50/30 rounded-3xl p-8 border border-secondary-100 shadow-sm">
+                <div class="bg-gradient-to-br from-white to-primary-50/30 rounded-3xl p-8 border border-primary-100 shadow-sm">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-12 h-12 bg-secondary-100 rounded-2xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-secondary-700">Servicios Personalizados</h3>
-                            <p class="text-secondary-500">Servicios adaptados a tus necesidades específicas</p>
+                            <h3 class="text-2xl font-bold text-primary-700">Servicios Personalizados</h3>
+                            <p class="text-primary-500">Servicios adaptados a tus necesidades específicas</p>
                         </div>
                     </div>
-                    <div class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($negocio->serviciosPersonalizados as $servicio)
-                        <div class="group bg-white rounded-2xl p-6 border border-secondary-200 hover:border-secondary-300 hover:shadow-lg transition-all duration-300">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-start gap-4 flex-1">
-                                    <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors">
-                                        <svg class="w-5 h-5 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-                                        </svg>
-                                    </div>
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <h4 class="font-bold text-secondary-700 text-lg">{{ $servicio->nombre_servicio }}</h4>
-                                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium {{ $servicio->disponible ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
-                                                <span class="w-1.5 h-1.5 rounded-full {{ $servicio->disponible ? 'bg-green-500' : 'bg-red-500' }}"></span>
-                                                {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
-                                            </span>
-                                        </div>
-                                        @if($servicio->descripcion)
-                                        <p class="text-secondary-500 text-sm leading-relaxed">{{ $servicio->descripcion }}</p>
-                                        @endif
-                                    </div>
+                        <div class="group bg-white rounded-2xl p-6 border border-primary-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center group-hover:bg-primary-200 transition-colors">
+                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                                    </svg>
                                 </div>
-                                @if($servicio->precio)
-                                <div class="text-right ml-4">
-                                    <div class="text-2xl font-bold text-secondary-600">S/ {{ number_format($servicio->precio, 2) }}</div>
-                                    <div class="text-secondary-400 text-sm">Precio</div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h4 class="font-bold text-primary-700 text-lg">{{ $servicio->nombre_servicio }}</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium {{ $servicio->disponible ? 'bg-secondary-100 text-secondary-600' : 'bg-red-100 text-red-600' }}">
+                                            <span class="w-1.5 h-1.5 rounded-full {{ $servicio->disponible ? 'bg-secondary-500' : 'bg-red-500' }}"></span>
+                                            {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
+                                        </span>
+                                    </div>
+                                    @if($servicio->descripcion)
+                                    <p class="text-primary-500 text-sm leading-relaxed mb-3">{{ $servicio->descripcion }}</p>
+                                    @endif
+                                    @if($servicio->precio)
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-lg font-bold text-primary-600">S/ {{ number_format($servicio->precio, 2) }}</span>
+                                        <span class="text-primary-400 text-sm">Precio</span>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
                         </div>
                         @endforeach
