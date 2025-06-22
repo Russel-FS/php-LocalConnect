@@ -108,17 +108,16 @@ class NegocioController extends Controller
         if ($request->filled('q')) {
             $searchTerm = $request->q;
             $query->where(function ($q) use ($searchTerm) {
-
-                $q->where('nombre_negocio', 'LIKE', "%{$searchTerm}%")
-                    ->orWhere('descripcion', 'LIKE', "%{$searchTerm}%")
+                $q->where('negocios.nombre_negocio', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('negocios.descripcion', 'LIKE', "%{$searchTerm}%")
                     ->orWhereHas('categorias', function ($q) use ($searchTerm) {
-                        $q->where('nombre_categoria', 'LIKE', "%{$searchTerm}%");
+                        $q->where('categorias.nombre_categoria', 'LIKE', "%{$searchTerm}%");
                     })
                     ->orWhereHas('serviciosPredefinidos', function ($q) use ($searchTerm) {
-                        $q->where('nombre_servicio', 'LIKE', "%{$searchTerm}%");
+                        $q->where('servicios_predefinidos.nombre_servicio', 'LIKE', "%{$searchTerm}%");
                     })
                     ->orWhereHas('serviciosPersonalizados', function ($q) use ($searchTerm) {
-                        $q->where('nombre_servicio', 'LIKE', "%{$searchTerm}%");
+                        $q->where('servicios_personalizados.nombre_servicio', 'LIKE', "%{$searchTerm}%");
                     });
             });
         }
@@ -126,26 +125,26 @@ class NegocioController extends Controller
         // Filtro por categorías
         if ($request->filled('categorias')) {
             $query->whereHas('categorias', function ($q) use ($request) {
-                $q->whereIn('id_categoria', $request->categorias);
+                $q->whereIn('categorias.id_categoria', $request->categorias);
             });
         }
 
         // Filtro por características
         if ($request->filled('caracteristicas')) {
             $query->whereHas('caracteristicas', function ($q) use ($request) {
-                $q->whereIn('id_caracteristica', $request->caracteristicas);
+                $q->whereIn('caracteristicas.id_caracteristica', $request->caracteristicas);
             });
         }
 
         // Filtro por servicios predefinidos
         if ($request->filled('servicios')) {
             $query->whereHas('serviciosPredefinidos', function ($q) use ($request) {
-                $q->whereIn('id_servicio_predefinido', $request->servicios);
+                $q->whereIn('servicios_predefinidos.id_servicio_predefinido', $request->servicios);
             });
         }
 
         // Siempre filtrar solo negocios verificados
-        $query->where('verificado', true);
+        $query->where('negocios.verificado', true);
 
         // Obtener datos para filtros
         $categorias = Categoria::where('estado', 'activo')->get();
