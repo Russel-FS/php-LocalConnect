@@ -149,53 +149,99 @@
                 </a>
             </div>
             @else
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 @foreach($negocios as $negocio)
-                <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="group block bg-white rounded-3xl border border-primary-200 shadow-sm hover:shadow-lg hover:border-primary-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-200" tabindex="0">
+                <div class="group bg-white rounded-2xl border border-primary-200 shadow-sm hover:shadow-lg hover:border-primary-300 transition-all duration-300 overflow-hidden">
+                    <!-- Header con imagen y estado -->
                     <div class="relative">
                         @if($negocio->imagen_portada)
-                        <div class="h-48 sm:h-52 lg:h-56 bg-primary-100 rounded-t-3xl overflow-hidden">
+                        <div class="h-48 bg-primary-100 overflow-hidden">
                             <img src="{{ asset('storage/' . $negocio->imagen_portada) }}"
                                 alt="{{ $negocio->nombre_negocio }}"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         </div>
                         @else
-                        <div class="h-48 sm:h-52 lg:h56 bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-3xl flex items-center justify-center">
-                            <x-icons.ui.business class="h-12 w-12 sm:h-14 sm:w-14 text-primary-400 group-hover:text-primary-500 transition-colors duration-300" />
+                        <div class="h-48 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+                            <x-icons.ui.business class="h-12 w-12 text-primary-400 group-hover:text-primary-500 transition-colors duration-300" />
                         </div>
                         @endif
-                        <div class="absolute top-4 right-4">
-                            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold {{ $negocio->verificado ? 'bg-secondary-100 text-secondary-700 border border-secondary-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200' }}" @if(!$negocio->verificado) title="Pendiente de verificación. Completa los datos y espera la revisión del equipo." @endif>
-                                <span class="w-2 h-2 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
-                                <span class="hidden sm:inline">{{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}</span>
-                                <span class="sm:hidden">{{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}</span>
+
+                        <!-- Estado de verificación -->
+                        <div class="absolute top-3 right-3">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium {{ $negocio->verificado ? 'bg-secondary-100 text-secondary-700 border border-secondary-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200' }}" @if(!$negocio->verificado) title="Pendiente de verificación" @endif>
+                                <span class="w-1.5 h-1.5 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
+                                {{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}
                             </span>
+                        </div>
+
+                        <!-- Contador de características y servicios -->
+                        <div class="absolute bottom-3 left-3 flex gap-2">
+                            @if($negocio->caracteristicas->count() > 0)
+                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700 border border-primary-200">
+                                <x-icons.content.check-circle class="w-3 h-3" />
+                                {{ $negocio->caracteristicas->count() }}
+                            </span>
+                            @endif
+                            @if($negocio->serviciosPredefinidos->count() > 0 || $negocio->serviciosPersonalizados->count() > 0)
+                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-secondary-100 text-secondary-700 border border-secondary-200">
+                                <x-icons.content.lightning class="w-3 h-3" />
+                                {{ $negocio->serviciosPredefinidos->count() + $negocio->serviciosPersonalizados->count() }}
+                            </span>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="p-6 sm:p-7">
-                        <h3 class="text-xl sm:text-2xl font-bold text-primary-800 tracking-tight mb-3 sm:mb-4 truncate group-hover:text-primary-700 transition-colors duration-200" title="{{ $negocio->nombre_negocio }}">{{ $negocio->nombre_negocio }}</h3>
-                        <p class="text-primary-600 text-sm sm:text-base mb-4 sm:mb-5 h-12 sm:h-14 line-clamp-2 leading-relaxed">{{ Str::limit($negocio->descripcion, 90) }}</p>
+                    <!-- Contenido principal -->
+                    <div class="p-5">
+                        <!-- Nombre y descripción -->
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-primary-800 tracking-tight mb-2 truncate group-hover:text-primary-700 transition-colors duration-200" title="{{ $negocio->nombre_negocio }}">
+                                {{ $negocio->nombre_negocio }}
+                            </h3>
+                            <p class="text-sm text-primary-600 line-clamp-2 leading-relaxed mb-3">
+                                {{ Str::limit($negocio->descripcion, 80) }}
+                            </p>
+                        </div>
 
+                        <!-- Ubicación -->
                         @if($negocio->ubicacion)
-                        <div class="flex items-center text-sm sm:text-base text-primary-600 mb-4 sm:mb-5">
-                            <div class="w-8 h-8 sm:w-9 sm:h-9 bg-primary-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                                <x-icons.outline.location-marker class="w-4 h-4 sm:w-5 sm:h-5 text-primary-600" />
+                        <div class="flex items-center text-sm text-primary-600 mb-3">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                <x-icons.outline.location-marker class="w-3 h-3 text-primary-600" />
                             </div>
-                            <span class="truncate font-medium text-xs sm:text-sm">{{ $negocio->ubicacion->direccion }}</span>
+                            <span class="truncate font-medium">{{ $negocio->ubicacion->distrito }}, {{ $negocio->ubicacion->ciudad }}</span>
                         </div>
                         @endif
 
+                        <!-- Horario de hoy -->
+                        @php
+                        $hoy = strtolower(date('l'));
+                        $horarioHoy = $negocio->horarios->where('dia_semana', $hoy)->first();
+                        @endphp
+                        @if($horarioHoy)
+                        <div class="flex items-center text-sm text-primary-600 mb-3">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                <x-icons.content.clock class="w-3 h-3 text-primary-600" />
+                            </div>
+                            @if($horarioHoy->cerrado)
+                            <span class="font-medium text-red-600">Cerrado hoy</span>
+                            @else
+                            <span class="font-medium">{{ \Carbon\Carbon::parse($horarioHoy->hora_apertura)->format('H:i') }} - {{ \Carbon\Carbon::parse($horarioHoy->hora_cierre)->format('H:i') }}</span>
+                            @endif
+                        </div>
+                        @endif
+
+                        <!-- Categorías -->
                         @if($negocio->categorias->isNotEmpty())
-                        <div class="mb-4 sm:mb-5">
-                            <div class="flex flex-wrap gap-2">
+                        <div class="mb-3">
+                            <div class="flex flex-wrap gap-1.5">
                                 @foreach($negocio->categorias->take(2) as $categoria)
-                                <span class="inline-flex items-center px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 border border-primary-200">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700 border border-primary-200">
                                     {{ $categoria->nombre_categoria }}
                                 </span>
                                 @endforeach
                                 @if($negocio->categorias->count() > 2)
-                                <span class="inline-flex items-center px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 border border-primary-200">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700 border border-primary-200">
                                     +{{ $negocio->categorias->count() - 2 }}
                                 </span>
                                 @endif
@@ -203,39 +249,56 @@
                         </div>
                         @endif
 
-                        @if($negocio->serviciosPredefinidos->isNotEmpty() || $negocio->serviciosPersonalizados->isNotEmpty())
-                        <div class="mb-4 sm:mb-5">
-                            @php
-                            $serviciosCombinados = $negocio->serviciosPredefinidos->merge($negocio->serviciosPersonalizados);
-                            $totalServicios = $serviciosCombinados->count();
-                            @endphp
-                            <div class="flex flex-wrap gap-2">
-                                @foreach($serviciosCombinados->take(2) as $servicio)
-                                <span class="inline-flex items-center px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-semibold bg-secondary-100 text-secondary-700 border border-secondary-200">
-                                    {{ $servicio->nombre_servicio ?? $servicio->nombre }}
+                        <!-- Características destacadas -->
+                        @if($negocio->caracteristicas->isNotEmpty())
+                        <div class="mb-3">
+                            <div class="flex flex-wrap gap-1.5">
+                                @foreach($negocio->caracteristicas->take(3) as $caracteristica)
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-secondary-100 text-secondary-700 border border-secondary-200">
+                                    {{ $caracteristica->nombre }}
                                 </span>
                                 @endforeach
-                                @if($totalServicios > 2)
-                                <span class="inline-flex items-center px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 border border-primary-200">
-                                    +{{ $totalServicios - 2 }}
+                                @if($negocio->caracteristicas->count() > 3)
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700 border border-primary-200">
+                                    +{{ $negocio->caracteristicas->count() - 3 }}
                                 </span>
                                 @endif
                             </div>
                         </div>
                         @endif
+
+                        <!-- Contactos rápidos -->
+                        @if($negocio->contactos->isNotEmpty())
+                        <div class="flex items-center gap-2 mb-4">
+                            @foreach($negocio->contactos->where('activo', true)->take(2) as $contacto)
+                            @if($contacto->tipo_contacto === 'whatsapp')
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contacto->valor_contacto) }}" target="_blank" class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center hover:bg-green-200 transition-colors duration-200" title="WhatsApp">
+                                <x-icons.solid.whatsapp class="w-4 h-4 text-green-600" />
+                            </a>
+                            @elseif($contacto->tipo_contacto === 'telefono')
+                            <a href="tel:{{ $contacto->valor_contacto }}" class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors duration-200" title="Llamar">
+                                <x-icons.outline.phone class="w-4 h-4 text-blue-600" />
+                            </a>
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif
                     </div>
 
-                    <div class="p-6 sm:p-7 pt-0 mt-2 border-t border-primary-200 flex justify-between items-center">
-                        <span class="text-sm sm:text-base font-semibold text-secondary-600 group-hover:text-secondary-700 transition-colors duration-200">
-                            Ver detalles
-                        </span>
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-secondary-100 rounded-full flex items-center justify-center group-hover:bg-secondary-200 transition-colors duration-200">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-secondary-600 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </div>
+                    <!-- Footer con acción -->
+                    <div class="px-5 pb-5">
+                        <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="w-full flex items-center justify-between p-3 bg-primary-50 hover:bg-primary-100 rounded-xl transition-all duration-200 group-hover:bg-primary-100">
+                            <span class="text-sm font-medium text-primary-700 group-hover:text-primary-800 transition-colors duration-200">
+                                Ver detalles completos
+                            </span>
+                            <div class="w-8 h-8 bg-primary-200 rounded-full flex items-center justify-center group-hover:bg-primary-300 transition-colors duration-200">
+                                <svg class="w-4 h-4 text-primary-600 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </a>
                     </div>
-                </a>
+                </div>
                 @endforeach
             </div>
 
