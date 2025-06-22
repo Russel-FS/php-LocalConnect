@@ -110,13 +110,13 @@ function mostrarResumen() {
                         </div>
                         
                         <div class="flex flex-wrap gap-3">
-                            ${cats
-                                .map(
-                                    (cat) =>
-                                        `<span class="px-4 py-2 bg-white/80 backdrop-blur-sm border border-primary-200 text-primary-700 rounded-full text-sm font-medium shadow-sm">${cat}</span>`
-                                )
-                                .join("")}
-                        </div>
+                    ${cats
+                        .map(
+                            (cat) =>
+                                `<span class="px-4 py-2 bg-white/80 backdrop-blur-sm border border-primary-200 text-primary-700 rounded-full text-sm font-medium shadow-sm">${cat}</span>`
+                        )
+                        .join("")}
+                </div>
                         
                         <div class="flex items-center gap-3 text-primary-500">
                             <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,8 +178,8 @@ function mostrarResumen() {
                                                 `<span class="px-4 py-2 bg-primary-50 text-primary-700 rounded-xl text-sm font-medium border border-primary-200">${s}</span>`
                                         )
                                         .join("")}
-                                </div>
-                            </div>
+            </div>
+        </div>
                         `
                                 : ""
                         }
@@ -189,14 +189,14 @@ function mostrarResumen() {
                             <div class="space-y-3">
                                 <h3 class="text-lg font-semibold text-primary-600">Servicios personalizados</h3>
                                 <div class="flex flex-wrap gap-3">
-                                    ${pers
-                                        .map(
-                                            (s) =>
-                                                `<span class="px-4 py-2 bg-secondary-50 text-secondary-700 rounded-xl text-sm font-medium border border-secondary-200">${s}</span>`
-                                        )
-                                        .join("")}
-                                </div>
-                            </div>
+                ${pers
+                    .map(
+                        (s) =>
+                            `<span class="px-4 py-2 bg-secondary-50 text-secondary-700 rounded-xl text-sm font-medium border border-secondary-200">${s}</span>`
+                    )
+                    .join("")}
+            </div>
+        </div>
                         `
                                 : ""
                         }
@@ -208,9 +208,9 @@ function mostrarResumen() {
                 <div>
                     <h2 class="text-3xl font-bold text-primary-700 mb-6">Características</h2>
                     <div class="space-y-4">
-                        ${
-                            caracteristicas.length > 0
-                                ? `<div class="flex flex-wrap gap-3">
+                ${
+                    caracteristicas.length > 0
+                        ? `<div class="flex flex-wrap gap-3">
                                     ${caracteristicas
                                         .map(
                                             (car) =>
@@ -218,8 +218,8 @@ function mostrarResumen() {
                                         )
                                         .join("")}
                                 </div>`
-                                : '<p class="text-primary-400 text-lg">No se seleccionaron características</p>'
-                        }
+                        : '<p class="text-primary-400 text-lg">No se seleccionaron características</p>'
+                }
                     </div>
                 </div>
             </div>
@@ -234,9 +234,9 @@ function mostrarResumen() {
                         <tbody class="divide-y divide-primary-100">
                             ${horarios}
                         </tbody>
-                    </table>
-                </div>
+                </table>
             </div>
+        </div>
             
             <div>
                 <h2 class="text-3xl font-bold text-primary-700 mb-6">Información de contacto</h2>

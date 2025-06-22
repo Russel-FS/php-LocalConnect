@@ -182,26 +182,28 @@
 
             <!-- Características del negocio -->
             @if($negocio->caracteristicas->isNotEmpty())
-            <div class="space-y-8">
+            <div class="space-y-12">
                 <div class="text-center">
-                    <h2 class="text-4xl font-bold text-primary-700 mb-4">Lo que ofrecemos</h2>
-                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">Características y servicios que nos distinguen</p>
+                    <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Lo que ofrecemos</h2>
+                    <p class="text-xl text-primary-500 max-w-3xl mx-auto leading-relaxed">Características y servicios que nos distinguen y hacen única tu experiencia</p>
                 </div>
 
-                <div class="bg-gradient-to-br from-white to-primary-50/30 rounded-3xl p-8 border border-primary-100 shadow-sm">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         @foreach($negocio->caracteristicas as $caracteristica)
-                        <div class="group bg-white rounded-2xl p-6 border border-primary-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300">
-                            <div class="flex flex-col items-center text-center">
-                                <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-                                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
+                        <div class="group relative">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-3xl flex items-center justify-center mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-500 group-hover:scale-110">
+                                        <svg class="w-10 h-10 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-bold text-primary-700 text-xl mb-3">{{ $caracteristica->nombre }}</h4>
+                                    @if($caracteristica->descripcion)
+                                    <p class="text-primary-500 text-sm leading-relaxed">{{ $caracteristica->descripcion }}</p>
+                                    @endif
                                 </div>
-                                <h4 class="font-bold text-primary-700 text-lg mb-2">{{ $caracteristica->nombre }}</h4>
-                                @if($caracteristica->descripcion)
-                                <p class="text-primary-500 text-sm leading-relaxed">{{ $caracteristica->descripcion }}</p>
-                                @endif
                             </div>
                         </div>
                         @endforeach
@@ -211,28 +213,40 @@
             @endif
 
             <!-- Información adicional -->
-            <div class="grid lg:grid-cols-2 gap-12">
+            <div class="space-y-16">
                 <!-- Horarios de atención -->
                 @if($negocio->horarios->isNotEmpty())
-                <div>
-                    <h2 class="text-3xl font-bold text-primary-700 mb-6">Horario de atención</h2>
-                    <div class="bg-white rounded-2xl p-8 border border-primary-100">
-                        <table class="w-full">
-                            <tbody class="divide-y divide-primary-100">
-                                @foreach($negocio->horarios as $horario)
-                                <tr class="border-b border-primary-100">
-                                    <td class="py-4 px-0 font-medium text-primary-700 text-sm capitalize">{{ $horario->dia_semana }}</td>
-                                    <td class="py-4 px-0 text-sm">
-                                        @if($horario->cerrado)
-                                        <span class="text-primary-500 font-medium">Cerrado</span>
-                                        @else
-                                        <span class="text-primary-600">{{ \Carbon\Carbon::parse($horario->hora_apertura)->format('H:i') }} - {{ \Carbon\Carbon::parse($horario->hora_cierre)->format('H:i') }}</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                <div class="space-y-8">
+                    <div class="text-center">
+                        <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Horario de atención</h2>
+                        <p class="text-xl text-primary-500 max-w-2xl mx-auto">Estamos aquí para ti en los horarios que mejor te convengan</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            @foreach($negocio->horarios as $horario)
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-300">
+                                <div class="text-center">
+                                    <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="font-bold text-primary-700 text-lg mb-2 capitalize">{{ $horario->dia_semana }}</h3>
+                                    @if($horario->cerrado)
+                                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-red-50 text-red-600 border border-red-200">
+                                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                        Cerrado
+                                    </span>
+                                    @else
+                                    <div class="text-primary-600 font-semibold text-lg">
+                                        {{ \Carbon\Carbon::parse($horario->hora_apertura)->format('H:i') }} - {{ \Carbon\Carbon::parse($horario->hora_cierre)->format('H:i') }}
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 @endif
@@ -240,125 +254,131 @@
                 <!-- Información de contacto -->
                 @php $contactos = $negocio->contactos ?? collect(); @endphp
                 @if($contactos->isNotEmpty())
-                <div>
-                    <h2 class="text-3xl font-bold text-primary-700 mb-6">Información de contacto</h2>
-                    <div class="bg-white rounded-2xl p-8 border border-primary-100 space-y-6">
-                        @if($contactos->where('tipo_contacto', 'telefono')->first())
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center">
-                                <x-icons.outline.phone class="w-6 h-6 text-primary-500" />
-                            </div>
-                            <div>
-                                <p class="text-sm text-primary-500 font-medium">Teléfono</p>
-                                <p class="text-lg text-primary-700 font-semibold">{{ $contactos->where('tipo_contacto', 'telefono')->first()->valor_contacto }}</p>
-                            </div>
-                        </div>
-                        @endif
+                <div class="space-y-8">
+                    <div class="text-center">
+                        <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Información de contacto</h2>
+                        <p class="text-xl text-primary-500 max-w-2xl mx-auto">Conecta con nosotros de la manera que prefieras</p>
+                    </div>
 
-                        @if($contactos->where('tipo_contacto', 'whatsapp')->first())
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
-                                <x-icons.solid.whatsapp class="w-6 h-6 text-green-500" />
+                    <div class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            @if($contactos->where('tipo_contacto', 'telefono')->first())
+                            <div class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
+                                        <x-icons.outline.phone class="w-8 h-8 text-primary-600" />
+                                    </div>
+                                    <h3 class="font-bold text-primary-700 text-xl mb-2">Teléfono</h3>
+                                    <p class="text-lg text-primary-600 font-semibold">{{ $contactos->where('tipo_contacto', 'telefono')->first()->valor_contacto }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-sm text-primary-500 font-medium">WhatsApp</p>
-                                <p class="text-lg text-primary-700 font-semibold">{{ $contactos->where('tipo_contacto', 'whatsapp')->first()->valor_contacto }}</p>
-                            </div>
-                        </div>
-                        @endif
+                            @endif
 
-                        @if($contactos->where('tipo_contacto', 'facebook')->first())
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
-                                <x-icons.solid.facebook class="w-6 h-6 text-blue-500" />
+                            @if($contactos->where('tipo_contacto', 'whatsapp')->first())
+                            <div class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+                                        <x-icons.solid.whatsapp class="w-8 h-8 text-green-600" />
+                                    </div>
+                                    <h3 class="font-bold text-primary-700 text-xl mb-2">WhatsApp</h3>
+                                    <p class="text-lg text-primary-600 font-semibold">{{ $contactos->where('tipo_contacto', 'whatsapp')->first()->valor_contacto }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-sm text-primary-500 font-medium">Facebook</p>
-                                <p class="text-lg text-primary-700 font-semibold">{{ $contactos->where('tipo_contacto', 'facebook')->first()->valor_contacto }}</p>
-                            </div>
-                        </div>
-                        @endif
+                            @endif
 
-                        @if($contactos->where('tipo_contacto', 'instagram')->first())
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center">
-                                <x-icons.solid.instagram class="w-6 h-6 text-pink-500" />
+                            @if($contactos->where('tipo_contacto', 'facebook')->first())
+                            <div class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
+                                        <x-icons.solid.facebook class="w-8 h-8 text-blue-600" />
+                                    </div>
+                                    <h3 class="font-bold text-primary-700 text-xl mb-2">Facebook</h3>
+                                    <p class="text-lg text-primary-600 font-semibold">{{ $contactos->where('tipo_contacto', 'facebook')->first()->valor_contacto }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-sm text-primary-500 font-medium">Instagram</p>
-                                <p class="text-lg text-primary-700 font-semibold">{{ $contactos->where('tipo_contacto', 'instagram')->first()->valor_contacto }}</p>
-                            </div>
-                        </div>
-                        @endif
+                            @endif
 
-                        @if($contactos->where('tipo_contacto', 'web')->first())
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center">
-                                <x-icons.outline.globe class="w-6 h-6 text-primary-500" />
+                            @if($contactos->where('tipo_contacto', 'instagram')->first())
+                            <div class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-200 transition-colors">
+                                        <x-icons.solid.instagram class="w-8 h-8 text-pink-600" />
+                                    </div>
+                                    <h3 class="font-bold text-primary-700 text-xl mb-2">Instagram</h3>
+                                    <p class="text-lg text-primary-600 font-semibold">{{ $contactos->where('tipo_contacto', 'instagram')->first()->valor_contacto }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-sm text-primary-500 font-medium">Sitio web</p>
-                                <a href="{{ $contactos->where('tipo_contacto', 'web')->first()->valor_contacto }}" target="_blank" class="text-lg text-primary-700 font-semibold hover:text-secondary-600 transition">
-                                    {{ $contactos->where('tipo_contacto', 'web')->first()->valor_contacto }}
-                                </a>
+                            @endif
+
+                            @if($contactos->where('tipo_contacto', 'web')->first())
+                            <div class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
+                                        <x-icons.outline.globe class="w-8 h-8 text-primary-600" />
+                                    </div>
+                                    <h3 class="font-bold text-primary-700 text-xl mb-2">Sitio web</h3>
+                                    <a href="{{ $contactos->where('tipo_contacto', 'web')->first()->valor_contacto }}" target="_blank" class="text-lg text-primary-600 font-semibold hover:text-secondary-600 transition">
+                                        {{ $contactos->where('tipo_contacto', 'web')->first()->valor_contacto }}
+                                    </a>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                <!-- Ubicación con mapa -->
+                @if($negocio->ubicacion)
+                <div class="space-y-8">
+                    <div class="text-center">
+                        <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Ubicación</h2>
+                        <p class="text-xl text-primary-500 max-w-2xl mx-auto">Encuentra fácilmente nuestro negocio en el mapa</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                        <div class="grid lg:grid-cols-2 gap-12 items-start">
+                            <div class="space-y-8">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center">
+                                        <x-icons.outline.location-marker class="w-8 h-8 text-primary-600" />
+                                    </div>
+                                    <div>
+                                        <h3 class="text-3xl font-bold text-primary-700">Dirección</h3>
+                                        <p class="text-lg text-primary-500">Ubicación exacta del negocio</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-4">
+                                    <div class="text-primary-700 font-semibold text-xl">{{ $negocio->ubicacion->direccion }}</div>
+                                    @if($negocio->ubicacion->distrito)
+                                    <div class="text-primary-500 text-lg">{{ $negocio->ubicacion->distrito }}, {{ $negocio->ubicacion->ciudad }}</div>
+                                    @endif
+                                    @if($negocio->ubicacion->provincia)
+                                    <div class="text-primary-500 text-lg">{{ $negocio->ubicacion->provincia }}</div>
+                                    @endif
+                                    <div class="text-primary-500 text-lg">{{ $negocio->ubicacion->pais }}</div>
+                                </div>
+                            </div>
+
+                            <div class="h-96 rounded-2xl overflow-hidden shadow-lg">
+                                <x-common.mapa-ubicacion :negocio="$negocio" />
                             </div>
                         </div>
-                        @endif
                     </div>
                 </div>
                 @endif
             </div>
 
-            <!-- Ubicación con mapa -->
-            @if($negocio->ubicacion)
-            <div class="space-y-8">
-                <div class="text-center">
-                    <h2 class="text-4xl font-bold text-primary-700 mb-4">Ubicación</h2>
-                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">Encuentra fácilmente nuestro negocio</p>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-primary-100 shadow-sm">
-                    <div class="grid lg:grid-cols-2 gap-8 items-start">
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center">
-                                    <x-icons.outline.location-marker class="w-6 h-6 text-primary-600" />
-                                </div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-primary-700">Dirección</h3>
-                                    <p class="text-primary-500">Ubicación exacta del negocio</p>
-                                </div>
-                            </div>
-
-                            <div class="space-y-3">
-                                <div class="text-primary-700 font-medium text-lg">{{ $negocio->ubicacion->direccion }}</div>
-                                @if($negocio->ubicacion->distrito)
-                                <div class="text-primary-500">{{ $negocio->ubicacion->distrito }}, {{ $negocio->ubicacion->ciudad }}</div>
-                                @endif
-                                @if($negocio->ubicacion->provincia)
-                                <div class="text-primary-500">{{ $negocio->ubicacion->provincia }}</div>
-                                @endif
-                                <div class="text-primary-500">{{ $negocio->ubicacion->pais }}</div>
-                            </div>
-                        </div>
-
-                        <div class="h-80">
-                            <x-common.mapa-ubicacion :negocio="$negocio" />
-                        </div>
-                    </div>
-                </div>
+            <!-- Botón de regreso -->
+            <div class="mt-16 text-center">
+                <a href="{{ route('negocios.mis-negocios') }}" class="inline-flex items-center gap-3 px-8 py-3 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    <span>Volver a mis negocios</span>
+                </a>
             </div>
-            @endif
-        </div>
-
-        <!-- Botón de regreso -->
-        <div class="mt-16 text-center">
-            <a href="{{ route('negocios.mis-negocios') }}" class="inline-flex items-center gap-3 px-8 py-3 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition-all duration-200">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                </svg>
-                <span>Volver a mis negocios</span>
-            </a>
         </div>
     </div>
 </div>
