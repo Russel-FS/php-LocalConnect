@@ -196,8 +196,8 @@ class NegocioController extends Controller
             // Validación de horarios
             'horarios' => 'required|array|size:7',
             'horarios.*.cerrado' => 'required',
-            'horarios.*.hora_apertura' => 'nullable|date_format:H:i',
-            'horarios.*.hora_cierre' => 'nullable|date_format:H:i',
+            'horarios.*.hora_apertura' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i',
+            'horarios.*.hora_cierre' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i|after:horarios.*.hora_apertura',
         ]);
 
         // Pasar los horarios explícitamente al servicio

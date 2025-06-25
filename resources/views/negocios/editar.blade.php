@@ -330,14 +330,13 @@
                         @php
                             $dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
                         @endphp
-                        @foreach ($dias as $dia)
+                        @foreach ($dias as $i => $dia)
                             @php
                                 $horario =
                                     $horarios->firstWhere('dia_semana', $dia) ??
                                     new \App\Models\Negocio\HorarioAtencion(['dia_semana' => $dia, 'cerrado' => true]);
-                                $horarioId = $horario->id_horario ?? 'new_' . $dia;
                             @endphp
-                            <div x-data="{ cerrado: {{ old('horarios.' . $horarioId . '.cerrado', $horario->cerrado) ? 'true' : 'false' }} }"
+                            <div x-data="{ cerrado: {{ old('horarios.' . $i . '.cerrado', $horario->cerrado) ? 'true' : 'false' }} }"
                                 class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-150 flex flex-col gap-3">
                                 <div class="flex items-center gap-3 mb-2">
                                     <span class="w-8 h-8 bg-primary-100 rounded-xl flex items-center justify-center">
@@ -353,15 +352,15 @@
                                 <div class="grid grid-cols-2 gap-3">
                                     <div>
                                         <label class="block text-xs font-medium text-gray-500 mb-1">Apertura</label>
-                                        <input type="time" name="horarios[{{ $horarioId }}][hora_apertura]"
-                                            value="{{ old('horarios.' . $horarioId . '.hora_apertura', optional($horario)->hora_apertura) }}"
+                                        <input type="time" name="horarios[{{ $i }}][hora_apertura]"
+                                            value="{{ old('horarios.' . $i . '.hora_apertura', optional($horario)->hora_apertura) }}"
                                             :disabled="cerrado"
                                             class="w-full px-3 py-2 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed transition">
                                     </div>
                                     <div>
                                         <label class="block text-xs font-medium text-gray-500 mb-1">Cierre</label>
-                                        <input type="time" name="horarios[{{ $horarioId }}][hora_cierre]"
-                                            value="{{ old('horarios.' . $horarioId . '.hora_cierre', optional($horario)->hora_cierre) }}"
+                                        <input type="time" name="horarios[{{ $i }}][hora_cierre]"
+                                            value="{{ old('horarios.' . $i . '.hora_cierre', optional($horario)->hora_cierre) }}"
                                             :disabled="cerrado"
                                             class="w-full px-3 py-2 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed transition">
                                     </div>
@@ -371,9 +370,9 @@
                                         x-text="cerrado ? 'Cerrado' : 'Abierto'"></span>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" class="sr-only peer" x-model="cerrado">
-                                        <input type="hidden" :name="'horarios[{{ $horarioId }}][cerrado]'"
+                                        <input type="hidden" :name="'horarios[{{ $i }}][cerrado]'"
                                             :value="cerrado ? 1 : 0">
-                                        <input type="hidden" name="horarios[{{ $horarioId }}][dia_semana]"
+                                        <input type="hidden" name="horarios[{{ $i }}][dia_semana]"
                                             value="{{ $dia }}">
                                         <div
                                             class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-primary-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600">
