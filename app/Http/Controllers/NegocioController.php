@@ -44,9 +44,9 @@ class NegocioController extends Controller
             }
 
             $userId = Auth::id();
-
-            // Registrar el negocio usando el servicio
-            $negocio = $this->negocioService->registrarNegocio($request->all(), $userId);
+            $data = $request->all();
+            $data['imagen_portada'] = $request->file('imagen_portada');
+            $negocio = $this->negocioService->registrarNegocio($data, $userId);
 
             Log::info('Negocio registrado exitosamente.', ['negocio_id' => $negocio->id_negocio]);
             return redirect()->route('home')->with('success', '¡Negocio registrado exitosamente! Pronto será verificado por nuestro equipo.');

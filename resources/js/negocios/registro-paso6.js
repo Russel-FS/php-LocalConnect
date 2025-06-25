@@ -2,7 +2,10 @@
 window.toggleCerrado = function (checkbox) {
     const card = checkbox.closest(".bg-primary-50");
     const inputs = card.querySelectorAll('input[type="time"]');
-    inputs.forEach((inp) => (inp.disabled = checkbox.checked));
+    inputs.forEach((inp) => {
+        inp.disabled = checkbox.checked;
+        if (checkbox.checked) inp.value = "";
+    });
 };
 
 // Validación específica del paso 6

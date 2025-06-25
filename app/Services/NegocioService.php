@@ -17,6 +17,7 @@ use Illuminate\Validation\ValidationException;
 use Exception;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Services\CloudinaryService;
+use Illuminate\Support\Facades\Log;
 
 class NegocioService
 {
@@ -67,9 +68,9 @@ class NegocioService
 
             // Horarios
             'horarios' => 'required|array|size:7',
+            'horarios.*.cerrado' => 'required|boolean',
             'horarios.*.inicio' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i',
             'horarios.*.fin' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i|after:horarios.*.inicio',
-            'horarios.*.cerrado' => 'required|boolean',
 
             // Contactos
             'telefono' => 'required|string|max:20',
@@ -163,7 +164,14 @@ class NegocioService
      */
     private function guardarImagen($imagen)
     {
-        return $this->cloudinaryService->upload($imagen, 'local-connect/negocios/portadas');
+        Log::info('Intentando subir imagen a Cloudinary', ['original_name' => $imagen->getClientOriginalName()]);
+        $url = $this->cloudinaryService->upload($imagen, 'negocios/portadas');
+        Log::info('Resultado de subida a Cloudinary', ['url' => $url]);
+        if (!$url) {
+            Log::error('Error: Cloudinary no devolvió una URL');
+            throw new Exception('Error al subir la imagen a Cloudinary');
+        }
+        return $url;
     }
 
     /**
@@ -198,12 +206,14 @@ class NegocioService
         foreach ($dias as $index => $dia) {
             $horario = $horariosData[$index] ?? [];
             $cerrado = filter_var($horario['cerrado'] ?? false, FILTER_VALIDATE_BOOLEAN);
+            $horaApertura = ($cerrado) ? null : ($horario['inicio'] ?? null);
+            $horaCierre = ($cerrado) ? null : ($horario['fin'] ?? null);
 
             HorarioAtencion::create([
                 'id_negocio' => $negocioId,
                 'dia_semana' => $dia,
-                'hora_apertura' => $cerrado ? null : ($horario['inicio'] ?? null),
-                'hora_cierre' => $cerrado ? null : ($horario['fin'] ?? null),
+                'hora_apertura' => $horaApertura,
+                'hora_cierre' => $horaCierre,
                 'cerrado' => $cerrado
             ]);
         }
