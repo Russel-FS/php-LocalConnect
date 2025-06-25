@@ -156,4 +156,45 @@ class NegocioController extends Controller
 
         return view('negocios.buscar', compact('negocios', 'categorias', 'caracteristicas', 'serviciosPredefinidos'));
     }
+
+    public function editar($id)
+    {
+        $negocio = Negocio::with(['ubicacion', 'categorias', 'caracteristicas'])->findOrFail($id);
+        $categorias = Categoria::all();
+        $caracteristicas = Caracteristica::all();
+
+        if ($negocio->id_usuario !== Auth::id()) {
+            abort(403);
+        }
+        return view('negocios.editar', compact('negocio', 'categorias', 'caracteristicas'));
+    }
+
+    public function actualizar(Request $request, $id)
+    {
+        $negocio =  Negocio::with('ubicacion')->findOrFail($id);
+
+        if ($negocio->id_usuario !== Auth::id()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'nombre_negocio' => 'required|string|max:100',
+            'descripcion' => 'nullable|string|max:500',
+            'imagen_portada' => 'nullable|image|max:2048',
+            'direccion' => 'nullable|string|max:255',
+            'distrito' => 'nullable|string|max:100',
+            'ciudad' => 'nullable|string|max:100',
+            'provincia' => 'nullable|string|max:100',
+            'departamento' => 'nullable|string|max:100',
+            'pais' => 'nullable|string|max:100',
+            'latitud' => 'nullable|numeric',
+            'longitud' => 'nullable|numeric',
+            'categorias' => 'array',
+            'caracteristicas' => 'array',
+        ]);
+
+        $this->negocioService->actualizarNegocio($negocio, $validated, $request);
+
+        return redirect()->route('negocios.mis-negocios')->with('success', '¡Negocio actualizado correctamente!');
+    }
 }

@@ -60,7 +60,7 @@
         @else
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             @foreach($negocios as $negocio)
-            <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="group block bg-white/80 backdrop-blur-sm rounded-3xl border border-primary-100/50 shadow-sm hover:shadow-xl hover:border-primary-200 transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-200" tabindex="0">
+            <div class="group block bg-white/80 backdrop-blur-sm rounded-3xl border border-primary-100/50 shadow-sm hover:shadow-xl hover:border-primary-200 transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-200" tabindex="0">
                 <div class="relative">
                     @if($negocio->imagen_portada)
                     <div class="h-40 sm:h-44 lg:h-48 bg-primary-100 rounded-t-3xl overflow-hidden">
@@ -117,8 +117,6 @@
                     </div>
                     @endif
 
-
-
                     @if($negocio->serviciosPredefinidos->isNotEmpty() || $negocio->serviciosPersonalizados->isNotEmpty())
                     <div class="mb-3 sm:mb-4">
                         @php
@@ -142,16 +140,23 @@
                 </div>
 
                 <div class="p-5 sm:p-6 pt-0 mt-2 border-t border-primary-100/50 flex justify-between items-center">
-                    <span class="text-sm sm:text-base font-semibold text-secondary-600">
-                        Ver detalles
-                    </span>
-                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors duration-300">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-secondary-600 transition-transform group-hover:translate-x-1 group-hover:scale-110" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}" class="flex items-center gap-2 group">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors duration-300">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-secondary-600 transition-transform group-hover:translate-x-1 group-hover:scale-110" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                        <span class="text-sm sm:text-base font-semibold text-secondary-600">Ver detalles</span>
+                    </a>
+                    <a href="{{ route('negocios.editar', $negocio->id_negocio) }}"
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-primary-200 text-primary-700 text-xs font-semibold shadow-sm hover:bg-primary-50 hover:border-primary-400 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6 6M3 17.25V21h3.75l11.06-11.06a2.121 2.121 0 00-3-3L3 17.25z" />
                         </svg>
-                    </div>
+                        Editar
+                    </a>
                 </div>
-            </a>
+            </div>
             @endforeach
         </div>
         @endif

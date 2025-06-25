@@ -252,4 +252,39 @@ class NegocioService
             ->where('id_usuario', $userId)
             ->get();
     }
+
+    public function actualizarNegocio(Negocio $negocio, array $data, $request)
+    {
+        $negocio->nombre_negocio = $data['nombre_negocio'];
+        $negocio->descripcion = $data['descripcion'] ?? null;
+
+        if ($request->hasFile('imagen_portada')) {
+            $path = $request->file('imagen_portada')->store('negocios', 'public');
+            $negocio->imagen_portada = $path;
+        }
+
+        $negocio->save();
+
+        // Ubicación
+        if ($negocio->ubicacion) {
+            $ubicacion = $negocio->ubicacion;
+        } else {
+            $ubicacion = new Ubicacion();
+        }
+        $ubicacion->direccion = $data['direccion'] ?? null;
+        $ubicacion->distrito = $data['distrito'] ?? null;
+        $ubicacion->ciudad = $data['ciudad'] ?? null;
+        $ubicacion->provincia = $data['provincia'] ?? null;
+        $ubicacion->departamento = $data['departamento'] ?? null;
+        $ubicacion->pais = $data['pais'] ?? 'Perú';
+        $ubicacion->latitud = $data['latitud'] ?? null;
+        $ubicacion->longitud = $data['longitud'] ?? null;
+        $ubicacion->save();
+
+        $negocio->id_ubicacion = $ubicacion->id_ubicacion;
+        $negocio->save();
+
+        $negocio->categorias()->sync($data['categorias'] ?? []);
+        $negocio->caracteristicas()->sync($data['caracteristicas'] ?? []);
+    }
 }

@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/negocios/registro', [NegocioController::class, 'showRegistro'])->name('negocios.registro');
     Route::post('/negocios/guardar', [NegocioController::class, 'guardar'])->name('negocios.guardar');
     Route::get('/negocios/mis-negocios', [NegocioController::class, 'misNegocios'])->name('negocios.mis-negocios');
+    Route::get('/negocios/{negocio}/editar', [NegocioController::class, 'editar'])->name('negocios.editar');
+    Route::put('/negocios/{negocio}', [NegocioController::class, 'actualizar'])->name('negocios.actualizar');
 });
 
 // rutas públicas para ver negocios
