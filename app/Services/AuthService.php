@@ -44,15 +44,14 @@ class AuthService
 
             $rolResidente = Rol::findByCode('residente');
 
-            // Debug: verificar si se encuentra el rol
             if (!$rolResidente) {
                 Log::error('Rol residente no encontrado en la base de datos');
                 throw new \Exception('Error en la configuración del sistema: Rol residente no encontrado.');
             }
 
             $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
+                'name' => $data['name'], //nombre de usuario
+                'email' => $data['email'], // correo electronico
                 'password' => Hash::make($data['password']), // se encripta la contraseña
                 'id_rol' => $rolResidente->id_rol, // rol por defecto
                 'estado' => 'activo'
