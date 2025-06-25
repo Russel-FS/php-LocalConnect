@@ -68,6 +68,7 @@ class NegocioService
 
             // Horarios
             'horarios' => 'required|array|size:7',
+            'horarios.*' => 'required|array',
             'horarios.*.cerrado' => 'required|boolean',
             'horarios.*.inicio' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i',
             'horarios.*.fin' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i|after:horarios.*.inicio',
@@ -107,6 +108,7 @@ class NegocioService
             // Guardar imagen de portada
             $imagenPath = $this->guardarImagen($data['imagen_portada']);
 
+
             // Crear ubicación
             $ubicacion = Ubicacion::create([
                 'direccion' => $data['direccion'],
@@ -126,7 +128,7 @@ class NegocioService
                 'nombre_negocio' => $data['nombre_negocio'],
                 'descripcion' => $data['descripcion_negocio'],
                 'verificado' => false,
-                'imagen_portada' => $imagenPath
+                'imagen_portada' => $imagenPath ?? ''
             ]);
 
             //Asociar categorías
@@ -150,6 +152,17 @@ class NegocioService
             }
 
             //Crear horarios de atención
+            Log::info('Debug horariosData', ['horariosData' => $data['horarios']]);
+            if (!is_array($data['horarios']) || count($data['horarios']) !== 7) {
+                Log::error('Horarios mal formados', ['horarios' => $data['horarios']]);
+                throw new Exception('Los horarios están mal formados.');
+            }
+            foreach ($data['horarios'] as $i => $h) {
+                if (!is_array($h)) {
+                    Log::error('Día de horario no es array', ['index' => $i, 'valor' => $h]);
+                    throw new Exception('El horario de un día no es válido.');
+                }
+            }
             $this->crearHorariosAtencion($negocio->id_negocio, $data['horarios']);
 
             // Crear contactos
@@ -166,11 +179,6 @@ class NegocioService
     {
         Log::info('Intentando subir imagen a Cloudinary', ['original_name' => $imagen->getClientOriginalName()]);
         $url = $this->cloudinaryService->upload($imagen, 'negocios/portadas');
-        Log::info('Resultado de subida a Cloudinary', ['url' => $url]);
-        if (!$url) {
-            Log::error('Error: Cloudinary no devolvió una URL');
-            throw new Exception('Error al subir la imagen a Cloudinary');
-        }
         return $url;
     }
 
