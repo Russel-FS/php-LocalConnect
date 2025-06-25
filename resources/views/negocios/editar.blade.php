@@ -33,8 +33,7 @@
                                 @if ($negocio->imagen_portada)
                                     <div
                                         class="aspect-square rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-1">
-                                        <img id="vista-previa" src="{{ asset('storage/' . $negocio->imagen_portada) }}"
-                                            alt="Portada actual"
+                                        <img id="vista-previa" src="{{ $negocio->imagen_portada }}" alt="Portada actual"
                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                     </div>
                                 @endif
