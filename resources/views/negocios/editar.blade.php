@@ -97,9 +97,17 @@
                             <p class="text-sm text-primary-400 mt-2">Haz clic en el mapa para marcar la ubicación exacta de
                                 tu negocio</p>
                         </div>
-                        <div
-                            class="h-80 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center bg-primary-50">
-                            <x-common.mapa />
+                        <div>
+                            <div>
+                                <label class="block mb-2 text-primary-600 font-medium">Selecciona la ubicación en el
+                                    mapa</label>
+                                <div class="relative w-full h-full">
+                                    <x-common.sugerencia />
+                                    <x-common.mapa />
+                                </div>
+                                <p class="text-sm text-primary-400 mt-2">Haz clic en el mapa para marcar la ubicación exacta
+                                    de tu negocio</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,7 +186,7 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                             @foreach ($catServ->serviciosPredefinidos as $servicio)
                                                 <label
-                                                    class="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex items-center gap-4 cursor-pointer">
+                                                    class="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-150 hover:-translate-y-0.5 flex items-center gap-4 cursor-pointer">
                                                     <span
                                                         class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
                                                         <svg class="w-6 h-6 text-primary-600" fill="none"
@@ -226,7 +234,7 @@
                             class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-16">
                             @foreach ($negocio->serviciosPersonalizados as $i => $servicio)
                                 <div
-                                    class="servicio-personalizado-item group relative bg-white/80 backdrop-blur-sm rounded-3xl p-12 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col gap-8 min-h-[360px]">
+                                    class="servicio-personalizado-item group relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 border border-primary-100/30 hover:shadow-lg hover:border-primary-200 transition-all duration-150 hover:-translate-y-0.5 flex flex-col gap-6 min-h-[320px]">
                                     <input type="hidden" name="servicios_personalizados[{{ $i }}][id]"
                                         value="{{ $servicio->id_servicio }}">
                                     <div class="flex items-center gap-4 mb-2">
@@ -241,17 +249,17 @@
                                         <input type="text"
                                             name="servicios_personalizados[{{ $i }}][nombre]"
                                             value="{{ old('servicios_personalizados.' . $i . '.nombre', $servicio->nombre_servicio) }}"
-                                            class="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white font-bold text-lg"
+                                            class="flex-1 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-bold text-lg"
                                             required placeholder="Nombre del servicio">
                                     </div>
                                     <input type="text"
                                         name="servicios_personalizados[{{ $i }}][descripcion]"
                                         value="{{ old('servicios_personalizados.' . $i . '.descripcion', $servicio->descripcion) }}"
-                                        class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white"
                                         placeholder="Descripción">
                                     <input type="number" name="servicios_personalizados[{{ $i }}][precio]"
                                         value="{{ old('servicios_personalizados.' . $i . '.precio', $servicio->precio) }}"
-                                        class="w-36 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white font-semibold text-lg"
+                                        class="w-36 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-semibold text-lg"
                                         min="0" step="0.01" placeholder="Precio (S/)">
                                     <div class="flex items-center gap-6 mt-2">
                                         <label class="inline-flex items-center gap-2 cursor-pointer">
@@ -259,7 +267,7 @@
                                                 name="servicios_personalizados[{{ $i }}][disponible]"
                                                 value="1" {{ $servicio->disponible ? 'checked' : '' }}>
                                             <span
-                                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium {{ $servicio->disponible ? 'bg-secondary-100 text-secondary-600 border border-secondary-200' : 'bg-red-100 text-red-600 border border-red-200' }}">
+                                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-secondary-50 text-secondary-600 border border-secondary-100">
                                                 <span
                                                     class="w-2 h-2 rounded-full {{ $servicio->disponible ? 'bg-secondary-500' : 'bg-red-500' }}"></span>
                                                 {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
@@ -305,7 +313,7 @@
                                 $horarioId = $horario->id_horario ?? 'new_' . $dia;
                             @endphp
                             <div x-data="{ cerrado: {{ old('horarios.' . $horarioId . '.cerrado', $horario->cerrado) ? 'true' : 'false' }} }"
-                                class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-300 flex flex-col gap-3">
+                                class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-150 flex flex-col gap-3">
                                 <div class="flex items-center gap-3 mb-2">
                                     <span class="w-8 h-8 bg-primary-100 rounded-xl flex items-center justify-center">
                                         <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor"
@@ -398,19 +406,19 @@
             const lista = document.getElementById('servicios-personalizados-lista');
             const index = lista.children.length;
             const html = `
-                <div class="servicio-personalizado-item group relative bg-white/80 backdrop-blur-sm rounded-3xl p-12 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col gap-8 min-h-[360px]">
+                <div class="servicio-personalizado-item group relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 border border-primary-100/30 hover:shadow-lg hover:border-primary-200 transition-all duration-150 hover:-translate-y-0.5 flex flex-col gap-6 min-h-[320px]">
                     <div class="flex items-center gap-4 mb-2">
                         <span class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
                             <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" /></svg>
                         </span>
-                        <input type="text" name="servicios_personalizados[${index}][nombre]" class="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white font-bold text-lg" required placeholder="Nombre del servicio">
+                        <input type="text" name="servicios_personalizados[${index}][nombre]" class="flex-1 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-bold text-lg" required placeholder="Nombre del servicio">
                     </div>
-                    <input type="text" name="servicios_personalizados[${index}][descripcion]" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white" placeholder="Descripción">
-                    <input type="number" name="servicios_personalizados[${index}][precio]" class="w-36 px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none bg-white font-semibold text-lg" min="0" step="0.01" placeholder="Precio (S/)">
+                    <input type="text" name="servicios_personalizados[${index}][descripcion]" class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white" placeholder="Descripción">
+                    <input type="number" name="servicios_personalizados[${index}][precio]" class="w-36 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-semibold text-lg" min="0" step="0.01" placeholder="Precio (S/)">
                     <div class="flex items-center gap-6 mt-2">
                         <label class="inline-flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" name="servicios_personalizados[${index}][disponible]" value="1" checked>
-                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-secondary-100 text-secondary-600 border border-secondary-200">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-secondary-50 text-secondary-600 border border-secondary-100">
                                 <span class="w-2 h-2 rounded-full bg-secondary-500"></span>
                                 Disponible
                             </span>
