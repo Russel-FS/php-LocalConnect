@@ -15,9 +15,18 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Exception;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Services\CloudinaryService;
 
 class NegocioService
 {
+    private $cloudinaryService;
+
+    public function __construct(CloudinaryService $cloudinaryService)
+    {
+        $this->cloudinaryService = $cloudinaryService;
+    }
+
     /**
      * Registrar un nuevo negocio con toda su información
      */
@@ -150,13 +159,11 @@ class NegocioService
     }
 
     /**
-     * Guardar imagen de portada
+     * Guardar imagen de portada en Cloudinary
      */
     private function guardarImagen($imagen)
     {
-        $nombreArchivo = time() . '_' . $imagen->getClientOriginalName();
-        $ruta = $imagen->storeAs('negocios/portadas', $nombreArchivo, 'public');
-        return $ruta;
+        return $this->cloudinaryService->upload($imagen, 'local-connect/negocios/portadas');
     }
 
     /**
@@ -259,8 +266,8 @@ class NegocioService
         $negocio->descripcion = $data['descripcion'] ?? null;
 
         if ($request->hasFile('imagen_portada')) {
-            $path = $request->file('imagen_portada')->store('negocios', 'public');
-            $negocio->imagen_portada = $path;
+            $url = $this->guardarImagen($request->file('imagen_portada'));
+            $negocio->imagen_portada = $url;
         }
 
         $negocio->save();
