@@ -34,9 +34,9 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Imagen de portada</label>
                             @if($negocio->imagen_portada)
-                            <img src="{{ asset('storage/' . $negocio->imagen_portada) }}" alt="Portada actual" class="w-48 h-32 object-cover rounded-lg mb-4 shadow-md">
+                            <img id="vista-previa" src="{{ asset('storage/' . $negocio->imagen_portada) }}" alt="Portada actual" class="w-48 h-32 object-cover rounded-lg mb-4 shadow-md">
                             @endif
-                            <input type="file" name="imagen_portada" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
+                            <input type="file" id="imagen-portada" name="imagen_portada" accept="image/*" required class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
                         </div>
                     </div>
                 </div>
@@ -110,5 +110,33 @@
         </form>
     </div>
 </div>
+
+<script>
+    function mostrarVistaPrevia(input) {
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const vistaPrevia = document.getElementById("vista-previa");
+                vistaPrevia.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+
+    function configurarInputImagen() {
+        const input = document.getElementById("imagen-portada");
+        if (input) {
+            input.addEventListener("change", function() {
+                mostrarVistaPrevia(this);
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        configurarInputImagen();
+    });
+</script>
 
 @endsection

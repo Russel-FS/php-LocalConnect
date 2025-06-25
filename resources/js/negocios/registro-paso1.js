@@ -1,4 +1,4 @@
-// Paso 1: Imagen de portada
+//  Imagen de portada
 
 window.mostrarVistaPrevia = function (input) {
     const file = input.files[0];
