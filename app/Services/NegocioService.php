@@ -278,6 +278,7 @@ class NegocioService
             ->get();
     }
 
+
     public function actualizarNegocio(Negocio $negocio, array $data, $request)
     {
         $negocio->nombre_negocio = $data['nombre_negocio'];
