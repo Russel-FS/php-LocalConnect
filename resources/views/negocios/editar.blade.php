@@ -45,7 +45,15 @@
                 <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 shadow-sm">
                     <h2 class="text-2xl font-bold text-primary-700 mb-6">Ubicación</h2>
                     <div class="space-y-6">
-                        <x-common.mapa></x-common.mapa>
+                        <!-- Mapa -->
+                        <div>
+                            <label class="block mb-2 text-primary-600 font-medium">Selecciona la ubicación en el mapa</label>
+                            <div class="relative w-full h-full">
+                                <x-common.sugerencia />
+                                <x-common.mapa />
+                            </div>
+                            <p class="text-sm text-primary-400 mt-2">Haz clic en el mapa para marcar la ubicación exacta de tu negocio</p>
+                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
