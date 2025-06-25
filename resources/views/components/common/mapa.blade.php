@@ -5,10 +5,24 @@
 
     // Inicializar el mapa y el marcador
     function inicializarMapa() {
-        const latitudDefault = -12.0464;
-        const longitudDefault = -77.0428;
+        let latitudInicial = -12.0464;
+        let longitudInicial = -77.0428;
+
+        const latitudInput = document.getElementById('latitud');
+        const longitudInput = document.getElementById('longitud');
+
+        if (latitudInput && longitudInput && latitudInput.value && longitudInput.value) {
+            const lat = parseFloat(latitudInput.value);
+            const lng = parseFloat(longitudInput.value);
+
+            if (!isNaN(lat) && !isNaN(lng)) {
+                latitudInicial = lat;
+                longitudInicial = lng;
+            }
+        }
+
         if (!map) {
-            map = L.map("map").setView([latitudDefault, longitudDefault], 13);
+            map = L.map("map").setView([latitudInicial, longitudInicial], 17);
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 attribution: "© OpenStreetMap contributors",
             }).addTo(map);
@@ -18,7 +32,7 @@
                 iconSize: [24, 24],
                 iconAnchor: [12, 12],
             });
-            marker = L.marker([latitudDefault, longitudDefault], {
+            marker = L.marker([latitudInicial, longitudInicial], {
                 icon: iconoPersonalizado,
                 draggable: true,
             }).addTo(map);
