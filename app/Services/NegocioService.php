@@ -286,6 +286,8 @@ class NegocioService
         if ($request->hasFile('imagen_portada')) {
             $url = $this->guardarImagen($request->file('imagen_portada'));
             $negocio->imagen_portada = $url;
+        } else if (isset($data['imagen_portada']) && is_string($data['imagen_portada'])) {
+            $negocio->imagen_portada = $data['imagen_portada'];
         }
 
         $negocio->save();
