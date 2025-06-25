@@ -159,16 +159,16 @@ class NegocioController extends Controller
 
     public function editar($id)
     {
-        $negocio = Negocio::with(['ubicacion', 'categorias', 'caracteristicas', 'horarios', 'serviciosPredefinidos'])->findOrFail($id);
+        $negocio = Negocio::with(['ubicacion', 'categorias', 'caracteristicas', 'horarios', 'serviciosPredefinidos', 'serviciosPersonalizados'])->findOrFail($id);
         $categorias = Categoria::all();
         $caracteristicas = Caracteristica::all();
         $horarios = $negocio->horarios;
-        $serviciosPredefinidos = $negocio->serviciosPredefinidos;
+        $categoriasServicio = CategoriaServicio::with('serviciosPredefinidos')->get();
 
         if ($negocio->id_usuario !== Auth::id()) {
             abort(403);
         }
-        return view('negocios.editar', compact('negocio', 'categorias', 'caracteristicas', 'horarios', 'serviciosPredefinidos'));
+        return view('negocios.editar', compact('negocio', 'categorias', 'caracteristicas', 'horarios', 'categoriasServicio'));
     }
 
     public function actualizar(Request $request, $id)

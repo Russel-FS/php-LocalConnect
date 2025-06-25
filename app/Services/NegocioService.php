@@ -286,5 +286,37 @@ class NegocioService
 
         $negocio->categorias()->sync($data['categorias'] ?? []);
         $negocio->caracteristicas()->sync($data['caracteristicas'] ?? []);
+        $negocio->serviciosPredefinidos()->sync($request->input('servicios_predefinidos', []));
+
+        $serviciosForm = $request->input('servicios_personalizados', []);
+        $idsEnviados = [];
+        foreach ($serviciosForm as $servicio) {
+            // actualizar si tiene id
+            if (!empty($servicio['id'])) {
+                $servicioPersonalizado = $negocio->serviciosPersonalizados()->find($servicio['id']);
+                if ($servicioPersonalizado) {
+                    $servicioPersonalizado->update([
+                        'nombre_servicio' => $servicio['nombre'],
+                        'descripcion' => $servicio['descripcion'] ?? null,
+                        'precio' => $servicio['precio'] ?? null,
+                        'disponible' => isset($servicio['disponible']) ? 1 : 0,
+                    ]);
+                    $idsEnviados[] = $servicioPersonalizado->id_servicio;
+                }
+            } else {
+                // caso contrario crea uno nuevo
+                $nuevo = $negocio->serviciosPersonalizados()->create([
+                    'nombre_servicio' => $servicio['nombre'],
+                    'descripcion' => $servicio['descripcion'] ?? null,
+                    'precio' => $servicio['precio'] ?? null,
+                    'disponible' => isset($servicio['disponible']) ? 1 : 0,
+                ]);
+                $idsEnviados[] = $nuevo->id_servicio;
+            }
+        }
+        // eliminar lo que ya no estan
+        $negocio->serviciosPersonalizados()
+            ->whereNotIn('id_servicio', $idsEnviados)
+            ->delete();
     }
 }

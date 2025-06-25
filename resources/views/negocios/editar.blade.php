@@ -141,32 +141,68 @@
                 </div>
 
                 <!-- Servicios Predefinidos -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 shadow-sm">
-                    <h2 class="text-2xl font-bold text-primary-700 mb-6">Servicios Predefinidos</h2>
-                    <div class="space-y-4">
-                        @foreach($serviciosPredefinidos as $servicio)
-                        <div x-data="{ disponible: {{ old('serviciosPredefinidos.'.$servicio->id_servicio_predefinido.'.disponible', $servicio->pivot->disponible ?? 1) ? 'true' : 'false' }} }" class="grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-4 items-end bg-gray-50/80 p-4 rounded-xl border border-gray-200/60">
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-semibold text-gray-800 mb-1">{{ $servicio->nombre_servicio }}</label>
-                                <p class="text-xs text-gray-500">{{ $servicio->descripcion }}</p>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-gray-500 mb-1">Precio</label>
-                                <div class="relative">
-                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 pointer-events-none">S/</span>
-                                    <input type="number" step="0.01" name="serviciosPredefinidos[{{ $servicio->id_servicio_predefinido }}][precio]" value="{{ old('serviciosPredefinidos.'.$servicio->id_servicio_predefinido.'.precio', $servicio->pivot->precio ?? '') }}" :disabled="!disponible" class="pl-8 w-full px-3 py-2 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed transition">
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-self-start md:justify-self-end">
-                                <span class="text-sm font-medium mr-3 text-gray-700" x-text="disponible ? 'Disponible' : 'No disponible'"></span>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" name="serviciosPredefinidos[{{ $servicio->id_servicio_predefinido }}][disponible]" value="1" class="sr-only peer" x-model="disponible">
-                                    <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-primary-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
-                                </label>
-                            </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 shadow-sm mb-12">
+                    <h2 class="text-2xl font-bold text-primary-700 mb-6">Servicios predefinidos</h2>
+                    @if(isset($categoriasServicio) && $categoriasServicio->isNotEmpty())
+                        <div class="space-y-8">
+                            @foreach($categoriasServicio as $catServ)
+                                @if($catServ->serviciosPredefinidos->isNotEmpty())
+                                    <div class="mb-2">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <span class="text-lg font-bold text-primary-700">{{ $catServ->nombre_categoria_servicio }}</span>
+                                            @if($catServ->descripcion)
+                                                <span class="text-xs text-primary-400">{{ $catServ->descripcion }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="flex flex-wrap gap-3">
+                                            @foreach($catServ->serviciosPredefinidos as $servicio)
+                                                <label class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 bg-white text-gray-700 cursor-pointer shadow-sm hover:border-primary-400 transition-all">
+                                                    <input type="checkbox" name="servicios_predefinidos[]" value="{{ $servicio->id_servicio_predefinido }}"
+                                                        {{ in_array($servicio->id_servicio_predefinido, $negocio->serviciosPredefinidos->pluck('id_servicio_predefinido')->toArray()) ? 'checked' : '' }}>
+                                                    <span class="font-medium">{{ $servicio->nombre_servicio }}</span>
+                                                    @if($servicio->descripcion)
+                                                        <span class="text-xs text-gray-400 ml-2">{{ $servicio->descripcion }}</span>
+                                                    @endif
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
+                    @else
+                        <div class="text-primary-400 text-center py-8">No hay categorías de servicios disponibles.</div>
+                    @endif
+                </div>
+
+                <!-- Servicios Personalizados -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-secondary-100/50 shadow-sm mb-12">
+                    <h2 class="text-2xl font-bold text-secondary-700 mb-6">Servicios personalizados</h2>
+                    <div id="servicios-personalizados-lista">
+                        @foreach($negocio->serviciosPersonalizados as $i => $servicio)
+                            <div class="servicio-personalizado-item flex flex-col md:flex-row gap-4 mb-4 items-end border-b pb-4">
+                                <input type="hidden" name="servicios_personalizados[{{ $i }}][id]" value="{{ $servicio->id_servicio }}">
+                                <div class="flex-1">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                                    <input type="text" name="servicios_personalizados[{{ $i }}][nombre]" value="{{ old('servicios_personalizados.'.$i.'.nombre', $servicio->nombre_servicio) }}" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-secondary-200 focus:outline-none" required>
+                                </div>
+                                <div class="flex-1">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                                    <input type="text" name="servicios_personalizados[{{ $i }}][descripcion]" value="{{ old('servicios_personalizados.'.$i.'.descripcion', $servicio->descripcion) }}" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-secondary-200 focus:outline-none">
+                                </div>
+                                <div class="flex-1">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Precio (S/)</label>
+                                    <input type="number" name="servicios_personalizados[{{ $i }}][precio]" value="{{ old('servicios_personalizados.'.$i.'.precio', $servicio->precio) }}" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-secondary-200 focus:outline-none" min="0" step="0.01">
+                                </div>
+                                <div class="flex items-center">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1 mr-2">Disponible</label>
+                                    <input type="checkbox" name="servicios_personalizados[{{ $i }}][disponible]" value="1" {{ $servicio->disponible ? 'checked' : '' }}>
+                                </div>
+                                <button type="button" class="text-red-500 ml-2" onclick="eliminarServicioPersonalizado(this)">Eliminar</button>
+                            </div>
                         @endforeach
                     </div>
+                    <button type="button" onclick="agregarServicioPersonalizado()" class="mt-4 px-4 py-2 bg-secondary-100 rounded">Agregar servicio personalizado</button>
                 </div>
             </div>
         </form>
@@ -198,7 +234,37 @@
     document.addEventListener("DOMContentLoaded", function() {
         configurarInputImagen();
     });
-</script>
 
+    function eliminarServicioPersonalizado(btn) {
+        btn.closest('.servicio-personalizado-item').remove();
+    }
+
+    function agregarServicioPersonalizado() {
+        const lista = document.getElementById('servicios-personalizados-lista');
+        const index = lista.children.length;
+        const html = `
+            <div class=\"servicio-personalizado-item flex flex-col md:flex-row gap-4 mb-4 items-end border-b pb-4\">
+                <div class=\"flex-1\">
+                    <label class=\"block text-sm font-medium text-gray-700 mb-1\">Nombre</label>
+                    <input type=\"text\" name=\"servicios_personalizados[${index}][nombre]\" class=\"w-full px-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-secondary-200 focus:outline-none\" required>
+                </div>
+                <div class=\"flex-1\">
+                    <label class=\"block text-sm font-medium text-gray-700 mb-1\">Descripción</label>
+                    <input type=\"text\" name=\"servicios_personalizados[${index}][descripcion]\" class=\"w-full px-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-secondary-200 focus:outline-none\">
+                </div>
+                <div class=\"flex-1\">
+                    <label class=\"block text-sm font-medium text-gray-700 mb-1\">Precio (S/)</label>
+                    <input type=\"number\" name=\"servicios_personalizados[${index}][precio]\" class=\"w-full px-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-secondary-200 focus:outline-none\" min=\"0\" step=\"0.01\">
+                </div>
+                <div class=\"flex items-center\">
+                    <label class=\"block text-sm font-medium text-gray-700 mb-1 mr-2\">Disponible</label>
+                    <input type=\"checkbox\" name=\"servicios_personalizados[${index}][disponible]\" value=\"1\" checked>
+                </div>
+                <button type=\"button\" class=\"text-red-500 ml-2\" onclick=\"eliminarServicioPersonalizado(this)\">Eliminar</button>
+            </div>
+        `;
+        lista.insertAdjacentHTML('beforeend', html);
+    }
+</script>
 
 @endsection
