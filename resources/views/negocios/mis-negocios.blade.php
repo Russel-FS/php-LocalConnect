@@ -19,7 +19,7 @@
             </a>
         </div>
 
-        <!-- Botón flotante móvil -->
+        <!-- bootton flotante móvil -->
         <a href="{{ route('negocios.registro') }}" class="md:hidden fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-white border border-primary-200 shadow-lg hover:bg-primary-50 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
             <svg class="w-7 h-7 text-primary-700 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5" fill="white" />
