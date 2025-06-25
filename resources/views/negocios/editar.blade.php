@@ -3,12 +3,12 @@
 @section('content')
     <div class="min-h-screen bg-gradient-to-br from-primary-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <form method="POST" action="{{ route('negocios.actualizar', $negocio->id_negocio) }}"
+            <form method="POST" id="form-editar-negocio" action="{{ route('negocios.actualizar', $negocio->id_negocio) }}"
                 enctype="multipart/form-data" class="space-y-16">
                 @csrf
                 @method('PUT')
 
-                <!-- Hero-Imagen de portada -->
+                <!-- Heroo-Imagen de portada -->
                 <div
                     class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-white rounded-xl sm:rounded-2xl lg:rounded-3xl mb-8 sm:mb-12 lg:mb-16 xl:mb-20">
                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/5 to-primary-500/5"></div>
@@ -344,8 +344,9 @@
                                     <span class="text-sm font-medium text-gray-700"
                                         x-text="cerrado ? 'Cerrado' : 'Abierto'"></span>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="horarios[{{ $horarioId }}][cerrado]"
-                                            value="1" class="sr-only peer" x-model="cerrado">
+                                        <input type="checkbox" class="sr-only peer" x-model="cerrado">
+                                        <input type="hidden" :name="'horarios[{{ $horarioId }}][cerrado]'"
+                                            :value="cerrado ? 1 : 0">
                                         <input type="hidden" name="horarios[{{ $horarioId }}][dia_semana]"
                                             value="{{ $dia }}">
                                         <div
@@ -359,7 +360,7 @@
                 </div>
 
                 <div class="flex justify-between items-center mt-12">
-                    <button type="submit"
+                    <button type="button" id="btn-guardar-negocio"
                         class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-600 text-white font-semibold shadow-lg hover:bg-primary-700 transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -375,6 +376,25 @@
         function mostrarVistaPrevia(input) {
             const file = input.files[0];
             if (file) {
+                const tiposPermitidos = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!tiposPermitidos.includes(file.type)) {
+                    window.notyf.dismissAll();
+                    window.notyf.open({
+                        type: "error",
+                        message: "El archivo debe ser una imagen (jpeg, png, jpg)."
+                    });
+                    input.value = '';
+                    return;
+                }
+                if (file.size > 10 * 1024 * 1024) {
+                    window.notyf.dismissAll();
+                    window.notyf.open({
+                        type: "error",
+                        message: "La imagen no puede superar los 10MB."
+                    });
+                    input.value = '';
+                    return;
+                }
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const vistaPrevia = document.getElementById("vista-previa");
@@ -428,6 +448,40 @@
             `;
             lista.insertAdjacentHTML('beforeend', html);
         }
+
+        // Validación de horarios y envío solo si es válido
+        document.getElementById('btn-guardar-negocio').addEventListener('click', function() {
+            const form = document.getElementById('form-editar-negocio');
+            const dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+            for (let dia of dias) {
+                const hidden = document.querySelector(
+                    `input[name^="horarios"][name$="[dia_semana]"][value="${dia}"]`);
+                if (!hidden) continue;
+                const prefix = hidden.name.replace(/\[dia_semana\]$/, '');
+                const cerrado = document.querySelector(`input[name="${prefix}[cerrado]"]`)?.value === '1';
+                const apertura = document.querySelector(`input[name="${prefix}[hora_apertura]"]`)?.value;
+                const cierre = document.querySelector(`input[name="${prefix}[hora_cierre]"]`)?.value;
+
+                if (!cerrado) {
+                    if (!apertura || !cierre) {
+                        window.notyf.dismissAll();
+                        window.notyf.open({
+                            type: "error",
+                            message: `Debes ingresar la hora de apertura y cierre para ${dia}.`
+                        });
+                        return;
+                    } else if (apertura >= cierre) {
+                        window.notyf.dismissAll();
+                        window.notyf.open({
+                            type: "error",
+                            message: `La hora de cierre debe ser mayor que la de apertura para ${dia}.`
+                        });
+                        return;
+                    }
+                }
+            }
+            form.submit();
+        });
     </script>
 
 @endsection
