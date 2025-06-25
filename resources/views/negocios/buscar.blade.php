@@ -25,7 +25,7 @@
             <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="space-y-6">
                 <!--  Buscador principal -->
                 <div class="relative max-w-2xl">
-                    <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                    <div class="absolute left-5 top-5 z-10">
                         <x-icons.navigation.search class="h-5 w-5 text-primary-400" />
                     </div>
                     <input
