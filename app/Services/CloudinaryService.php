@@ -13,10 +13,12 @@ class CloudinaryService
      * @param array $options
      * @return string URL segura de la imagen
      */
-    public function upload($file, $folder = 'local-connect', $options = [])
+    public function upload($file, $folder = '', $options = [])
     {
+        $root = 'local-connect';
+        $finalFolder = $root . ($folder ? '/' . ltrim($folder, '/') : '');
         $defaultOptions = [
-            'folder' => $folder,
+            'folder' => $finalFolder,
             'resource_type' => 'image',
             'overwrite' => true,
         ];
