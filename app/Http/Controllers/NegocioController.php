@@ -193,9 +193,15 @@ class NegocioController extends Controller
             'longitud' => 'nullable|numeric',
             'categorias' => 'array',
             'caracteristicas' => 'array',
+            // Validación de horarios
+            'horarios' => 'required|array|size:7',
+            'horarios.*.cerrado' => 'required',
+            'horarios.*.hora_apertura' => 'nullable|date_format:H:i',
+            'horarios.*.hora_cierre' => 'nullable|date_format:H:i',
         ]);
 
-        $this->negocioService->actualizarNegocio($negocio, $validated, $request);
+        // Pasar los horarios explícitamente al servicio
+        $this->negocioService->actualizarNegocio($negocio, $validated, $request, $request->input('horarios'));
 
         return redirect()->route('negocios.mis-negocios')->with('success', '¡Negocio actualizado correctamente!');
     }

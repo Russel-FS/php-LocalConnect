@@ -6,17 +6,11 @@ use App\Models\Negocio\Negocio;
 use App\Models\Negocio\Ubicacion;
 use App\Models\Negocio\HorarioAtencion;
 use App\Models\Negocio\ServicioPersonalizado;
-use App\Models\Negocio\Categoria;
-use App\Models\Negocio\ServicioPredefinido;
-use App\Models\Negocio\CategoriaServicio;
-use App\Models\Negocio\Caracteristica;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Exception;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Services\CloudinaryService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class NegocioService
@@ -279,7 +273,7 @@ class NegocioService
     }
 
 
-    public function actualizarNegocio(Negocio $negocio, array $data, $request)
+    public function actualizarNegocio(Negocio $negocio, array $data, $request, $horarios = null)
     {
         $negocio->nombre_negocio = $data['nombre_negocio'];
         $negocio->descripcion = $data['descripcion'] ?? null;
@@ -315,6 +309,34 @@ class NegocioService
         $negocio->categorias()->sync($data['categorias'] ?? []);
         $negocio->caracteristicas()->sync($data['caracteristicas'] ?? []);
         $negocio->serviciosPredefinidos()->sync($request->input('servicios_predefinidos', []));
+
+        // --- Actualizar horarios de atención ---
+        if ($horarios && is_array($horarios)) {
+            $negocio->horarios()->delete();
+            $dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+            foreach ($dias as $dia) {
+                // Buscar el horario correspondiente por dia_semana
+                $horario = null;
+                foreach ($horarios as $h) {
+                    if (($h['dia_semana'] ?? null) === $dia) {
+                        $horario = $h;
+                        break;
+                    }
+                }
+                if ($horario) {
+                    $cerrado = filter_var($horario['cerrado'] ?? false, FILTER_VALIDATE_BOOLEAN);
+                    $horaApertura = ($cerrado) ? null : ($horario['hora_apertura'] ?? null);
+                    $horaCierre = ($cerrado) ? null : ($horario['hora_cierre'] ?? null);
+                    HorarioAtencion::create([
+                        'id_negocio' => $negocio->id_negocio,
+                        'dia_semana' => $dia,
+                        'hora_apertura' => $horaApertura,
+                        'hora_cierre' => $horaCierre,
+                        'cerrado' => $cerrado
+                    ]);
+                }
+            }
+        }
 
         $serviciosForm = $request->input('servicios_personalizados', []);
         $idsEnviados = [];

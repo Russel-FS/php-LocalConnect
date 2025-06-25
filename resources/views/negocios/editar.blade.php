@@ -3,6 +3,32 @@
 @section('content')
     <div class="min-h-screen bg-gradient-to-br from-primary-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            @if (session('success'))
+                <div class="mb-6">
+                    <div class="bg-green-100 border border-green-300 text-green-800 px-6 py-4 rounded-xl shadow">
+                        <strong>¡Éxito!</strong> {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="mb-6">
+                    <div class="bg-red-100 border border-red-300 text-red-800 px-6 py-4 rounded-xl shadow">
+                        <strong>Error:</strong> {{ session('error') }}
+                    </div>
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="mb-6">
+                    <div class="bg-red-100 border border-red-300 text-red-800 px-6 py-4 rounded-xl shadow">
+                        <strong>Corrige los siguientes errores:</strong>
+                        <ul class="mt-2 list-disc list-inside">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
             <form method="POST" id="form-editar-negocio" action="{{ route('negocios.actualizar', $negocio->id_negocio) }}"
                 enctype="multipart/form-data" class="space-y-16">
                 @csrf
