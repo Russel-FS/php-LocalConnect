@@ -8,7 +8,7 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Hero/Imagen de portada -->
+                <!-- Hero-Imagen de portada -->
                 <div
                     class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-white rounded-xl sm:rounded-2xl lg:rounded-3xl mb-8 sm:mb-12 lg:mb-16 xl:mb-20">
                     <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/5 to-primary-500/5"></div>
