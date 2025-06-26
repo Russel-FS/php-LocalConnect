@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NegocioController;
+use App\Http\Controllers\Admin\AdminNegocioController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -28,3 +29,10 @@ Route::middleware('auth')->group(function () {
 // rutas públicas para ver negocios
 Route::get('/negocios/buscar', [NegocioController::class, 'buscar'])->name('negocios.buscar');
 Route::get('/negocios/{id}', [NegocioController::class, 'mostrarNegocio'])->name('negocios.mostrar');
+
+// Rutas de administración
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/solicitudes', [AdminNegocioController::class, 'index'])->name('negocios.solicitudes');
+    Route::get('/negocios/{negocio}', [AdminNegocioController::class, 'show'])->name('negocios.show');
+    Route::patch('/solicitudes/{negocio}', [AdminNegocioController::class, 'update'])->name('negocios.update');
+});
