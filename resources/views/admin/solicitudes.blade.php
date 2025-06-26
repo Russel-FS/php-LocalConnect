@@ -12,42 +12,52 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse ($negocios as $negocio)
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
                 @if($negocio->imagen_portada)
                     <img class="w-full h-48 object-cover" src="{{ $negocio->imagen_portada }}" alt="Imagen de portada de {{ $negocio->nombre_negocio }}">
                 @else
-                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
-                        No hay imagen de portada
+                    <div class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
+                        Sin imagen
                     </div>
                 @endif
-                <div class="p-6">
+                <div class="p-5">
                     <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $negocio->nombre_negocio }}</h2>
-                    <p class="text-gray-600 text-sm mb-4">{{ Str::limit($negocio->descripcion, 100) }}</p>
+                    <p class="text-gray-600 text-sm mb-4">{{ Str::limit($negocio->descripcion, 80) }}</p>
 
-                    <div class="mb-4">
-                        <p class="text-gray-700 text-sm"><strong class="font-medium">Propietario:</strong> {{ $negocio->usuario->name }}</p>
-                        <p class="text-gray-700 text-sm"><strong class="font-medium">Ubicación:</strong> {{ $negocio->ubicacion->direccion }}, {{ $negocio->ubicacion->ciudad }}</p>
-                        <p class="text-gray-700 text-sm"><strong class="font-medium">Estado Actual:</strong> 
-                            <span class="{{ $negocio->verificado ? 'text-green-500' : 'text-red-500' }}">
+                    <div class="space-y-2 text-sm text-gray-700 mb-4">
+                        <div class="flex items-center">
+                            <x-icons.outline.user class="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{{ $negocio->usuario->name }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <x-icons.outline.location-marker class="w-4 h-4 mr-2 text-gray-500" />
+                            <span>{{ $negocio->ubicacion->direccion }}, {{ $negocio->ubicacion->ciudad }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <x-icons.outline.check-circle class="w-4 h-4 mr-2 {{ $negocio->verificado ? 'text-green-500' : 'text-red-500' }}" />
+                            <span class="{{ $negocio->verificado ? 'text-green-600' : 'text-red-600' }} font-medium">
                                 {{ $negocio->verificado ? 'Aprobado' : 'Pendiente' }}
                             </span>
-                        </p>
+                        </div>
                     </div>
 
-                    <div class="flex justify-between items-center mt-4">
-                        <a href="{{ route('admin.negocios.show', $negocio) }}" class="text-blue-600 hover:text-blue-800 font-medium">Ver Detalles</a>
+                    <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                        <a href="{{ route('admin.negocios.show', $negocio) }}" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
+                            Ver Detalles
+                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
                         <div class="flex space-x-2">
-                            <form action="{{ route('admin.negocios.update', $negocio) }}" method="POST" class="inline-block">
+                            <form action="{{ route('admin.negocios.update', $negocio) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" name="estado" value="1">
-                                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Aprobar</button>
+                                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-md text-xs">Aprobar</button>
                             </form>
-                            <form action="{{ route('admin.negocios.update', $negocio) }}" method="POST" class="inline-block">
+                            <form action="{{ route('admin.negocios.update', $negocio) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" name="estado" value="0">
-                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg text-sm">Rechazar</button>
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-md text-xs">Rechazar</button>
                             </form>
                         </div>
                     </div>
