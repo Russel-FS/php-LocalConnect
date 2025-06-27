@@ -179,7 +179,7 @@
                                 class="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col p-0">
                                 <!-- Header con imagen y estado -->
                                 <div
-                                    class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                    class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden rounded-2xl">
                                     @if ($negocio->imagen_portada)
                                         <img src="{{ $negocio->imagen_portada }}" alt="{{ $negocio->nombre_negocio }}"
                                             class="object-cover w-full h-full" loading="lazy"
