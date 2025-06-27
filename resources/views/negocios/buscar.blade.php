@@ -24,128 +24,130 @@
                 </div>
 
                 <!-- Buscador y Filtros -->
-                <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="space-y-6">
+                <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="space-y-6 mb-8">
                     <!--  Buscador principal -->
-                    <div class="relative max-w-2xl">
-                        <div class="absolute left-5 top-5 z-10">
-                            <x-icons.navigation.search class="h-5 w-5 text-primary-400" />
+                    <div class="relative max-w-2xl mx-auto">
+                        <div class="absolute left-5 top-1/2 -translate-y-1/2 z-10">
+                            <x-icons.navigation.search class="h-5 w-5 text-gray-400" />
                         </div>
                         <input type="text" name="q" placeholder="Buscar negocios..."
-                            class="w-full pl-14 pr-24 py-4 text-base bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-sm focus:border-secondary-400 focus:ring-2 focus:ring-secondary-100/50 transition-all duration-300 placeholder-primary-400 focus:bg-white/95"
+                            class="w-full pl-14 pr-24 py-3 text-base bg-white rounded-full border border-gray-200 shadow-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-100 transition-all duration-300 placeholder-gray-400"
                             value="{{ request('q') }}">
                         <button type="submit"
-                            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary-800 to-primary-700 hover:from-primary-700 hover:to-primary-600 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-300 shadow-sm hover:shadow-md">
+                            class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300">
                             Buscar
                         </button>
                     </div>
-
                     <!--  Filtros dropdown -->
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-3 justify-center">
                         <!-- Dropdown Categorías -->
-                        <div class="relative group">
+                        <div class="relative" x-data="{ open: false }">
                             <button type="button"
-                                class="flex items-center gap-3 px-5 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-full shadow-sm hover:bg-white hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
+                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 text-gray-700 text-sm font-medium"
+                                @click="open = !open">
                                 <x-icons.content.category class="w-4 h-4" />
                                 Categorías
                                 @if (request('categorias'))
-                                    <span class="w-2.5 h-2.5 bg-secondary-500 rounded-full"></span>
+                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
                                 @endif
-                                <x-icons.navigation.chevron-down
-                                    class="w-4 h-4 transition-transform group-hover:rotate-180" />
+                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
+                                    x-bind:class="open ? 'rotate-180' : ''" />
                             </button>
-                            <div
-                                class="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                                <div class="p-5 max-h-64 overflow-y-auto custom-scroll">
-                                    <div class="space-y-2">
+                            <div x-show="open" @click.away="open = false"
+                                class="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-200 z-[9999]"
+                                x-transition>
+                                <div class="p-4 max-h-64 overflow-y-auto custom-scroll">
+                                    <div class="space-y-1">
                                         @foreach ($categorias as $categoria)
                                             <label
-                                                class="flex items-center p-3 hover:bg-primary-50/80 rounded-xl transition-colors duration-200 cursor-pointer">
+                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
                                                 <input type="checkbox" name="categorias[]"
                                                     value="{{ $categoria->id_categoria }}"
-                                                    class="rounded border-primary-300 text-secondary-600 focus:ring-secondary-500"
+                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                                                     {{ in_array($categoria->id_categoria, request('categorias', [])) ? 'checked' : '' }}>
                                                 <span
-                                                    class="ml-3 text-sm text-primary-700 font-medium">{{ $categoria->nombre_categoria }}</span>
+                                                    class="ml-3 text-sm text-gray-700">{{ $categoria->nombre_categoria }}</span>
                                             </label>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Dropdown Características -->
-                        <div class="relative group">
+                        <div class="relative" x-data="{ open: false }">
                             <button type="button"
-                                class="flex items-center gap-3 px-5 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-full shadow-sm hover:bg-white hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
+                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 text-gray-700 text-sm font-medium"
+                                @click="open = !open">
                                 <x-icons.content.check-circle class="w-4 h-4" />
                                 Características
                                 @if (request('caracteristicas'))
-                                    <span class="w-2.5 h-2.5 bg-secondary-500 rounded-full"></span>
+                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
                                 @endif
-                                <x-icons.navigation.chevron-down
-                                    class="w-4 h-4 transition-transform group-hover:rotate-180" />
+                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
+                                    x-bind:class="open ? 'rotate-180' : ''" />
                             </button>
-                            <div
-                                class="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                                <div class="p-5 max-h-64 overflow-y-auto custom-scroll">
-                                    <div class="space-y-2">
+                            <div x-show="open" @click.away="open = false"
+                                class="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-200 z-[9999]"
+                                x-transition>
+                                <div class="p-4 max-h-64 overflow-y-auto custom-scroll">
+                                    <div class="space-y-1">
                                         @foreach ($caracteristicas as $caracteristica)
                                             <label
-                                                class="flex items-center p-3 hover:bg-primary-50/80 rounded-xl transition-colors duration-200 cursor-pointer">
+                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
                                                 <input type="checkbox" name="caracteristicas[]"
                                                     value="{{ $caracteristica->id_caracteristica }}"
-                                                    class="rounded border-primary-300 text-secondary-600 focus:ring-secondary-500"
+                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                                                     {{ in_array($caracteristica->id_caracteristica, request('caracteristicas', [])) ? 'checked' : '' }}>
                                                 <span
-                                                    class="ml-3 text-sm text-primary-700 font-medium">{{ $caracteristica->nombre }}</span>
+                                                    class="ml-3 text-sm text-gray-700">{{ $caracteristica->nombre }}</span>
                                             </label>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Dropdown Servicios Predefinidos -->
-                        <div class="relative group">
+                        <div class="relative" x-data="{ open: false }">
                             <button type="button"
-                                class="flex items-center gap-3 px-5 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 rounded-full shadow-sm hover:bg-white hover:border-primary-400 transition-all duration-300 text-primary-700 font-medium">
+                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 text-gray-700 text-sm font-medium"
+                                @click="open = !open">
                                 <x-icons.content.lightning class="w-4 h-4" />
                                 Servicios
                                 @if (request('servicios'))
-                                    <span class="w-2.5 h-2.5 bg-secondary-500 rounded-full"></span>
+                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
                                 @endif
-                                <x-icons.navigation.chevron-down
-                                    class="w-4 h-4 transition-transform group-hover:rotate-180" />
+                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
+                                    x-bind:class="open ? 'rotate-180' : ''" />
                             </button>
-                            <div
-                                class="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-md border border-primary-200/60 rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                                <div class="p-5 max-h-64 overflow-y-auto custom-scroll">
-                                    <div class="space-y-2">
+                            <div x-show="open" @click.away="open = false"
+                                class="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-200 z-[9999]"
+                                x-transition>
+                                <div class="p-4 max-h-64 overflow-y-auto custom-scroll">
+                                    <div class="space-y-1">
                                         @foreach ($serviciosPredefinidos as $servicio)
                                             <label
-                                                class="flex items-center p-3 hover:bg-primary-50/80 rounded-xl transition-colors duration-200 cursor-pointer">
+                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
                                                 <input type="checkbox" name="servicios[]"
                                                     value="{{ $servicio->id_servicio_predefinido }}"
-                                                    class="rounded border-primary-300 text-secondary-600 focus:ring-secondary-500"
+                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                                                     {{ in_array($servicio->id_servicio_predefinido, request('servicios', [])) ? 'checked' : '' }}>
                                                 <span
-                                                    class="ml-3 text-sm text-primary-700 font-medium">{{ $servicio->nombre_servicio }}</span>
+                                                    class="ml-3 text-sm text-gray-700">{{ $servicio->nombre_servicio }}</span>
                                             </label>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Botones de acción -->
-                        <div class="flex gap-3">
+                        <div class="flex gap-2">
                             <button type="submit"
-                                class="flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-primary-800 to-primary-700 hover:from-primary-700 hover:to-primary-600 text-white rounded-full font-medium transition-all duration-300 shadow-sm hover:shadow-md">
+                                class="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full text-sm font-medium transition-all duration-300">
                                 <x-icons.actions.filter class="w-4 h-4" />
                                 Aplicar
                             </button>
                             <a href="{{ route('negocios.buscar') }}"
-                                class="flex items-center gap-2.5 px-6 py-3 bg-white/90 backdrop-blur-md border border-primary-200/60 text-primary-700 rounded-full font-medium transition-all duration-300 shadow-sm hover:bg-white hover:border-primary-400">
+                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 text-gray-700 text-sm font-medium transition-all duration-300 hover:bg-gray-50">
                                 <x-icons.actions.refresh class="w-4 h-4" />
                                 Limpiar
                             </a>
