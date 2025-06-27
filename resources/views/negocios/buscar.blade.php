@@ -282,9 +282,8 @@
                                     <!-- Categorías -->
                                     <div>
                                         <div class="flex items-center gap-3 mb-4">
-                                            <div
-                                                class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
-                                                <x-icons.content.category class="w-4 h-4 text-primary-600" />
+                                            <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                <x-icons.content.category class="w-4 h-4 text-gray-600" />
                                             </div>
                                             <div>
                                                 <h3 class="text-base font-semibold text-gray-900">Categorías</h3>
@@ -294,13 +293,13 @@
                                         <div class="grid grid-cols-1 gap-2">
                                             @foreach ($categorias as $categoria)
                                                 <label
-                                                    class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border-2 border-transparent text-sm cursor-pointer hover:bg-primary-50 hover:border-primary-200 transition-all duration-200 group">
+                                                    class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border-2 border-transparent text-sm cursor-pointer hover:bg-gray-100 hover:border-gray-200 transition-all duration-200 group">
                                                     <input type="checkbox" name="categorias[]"
                                                         value="{{ $categoria->id_categoria }}"
-                                                        class="w-5 h-5 accent-primary-600 rounded border-gray-300"
+                                                        class="w-5 h-5 accent-gray-600 rounded border-gray-300"
                                                         {{ in_array($categoria->id_categoria, request('categorias', [])) ? 'checked' : '' }}>
                                                     <span
-                                                        class="text-gray-700 font-medium group-hover:text-primary-700">{{ $categoria->nombre_categoria }}</span>
+                                                        class="text-gray-700 font-medium group-hover:text-gray-900">{{ $categoria->nombre_categoria }}</span>
                                                 </label>
                                             @endforeach
                                         </div>
@@ -309,9 +308,8 @@
                                     <!-- Características -->
                                     <div>
                                         <div class="flex items-center gap-3 mb-4">
-                                            <div
-                                                class="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center">
-                                                <x-icons.content.check-circle class="w-4 h-4 text-secondary-600" />
+                                            <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                <x-icons.content.check-circle class="w-4 h-4 text-gray-600" />
                                             </div>
                                             <div>
                                                 <h3 class="text-base font-semibold text-gray-900">Características</h3>
@@ -321,13 +319,13 @@
                                         <div class="grid grid-cols-1 gap-2">
                                             @foreach ($caracteristicas as $caracteristica)
                                                 <label
-                                                    class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border-2 border-transparent text-sm cursor-pointer hover:bg-secondary-50 hover:border-secondary-200 transition-all duration-200 group">
+                                                    class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border-2 border-transparent text-sm cursor-pointer hover:bg-gray-100 hover:border-gray-200 transition-all duration-200 group">
                                                     <input type="checkbox" name="caracteristicas[]"
                                                         value="{{ $caracteristica->id_caracteristica }}"
-                                                        class="w-5 h-5 accent-secondary-600 rounded border-gray-300"
+                                                        class="w-5 h-5 accent-gray-600 rounded border-gray-300"
                                                         {{ in_array($caracteristica->id_caracteristica, request('caracteristicas', [])) ? 'checked' : '' }}>
                                                     <span
-                                                        class="text-gray-700 font-medium group-hover:text-secondary-700">{{ $caracteristica->nombre }}</span>
+                                                        class="text-gray-700 font-medium group-hover:text-gray-900">{{ $caracteristica->nombre }}</span>
                                                 </label>
                                             @endforeach
                                         </div>
@@ -336,8 +334,8 @@
                                     <!-- Servicios -->
                                     <div>
                                         <div class="flex items-center gap-3 mb-4">
-                                            <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                                <x-icons.content.lightning class="w-4 h-4 text-yellow-600" />
+                                            <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                <x-icons.content.lightning class="w-4 h-4 text-gray-600" />
                                             </div>
                                             <div>
                                                 <h3 class="text-base font-semibold text-gray-900">Servicios</h3>
@@ -347,13 +345,13 @@
                                         <div class="grid grid-cols-1 gap-2">
                                             @foreach ($serviciosPredefinidos as $servicio)
                                                 <label
-                                                    class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border-2 border-transparent text-sm cursor-pointer hover:bg-yellow-50 hover:border-yellow-200 transition-all duration-200 group">
+                                                    class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border-2 border-transparent text-sm cursor-pointer hover:bg-gray-100 hover:border-gray-200 transition-all duration-200 group">
                                                     <input type="checkbox" name="servicios[]"
                                                         value="{{ $servicio->id_servicio_predefinido }}"
-                                                        class="w-5 h-5 accent-yellow-600 rounded border-gray-300"
+                                                        class="w-5 h-5 accent-gray-600 rounded border-gray-300"
                                                         {{ in_array($servicio->id_servicio_predefinido, request('servicios', [])) ? 'checked' : '' }}>
                                                     <span
-                                                        class="text-gray-700 font-medium group-hover:text-yellow-700">{{ $servicio->nombre_servicio }}</span>
+                                                        class="text-gray-700 font-medium group-hover:text-gray-900">{{ $servicio->nombre_servicio }}</span>
                                                 </label>
                                             @endforeach
                                         </div>
@@ -365,7 +363,7 @@
                             <div class="px-6 py-6 border-t border-gray-100 bg-gray-50">
                                 <div class="flex gap-3">
                                     <button type="submit" form="filtros-form-movil"
-                                        class="flex-1 py-4 rounded-2xl bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-200 text-sm shadow-lg shadow-primary-200">
+                                        class="flex-1 py-4 rounded-2xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-all duration-200 text-sm">
                                         Aplicar filtros
                                     </button>
                                     <a href="{{ route('negocios.buscar') }}"
