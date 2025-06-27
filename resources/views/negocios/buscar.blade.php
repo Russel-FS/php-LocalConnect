@@ -176,19 +176,24 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                         @foreach ($negocios as $negocio)
                             <div
-                                class="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col p-0">
-                                <!-- Header con imagen y estado -->
+                                class="fade-in-card group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex flex-col p-0">
+                                <!-- Header con imagen, estado y promo -->
                                 <div
-                                    class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden rounded-2xl">
+                                    class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden rounded-2xl img-responsive-rappi">
                                     @if ($negocio->imagen_portada)
                                         <img src="{{ $negocio->imagen_portada }}" alt="{{ $negocio->nombre_negocio }}"
-                                            class="object-cover w-full h-full" loading="lazy"
-                                            style="border-radius: 0 0 1.5rem 1.5rem;">
+                                            class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                                            loading="lazy" style="border-radius: 0 0 1.5rem 1.5rem;">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center">
                                             <x-icons.ui.business
                                                 class="h-12 w-12 text-primary-400 group-hover:text-primary-500 transition-colors duration-300" />
                                         </div>
+                                    @endif
+                                    <!-- Badge Promo -->
+                                    @if ($negocio->promociones && $negocio->promociones->count() > 0)
+                                        <span
+                                            class="absolute top-4 left-4 bg-pink-100 text-pink-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">Promo</span>
                                     @endif
                                     <!-- Estado de verificación -->
                                     <span
@@ -198,6 +203,15 @@
                                 </div>
                                 <!-- Contenido principal -->
                                 <div class="flex-1 flex flex-col px-6 pt-6 pb-4">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <!-- Avatar inicial usuario -->
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-base select-none">
+                                            {{ strtoupper(substr($negocio->usuario->name ?? $negocio->usuario->email, 0, 1)) }}
+                                        </div>
+                                        <span
+                                            class="text-xs text-gray-500 font-medium truncate">{{ $negocio->usuario->name ?? $negocio->usuario->email }}</span>
+                                    </div>
                                     <h3 class="text-lg font-semibold text-gray-900 leading-snug truncate mb-1"
                                         title="{{ $negocio->nombre_negocio }}">
                                         {{ $negocio->nombre_negocio }}
@@ -285,13 +299,13 @@
                                                     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contacto->valor_contacto) }}"
                                                         target="_blank"
                                                         class="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center hover:from-green-200 hover:to-green-300 transition-all duration-300 shadow-sm hover:shadow-md"
-                                                        title="WhatsApp">
+                                                        title="WhatsApp" aria-label="WhatsApp">
                                                         <x-icons.solid.whatsapp class="w-4 h-4 text-green-600" />
                                                     </a>
                                                 @elseif($contacto->tipo_contacto === 'telefono')
                                                     <a href="tel:{{ $contacto->valor_contacto }}"
                                                         class="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center hover:from-blue-200 hover:to-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
-                                                        title="Llamar">
+                                                        title="Llamar" aria-label="Llamar">
                                                         <x-icons.outline.phone class="w-4 h-4 text-blue-600" />
                                                     </a>
                                                 @endif
@@ -303,7 +317,8 @@
                                 <div
                                     class="w-full flex justify-between items-center px-6 pb-4 pt-2 mt-auto border-t border-gray-100">
                                     <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}"
-                                        class="btn-link text-sm font-semibold">
+                                        class="btn-link text-sm font-semibold"
+                                        aria-label="Ver detalles de {{ $negocio->nombre_negocio }}">
                                         Ver detalles
                                         <svg class="w-4 h-4 ml-1 inline-block text-primary-600" fill="none"
                                             stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -368,6 +383,31 @@
         .btn-link:hover {
             background: var(--color-primary-50);
             color: var(--color-primary-800);
+        }
+
+        .fade-in-card {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInCard 0.7s cubic-bezier(.4, 0, .2, 1) forwards;
+        }
+
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .img-responsive-rappi {
+                aspect-ratio: 1/1;
+            }
+        }
+
+        @media (min-width: 641px) {
+            .img-responsive-rappi {
+                aspect-ratio: 16/9;
+            }
         }
     </style>
 @endsection
