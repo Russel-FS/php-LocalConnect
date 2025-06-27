@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-br from-primary-50 via-white to-gray-50 py-8 sm:py-12 lg:py-16">
+    <div class="min-h-screen bg-gradient-to-br from-primary-50 via-primary-50 py-8 sm:py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header con buscador -->
             <div class="mb-8 sm:mb-12" x-data="{ menuMobil: false }">
