@@ -143,7 +143,7 @@
     </main>
 
     <!-- navagecion mobil inferior flotante -->
-    <div class="lg:hidden fixed bottom-4 left-4 right-4 z-50">
+    <div class="lg:hidden fixed bottom-4 left-4 right-4 z-40">
         <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-gray-100/50">
             <div class="flex items-center justify-around px-2 py-3">
                 <!-- Inicio -->
