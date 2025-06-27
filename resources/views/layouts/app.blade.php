@@ -24,7 +24,7 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-50 text-gray-900" style="font-family: 'Inter', sans-serif;">
-    <!-- Navbar moderno -->
+    <!-- Navbar pc -->
     <nav class="bg-white/80 backdrop-blur-md w-full fixed z-50 border-b border-gray-100/50">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between h-16 lg:h-20 items-center">
@@ -142,63 +142,65 @@
         @yield('content')
     </main>
 
-    <!-- Mennu inferior flotante para móvillllll -->
-    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
-        <div class="flex items-center justify-around px-2 py-2">
-            <!-- Inicio -->
-            <a href="/"
-                class="flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-colors duration-200 {{ request()->is('/') ? 'text-primary-600 bg-primary-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span class="text-xs font-medium">Inicio</span>
-            </a>
-
-            <!-- Buscar -->
-            <a href="{{ route('negocios.buscar') }}"
-                class="flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-colors duration-200 {{ request()->routeIs('negocios.buscar') ? 'text-primary-600 bg-primary-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <span class="text-xs font-medium">Buscar</span>
-            </a>
-
-            @if (Auth::check())
-                <!-- Mis Negocios -->
-                <a href="{{ route('negocios.mis-negocios') }}"
-                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-colors duration-200 {{ request()->routeIs('negocios.mis-negocios') ? 'text-primary-600 bg-primary-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
-                    <x-icons.ui.business class="w-6 h-6" />
-                    <span class="text-xs font-medium">Mis Negocios</span>
-                </a>
-            @endif
-
-            <!-- Cuenta -->
-            @if (Auth::check())
-                <a href="/perfil"
-                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-colors duration-200 {{ request()->is('perfil*') ? 'text-primary-600 bg-primary-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
-                    <div
-                        class="w-6 h-6 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                        <span
-                            class="text-xs font-semibold text-gray-700">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-                    </div>
-                    <span class="text-xs font-medium">Cuenta</span>
-                </a>
-            @else
-                <a href="{{ route('login') }}"
-                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-colors duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- navagecion mobil inferior flotante -->
+    <div class="lg:hidden fixed bottom-4 left-4 right-4 z-50">
+        <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-gray-100/50">
+            <div class="flex items-center justify-around px-2 py-3">
+                <!-- Inicio -->
+                <a href="/"
+                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('/') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                     </svg>
-                    <span class="text-xs font-medium">Iniciar sesión</span>
+                    <span class="text-xs font-medium">Inicio</span>
                 </a>
-            @endif
+
+                <!-- Buscar -->
+                <a href="{{ route('negocios.buscar') }}"
+                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.buscar') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <span class="text-xs font-medium">Buscar</span>
+                </a>
+
+                @if (Auth::check())
+                    <!-- Mis Negocios -->
+                    <a href="{{ route('negocios.mis-negocios') }}"
+                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.mis-negocios') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50' }}">
+                        <x-icons.ui.business class="w-5 h-5" />
+                        <span class="text-xs font-medium">Mis Negocios</span>
+                    </a>
+                @endif
+
+                <!-- Cuenta -->
+                @if (Auth::check())
+                    <a href="/perfil"
+                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('perfil*') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50' }}">
+                        <div
+                            class="w-5 h-5 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                            <span
+                                class="text-xs font-semibold text-gray-700">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                        </div>
+                        <span class="text-xs font-medium">Cuenta</span>
+                    </a>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 text-gray-600 hover:text-gray-900 hover:bg-gray-50/50">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span class="text-xs font-medium">Iniciar sesión</span>
+                    </a>
+                @endif
+            </div>
         </div>
     </div>
 
-    <!-- Footer moderno -->
+    <!-- Footer  -->
     <footer class="bg-white border-t border-gray-100 mt-24">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
@@ -243,7 +245,7 @@
                 <div>
                     <h3 class="font-semibold text-gray-900 mb-4">Contacto</h3>
                     <div class="space-y-3">
-                        <p class="text-sm text-gray-600">info@localconnect.com</p>
+                        <p class="text-sm text-gray-600">flores@localconnect.com</p>
                         <p class="text-sm text-gray-600">+1 (555) 123-4567</p>
                         <div class="flex gap-3 pt-2">
                             <a href="#"
