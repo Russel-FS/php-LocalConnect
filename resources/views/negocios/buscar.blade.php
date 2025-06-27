@@ -5,155 +5,237 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header con buscador -->
             <div class="mb-8 sm:mb-12">
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6 mb-8 sm:mb-10">
-                    <div>
-                        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-800 tracking-tight mb-3">
-                            Resultados de búsqueda
-                        </h1>
-                        @if (request('q'))
-                            <p class="text-lg sm:text-xl text-primary-600 font-medium">
-                                Buscando: <span
-                                    class="font-semibold text-secondary-600 bg-secondary-100/80 backdrop-blur-sm px-3 py-1 rounded-full border border-secondary-200">"{{ request('q') }}"</span>
-                            </p>
+                <div class="max-w-6xl mx-auto">
+                    <div class="bg-white rounded-2xl p-6 mb-6">
+                        <div class="flex flex-col lg:flex-row gap-4 items-center mb-4">
+                            <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="w-full">
+                                <div class="flex flex-col lg:flex-row gap-4 items-center">
+                                    <!-- Buscador -->
+                                    <div class="flex-1 min-w-0">
+                                        <div class="relative">
+                                            <div class="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+                                                <x-icons.navigation.search class="h-5 w-5 text-gray-400" />
+                                            </div>
+                                            <input type="text" name="q" placeholder="Buscar negocios..."
+                                                class="w-full pl-12 pr-4 py-2.5 text-sm bg-gray-50 rounded-lg border border-gray-200 focus:border-primary-400 focus:ring-1 focus:ring-primary-100 transition-all duration-300 placeholder-gray-400"
+                                                value="{{ request('q') }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Filtros principales -->
+                                    <div class="flex flex-wrap gap-3 items-center">
+                                        <!-- Categorías -->
+                                        <div class="relative" x-data="{ open: false }">
+                                            <button type="button"
+                                                class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors duration-200 rounded-lg hover:bg-gray-50"
+                                                @click="open = !open">
+                                                <x-icons.content.category class="w-4 h-4" />
+                                                Categorías
+                                                @if (request('categorias'))
+                                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
+                                                @endif
+                                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
+                                                    x-bind:class="open ? 'rotate-180' : ''" />
+                                            </button>
+                                            <div x-show="open" @click.away="open = false"
+                                                class="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50"
+                                                x-transition>
+                                                <div class="p-5">
+                                                    <div class="flex items-center gap-2 mb-4">
+                                                        <x-icons.content.category class="w-5 h-5 text-primary-600" />
+                                                        <h4 class="text-sm font-semibold text-gray-900">Categorías</h4>
+                                                    </div>
+                                                    <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar">
+                                                        @foreach ($categorias as $categoria)
+                                                            <label
+                                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
+                                                                <input type="checkbox" name="categorias[]"
+                                                                    value="{{ $categoria->id_categoria }}"
+                                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                                                    {{ in_array($categoria->id_categoria, request('categorias', [])) ? 'checked' : '' }}>
+                                                                <span
+                                                                    class="ml-3 text-sm text-gray-700">{{ $categoria->nombre_categoria }}</span>
+                                                            </label>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Características -->
+                                        <div class="relative" x-data="{ open: false }">
+                                            <button type="button"
+                                                class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors duration-200 rounded-lg hover:bg-gray-50"
+                                                @click="open = !open">
+                                                <x-icons.content.check-circle class="w-4 h-4" />
+                                                Características
+                                                @if (request('caracteristicas'))
+                                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
+                                                @endif
+                                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
+                                                    x-bind:class="open ? 'rotate-180' : ''" />
+                                            </button>
+                                            <div x-show="open" @click.away="open = false"
+                                                class="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50"
+                                                x-transition>
+                                                <div class="p-5">
+                                                    <div class="flex items-center gap-2 mb-4">
+                                                        <x-icons.content.check-circle class="w-5 h-5 text-primary-600" />
+                                                        <h4 class="text-sm font-semibold text-gray-900">Características</h4>
+                                                    </div>
+                                                    <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar">
+                                                        @foreach ($caracteristicas as $caracteristica)
+                                                            <label
+                                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
+                                                                <input type="checkbox" name="caracteristicas[]"
+                                                                    value="{{ $caracteristica->id_caracteristica }}"
+                                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                                                    {{ in_array($caracteristica->id_caracteristica, request('caracteristicas', [])) ? 'checked' : '' }}>
+                                                                <span
+                                                                    class="ml-3 text-sm text-gray-700">{{ $caracteristica->nombre }}</span>
+                                                            </label>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Servicios -->
+                                        <div class="relative" x-data="{ open: false }">
+                                            <button type="button"
+                                                class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors duration-200 rounded-lg hover:bg-gray-50"
+                                                @click="open = !open">
+                                                <x-icons.content.lightning class="w-4 h-4" />
+                                                Servicios
+                                                @if (request('servicios'))
+                                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
+                                                @endif
+                                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
+                                                    x-bind:class="open ? 'rotate-180' : ''" />
+                                            </button>
+                                            <div x-show="open" @click.away="open = false"
+                                                class="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50"
+                                                x-transition>
+                                                <div class="p-5">
+                                                    <div class="flex items-center gap-2 mb-4">
+                                                        <x-icons.content.lightning class="w-5 h-5 text-primary-600" />
+                                                        <h4 class="text-sm font-semibold text-gray-900">Servicios</h4>
+                                                    </div>
+                                                    <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar">
+                                                        @foreach ($serviciosPredefinidos as $servicio)
+                                                            <label
+                                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
+                                                                <input type="checkbox" name="servicios[]"
+                                                                    value="{{ $servicio->id_servicio_predefinido }}"
+                                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                                                    {{ in_array($servicio->id_servicio_predefinido, request('servicios', [])) ? 'checked' : '' }}>
+                                                                <span
+                                                                    class="ml-3 text-sm text-gray-700">{{ $servicio->nombre_servicio }}</span>
+                                                            </label>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Botones de acción -->
+                                        <div class="flex gap-2">
+                                            <button type="submit"
+                                                class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors duration-200 rounded-lg hover:bg-primary-50">
+                                                <x-icons.actions.filter class="w-4 h-4" />
+                                                Aplicar
+                                            </button>
+                                            <a href="{{ route('negocios.buscar') }}"
+                                                class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200 rounded-lg hover:bg-gray-50">
+                                                <x-icons.actions.refresh class="w-4 h-4" />
+                                                Limpiar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Información de búsqueda debajo -->
+                        <div
+                            class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 pt-4 border-t border-gray-100">
+                            <div class="flex items-center gap-3">
+                                @if (request('q'))
+                                    <p class="text-sm text-gray-600">
+                                        Buscando: <span class="font-medium text-primary-700">"{{ request('q') }}"</span>
+                                    </p>
+                                @endif
+                            </div>
+                            <span class="text-sm text-gray-500 font-medium">
+                                {{ $negocios->total() }}
+                                {{ $negocios->total() == 1 ? 'negocio encontrado' : 'negocios encontrados' }}
+                            </span>
+                        </div>
+
+                        <!-- Filtros activos -->
+                        @if (request('categorias') || request('caracteristicas') || request('servicios'))
+                            <div class="flex flex-wrap gap-2 justify-start pt-4 border-t border-gray-100">
+                                @if (request('categorias'))
+                                    @foreach (request('categorias') as $categoriaId)
+                                        @php
+                                            $categoria = $categorias->find($categoriaId);
+                                        @endphp
+                                        @if ($categoria)
+                                            <span
+                                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-primary-100 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
+                                                <x-icons.content.category class="w-3 h-3" />
+                                                {{ $categoria->nombre_categoria }}
+                                                <a href="{{ route('negocios.buscar', array_merge(request()->except('categorias'), ['categorias' => array_diff(request('categorias', []), [$categoriaId])])) }}"
+                                                    class="ml-1 hover:text-primary-900 transition-colors duration-200">×</a>
+                                            </span>
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                                @if (request('caracteristicas'))
+                                    @foreach (request('caracteristicas') as $caracteristicaId)
+                                        @php
+                                            $caracteristica = $caracteristicas->find($caracteristicaId);
+                                        @endphp
+                                        @if ($caracteristica)
+                                            <span
+                                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary-100 text-secondary-700 text-xs font-medium rounded-full border border-secondary-200">
+                                                <x-icons.content.check-circle class="w-3 h-3" />
+                                                {{ $caracteristica->nombre }}
+                                                <a href="{{ route('negocios.buscar', array_merge(request()->except('caracteristicas'), ['caracteristicas' => array_diff(request('caracteristicas', []), [$caracteristicaId])])) }}"
+                                                    class="ml-1 hover:text-secondary-900 transition-colors duration-200">×</a>
+                                            </span>
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                                @if (request('servicios'))
+                                    @foreach (request('servicios') as $servicioId)
+                                        @php
+                                            $servicio = $serviciosPredefinidos->find($servicioId);
+                                        @endphp
+                                        @if ($servicio)
+                                            <span
+                                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary-100 text-secondary-700 text-xs font-medium rounded-full border border-secondary-200">
+                                                <x-icons.content.lightning class="w-3 h-3" />
+                                                {{ $servicio->nombre_servicio }}
+                                                <a href="{{ route('negocios.buscar', array_merge(request()->except('servicios'), ['servicios' => array_diff(request('servicios', []), [$servicioId])])) }}"
+                                                    class="ml-1 hover:text-secondary-900 transition-colors duration-200">×</a>
+                                            </span>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
                         @endif
                     </div>
-                    <span
-                        class="inline-flex items-center px-4 py-2 rounded-full text-sm sm:text-base font-semibold bg-white/80 backdrop-blur-sm border border-primary-200/50 text-primary-700 shadow-sm">
-                        {{ $negocios->total() }} {{ $negocios->total() == 1 ? 'negocio' : 'negocios' }}
-                    </span>
                 </div>
 
-                <!-- Buscador y Filtros -->
-                <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="space-y-6 mb-8">
-                    <!--  Buscador principal -->
-                    <div class="relative max-w-2xl mx-auto">
-                        <div class="absolute left-5 top-1/2 -translate-y-1/2 z-10">
-                            <x-icons.navigation.search class="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input type="text" name="q" placeholder="Buscar negocios..."
-                            class="w-full pl-14 pr-24 py-3 text-base bg-white rounded-full border border-gray-200 shadow-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-100 transition-all duration-300 placeholder-gray-400"
-                            value="{{ request('q') }}">
-                        <button type="submit"
-                            class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300">
-                            Buscar
-                        </button>
-                    </div>
-                    <!--  Filtros dropdown -->
-                    <div class="flex flex-wrap gap-3 justify-center">
-                        <!-- Dropdown Categorías -->
-                        <div class="relative" x-data="{ open: false }">
-                            <button type="button"
-                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 text-gray-700 text-sm font-medium"
-                                @click="open = !open">
-                                <x-icons.content.category class="w-4 h-4" />
-                                Categorías
-                                @if (request('categorias'))
-                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
-                                @endif
-                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
-                                    x-bind:class="open ? 'rotate-180' : ''" />
-                            </button>
-                            <div x-show="open" @click.away="open = false"
-                                class="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-200 z-[9999]"
-                                x-transition>
-                                <div class="p-4 max-h-64 overflow-y-auto custom-scroll">
-                                    <div class="space-y-1">
-                                        @foreach ($categorias as $categoria)
-                                            <label
-                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
-                                                <input type="checkbox" name="categorias[]"
-                                                    value="{{ $categoria->id_categoria }}"
-                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                                                    {{ in_array($categoria->id_categoria, request('categorias', [])) ? 'checked' : '' }}>
-                                                <span
-                                                    class="ml-3 text-sm text-gray-700">{{ $categoria->nombre_categoria }}</span>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Dropdown Características -->
-                        <div class="relative" x-data="{ open: false }">
-                            <button type="button"
-                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 text-gray-700 text-sm font-medium"
-                                @click="open = !open">
-                                <x-icons.content.check-circle class="w-4 h-4" />
-                                Características
-                                @if (request('caracteristicas'))
-                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
-                                @endif
-                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
-                                    x-bind:class="open ? 'rotate-180' : ''" />
-                            </button>
-                            <div x-show="open" @click.away="open = false"
-                                class="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-200 z-[9999]"
-                                x-transition>
-                                <div class="p-4 max-h-64 overflow-y-auto custom-scroll">
-                                    <div class="space-y-1">
-                                        @foreach ($caracteristicas as $caracteristica)
-                                            <label
-                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
-                                                <input type="checkbox" name="caracteristicas[]"
-                                                    value="{{ $caracteristica->id_caracteristica }}"
-                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                                                    {{ in_array($caracteristica->id_caracteristica, request('caracteristicas', [])) ? 'checked' : '' }}>
-                                                <span
-                                                    class="ml-3 text-sm text-gray-700">{{ $caracteristica->nombre }}</span>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Dropdown Servicios Predefinidos -->
-                        <div class="relative" x-data="{ open: false }">
-                            <button type="button"
-                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 text-gray-700 text-sm font-medium"
-                                @click="open = !open">
-                                <x-icons.content.lightning class="w-4 h-4" />
-                                Servicios
-                                @if (request('servicios'))
-                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
-                                @endif
-                                <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
-                                    x-bind:class="open ? 'rotate-180' : ''" />
-                            </button>
-                            <div x-show="open" @click.away="open = false"
-                                class="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-200 z-[9999]"
-                                x-transition>
-                                <div class="p-4 max-h-64 overflow-y-auto custom-scroll">
-                                    <div class="space-y-1">
-                                        @foreach ($serviciosPredefinidos as $servicio)
-                                            <label
-                                                class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200 cursor-pointer">
-                                                <input type="checkbox" name="servicios[]"
-                                                    value="{{ $servicio->id_servicio_predefinido }}"
-                                                    class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                                                    {{ in_array($servicio->id_servicio_predefinido, request('servicios', [])) ? 'checked' : '' }}>
-                                                <span
-                                                    class="ml-3 text-sm text-gray-700">{{ $servicio->nombre_servicio }}</span>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Botones de acción -->
-                        <div class="flex gap-2">
-                            <button type="submit"
-                                class="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full text-sm font-medium transition-all duration-300">
-                                <x-icons.actions.filter class="w-4 h-4" />
-                                Aplicar
-                            </button>
-                            <a href="{{ route('negocios.buscar') }}"
-                                class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 text-gray-700 text-sm font-medium transition-all duration-300 hover:bg-gray-50">
-                                <x-icons.actions.refresh class="w-4 h-4" />
-                                Limpiar
-                            </a>
-                        </div>
-                    </div>
-                </form>
+                <!-- Título de resultados debajo de los filtros -->
+                <div class="text-center mb-8">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-primary-800 tracking-tight">
+                        Resultados de búsqueda
+                    </h1>
+                </div>
             </div>
 
             <!-- Resultados -->
@@ -398,6 +480,31 @@
                 opacity: 1;
                 transform: none;
             }
+        }
+
+        /* Scrollbarr*/
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /*contenedor de filtros*/
+        .filter-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         @media (max-width: 640px) {
