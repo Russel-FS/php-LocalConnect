@@ -4,7 +4,7 @@
     <div class="min-h-screen bg-gradient-to-br from-primary-50 via-white to-gray-50 py-8 sm:py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header con buscador -->
-            <div class="mb-8 sm:mb-12">
+            <div class="mb-8 sm:mb-12" x-data="{ menuMobil: false }">
                 <div class="max-w-6xl mx-auto">
                     <div class="bg-white rounded-2xl p-6 mb-6">
                         <div class="flex flex-col lg:flex-row gap-4 items-center mb-4">
@@ -12,18 +12,32 @@
                                 <div class="flex flex-col lg:flex-row gap-4 items-center">
                                     <!-- Buscador -->
                                     <div class="flex-1 min-w-0">
-                                        <div class="relative">
-                                            <div class="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-                                                <x-icons.navigation.search class="h-5 w-5 text-gray-400" />
-                                            </div>
-                                            <input type="text" name="q" placeholder="Buscar negocios..."
-                                                class="w-full pl-12 pr-4 py-2.5 text-sm bg-gray-50 rounded-lg border border-gray-200 focus:border-primary-400 focus:ring-1 focus:ring-primary-100 transition-all duration-300 placeholder-gray-400"
+                                        <div class="relative group">
+                                            <input type="text" name="q" placeholder="¿Qué negocio buscas hoy?"
+                                                class="w-full pl-4 pr-12 py-3 text-sm bg-white rounded-full border border-gray-200 focus:border-primary-400 focus:ring-1 focus:ring-primary-100 transition-all duration-300 placeholder-gray-400"
                                                 value="{{ request('q') }}">
+                                            <button type="submit"
+                                                class="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center">
+                                                <x-icons.navigation.search class="h-4 w-4" />
+                                            </button>
                                         </div>
                                     </div>
 
-                                    <!-- Filtros principales -->
-                                    <div class="flex flex-wrap gap-3 items-center">
+                                    <!-- Botón de filtros para móvil -->
+                                    <div class="lg:hidden">
+                                        <button type="button"
+                                            class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors duration-200 rounded-lg hover:bg-gray-50"
+                                            @click="menuMobil = true">
+                                            <x-icons.actions.filter class="w-4 h-4" />
+                                            Filtros
+                                            @if (request('categorias') || request('caracteristicas') || request('servicios'))
+                                                <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                                            @endif
+                                        </button>
+                                    </div>
+
+                                    <!-- Filtros principales (solo desktop) -->
+                                    <div class="hidden lg:flex flex-wrap gap-3 items-center">
                                         <!-- Categorías -->
                                         <div class="relative" x-data="{ open: false }">
                                             <button type="button"
@@ -32,7 +46,7 @@
                                                 <x-icons.content.category class="w-4 h-4" />
                                                 Categorías
                                                 @if (request('categorias'))
-                                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
+                                                    <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                                                 @endif
                                                 <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
                                                     x-bind:class="open ? 'rotate-180' : ''" />
@@ -70,7 +84,7 @@
                                                 <x-icons.content.check-circle class="w-4 h-4" />
                                                 Características
                                                 @if (request('caracteristicas'))
-                                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
+                                                    <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                                                 @endif
                                                 <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
                                                     x-bind:class="open ? 'rotate-180' : ''" />
@@ -108,7 +122,7 @@
                                                 <x-icons.content.lightning class="w-4 h-4" />
                                                 Servicios
                                                 @if (request('servicios'))
-                                                    <span class="w-2 h-2 bg-primary-500 rounded-full"></span>
+                                                    <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                                                 @endif
                                                 <x-icons.navigation.chevron-down class="w-4 h-4 transition-transform"
                                                     x-bind:class="open ? 'rotate-180' : ''" />
@@ -156,7 +170,7 @@
                             </form>
                         </div>
 
-                        <!-- Información de búsqueda debajo -->
+                        <!-- Información de búsquedaa -->
                         <div
                             class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 pt-4 border-t border-gray-100">
                             <div class="flex items-center gap-3">
@@ -230,7 +244,115 @@
                     </div>
                 </div>
 
-                <!-- Título de resultados debajo de los filtros -->
+                <!-- Drawer de filtros para móvil tengo sueñooooooooooooooooo revisen el codigo de filtro de desktop creo que algo falla -->
+                <div class="lg:hidden">
+                    <div x-show="menuMobil" x-cloak class="fixed inset-0 z-50 flex justify-end">
+                        <!-- Backdrop negro -->
+                        <div x-show="menuMobil" x-transition:enter="transition-opacity ease-out duration-300"
+                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                            x-transition:leave="transition-opacity ease-in duration-200"
+                            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                            class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="menuMobil = false"></div>
+
+                        <!-- Panel de filtros -->
+                        <div x-show="menuMobil" x-transition:enter="transition-transform ease-out duration-300"
+                            x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+                            x-transition:leave="transition-transform ease-in duration-200"
+                            x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
+                            class="relative w-4/5 h-screen bg-white shadow-2xl flex flex-col" style="width: 80vw;">
+                            <!-- Header fijo -->
+                            <div class="flex items-center justify-between p-6 pb-4 border-b border-gray-100">
+                                <h2 class="text-xl font-bold text-gray-900">Filtros</h2>
+                                <button @click="menuMobil = false" class="p-2 rounded-full hover:bg-gray-100 transition">
+                                    <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor"
+                                        stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Contenido scrolleable -->
+                            <div class="flex-1 overflow-y-auto custom-scrollbar p-6 pt-4">
+                                <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form-movil"
+                                    class="flex flex-col gap-6">
+                                    <!-- Categorías -->
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                            <x-icons.content.category class="w-4 h-4 text-primary-600" /> Categorías
+                                        </h3>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            @foreach ($categorias as $categoria)
+                                                <label
+                                                    class="flex items-center gap-2 px-3 py-2.5 bg-gray-50 rounded-xl border border-gray-200 text-sm cursor-pointer hover:bg-gray-100 transition-colors">
+                                                    <input type="checkbox" name="categorias[]"
+                                                        value="{{ $categoria->id_categoria }}"
+                                                        class="accent-primary-600 rounded"
+                                                        {{ in_array($categoria->id_categoria, request('categorias', [])) ? 'checked' : '' }}>
+                                                    <span class="truncate">{{ $categoria->nombre_categoria }}</span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <!-- Características -->
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                            <x-icons.content.check-circle class="w-4 h-4 text-primary-600" />
+                                            Características
+                                        </h3>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            @foreach ($caracteristicas as $caracteristica)
+                                                <label
+                                                    class="flex items-center gap-2 px-3 py-2.5 bg-gray-50 rounded-xl border border-gray-200 text-sm cursor-pointer hover:bg-gray-100 transition-colors">
+                                                    <input type="checkbox" name="caracteristicas[]"
+                                                        value="{{ $caracteristica->id_caracteristica }}"
+                                                        class="accent-primary-600 rounded"
+                                                        {{ in_array($caracteristica->id_caracteristica, request('caracteristicas', [])) ? 'checked' : '' }}>
+                                                    <span class="truncate">{{ $caracteristica->nombre }}</span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <!-- Servicios -->
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                            <x-icons.content.lightning class="w-4 h-4 text-primary-600" /> Servicios
+                                        </h3>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            @foreach ($serviciosPredefinidos as $servicio)
+                                                <label
+                                                    class="flex items-center gap-2 px-3 py-2.5 bg-gray-50 rounded-xl border border-gray-200 text-sm cursor-pointer hover:bg-gray-100 transition-colors">
+                                                    <input type="checkbox" name="servicios[]"
+                                                        value="{{ $servicio->id_servicio_predefinido }}"
+                                                        class="accent-primary-600 rounded"
+                                                        {{ in_array($servicio->id_servicio_predefinido, request('servicios', [])) ? 'checked' : '' }}>
+                                                    <span class="truncate">{{ $servicio->nombre_servicio }}</span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Botones fijos en la parte inferior -->
+                            <div class="p-6 pt-4 border-t border-gray-100 bg-white">
+                                <div class="flex gap-3">
+                                    <button type="submit" form="filtros-form-movil"
+                                        class="flex-1 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors">
+                                        Aplicar filtros
+                                    </button>
+                                    <a href="{{ route('negocios.buscar') }}"
+                                        class="flex-1 py-3 rounded-xl bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors text-center">
+                                        Limpiar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Título-->
                 <div class="text-center mb-8">
                     <h1 class="text-2xl sm:text-3xl font-bold text-primary-800 tracking-tight">
                         Resultados de búsqueda
@@ -261,7 +383,7 @@
                         @foreach ($negocios as $negocio)
                             <div
                                 class="fade-in-card group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex flex-col p-0">
-                                <!-- Header con imagen, estado y promo -->
+                                <!-- Header -->
                                 <div
                                     class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden rounded-2xl img-responsive-rappi">
                                     @if ($negocio->imagen_portada)
@@ -426,12 +548,24 @@
     </div>
 
     <script>
-        // Auto-submit form cuando cambien los checkboxes
+        // Auto-submitr form cuando cambien los checkboxesss xd son las 1 am y yo haciendo esto.
         document.addEventListener('DOMContentLoaded', function() {
+            // Para el formulario de desktop
             const checkboxes = document.querySelectorAll('#filtros-form input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     document.getElementById('filtros-form').submit();
+                });
+            });
+
+            // Para el formulario móvil
+            const checkboxesMovil = document.querySelectorAll('#filtros-form-movil input[type="checkbox"]');
+            checkboxesMovil.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Pequeño delay para que se vea el cambio visual
+                    setTimeout(() => {
+                        document.getElementById('filtros-form-movil').submit();
+                    }, 300);
                 });
             });
         });
