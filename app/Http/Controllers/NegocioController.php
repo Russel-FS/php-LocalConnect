@@ -195,10 +195,29 @@ class NegocioController extends Controller
             'caracteristicas' => 'array',
             // Validación de horarios
             'horarios' => 'required|array|size:7',
-            'horarios.*.cerrado' => 'required',
-            'horarios.*.hora_apertura' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i',
-            'horarios.*.hora_cierre' => 'required_if:horarios.*.cerrado,0|nullable|date_format:H:i|after:horarios.*.hora_apertura',
+            'horarios.*.cerrado' => 'required|in:0,1',
+            'horarios.*.hora_apertura' => 'nullable|date_format:H:i',
+            'horarios.*.hora_cierre' => 'nullable|date_format:H:i',
+            'horarios.*.dia_semana' => 'required|string',
         ]);
+
+        // Validación adicional para horarios
+        foreach ($validated['horarios'] as $index => $horario) {
+            if (!$horario['cerrado']) {
+                if (empty($horario['hora_apertura']) || empty($horario['hora_cierre'])) {
+                    throw ValidationException::withMessages([
+                        "horarios.{$index}.hora_apertura" => 'La hora de apertura es requerida cuando el día está abierto.',
+                        "horarios.{$index}.hora_cierre" => 'La hora de cierre es requerida cuando el día está abierto.'
+                    ]);
+                }
+
+                if ($horario['hora_apertura'] >= $horario['hora_cierre']) {
+                    throw ValidationException::withMessages([
+                        "horarios.{$index}.hora_cierre" => 'La hora de cierre debe ser mayor que la hora de apertura.'
+                    ]);
+                }
+            }
+        }
 
         // Pasar los horarios explícitamente al servicio
         $this->negocioService->actualizarNegocio($negocio, $validated, $request, $request->input('horarios'));

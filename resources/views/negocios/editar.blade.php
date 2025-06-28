@@ -332,11 +332,17 @@
                         @endphp
                         @foreach ($dias as $i => $dia)
                             @php
-                                $horario =
-                                    $horarios->firstWhere('dia_semana', $dia) ??
-                                    new \App\Models\Negocio\HorarioAtencion(['dia_semana' => $dia, 'cerrado' => true]);
+                                $horario = $horarios->firstWhere('dia_semana', $dia);
+                                if (!$horario) {
+                                    $horario = new \App\Models\Negocio\HorarioAtencion([
+                                        'dia_semana' => $dia,
+                                        'cerrado' => true,
+                                        'hora_apertura' => null,
+                                        'hora_cierre' => null,
+                                    ]);
+                                }
                             @endphp
-                            <div x-data="{ cerrado: {{ old('horarios.' . $i . '.cerrado', $horario->cerrado) ? 'true' : 'false' }} }"
+                            <div x-data="{ cerrado: {{ old('horarios.' . $i . '.cerrado', $horario->cerrado ? 'true' : 'false') }} }"
                                 class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-150 flex flex-col gap-3">
                                 <div class="flex items-center gap-3 mb-2">
                                     <span class="w-8 h-8 bg-primary-100 rounded-xl flex items-center justify-center">
@@ -353,14 +359,14 @@
                                     <div>
                                         <label class="block text-xs font-medium text-gray-500 mb-1">Apertura</label>
                                         <input type="time" name="horarios[{{ $i }}][hora_apertura]"
-                                            value="{{ old('horarios.' . $i . '.hora_apertura', optional($horario)->hora_apertura) }}"
+                                            value="{{ old('horarios.' . $i . '.hora_apertura', $horario->hora_apertura ? \Carbon\Carbon::parse($horario->hora_apertura)->format('H:i') : '') }}"
                                             :disabled="cerrado"
                                             class="w-full px-3 py-2 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed transition">
                                     </div>
                                     <div>
                                         <label class="block text-xs font-medium text-gray-500 mb-1">Cierre</label>
                                         <input type="time" name="horarios[{{ $i }}][hora_cierre]"
-                                            value="{{ old('horarios.' . $i . '.hora_cierre', optional($horario)->hora_cierre) }}"
+                                            value="{{ old('horarios.' . $i . '.hora_cierre', $horario->hora_cierre ? \Carbon\Carbon::parse($horario->hora_cierre)->format('H:i') : '') }}"
                                             :disabled="cerrado"
                                             class="w-full px-3 py-2 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary-200 focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed transition">
                                     </div>
@@ -474,7 +480,7 @@
             lista.insertAdjacentHTML('beforeend', html);
         }
 
-        // Validación de horarios y envío solo si es válido
+        // Validación de horarios y envío solo si es válidoo
         document.getElementById('btn-guardar-negocio').addEventListener('click', function() {
             const form = document.getElementById('form-editar-negocio');
             const dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];

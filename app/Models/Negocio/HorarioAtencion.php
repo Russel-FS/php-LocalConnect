@@ -18,6 +18,12 @@ class HorarioAtencion extends Model
         'cerrado'
     ];
 
+    protected $casts = [
+        'hora_apertura' => 'datetime:H:i',
+        'hora_cierre' => 'datetime:H:i',
+        'cerrado' => 'boolean'
+    ];
+
     public function negocio()
     {
         return $this->belongsTo(Negocio::class, 'id_negocio');
