@@ -48,27 +48,24 @@
                 <!-- Navegación -->
                 <div class="flex items-center gap-2 lg:gap-4">
                     @if (Auth::check())
-                        @if (Auth::user()->isAdmin())
-                            <a href="/admin"
-                                class="hidden lg:flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                </svg>
-                                <span>Admin</span>
-                            </a>
-                        @endif
+                        <div class="hidden lg:flex">
+                            @if (Auth::user()->isAdmin())
+                                <a href="/admin"
+                                    class=" items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                    </svg>
+                                    <span>Admin</span>
+                                </a>
+                            @endif
 
-                        <a href="{{ route('negocios.mis-negocios') }}"
-                            class="hidden lg:flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 5a2 2 0 012-2h2a2 2 0 012 2v2H8V5z" />
-                            </svg>
-                            <span>Mis Negocios</span>
-                        </a>
+                            <a href="{{ route('negocios.mis-negocios') }}"
+                                class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
+                                <x-icons.outline.folder class="w-4 h-4" />
+                                <span>Mis Negocios</span>
+                            </a>
+                        </div>
 
                         <!-- Avatar y menú de usuario -->
                         <div x-data="{ open: false }" class="relative hidden lg:block">
@@ -96,12 +93,7 @@
                                 <div class="py-2">
                                     <a href="{{ route('negocios.mis-negocios') }}"
                                         class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 5a2 2 0 012-2h2a2 2 0 012 2v2H8V5z" />
-                                        </svg>
+                                        <x-icons.outline.folder class="w-4 h-4" />
                                         <span>Mis Negocios</span>
                                     </a>
 
@@ -160,14 +152,9 @@
                 <a href="/"
                     class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('/') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
                     @if (request()->is('/'))
-                        <svg class="w-5 h-5 text-slate-700" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                        </svg>
+                        <x-icons.solid.home class="w-5 h-5 text-slate-700" />
                     @else
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
+                        <x-icons.outline.home class="w-5 h-5" />
                     @endif
                     <span class="text-xs font-medium">Inicio</span>
                 </a>
@@ -176,15 +163,9 @@
                 <a href="{{ route('negocios.buscar') }}"
                     class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.buscar') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
                     @if (request()->routeIs('negocios.buscar'))
-                        <svg class="w-5 h-5 text-slate-700" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                        </svg>
+                        <x-icons.solid.search class="w-5 h-5 text-slate-700" />
                     @else
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                        <x-icons.outline.search class="w-5 h-5" />
                     @endif
                     <span class="text-xs font-medium">Buscar</span>
                 </a>
@@ -194,17 +175,9 @@
                     <a href="{{ route('negocios.mis-negocios') }}"
                         class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.mis-negocios') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
                         @if (request()->routeIs('negocios.mis-negocios'))
-                            <svg class="w-5 h-5 text-slate-700" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
-                            </svg>
+                            <x-icons.solid.folder class="w-5 h-5 text-slate-700" />
                         @else
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 5a2 2 0 012-2h2a2 2 0 012 2v2H8V5z" />
-                            </svg>
+                            <x-icons.outline.folder class="w-5 h-5" />
                         @endif
                         <span class="text-xs font-medium">Mis Negocios</span>
                     </a>
@@ -215,25 +188,16 @@
                     <a href="/perfil"
                         class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('perfil*') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
                         @if (request()->is('perfil*'))
-                            <svg class="w-5 h-5 text-slate-700" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                            </svg>
+                            <x-icons.solid.user class="w-5 h-5 text-slate-700" />
                         @else
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                            <x-icons.outline.user class="w-5 h-5" />
                         @endif
                         <span class="text-xs font-medium">Cuenta</span>
                     </a>
                 @else
                     <a href="{{ route('login') }}"
                         class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-slate-50/50">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                        <x-icons.outline.user class="w-5 h-5" />
                         <span class="text-xs font-medium">Iniciar sesión</span>
                     </a>
                 @endif
