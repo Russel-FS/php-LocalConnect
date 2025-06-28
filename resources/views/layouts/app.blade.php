@@ -144,8 +144,8 @@
         @yield('content')
     </main>
 
-    <!-- navagecion mobil inferior flotante -->
-    <div class="lg:hidden fixed bottom-4 left-4 right-4 z-50">
+    <!-- navagecion mobil inferior flotanteeeeee -->
+    <div class="lg:hidden fixed bottom-4 left-4 right-4 z-40">
         <div class="bg-white/95 backdrop-blur-lg rounded-3xl shadow-xl border border-slate-200/60">
             <div class="flex items-center justify-around px-2 py-3">
                 <!-- Inicio -->
