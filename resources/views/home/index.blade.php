@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Hero Section con buscador principal -->
+    <!-- Hero-->
     <section
         class="min-h-[340px] bg-gradient-to-br from-primary-50 to-white flex items-center justify-center py-12 sm:py-16 lg:py-20">
         <div class="max-w-4xl mx-auto px-4 text-center">
@@ -44,7 +44,7 @@
         </div>
     </section>
 
-    <!-- Carrusel informativo minimalista debajo del hero -->
+    <!-- Carrusel -->
     <section class="py-6 bg-white">
         <div class="max-w-3xl mx-auto px-4">
             <div x-data="{
@@ -55,7 +55,7 @@
                     { title: 'Apoya a tu comunidad', desc: 'Conecta con negocios locales y ayuda a crecer tu ciudad.' }
                 ]
             }" class="relative">
-                <div class="overflow-hidden rounded-2xl shadow-lg bg-primary-50">
+                <div class="overflow-hidden rounded-2xl shadow-sm bg-white border border-primary-100">
                     <template x-for="(slide, i) in slides" :key="i">
                         <div x-show="active === i" x-transition:enter="transition ease-out duration-500"
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
@@ -85,7 +85,7 @@
                 LocalConnect?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
                 <div
-                    class="text-center p-8 bg-primary-50 rounded-3xl border border-primary-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    class="text-center p-8 bg-white rounded-3xl border border-primary-100 shadow-sm hover:shadow-lg transition-all duration-300">
                     <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <x-icons.content.check-circle class="w-8 h-8 text-primary-600" />
                     </div>
@@ -93,7 +93,7 @@
                     <p class="text-primary-500 leading-relaxed">Negocios verificados y reseñas reales de la comunidad.</p>
                 </div>
                 <div
-                    class="text-center p-8 bg-primary-50 rounded-3xl border border-primary-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    class="text-center p-8 bg-white rounded-3xl border border-primary-100 shadow-sm hover:shadow-lg transition-all duration-300">
                     <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <x-icons.outline.location-marker class="w-8 h-8 text-primary-600" />
                     </div>
@@ -102,7 +102,7 @@
                         ubicación.</p>
                 </div>
                 <div
-                    class="text-center p-8 bg-primary-50 rounded-3xl border border-primary-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                    class="text-center p-8 bg-white rounded-3xl border border-primary-100 shadow-sm hover:shadow-lg transition-all duration-300">
                     <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <x-icons.content.lightning class="w-8 h-8 text-primary-600" />
                     </div>
@@ -113,7 +113,7 @@
         </div>
     </section>
 
-    <!-- Testimonios Section -->
+    <!-- Testimonios  -->
     <section class="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-primary-50 to-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 text-primary-700">Lo que dice
@@ -141,7 +141,7 @@
         </div>
     </section>
 
-    <!-- Sección de contacto minimalista -->
+    <!-- Sección de contacto -->
     <section id="contacto" class="py-16 sm:py-20 lg:py-24 bg-white">
         <div class="max-w-2xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-primary-700">¿Tienes dudas o quieres
