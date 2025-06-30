@@ -480,107 +480,113 @@
                     @endif
                 </div>
 
-                <!-- Botón de regreso -->
-                <div class="mt-16 text-center">
-                    <button type="button" onclick="history.back()"
-                        class="inline-flex items-center gap-3 px-8 py-3 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition-all duration-200">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                        </svg>
-                        <span>Volver</span>
-                    </button>
-                </div>
             </div>
 
             <!-- Sección de comentarios -->
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-                <h2 class="text-2xl font-bold text-primary-700 mb-6 flex items-center gap-2">
-                    <x-icons.solid.star class="w-6 h-6 text-yellow-400" /> Opiniones de clientes
-                </h2>
-                @if ($negocio->valoraciones->count())
-                    <div class="space-y-6 mb-10">
-                        @foreach ($negocio->valoraciones->sortByDesc('fecha_valoracion') as $valoracion)
-                            <div
-                                class="bg-white rounded-2xl p-6 flex gap-4 items-start shadow-sm border border-primary-50">
+            <div class="space-y-8 mt-16">
+                <div class="text-center">
+                    <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Opiniones de clientes</h2>
+                    <p class="text-xl text-primary-500 max-w-2xl mx-auto">Lo que dicen nuestros clientes sobre nosotros</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                    @if ($negocio->valoraciones->count())
+                        <div class="space-y-6 mb-10">
+                            @foreach ($negocio->valoraciones->sortByDesc('fecha_valoracion') as $valoracion)
                                 <div
-                                    class="w-12 h-12 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-lg select-none">
-                                    {{ strtoupper(substr($valoracion->usuario->name, 0, 1)) }}
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span
-                                            class="font-semibold text-primary-700">{{ $valoracion->usuario->name }}</span>
-                                        <span
-                                            class="text-xs text-slate-400">{{ \Carbon\Carbon::parse($valoracion->fecha_valoracion)->diffForHumans() }}</span>
+                                    class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 flex gap-4 items-start shadow-sm border border-primary-100/50">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-lg select-none">
+                                        {{ strtoupper(substr($valoracion->usuario->name, 0, 1)) }}
                                     </div>
-                                    <div class="flex items-center gap-0.5 mb-2">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <x-icons.solid.star
-                                                class="w-4 h-4 {{ $i <= $valoracion->calificacion ? 'text-yellow-400' : 'text-gray-200' }}" />
-                                        @endfor
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span
+                                                class="font-semibold text-primary-700">{{ $valoracion->usuario->name }}</span>
+                                            <span
+                                                class="text-xs text-slate-400">{{ \Carbon\Carbon::parse($valoracion->fecha_valoracion)->diffForHumans() }}</span>
+                                        </div>
+                                        <div class="flex items-center gap-0.5 mb-2">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <x-icons.solid.star
+                                                    class="w-4 h-4 {{ $i <= $valoracion->calificacion ? 'text-yellow-400' : 'text-gray-200' }}" />
+                                            @endfor
+                                        </div>
+                                        <p class="text-primary-600 text-base leading-relaxed">
+                                            {{ $valoracion->comentario }}
+                                        </p>
                                     </div>
-                                    <p class="text-primary-600 text-base leading-relaxed">{{ $valoracion->comentario }}
-                                    </p>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <p class="text-slate-400 mb-10">Aún no hay comentarios para este negocio.</p>
-                @endif
-                @if (Auth::check() && !$negocio->valoraciones->where('id_usuario', Auth::id())->count())
-                    <div class="bg-white rounded-2xl shadow border border-primary-50 p-6">
-                        <h3 class="text-lg font-semibold text-primary-700 mb-4">Deja tu comentario</h3>
-                        @if (session('success'))
-                            <div class="mb-4 p-3 bg-green-100 border border-green-200 text-green-700 rounded-lg">
-                                {{ session('success') }}</div>
-                        @endif
-                        @if (session('error'))
-                            <div class="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg">
-                                {{ session('error') }}</div>
-                        @endif
-                        <form method="POST" action="{{ route('negocios.comentar', $negocio->id_negocio) }}"
-                            class="space-y-4">
-                            @csrf
-                            <div>
-                                <label class="block mb-2 text-primary-600 font-medium">Calificación</label>
-                                <div x-data="{ rating: 0 }" class="flex items-center gap-1">
-                                    <template x-for="star in 5" :key="star">
-                                        <button type="button" @click.prevent="rating = star"
-                                            :class="rating >= star ? 'text-yellow-400' : 'text-gray-200'"
-                                            class="focus:outline-none transition-colors duration-150">
-                                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.385 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.385-2.46a1 1 0 00-1.175 0l-3.385 2.46c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.967z" />
-                                            </svg>
-                                        </button>
-                                    </template>
-                                    <input type="hidden" name="calificacion" x-model="rating" required>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="text-slate-400 mb-10 text-center">Aún no hay comentarios para este negocio.</p>
+                    @endif
+                    @if (Auth::check() && !$negocio->valoraciones->where('id_usuario', Auth::id())->count())
+                        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow border border-primary-100/50 p-6">
+                            <h3 class="text-lg font-semibold text-primary-700 mb-4">Deja tu comentario</h3>
+                            @if (session('success'))
+                                <div class="mb-4 p-3 bg-green-100 border border-green-200 text-green-700 rounded-lg">
+                                    {{ session('success') }}</div>
+                            @endif
+                            @if (session('error'))
+                                <div class="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg">
+                                    {{ session('error') }}</div>
+                            @endif
+                            <form method="POST" action="{{ route('negocios.comentar', $negocio->id_negocio) }}"
+                                class="space-y-4">
+                                @csrf
+                                <div>
+                                    <label class="block mb-2 text-primary-600 font-medium">Calificación</label>
+                                    <div x-data="{ rating: 0 }" class="flex items-center gap-1">
+                                        <template x-for="star in 5" :key="star">
+                                            <button type="button" @click.prevent="rating = star"
+                                                :class="rating >= star ? 'text-yellow-400' : 'text-gray-200'"
+                                                class="focus:outline-none transition-colors duration-150">
+                                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.385 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.385-2.46a1 1 0 00-1.175 0l-3.385 2.46c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.967z" />
+                                                </svg>
+                                            </button>
+                                        </template>
+                                        <input type="hidden" name="calificacion" x-model="rating" required>
+                                    </div>
+                                    @if ($errors->has('calificacion'))
+                                        <p class="text-sm text-red-600 mt-1">{{ $errors->first('calificacion') }}</p>
+                                    @endif
                                 </div>
-                                @if ($errors->has('calificacion'))
-                                    <p class="text-sm text-red-600 mt-1">{{ $errors->first('calificacion') }}</p>
-                                @endif
-                            </div>
-                            <div>
-                                <label class="block mb-2 text-primary-600 font-medium">Comentario</label>
-                                <textarea name="comentario" rows="3" required maxlength="1000"
-                                    class="w-full rounded-xl border border-primary-100 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-100/40 transition p-3 resize-none"
-                                    placeholder="¿Qué te pareció este negocio?"></textarea>
-                                @if ($errors->has('comentario'))
-                                    <p class="text-sm text-red-600 mt-1">{{ $errors->first('comentario') }}</p>
-                                @endif
-                            </div>
-                            <div class="flex justify-end">
-                                <button type="submit"
-                                    class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-secondary-500 text-white font-semibold text-base shadow hover:bg-secondary-600 transition-all duration-200">
-                                    <x-icons.solid.star class="w-5 h-5 text-yellow-400" />
-                                    Enviar comentario
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                @endif
+                                <div>
+                                    <label class="block mb-2 text-primary-600 font-medium">Comentario</label>
+                                    <textarea name="comentario" rows="3" required maxlength="1000"
+                                        class="w-full rounded-xl border border-primary-100 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-100/40 transition p-3 resize-none"
+                                        placeholder="¿Qué te pareció este negocio?"></textarea>
+                                    @if ($errors->has('comentario'))
+                                        <p class="text-sm text-red-600 mt-1">{{ $errors->first('comentario') }}</p>
+                                    @endif
+                                </div>
+                                <div class="flex justify-end">
+                                    <button type="submit"
+                                        class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-secondary-500 text-white font-semibold text-base shadow hover:bg-secondary-600 transition-all duration-200">
+                                        <x-icons.solid.star class="w-5 h-5 text-yellow-400" />
+                                        Enviar comentario
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <!-- boton de regreso -->
+            <div class="mt-16 text-center">
+                <button type="button" onclick="history.back()"
+                    class="inline-flex items-center gap-3 px-8 py-3 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    <span>Volver</span>
+                </button>
             </div>
         </div>
     </div>
