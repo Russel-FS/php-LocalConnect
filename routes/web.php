@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\Admin\AdminNegocioController;
+use App\Http\Controllers\Admin\AdminNegocioPanelController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -35,4 +36,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/solicitudes', [AdminNegocioController::class, 'index'])->name('negocios.solicitudes');
     Route::get('/negocios/{negocio}', [AdminNegocioController::class, 'show'])->name('negocios.show');
     Route::patch('/solicitudes/{negocio}', [AdminNegocioController::class, 'update'])->name('negocios.update');
+    Route::get('/negocios', [AdminNegocioPanelController::class, 'index'])->name('negocios.panel');
 });
