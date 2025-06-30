@@ -24,7 +24,7 @@
 </head>
 
 <body class="font-sans antialiased bg-slate-50 text-slate-900" style="font-family: 'Inter', sans-serif;">
-    <!-- Navbar pc -->
+    <!-- Navbar Rediseñado -->
     <nav class="bg-white/90 backdrop-blur-lg w-full fixed z-50 border-b border-slate-200/60">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between h-16 lg:h-20 items-center">
@@ -44,46 +44,42 @@
                         LocalConnect
                     </span>
                 </a>
-
-                <!-- Navegación -->
+                <!-- Enlaces principales -->
+                <div class="hidden lg:flex gap-2 mx-auto">
+                    <a href="/"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <x-icons.outline.home class="w-4 h-4" />
+                        Inicio
+                    </a>
+                    <a href="{{ route('negocios.buscar') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <x-icons.outline.search class="w-4 h-4" />
+                        Buscar
+                    </a>
+                    <a href="#por-que"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <x-icons.content.check-circle class="w-4 h-4" />
+                        ¿Por qué?
+                    </a>
+                    <a href="#contacto"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        <x-icons.outline.phone class="w-4 h-4" />
+                        Contacto
+                    </a>
+                </div>
+                <!-- Acciones y usuario -->
                 <div class="flex items-center gap-2 lg:gap-4">
+                    <a href="{{ route('negocios.registro') }}"
+                        class="hidden lg:inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-600 text-white font-semibold text-sm shadow-md hover:bg-primary-700 transition-all duration-200">
+                        <x-icons.actions.plus class="w-4 h-4" />
+                        Registrar mi negocio
+                    </a>
                     @if (Auth::check())
-                        <div class="hidden lg:flex">
-                            @if (Auth::user()->isAdmin())
-                                <a href="/admin"
-                                    class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                    </svg>
-                                    <span>Administrar</span>
-                                </a>
-                                <a href="/admin/negocios"
-                                    class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
-                                    <x-icons.outline.folder class="w-4 h-4" />
-                                    <span>Negocios</span>
-                                </a>
-                                <a href="/admin/solicitudes"
-                                    class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
-                                    <x-icons.outline.folder class="w-4 h-4" />
-                                    <span>Solicitudes</span>
-                                </a>
-                            @endif
-
-                            <a href="{{ route('negocios.mis-negocios') }}"
-                                class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
-                                <x-icons.outline.folder class="w-4 h-4" />
-                                <span>Mis Negocios</span>
-                            </a>
-                        </div>
-
-                        <!-- Avatar y menú de usuario -->
-                        <div x-data="{ open: false }" class="relative hidden lg:block">
+                        <div x-data="{ open: false }" class="relative">
                             <button @click="open = !open"
                                 class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-700 font-semibold text-sm hover:from-slate-200 hover:to-slate-300 transition-all duration-200 shadow-sm">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                             </button>
-
                             <div x-show="open" @click.away="open = false"
                                 class="absolute right-0 mt-3 w-56 bg-white rounded-2xl py-3 shadow-xl border border-slate-200 z-50"
                                 x-cloak x-transition:enter="transition ease-out duration-200"
@@ -92,30 +88,16 @@
                                 x-transition:leave="transition ease-in duration-150"
                                 x-transition:leave-start="opacity-100 translate-y-0"
                                 x-transition:leave-end="opacity-0 translate-y-2">
-
-                                <!-- Info del usuario -->
                                 <div class="px-4 py-3 border-b border-slate-100">
                                     <p class="text-sm font-semibold text-slate-900">{{ Auth::user()->name }}</p>
                                     <p class="text-xs text-slate-500">{{ Auth::user()->email }}</p>
                                 </div>
-
-                                <!-- Opciones del menú -->
                                 <div class="py-2">
-                                    <a href="{{ route('negocios.mis-negocios') }}"
-                                        class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
-                                        <x-icons.outline.folder class="w-4 h-4" />
-                                        <span>Mis Negocios</span>
-                                    </a>
-
                                     @if (Auth::user()->isAdmin())
                                         <a href="/admin"
                                             class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                            </svg>
-                                            <span>Administrar</span>
+                                            <x-icons.outline.home class="w-4 h-4" />
+                                            <span>Panel Admin</span>
                                         </a>
                                         <a href="/admin/negocios"
                                             class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
@@ -128,16 +110,11 @@
                                             <span>Solicitudes</span>
                                         </a>
                                     @endif
-
-                                    <form method="POST" action="{{ url('/logout') }}"
-                                        class="border-t border-slate-100 mt-2 pt-2">
-                                        @csrf
-                                        <button type="submit"
-                                            class="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200">
-                                            <x-icons.actions.logout class="w-4 h-4" />
-                                            <span>Cerrar sesión</span>
-                                        </button>
-                                    </form>
+                                    <a href="{{ route('negocios.mis-negocios') }}"
+                                        class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
+                                        <x-icons.outline.folder class="w-4 h-4" />
+                                        Mis Negocios
+                                    </a>
                                 </div>
                             </div>
                         </div>
