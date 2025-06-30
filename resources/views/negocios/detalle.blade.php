@@ -12,8 +12,8 @@
 
             <!-- Hero Section-->
             <div
-                class="relative overflow-hidden bg-gradient-to-br from-primary-50 to-white rounded-xl sm:rounded-2xl lg:rounded-3xl mb-8 sm:mb-12 lg:mb-16 xl:mb-20">
-                <div class="absolute inset-0 bg-gradient-to-r from-secondary-500/5 to-primary-500/5"></div>
+                class="relative overflow-hidden bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl mb-8 sm:mb-12 lg:mb-16 xl:mb-20">
+                <div class="absolute inset-0"></div>
                 <div class="relative p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-24">
                     <div class="max-w-6xl mx-auto">
                         <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
@@ -67,9 +67,10 @@
 
                                 <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
                                     <span
-                                        class="inline-flex items-center gap-1.5 sm:gap-2 md:gap-3 px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold {{ $negocio->verificado ? 'bg-secondary-500/10 text-secondary-600 border border-secondary-200' : 'bg-yellow-500/10 text-yellow-600 border border-yellow-200' }}">
+                                        class="inline-flex items-center gap-1.5 sm:gap-2 md:gap-3 px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold
+                                        {{ $negocio->verificado ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200' }}">
                                         <span
-                                            class="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
+                                            class="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 rounded-full {{ $negocio->verificado ? 'bg-green-500' : 'bg-yellow-500' }}"></span>
                                         <span
                                             class="hidden md:inline">{{ $negocio->verificado ? 'Verificado' : 'Pendiente de verificación' }}</span>
                                         <span
@@ -147,7 +148,7 @@
                                     @foreach ($negocio->serviciosPredefinidos as $servicio)
                                         <div class="group relative">
                                             <div
-                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-500">
                                                 <div class="flex items-start gap-6">
                                                     <div
                                                         class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
@@ -195,7 +196,7 @@
                                     @foreach ($negocio->serviciosPersonalizados as $servicio)
                                         <div class="group relative">
                                             <div
-                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-500">
                                                 <div class="flex items-start gap-6">
                                                     <div
                                                         class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
@@ -254,7 +255,7 @@
                                 @foreach ($negocio->caracteristicas as $caracteristica)
                                     <div class="group relative">
                                         <div
-                                            class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                            class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-500">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-3xl flex items-center justify-center mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-500 group-hover:scale-110">
@@ -297,7 +298,7 @@
                                     class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                                     @foreach ($negocio->horarios as $horario)
                                         <div
-                                            class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-300">
+                                            class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-primary-100/50 hover:shadow-sm transition-all duration-300">
                                             <div class="text-center">
                                                 <div
                                                     class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
@@ -347,7 +348,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                     @if ($contactos->where('tipo_contacto', 'telefono')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
@@ -363,7 +364,7 @@
 
                                     @if ($contactos->where('tipo_contacto', 'whatsapp')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
@@ -379,7 +380,7 @@
 
                                     @if ($contactos->where('tipo_contacto', 'facebook')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
@@ -395,7 +396,7 @@
 
                                     @if ($contactos->where('tipo_contacto', 'instagram')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-200 transition-colors">
@@ -411,7 +412,7 @@
 
                                     @if ($contactos->where('tipo_contacto', 'web')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
@@ -481,69 +482,106 @@
 
                 <!-- Botón de regreso -->
                 <div class="mt-16 text-center">
-                    <a href="{{ route('negocios.mis-negocios') }}"
+                    <button type="button" onclick="history.back()"
                         class="inline-flex items-center gap-3 px-8 py-3 rounded-full font-semibold border border-primary-200 bg-white text-primary-700 shadow-sm hover:bg-primary-50 hover:border-primary-400 transition-all duration-200">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                         </svg>
-                        <span>Volver a mis negocios</span>
-                    </a>
+                        <span>Volver</span>
+                    </button>
                 </div>
             </div>
 
-            @if (Auth::check() && !$negocio->valoraciones->where('id_usuario', Auth::id())->count())
-                <div class="max-w-xl mx-auto mt-10 bg-white rounded-2xl shadow-md border border-primary-100 p-6">
-                    <h3 class="text-lg font-semibold text-primary-700 mb-4">Deja tu comentario</h3>
-                    @if (session('success'))
-                        <div class="mb-4 p-3 bg-green-100 border border-green-200 text-green-700 rounded-lg">
-                            {{ session('success') }}</div>
-                    @endif
-                    @if (session('error'))
-                        <div class="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg">
-                            {{ session('error') }}</div>
-                    @endif
-                    <form method="POST" action="{{ route('negocios.comentar', $negocio->id_negocio) }}"
-                        class="space-y-4">
-                        @csrf
-                        <div>
-                            <label class="block mb-2 text-primary-600 font-medium">Calificación</label>
-                            <div x-data="{ rating: 0 }" class="flex items-center gap-1">
-                                <template x-for="star in 5" :key="star">
-                                    <button type="button" @click.prevent="rating = star"
-                                        :class="rating >= star ? 'text-secondary-500' : 'text-primary-200'"
-                                        class="focus:outline-none">
-                                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.385 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.385-2.46a1 1 0 00-1.175 0l-3.385 2.46c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.967z" />
-                                        </svg>
-                                    </button>
-                                </template>
-                                <input type="hidden" name="calificacion" x-model="rating" required>
+            <!-- Sección de comentarios -->
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+                <h2 class="text-2xl font-bold text-primary-700 mb-6 flex items-center gap-2">
+                    <x-icons.solid.star class="w-6 h-6 text-yellow-400" /> Opiniones de clientes
+                </h2>
+                @if ($negocio->valoraciones->count())
+                    <div class="space-y-6 mb-10">
+                        @foreach ($negocio->valoraciones->sortByDesc('fecha_valoracion') as $valoracion)
+                            <div
+                                class="bg-white rounded-2xl p-6 flex gap-4 items-start shadow-sm border border-primary-50">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-lg select-none">
+                                    {{ strtoupper(substr($valoracion->usuario->name, 0, 1)) }}
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span
+                                            class="font-semibold text-primary-700">{{ $valoracion->usuario->name }}</span>
+                                        <span
+                                            class="text-xs text-slate-400">{{ \Carbon\Carbon::parse($valoracion->fecha_valoracion)->diffForHumans() }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-0.5 mb-2">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <x-icons.solid.star
+                                                class="w-4 h-4 {{ $i <= $valoracion->calificacion ? 'text-yellow-400' : 'text-gray-200' }}" />
+                                        @endfor
+                                    </div>
+                                    <p class="text-primary-600 text-base leading-relaxed">{{ $valoracion->comentario }}
+                                    </p>
+                                </div>
                             </div>
-                            @error('calificacion')
-                                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-primary-600 font-medium">Comentario</label>
-                            <textarea name="comentario" rows="3" required maxlength="1000"
-                                class="w-full rounded-xl border border-primary-200 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-100/40 transition p-3 resize-none"
-                                placeholder="¿Qué te pareció este negocio?"></textarea>
-                            @if ($errors->has('calificacion'))
-                                <p class="text-sm text-red-600 mt-1">{{ $errors->first('calificacion') }}</p>
-                            @endif
-                        </div>
-                        <div class="flex justify-end">
-                            <button type="submit"
-                                class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-secondary-500 text-white font-semibold text-base shadow hover:bg-secondary-600 transition-all duration-200">
-                                <x-icons.solid.star class="w-5 h-5" />
-                                Enviar comentario
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            @endif
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-slate-400 mb-10">Aún no hay comentarios para este negocio.</p>
+                @endif
+                @if (Auth::check() && !$negocio->valoraciones->where('id_usuario', Auth::id())->count())
+                    <div class="bg-white rounded-2xl shadow border border-primary-50 p-6">
+                        <h3 class="text-lg font-semibold text-primary-700 mb-4">Deja tu comentario</h3>
+                        @if (session('success'))
+                            <div class="mb-4 p-3 bg-green-100 border border-green-200 text-green-700 rounded-lg">
+                                {{ session('success') }}</div>
+                        @endif
+                        @if (session('error'))
+                            <div class="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg">
+                                {{ session('error') }}</div>
+                        @endif
+                        <form method="POST" action="{{ route('negocios.comentar', $negocio->id_negocio) }}"
+                            class="space-y-4">
+                            @csrf
+                            <div>
+                                <label class="block mb-2 text-primary-600 font-medium">Calificación</label>
+                                <div x-data="{ rating: 0 }" class="flex items-center gap-1">
+                                    <template x-for="star in 5" :key="star">
+                                        <button type="button" @click.prevent="rating = star"
+                                            :class="rating >= star ? 'text-yellow-400' : 'text-gray-200'"
+                                            class="focus:outline-none transition-colors duration-150">
+                                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.385 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.385-2.46a1 1 0 00-1.175 0l-3.385 2.46c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.967z" />
+                                            </svg>
+                                        </button>
+                                    </template>
+                                    <input type="hidden" name="calificacion" x-model="rating" required>
+                                </div>
+                                @if ($errors->has('calificacion'))
+                                    <p class="text-sm text-red-600 mt-1">{{ $errors->first('calificacion') }}</p>
+                                @endif
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-primary-600 font-medium">Comentario</label>
+                                <textarea name="comentario" rows="3" required maxlength="1000"
+                                    class="w-full rounded-xl border border-primary-100 focus:border-secondary-500 focus:ring-2 focus:ring-secondary-100/40 transition p-3 resize-none"
+                                    placeholder="¿Qué te pareció este negocio?"></textarea>
+                                @if ($errors->has('comentario'))
+                                    <p class="text-sm text-red-600 mt-1">{{ $errors->first('comentario') }}</p>
+                                @endif
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit"
+                                    class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-secondary-500 text-white font-semibold text-base shadow hover:bg-secondary-600 transition-all duration-200">
+                                    <x-icons.solid.star class="w-5 h-5 text-yellow-400" />
+                                    Enviar comentario
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endsection
