@@ -47,22 +47,22 @@
                 <!-- Enlaces principales -->
                 <div class="hidden lg:flex gap-2 mx-auto">
                     <a href="/"
-                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-primary-50 hover:text-primary-700 transition-all duration-200">
                         <x-icons.outline.home class="w-4 h-4" />
                         Inicio
                     </a>
                     <a href="{{ route('negocios.buscar') }}"
-                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-primary-50 hover:text-primary-700 transition-all duration-200">
                         <x-icons.outline.search class="w-4 h-4" />
                         Buscar
                     </a>
                     <a href="#por-que"
-                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-primary-50 hover:text-primary-700 transition-all duration-200">
                         <x-icons.content.check-circle class="w-4 h-4" />
                         ¿Por qué?
                     </a>
                     <a href="#contacto"
-                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-primary-50 hover:text-primary-700 transition-all duration-200">
                         <x-icons.outline.phone class="w-4 h-4" />
                         Contacto
                     </a>
@@ -100,23 +100,23 @@
                                 <div class="py-2 space-y-1 px-1">
                                     @if (Auth::user()->isAdmin())
                                         <a href="/admin"
-                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-100 transition-colors duration-200">
+                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
                                             <x-icons.outline.home class="w-4 h-4" />
                                             <span>Panel Admin</span>
                                         </a>
                                         <a href="/admin/negocios"
-                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-100 transition-colors duration-200">
+                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
                                             <x-icons.outline.folder class="w-4 h-4" />
                                             <span>Negocios</span>
                                         </a>
                                         <a href="/admin/solicitudes"
-                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-100 transition-colors duration-200">
+                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
                                             <x-icons.outline.folder class="w-4 h-4" />
                                             <span>Solicitudes</span>
                                         </a>
                                     @endif
                                     <a href="{{ route('negocios.mis-negocios') }}"
-                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-100 transition-colors duration-200">
+                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
                                         <x-icons.outline.folder class="w-4 h-4" />
                                         Mis Negocios
                                     </a>
@@ -162,9 +162,9 @@
             <div class="flex items-center justify-around px-2 py-3">
                 <!-- Inicio -->
                 <a href="/"
-                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('/') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
+                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('/') ? 'bg-primary-50 text-primary-700' : 'text-slate-600 hover:text-primary-700 hover:bg-primary-50' }}">
                     @if (request()->is('/'))
-                        <x-icons.solid.home class="w-5 h-5 text-slate-700" />
+                        <x-icons.solid.home class="w-5 h-5 text-primary-700" />
                     @else
                         <x-icons.outline.home class="w-5 h-5" />
                     @endif
@@ -173,9 +173,9 @@
 
                 <!-- Buscar -->
                 <a href="{{ route('negocios.buscar') }}"
-                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.buscar') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
+                    class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.buscar') ? 'bg-primary-50 text-primary-700' : 'text-slate-600 hover:text-primary-700 hover:bg-primary-50' }}">
                     @if (request()->routeIs('negocios.buscar'))
-                        <x-icons.solid.search class="w-5 h-5 text-slate-700" />
+                        <x-icons.solid.search class="w-5 h-5 text-primary-700" />
                     @else
                         <x-icons.outline.search class="w-5 h-5" />
                     @endif
@@ -185,9 +185,9 @@
                 @if (Auth::check())
                     <!-- Mis Negocios -->
                     <a href="{{ route('negocios.mis-negocios') }}"
-                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.mis-negocios') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
+                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('negocios.mis-negocios') ? 'bg-primary-50 text-primary-700' : 'text-slate-600 hover:text-primary-700 hover:bg-primary-50' }}">
                         @if (request()->routeIs('negocios.mis-negocios'))
-                            <x-icons.solid.folder class="w-5 h-5 text-slate-700" />
+                            <x-icons.solid.folder class="w-5 h-5 text-primary-700" />
                         @else
                             <x-icons.outline.folder class="w-5 h-5" />
                         @endif
@@ -198,9 +198,9 @@
                 <!-- Cuenta -->
                 @if (Auth::check())
                     <a href="/perfil"
-                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('perfil*') ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50' }}">
+                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->is('perfil*') ? 'bg-primary-50 text-primary-700' : 'text-slate-600 hover:text-primary-700 hover:bg-primary-50' }}">
                         @if (request()->is('perfil*'))
-                            <x-icons.solid.user class="w-5 h-5 text-slate-700" />
+                            <x-icons.solid.user class="w-5 h-5 text-primary-700" />
                         @else
                             <x-icons.outline.user class="w-5 h-5" />
                         @endif
@@ -208,7 +208,7 @@
                     </a>
                 @else
                     <a href="{{ route('login') }}"
-                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 text-slate-600 hover:text-slate-900 hover:bg-slate-50/50">
+                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 text-slate-600 hover:text-primary-700 hover:bg-primary-50">
                         <x-icons.outline.user class="w-5 h-5" />
                         <span class="text-xs font-medium">Iniciar sesión</span>
                     </a>
