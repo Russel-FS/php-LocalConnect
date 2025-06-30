@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="min-h-screen bg-gradient-to-br from-primary-50 via-primary-50 py-8 sm:py-12 lg:py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
             <!-- Header con buscador -->
             <div class="mb-8 sm:mb-12" x-data="{ menuMobil: false }">
-                <div class="max-w-6xl mx-auto">
+                <div class="mx-auto">
                     <div class="bg-white rounded-2xl p-6 mb-6">
                         <div class="flex flex-col lg:flex-row gap-4 items-center mb-4">
                             <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="w-full">
