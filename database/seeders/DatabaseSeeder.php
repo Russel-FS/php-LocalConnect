@@ -24,11 +24,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        // User::factory(10)->create();
+        // obtener rol administrador
+        $rolAdministrador = DB::table('roles')->where('code', 'admin')->first();
 
+        // creacion de usuario por defecto
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'administrador',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin123'),
+            'telefono' => '123456789',
+            'id_rol' => $rolAdministrador->id_rol,
+            'estado' => 'activo'
         ]);
 
         // Crear categorías de características
