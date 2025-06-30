@@ -56,7 +56,12 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                     </svg>
-                                    <span>Admin</span>
+                                    <span>Administrar</span>
+                                </a>
+                                <a href="/admin/solicitudes"
+                                    class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
+                                    <x-icons.outline.folder class="w-4 h-4" />
+                                    <span>Solicitudes</span>
                                 </a>
                             @endif
 
@@ -106,6 +111,11 @@
                                                     d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                             </svg>
                                             <span>Administrar</span>
+                                        </a>
+                                        <a href="/admin/solicitudes"
+                                            class="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-200">
+                                            <x-icons.outline.folder class="w-4 h-4" />
+                                            <span>Solicitudes</span>
                                         </a>
                                     @endif
 
@@ -279,7 +289,7 @@
                 </div>
             </div>
 
-            <!-- Línea divisoria y copyright -->
+            <!-- Línea divisoria yy copyright -->
             <div
                 class="border-t border-slate-100 mt-8 pt-8 flex flex-col lg:flex-row items-center justify-between gap-4">
                 <p class="text-sm text-slate-500">&copy; {{ date('Y') }} LocalConnect. Todos los derechos
