@@ -7,6 +7,7 @@ use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\Admin\AdminNegocioController;
 use App\Http\Controllers\Admin\AdminNegocioPanelController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -40,3 +41,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::patch('/solicitudes/{negocio}', [AdminNegocioController::class, 'update'])->name('negocios.update');
     Route::get('/negocios', [AdminNegocioPanelController::class, 'index'])->name('negocios.panel');
 });
+
+// Ruta de perfil de usuario
+Route::middleware('auth')->get('/perfil', [UserController::class, 'perfil'])->name('perfil');

@@ -115,6 +115,11 @@
                                             <span>Solicitudes</span>
                                         </a>
                                     @endif
+                                    <a href="/perfil"
+                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
+                                        <x-icons.outline.user class="w-4 h-4" />
+                                        Perfil
+                                    </a>
                                     <a href="{{ route('negocios.mis-negocios') }}"
                                         class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
                                         <x-icons.outline.folder class="w-4 h-4" />
