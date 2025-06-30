@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Rol;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -34,7 +35,7 @@ class RolSeeder extends Seeder
         ];
 
         foreach ($roles as $rol) {
-            DB::table('roles')->updateOrInsert(
+            Rol::updateOrCreate(
                 ['code' => $rol['code']],
                 $rol
             );
