@@ -241,7 +241,7 @@
     </div>
 
     <!-- Footer  -->
-    <footer class="bg-white border-t border-slate-200 mt-24">
+    <footer class="bg-white border-t border-slate-200 ">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
                 <!-- Logo y descripción -->
