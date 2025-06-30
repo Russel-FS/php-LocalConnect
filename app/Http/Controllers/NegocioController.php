@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Negocio\Negocio;
 use App\Models\Negocio\Caracteristica;
 use App\Models\Negocio\ServicioPredefinido;
+use App\Models\Negocio\Valoracion;
 
 class NegocioController extends Controller
 {
@@ -223,5 +224,32 @@ class NegocioController extends Controller
         $this->negocioService->actualizarNegocio($negocio, $validated, $request, $request->input('horarios'));
 
         return redirect()->route('negocios.mis-negocios')->with('success', '¡Negocio actualizado correctamente!');
+    }
+
+    public function comentarNegocio(Request $request, $id)
+    {
+        $request->validate([
+            'calificacion' => 'required|integer|min:1|max:5',
+            'comentario' => 'required|string|max:1000',
+        ]);
+
+        $user = Auth::user();
+        $negocio = Negocio::findOrFail($id);
+
+        // Solo una valoración por usuario-negocio
+        $yaComentado = Valoracion::where('id_usuario', $user->id_usuario)->where('id_negocio', $id)->first();
+        if ($yaComentado) {
+            return back()->with('error', 'Ya has dejado un comentario para este negocio.');
+        }
+
+        Valoracion::create([
+            'id_usuario' => $user->id_usuario,
+            'id_negocio' => $id,
+            'calificacion' => $request->calificacion,
+            'comentario' => $request->comentario,
+            'fecha_valoracion' => now(),
+        ]);
+
+        return back()->with('success', '¡Gracias por tu comentario!');
     }
 }
