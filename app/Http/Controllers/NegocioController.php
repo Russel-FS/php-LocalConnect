@@ -252,4 +252,43 @@ class NegocioController extends Controller
 
         return back()->with('success', '¡Gracias por tu comentario!');
     }
+
+    public function editarComentario(Request $request, $id)
+    {
+        $request->validate([
+            'calificacion' => 'required|integer|min:1|max:5',
+            'comentario' => 'required|string|max:1000',
+        ]);
+
+        $user = Auth::user();
+        $valoracion = Valoracion::findOrFail($id);
+
+        // Verificar que el usuario sea el propietario del comentario
+        if ($valoracion->id_usuario !== $user->id_usuario) {
+            abort(403, 'No tienes permisos para editar este comentario.');
+        }
+
+        $valoracion->update([
+            'calificacion' => $request->calificacion,
+            'comentario' => $request->comentario,
+            'fecha_actualizacion' => now(),
+        ]);
+
+        return back()->with('success', '¡Comentario actualizado correctamente!');
+    }
+
+    public function eliminarComentario($id)
+    {
+        $user = Auth::user();
+        $valoracion = Valoracion::findOrFail($id);
+
+        // verificar el usaurio para eliminar si es dueño del comentario
+        if ($valoracion->id_usuario !== $user->id_usuario) {
+            abort(403, 'No tienes permisos para eliminar este comentario.');
+        }
+
+        $valoracion->delete();
+
+        return back()->with('success', '¡Comentario eliminado correctamente!');
+    }
 }
