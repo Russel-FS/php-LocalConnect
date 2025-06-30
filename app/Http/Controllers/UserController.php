@@ -13,6 +13,8 @@ class UserController extends Controller
 
     public function perfil()
     {
-        return view('usuarios.perfil');
+        $user = Auth::user();
+        $negocios = $user->negocios()->with('ubicacion')->get();
+        return view('usuarios.perfil', compact('user', 'negocios'));
     }
 }
