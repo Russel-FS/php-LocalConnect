@@ -48,6 +48,40 @@
         </div>
     </section>
 
+    <!-- Carrusel informativo -->
+    <section class="py-6 bg-white">
+        <div class="max-w-3xl mx-auto px-4">
+            <div x-data="{
+                active: 0,
+                slides: [
+                    { title: 'Negocios verificados', desc: 'Solo mostramos negocios reales y verificados por nuestro equipo.' },
+                    { title: 'Encuentra lo que buscas', desc: 'Filtra por categorías, servicios y ubicación para resultados precisos.' },
+                    { title: 'Apoya a tu comunidad', desc: 'Conecta con negocios locales y ayuda a crecer tu ciudad.' }
+                ]
+            }" class="relative">
+                <div class="overflow-hidden rounded-2xl shadow-lg bg-primary-50">
+                    <template x-for="(slide, i) in slides" :key="i">
+                        <div x-show="active === i" x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-300"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                            class="p-8 text-center min-h-[140px] flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-semibold text-primary-700 mb-2" x-text="slide.title"></h3>
+                            <p class="text-primary-500 text-base" x-text="slide.desc"></p>
+                        </div>
+                    </template>
+                </div>
+                <div class="flex justify-center gap-2 mt-4">
+                    <template x-for="(slide, i) in slides" :key="i">
+                        <button @click="active = i"
+                            :class="{ 'bg-primary-600': active === i, 'bg-primary-200': active !== i }"
+                            class="w-3 h-3 rounded-full transition-colors"></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="por-que" class="py-16 sm:py-20 lg:py-24 bg-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
