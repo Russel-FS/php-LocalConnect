@@ -11,6 +11,7 @@ use App\Models\Negocio\Caracteristica;
 use App\Models\Negocio\CategoriaCaracteristica;
 use App\Models\Negocio\CategoriaServicio;
 use App\Models\Negocio\ServicioPredefinido;
+use App\Models\Rol;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
 
         // obtener rol administrador
-        $rolAdministrador = DB::table('roles')->where('code', 'admin')->first();
+        $rolAdministrador = Rol::where('code', 'admin')->first();
 
         // creacion de usuario por defecto
         User::factory()->create([
