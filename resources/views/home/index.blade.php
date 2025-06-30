@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Hero principal con buscador -->
+    <!-- Hero Section con buscador principal -->
     <section
-        class="min-h-[50vh] bg-gradient-to-br from-primary-50 to-white flex items-center justify-center py-12 sm:py-16 lg:py-20">
+        class="min-h-[340px] bg-gradient-to-br from-primary-50 to-white flex items-center justify-center py-12 sm:py-16 lg:py-20">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-primary-700 leading-tight">
                 Conecta con tu <span class="text-secondary-600">comunidad local</span>
@@ -12,7 +12,7 @@
                 Descubre y apoya negocios cerca de ti. Todo lo que necesitas, en un solo lugar.
             </p>
             <!-- Buscador -->
-            <div class="max-w-2xl mx-auto mb-8">
+            <div class="max-w-2xl mx-auto mb-4">
                 <form action="{{ route('negocios.buscar') }}" method="GET" class="relative">
                     <div class="relative flex items-center">
                         <input type="text" name="q"
@@ -44,8 +44,8 @@
         </div>
     </section>
 
-    <!-- Carrusel simple, elegante y sin imágenes -->
-    <section class="py-10 bg-white">
+    <!-- Carrusel informativo minimalista debajo del hero -->
+    <section class="py-6 bg-white">
         <div class="max-w-3xl mx-auto px-4">
             <div x-data="{
                 active: 0,
@@ -55,26 +55,23 @@
                     { title: 'Apoya a tu comunidad', desc: 'Conecta con negocios locales y ayuda a crecer tu ciudad.' }
                 ]
             }" class="relative">
-                <div class="overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-sm">
+                <div class="overflow-hidden rounded-2xl shadow-lg bg-primary-50">
                     <template x-for="(slide, i) in slides" :key="i">
                         <div x-show="active === i" x-transition:enter="transition ease-out duration-500"
-                            x-transition:enter-start="opacity-0 translate-y-4"
-                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300"
-                            x-transition:leave-start="opacity-100 translate-y-0"
-                            x-transition:leave-end="opacity-0 translate-y-4"
-                            class="p-10 text-center min-h-[140px] flex flex-col items-center justify-center">
-                            <h3 class="text-2xl sm:text-3xl font-semibold text-primary-700 mb-2 tracking-tight"
-                                x-text="slide.title"></h3>
-                            <p class="text-primary-400 text-lg font-light" x-text="slide.desc"></p>
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                            class="p-8 text-center min-h-[140px] flex flex-col items-center justify-center">
+                            <h3 class="text-xl font-semibold text-primary-700 mb-2" x-text="slide.title"></h3>
+                            <p class="text-primary-500 text-base" x-text="slide.desc"></p>
                         </div>
                     </template>
                 </div>
-                <div class="flex justify-center gap-2 mt-6">
+                <div class="flex justify-center gap-2 mt-4">
                     <template x-for="(slide, i) in slides" :key="i">
                         <button @click="active = i"
-                            :class="{ 'bg-secondary-500': active === i, 'bg-secondary-100': active !== i }"
-                            class="w-2.5 h-2.5 rounded-full transition-colors border border-secondary-200"></button>
+                            :class="{ 'bg-secondary-500': active === i, 'bg-secondary-200': active !== i }"
+                            class="w-3 h-3 rounded-full transition-colors"></button>
                     </template>
                 </div>
             </div>
