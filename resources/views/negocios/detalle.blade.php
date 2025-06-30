@@ -601,9 +601,12 @@
                                 </div>
                                 <div class="flex justify-end">
                                     <button type="submit"
-                                        class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-secondary-500 text-white font-semibold text-base shadow hover:bg-secondary-600 transition-all duration-200">
-                                        <x-icons.solid.star class="w-5 h-5 text-yellow-400" />
-                                        Enviar comentario
+                                        class="inline-flex items-center gap-3 px-8 py-3 rounded-xl bg-secondary-500 text-white font-medium text-base shadow-sm hover:bg-secondary-600 hover:shadow-md transition-all duration-200">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                        </svg>
+                                        <span>Enviar comentario</span>
                                     </button>
                                 </div>
                             </form>
@@ -643,13 +646,16 @@
                         </div>
                         <div class="flex justify-end gap-3">
                             <button type="button" onclick="cancelarEdicion()"
-                                class="px-6 py-2 rounded-full border border-primary-200 bg-white text-primary-700 font-semibold text-base shadow hover:bg-primary-50 hover:border-primary-400 transition-all duration-200">
+                                class="px-6 py-3 rounded-full border-2 border-primary-200 bg-white text-primary-700 font-semibold text-base shadow-md hover:shadow-lg hover:bg-primary-50 hover:border-primary-400 transform hover:-translate-y-0.5 transition-all duration-300">
                                 Cancelar
                             </button>
                             <button type="submit"
-                                class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-secondary-500 text-white font-semibold text-base shadow hover:bg-secondary-600 transition-all duration-200">
-                                <x-icons.solid.star class="w-5 h-5 text-yellow-400" />
-                                Actualizar comentario
+                                class="inline-flex items-center gap-3 px-8 py-3 rounded-xl bg-secondary-500 text-white font-medium text-base shadow-sm hover:bg-secondary-600 hover:shadow-md transition-all duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Actualizar comentario</span>
                             </button>
                         </div>
                     </form>
@@ -680,6 +686,7 @@
             if (ratingInput && ratingInput._x_dataStack) {
                 ratingInput._x_dataStack[0].rating = calificacion;
             }
+            // desplazar hacia el formm de edicion
             document.getElementById('formulario-edicion').scrollIntoView({
                 behavior: 'smooth'
             });
