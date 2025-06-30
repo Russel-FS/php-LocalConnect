@@ -17,6 +17,7 @@ class Valoracion extends Model
         'calificacion',
         'comentario',
         'fecha_valoracion',
+        'fecha_actualizacion',
     ];
 
     public function negocio()
