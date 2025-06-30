@@ -70,7 +70,6 @@
                 <!-- Acciones y usuario -->
                 <div class="flex items-center gap-2 lg:gap-4">
                     @if (Auth::check() && Auth::user()->isAdmin())
-                        <!-- Botón Panel Admin solo en móvil, elegante y minimalista -->
                         <a href="/admin"
                             class="lg:hidden inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-secondary-100 shadow transition-shadow duration-200 hover:shadow-lg mr-2"
                             style="backdrop-filter: none;">
@@ -78,11 +77,7 @@
                             <span class="text-sm font-semibold text-secondary-700">Panel Admin</span>
                         </a>
                     @endif
-                    <a href="{{ route('negocios.registro') }}"
-                        class="hidden lg:inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-600 text-white font-semibold text-sm shadow-md hover:bg-primary-700 transition-all duration-200">
-                        <x-icons.actions.plus class="w-4 h-4" />
-                        Registrar mi negocio
-                    </a>
+
                     @if (Auth::check())
                         <div x-data="{ open: false }" class="relative hidden lg:block">
                             <button @click="open = !open"
