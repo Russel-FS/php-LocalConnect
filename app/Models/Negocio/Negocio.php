@@ -12,6 +12,7 @@ use App\Models\Negocio\Caracteristica;
 use App\Models\User;
 use App\Models\Negocio\Estadistica;
 use App\Models\Negocio\Favorito;
+use App\Models\Negocio\Valoracion;
 
 class Negocio extends Model
 {
@@ -116,5 +117,10 @@ class Negocio extends Model
     public function favoritos()
     {
         return $this->hasMany(Favorito::class, 'id_negocio');
+    }
+
+    public function valoraciones()
+    {
+        return $this->hasMany(Valoracion::class, 'id_negocio');
     }
 }
