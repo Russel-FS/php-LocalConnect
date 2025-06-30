@@ -69,68 +69,86 @@
                 </div>
                 <!-- Acciones y usuario -->
                 <div class="flex items-center gap-2 lg:gap-4">
+                    @if (Auth::check() && Auth::user()->isAdmin())
+                        <!-- Botón Panel Admin solo en móvil, elegante y minimalista -->
+                        <a href="/admin"
+                            class="lg:hidden inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-secondary-100 shadow transition-shadow duration-200 hover:shadow-lg mr-2"
+                            style="backdrop-filter: none;">
+                            <x-icons.outline.home class="w-5 h-5 text-secondary-500" />
+                            <span class="text-sm font-semibold text-secondary-700">Panel Admin</span>
+                        </a>
+                    @endif
                     <a href="{{ route('negocios.registro') }}"
                         class="hidden lg:inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-600 text-white font-semibold text-sm shadow-md hover:bg-primary-700 transition-all duration-200">
                         <x-icons.actions.plus class="w-4 h-4" />
                         Registrar mi negocio
                     </a>
                     @if (Auth::check())
-                        <div x-data="{ open: false }" class="relative">
+                        <div x-data="{ open: false }" class="relative hidden lg:block">
                             <button @click="open = !open"
                                 class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-700 font-semibold text-sm hover:from-slate-200 hover:to-slate-300 transition-all duration-200 shadow-sm">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                             </button>
                             <div x-show="open" @click.away="open = false"
-                                class="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-md rounded-2xl py-4 shadow-xl border border-slate-200 z-50"
+                                class="absolute right-0 mt-3 w-64 bg-white rounded-3xl py-6 shadow-2xl border border-secondary-100 z-50"
                                 x-cloak x-transition:enter="transition ease-out duration-200"
                                 x-transition:enter-start="opacity-0 translate-y-2"
                                 x-transition:enter-end="opacity-100 translate-y-0"
                                 x-transition:leave="transition ease-in duration-150"
                                 x-transition:leave-start="opacity-100 translate-y-0"
                                 x-transition:leave-end="opacity-0 translate-y-2">
-                                <div class="px-4 pb-2">
+                                <div class="px-6 pb-3 text-center">
                                     <span
                                         class="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">Mi
                                         cuenta</span>
-                                    <div class="px-2 py-3 rounded-xl bg-slate-50/80">
-                                        <p class="text-sm font-semibold text-slate-900">{{ Auth::user()->name }}</p>
-                                        <p class="text-xs text-slate-500">{{ Auth::user()->email }}</p>
+                                    <div class="px-3 py-4 rounded-2xl bg-secondary-50/60 flex flex-col items-center">
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-xl mb-2 select-none">
+                                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                        </div>
+                                        <span
+                                            class="text-base font-semibold text-slate-900">{{ Auth::user()->name }}</span>
+                                        <span class="text-xs text-slate-500 mb-1">{{ Auth::user()->email }}</span>
+                                        <span
+                                            class="inline-block px-2 py-0.5 rounded-full text-xs font-medium mt-1 mb-0.5 bg-secondary-100 text-secondary-600">
+                                            {{ Auth::user()->isAdmin() ? 'Admin' : (Auth::user()->isNegocio() ? 'Negocio' : 'Usuario') }}
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="py-2 space-y-1 px-1">
+                                <div class="py-2 space-y-1 px-2">
                                     @if (Auth::user()->isAdmin())
                                         <a href="/admin"
-                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
+                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-secondary-50 hover:text-secondary-600 transition-colors duration-200">
                                             <x-icons.outline.home class="w-4 h-4" />
                                             <span>Panel Admin</span>
                                         </a>
                                         <a href="/admin/negocios"
-                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
+                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-secondary-50 hover:text-secondary-600 transition-colors duration-200">
                                             <x-icons.outline.folder class="w-4 h-4" />
                                             <span>Negocios</span>
                                         </a>
                                         <a href="/admin/solicitudes"
-                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
+                                            class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-secondary-50 hover:text-secondary-600 transition-colors duration-200">
                                             <x-icons.outline.folder class="w-4 h-4" />
                                             <span>Solicitudes</span>
                                         </a>
                                     @endif
                                     <a href="/perfil"
-                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
+                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-secondary-50 hover:text-secondary-600 transition-colors duration-200">
                                         <x-icons.outline.user class="w-4 h-4" />
                                         Perfil
                                     </a>
                                     <a href="{{ route('negocios.mis-negocios') }}"
-                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-primary-50 hover:text-primary-700 transition-colors duration-200">
+                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-secondary-50 hover:text-secondary-600 transition-colors duration-200">
                                         <x-icons.outline.folder class="w-4 h-4" />
                                         Mis Negocios
                                     </a>
                                 </div>
-                                <div class="mt-2 pt-2 border-t border-slate-100 px-1">
+                                <div class="mt-4 pt-3 border-t border-secondary-100 px-2">
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit"
-                                            class="w-full text-left flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200">
+                                            class="w-full text-left flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-secondary-700 hover:bg-secondary-100 hover:text-secondary-700 transition-colors duration-200">
                                             <x-icons.actions.logout class="w-4 h-4" />
                                             Cerrar sesión
                                         </button>
