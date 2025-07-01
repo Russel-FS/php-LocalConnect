@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminNegocioController;
 use App\Http\Controllers\Admin\AdminNegocioPanelController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NegocioPublicoController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -34,8 +35,8 @@ Route::middleware('auth')->group(function () {
 });
 
 // rutas públicas para ver negocios
-Route::get('/negocios/buscar', [NegocioController::class, 'buscar'])->name('negocios.buscar');
-Route::get('/negocios/{id}', [NegocioController::class, 'mostrarNegocio'])->name('negocios.mostrar');
+Route::get('/negocios/buscar', [NegocioPublicoController::class, 'buscar'])->name('negocios.buscar');
+Route::get('/negocios/{id}', [NegocioPublicoController::class, 'mostrar'])->name('negocios.mostrar');
 
 // Rutas de administración
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
