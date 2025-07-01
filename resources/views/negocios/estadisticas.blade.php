@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <!-- Tarjetas de estadísticas -->
+            <!-- datos de estatidisticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <!-- Vistas de búsqueda -->
                 <div
@@ -76,12 +76,12 @@
                 </div>
             </div>
 
-            <!-- Métricas adicionales -->
+            <!-- datos de metricas adicionales -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Tasa de conversión -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Tasa de conversión</h3>
                     @php
+                        // Calcular la tasa de conversión para calcular el porcentaje de vistas de detalle sobre vistas de búsqueda
                         $tasaConversion =
                             $estadisticas->vistas_busqueda > 0
                                 ? round(($estadisticas->vistas_detalle / $estadisticas->vistas_busqueda) * 100, 1)
@@ -102,7 +102,7 @@
                     </p>
                 </div>
 
-                <!-- Última actualización -->
+                <!-- ultima actualización -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Información de actualización</h3>
                     <div class="space-y-3">
@@ -122,7 +122,7 @@
                 </div>
             </div>
 
-            <!-- Acciones -->
+            <!-- acciones -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}"
                     class="inline-flex items-center gap-3 px-8 py-3 rounded-full font-semibold bg-primary-600 text-white hover:bg-primary-700 transition-all duration-200">
