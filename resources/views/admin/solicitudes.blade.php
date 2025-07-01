@@ -46,7 +46,7 @@
             color: var(--color-secondary-700);
         }
     </style>
-    <div class="bg-gradient-to-br from-primary-50 to-white min-h-dvh">
+    <div class="bg-gradient-to-br from-primary-50 to-white min-h-dvh py-10">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 py-12">
             <div class="mb-8 flex items-center gap-4">
                 <a href="/admin"
@@ -71,8 +71,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse ($negocios as $negocio)
                     <div
-                        class="fade-in-card bg-white flex flex-col items-start p-0 rounded-3xl overflow-hidden transition-all duration-300 shadow-[0_4px_24px_0_rgba(80,80,120,0.10)] border border-primary-50">
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                        class="fade-in-card bg-white flex flex-col items-start p-0 rounded-xl overflow-hidden transition-all duration-300 shadow-sm border border-primary-50">
+                        <div class="w-full h-40 bg-gray-50 flex items-center justify-center overflow-hidden relative">
                             @if ($negocio->imagen_portada)
                                 <img src="{{ $negocio->imagen_portada }}" alt="Imagen de {{ $negocio->nombre_negocio }}"
                                     class="object-cover h-full w-full">
@@ -85,14 +85,13 @@
                                 </svg>
                             @endif
                             <span
-                                class="absolute top-4 right-4 inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border
-                                    {{ $negocio->verificado ? 'bg-green-50 text-green-700 border-green-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200' }}">
+                                class="absolute top-4 right-4 inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border {{ $negocio->verificado ? 'bg-green-50 text-green-700 border-green-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200' }}">
                                 <span
                                     class="w-2 h-2 rounded-full {{ $negocio->verificado ? 'bg-green-400' : 'bg-yellow-400' }}"></span>
                                 {{ $negocio->verificado ? 'Aprobado' : 'Pendiente' }}
                             </span>
                         </div>
-                        <div class="w-full flex flex-col gap-1 px-6 pt-6 pb-4 flex-grow">
+                        <div class="w-full flex flex-col gap-1 px-6 pt-4 pb-4 flex-grow">
                             <h2 class="text-lg font-semibold text-gray-900 leading-snug truncate">
                                 {{ $negocio->nombre_negocio }}
                             </h2>
@@ -120,7 +119,7 @@
                         <div
                             class="w-full flex justify-between items-center px-6 pb-4 pt-2 mt-auto border-t border-gray-100">
                             <a href="{{ route('admin.negocios.show', $negocio) }}"
-                                class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-800 font-medium transition-colors text-sm">
+                                class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-800 font-medium transition-colors text-xs">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -134,7 +133,7 @@
                                     @method('PATCH')
                                     <input type="hidden" name="estado" value="1">
                                     <button type="submit"
-                                        class="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-700 font-semibold hover:bg-green-200 transition-all text-xs">
+                                        class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-50 text-green-700 font-semibold hover:bg-green-100 transition-all text-xs">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -147,7 +146,7 @@
                                     @method('PATCH')
                                     <input type="hidden" name="estado" value="0">
                                     <button type="submit"
-                                        class="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-700 font-semibold hover:bg-red-200 transition-all text-xs">
+                                        class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-red-50 text-red-700 font-semibold hover:bg-red-100 transition-all text-xs">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-[#f8fafc] min-h-dvh py-10">
+    <div class="bg-gradient-to-br from-primary-50 to-white min-h-dvh py-10">
         <div class="max-w-7xl mx-auto px-2 sm:px-6">
             <h1 class="text-3xl md:text-4xl font-semibold text-gray-900 mb-10 text-center tracking-tight">Todos los Negocios
             </h1>
@@ -19,11 +19,10 @@
                 </form>
             </div>
 
-            <div
-                class="bg-white rounded-3xl shadow-[0_4px_24px_0_rgba(80,80,120,0.10)] p-0 overflow-x-auto border border-primary-50">
-                <table class="min-w-full text-sm divide-y divide-gray-100">
+            <div class="bg-white rounded-xl shadow-sm p-0 overflow-x-auto">
+                <table class="min-w-full text-sm">
                     <thead>
-                        <tr class="text-left text-slate-400 uppercase text-xs tracking-wider bg-[#f8fafc]">
+                        <tr class="text-left text-slate-400 uppercase text-xs tracking-wider bg-white">
                             <th class="py-3 px-2">Nombre</th>
                             <th class="py-3 px-2">Usuario</th>
                             <th class="py-3 px-2">Estado</th>
@@ -36,20 +35,19 @@
                         @forelse($negocios as $negocio)
                             <tr class="border-b last:border-0 hover:bg-primary-50/40 transition-all group">
                                 <td
-                                    class="py-4 px-2 font-semibold text-slate-900 whitespace-nowrap group-hover:text-primary-700 transition-colors">
+                                    class="py-3 px-2 font-semibold text-slate-900 whitespace-nowrap group-hover:text-primary-700 transition-colors">
                                     {{ $negocio->nombre_negocio }}</td>
-                                <td class="py-4 px-2 text-slate-700 whitespace-nowrap">{{ $negocio->usuario->name ?? '-' }}
+                                <td class="py-3 px-2 text-slate-700 whitespace-nowrap">{{ $negocio->usuario->name ?? '-' }}
                                 </td>
-                                <td class="py-4 px-2">
+                                <td class="py-3 px-2">
                                     <span
-                                        class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border
-                                        {{ $negocio->verificado ? 'bg-green-50 text-green-700 border-green-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200' }}">
+                                        class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border {{ $negocio->verificado ? 'bg-green-50 text-green-700 border-green-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200' }}">
                                         <span
                                             class="w-2 h-2 rounded-full {{ $negocio->verificado ? 'bg-green-400' : 'bg-yellow-400' }}"></span>
                                         {{ $negocio->verificado ? 'Aprobado' : 'Pendiente' }}
                                     </span>
                                 </td>
-                                <td class="py-4 px-2 text-slate-500 whitespace-nowrap">
+                                <td class="py-3 px-2 text-slate-500 whitespace-nowrap">
                                     @if ($negocio->ubicacion)
                                         {{ $negocio->ubicacion->direccion ?? '' }}
                                         @if ($negocio->ubicacion->ciudad)
@@ -59,12 +57,11 @@
                                         -
                                     @endif
                                 </td>
-                                <td class="py-4 px-2 text-slate-400 whitespace-nowrap">
-                                    {{ $negocio->created_at ? $negocio->created_at->format('d/m/Y H:i') : '-' }}
-                                </td>
-                                <td class="py-4 px-2 whitespace-nowrap">
+                                <td class="py-3 px-2 text-slate-400 whitespace-nowrap">
+                                    {{ $negocio->created_at ? $negocio->created_at->format('d/m/Y H:i') : '-' }}</td>
+                                <td class="py-3 px-2 whitespace-nowrap">
                                     <a href="{{ route('admin.negocios.show', $negocio) }}"
-                                        class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-800 font-medium transition-colors">
+                                        class="inline-flex items-center gap-1 text-primary-600 hover:text-primary-800 font-medium transition-colors text-xs">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round"
