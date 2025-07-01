@@ -139,7 +139,7 @@
 
                 <!-- Categorías -->
                 <div
-                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm mb-12">
+                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 md:p-12 border border-primary-100/50 shadow-sm mb-12">
                     <div class="flex items-center gap-4 mb-6">
                         <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-width="2"
@@ -164,7 +164,7 @@
 
                 <!-- Características -->
                 <div
-                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm mb-12">
+                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 md:p-12 border border-primary-100/50 shadow-sm mb-12">
                     <div class="flex items-center gap-4 mb-6">
                         <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -189,12 +189,13 @@
 
                 <!-- Servicios Predefinidos -->
                 <div
-                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm mb-12">
+                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 md:p-12 border border-primary-100/50 shadow-sm mb-12">
                     <div class="flex items-center gap-4 mb-6">
                         <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
-                        <h2 class="text-3xl font-bold text-primary-700 tracking-tight">Servicios predefinidos</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold text-primary-700 tracking-tight">Servicios predefinidos
+                        </h2>
                     </div>
                     @if (isset($categoriasServicio) && $categoriasServicio->isNotEmpty())
                         <div class="space-y-8">
@@ -203,7 +204,7 @@
                                     <div class="mb-2">
                                         <div class="flex items-center gap-3 mb-2">
                                             <span
-                                                class="text-lg font-bold text-primary-700">{{ $catServ->nombre_categoria_servicio }}</span>
+                                                class="text-sm md:text-lg font-bold text-primary-700">{{ $catServ->nombre_categoria_servicio }}</span>
                                             @if ($catServ->descripcion)
                                                 <span class="text-xs text-primary-400">{{ $catServ->descripcion }}</span>
                                             @endif
@@ -211,7 +212,7 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                             @foreach ($catServ->serviciosPredefinidos as $servicio)
                                                 <label
-                                                    class="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-150 hover:-translate-y-0.5 flex items-center gap-4 cursor-pointer">
+                                                    class="group bg-white/80 backdrop-blur-sm rounded-3xl p-4 md:p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-150 hover:-translate-y-0.5 flex items-center gap-4 cursor-pointer">
                                                     <span
                                                         class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
                                                         <svg class="w-6 h-6 text-primary-600" fill="none"
@@ -226,7 +227,7 @@
                                                         {{ in_array($servicio->id_servicio_predefinido, $negocio->serviciosPredefinidos->pluck('id_servicio_predefinido')->toArray()) ? 'checked' : '' }}>
                                                     <span class="flex-1">
                                                         <span
-                                                            class="font-bold text-primary-700 text-lg">{{ $servicio->nombre_servicio }}</span>
+                                                            class="font-bold text-primary-700 text-sm md:text-lg">{{ $servicio->nombre_servicio }}</span>
                                                         @if ($servicio->descripcion)
                                                             <span
                                                                 class="block text-primary-500 text-sm leading-relaxed">{{ $servicio->descripcion }}</span>
@@ -246,25 +247,26 @@
 
                 <!-- Servicios Personalizados -->
                 <div
-                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm mb-12">
+                    class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 md:p-12 border border-primary-100/50 shadow-sm mb-12">
                     <div class="flex items-center gap-4 mb-6">
                         <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-width="2"
                                 d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                         </svg>
-                        <h2 class="text-3xl font-bold text-primary-700 tracking-tight">Servicios personalizados</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold text-primary-700 tracking-tight">Servicios personalizados
+                        </h2>
                     </div>
                     <div class="max-w-6xl w-full mx-auto">
                         <div id="servicios-personalizados-lista"
                             class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-16">
                             @foreach ($negocio->serviciosPersonalizados as $i => $servicio)
                                 <div
-                                    class="servicio-personalizado-item group relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 border border-primary-100/30 hover:shadow-lg hover:border-primary-200 transition-all duration-150 hover:-translate-y-0.5 flex flex-col gap-6 min-h-[320px]">
+                                    class="servicio-personalizado-item group relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 md:p-10 border border-primary-100 hover:shadow-sm hover:border-primary-200 transition-all duration-150 hover:-translate-y-0.5 flex flex-col gap-6 min-h-[320px]">
                                     <input type="hidden" name="servicios_personalizados[{{ $i }}][id]"
                                         value="{{ $servicio->id_servicio }}">
-                                    <div class="flex items-center gap-4 mb-2">
+                                    <div class="flex  items-center gap-4 mb-2">
                                         <span
-                                            class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
+                                            class="md:w-12 md:h-12 w-7 h-7 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
                                             <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-width="2"
@@ -274,27 +276,32 @@
                                         <input type="text"
                                             name="servicios_personalizados[{{ $i }}][nombre]"
                                             value="{{ old('servicios_personalizados.' . $i . '.nombre', $servicio->nombre_servicio) }}"
-                                            class="flex-1 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-bold text-lg"
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-bold text-lg"
                                             required placeholder="Nombre del servicio">
                                     </div>
+                                    <!-- Descripción -->
                                     <input type="text"
                                         name="servicios_personalizados[{{ $i }}][descripcion]"
                                         value="{{ old('servicios_personalizados.' . $i . '.descripcion', $servicio->descripcion) }}"
                                         class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white"
                                         placeholder="Descripción">
+                                    <!--precio -->
                                     <input type="number" name="servicios_personalizados[{{ $i }}][precio]"
                                         value="{{ old('servicios_personalizados.' . $i . '.precio', $servicio->precio) }}"
-                                        class="w-36 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-semibold text-lg"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-semibold text-lg"
                                         min="0" step="0.01" placeholder="Precio (S/)">
+                                    <!-- Disponibilidad -->
                                     <div class="flex items-center gap-6 mt-2">
                                         <label class="inline-flex items-center gap-2 cursor-pointer">
                                             <input type="checkbox"
+                                                class="border-gray-300 rounded-full text-primary-600 focus:ring-primary-500"
+                                                {{ old('servicios_personalizados.' . $i . '.disponible', $servicio->disponible) ? 'checked' : '' }}
                                                 name="servicios_personalizados[{{ $i }}][disponible]"
                                                 value="1" {{ $servicio->disponible ? 'checked' : '' }}>
                                             <span
-                                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-secondary-50 text-secondary-600 border border-secondary-100">
+                                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-secondary-50 text-secondary-600 border border-secondary-200">
                                                 <span
-                                                    class="w-2 h-2 rounded-full {{ $servicio->disponible ? 'bg-secondary-500' : 'bg-red-500' }}"></span>
+                                                    class="w-2 h-2 rounded-full {{ $servicio->disponible ? 'bg-secondary-600' : 'bg-red-500' }}"></span>
                                                 {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
                                             </span>
                                         </label>
