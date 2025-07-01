@@ -189,7 +189,8 @@
                                     </div>
                                     <div>
                                         <h3 class="text-2xl font-bold text-primary-700">Servicios Personalizados</h3>
-                                        <p class="text-base text-primary-500">Servicios adaptados a tus necesidades
+                                        <p class="text-sm md:text-base text-primary-500">Servicios adaptados a tus
+                                            necesidades
                                             específicas y requerimientos únicos</p>
                                     </div>
                                 </div>
@@ -208,8 +209,8 @@
                                                         </svg>
                                                     </div>
                                                     <div class="flex-1">
-                                                        <div class="flex items-center gap-4 mb-3">
-                                                            <h4 class="font-bold text-primary-700 text-lg">
+                                                        <div class="flex flex-wrap items-center gap-4 mb-3">
+                                                            <h4 class="font-bold text-primary-700 text-lg truncate">
                                                                 {{ $servicio->nombre_servicio }}</h4>
                                                             <span
                                                                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium {{ $servicio->disponible ? 'bg-secondary-100 text-secondary-600 border border-secondary-200' : 'bg-red-100 text-red-600 border border-red-200' }}">
@@ -219,7 +220,8 @@
                                                             </span>
                                                         </div>
                                                         @if ($servicio->descripcion)
-                                                            <p class="text-primary-500 text-xs leading-relaxed mb-4">
+                                                            <p
+                                                                class="text-primary-500 text-xs leading-relaxed mb-4 truncate">
                                                                 {{ $servicio->descripcion }}</p>
                                                         @endif
                                                         @if ($servicio->precio)
