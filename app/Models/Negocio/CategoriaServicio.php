@@ -15,12 +15,9 @@ class CategoriaServicio extends Model
         'nombre_categoria_servicio',
         'descripcion',
         'estado',
-        'creado_en',
-        'actualizado_en',
     ];
 
     const CREATED_AT = 'creado_en';
-    const UPDATED_AT = 'actualizado_en';
 
     public function serviciosPredefinidos()
     {

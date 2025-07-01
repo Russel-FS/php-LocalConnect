@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('tipo_contacto', 50);
             $table->string('valor_contacto', 255);
             $table->boolean('activo')->default(true);
-            $table->timestamp('creado_en')->useCurrent();
-            $table->timestamp('actualizado_en')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamps();
         });
     }
 

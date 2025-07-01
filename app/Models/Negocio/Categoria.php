@@ -15,11 +15,7 @@ class Categoria extends Model
         'nombre_categoria',
         'descripcion',
         'estado',
-        'actualizado_en',
     ];
-
-    const UPDATED_AT = 'actualizado_en';
-
 
     public function negocios()
     {
