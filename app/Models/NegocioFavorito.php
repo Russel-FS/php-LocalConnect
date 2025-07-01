@@ -16,7 +16,6 @@ class NegocioFavorito extends Model
     protected $fillable = [
         'id_usuario',
         'id_negocio',
-        'creado_en',
     ];
 
     public function negocio()

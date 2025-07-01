@@ -31,7 +31,7 @@
                             <x-icons.navigation.search class="w-6 h-6 text-blue-600" />
                         </div>
                         <span
-                            class="text-2xl font-bold text-blue-600">{{ number_format($estadisticas->vistas_busqueda) }}</span>
+                            class="text-2xl font-bold text-blue-600">{{ number_format($estadisticas['vistas_busqueda']) }}</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Vistas en búsqueda</h3>
                     <p class="text-sm text-gray-500">Veces que apareció en resultados</p>
@@ -45,7 +45,7 @@
                             <x-icons.outline.eye class="w-6 h-6 text-green-600" />
                         </div>
                         <span
-                            class="text-2xl font-bold text-green-600">{{ number_format($estadisticas->vistas_detalle) }}</span>
+                            class="text-2xl font-bold text-green-600">{{ number_format($estadisticas['vistas_detalle']) }}</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Vistas de detalle</h3>
                     <p class="text-sm text-gray-500">Clics en "Ver detalles"</p>
@@ -58,7 +58,7 @@
                         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
                             <x-icons.solid.star class="w-6 h-6 text-red-600" />
                         </div>
-                        <span class="text-2xl font-bold text-red-600">{{ number_format($negocio->meGusta->count()) }}</span>
+                        <span class="text-2xl font-bold text-red-600">{{ number_format($estadisticas['me_gusta']) }}</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Me gusta</h3>
                     <p class="text-sm text-gray-500">Reacciones positivas</p>
@@ -75,7 +75,7 @@
                             </svg>
                         </div>
                         <span
-                            class="text-2xl font-bold text-yellow-600">{{ number_format($negocio->favoritos->count()) }}</span>
+                            class="text-2xl font-bold text-yellow-600">{{ number_format($estadisticas['favoritos']) }}</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Favoritos</h3>
                     <p class="text-sm text-gray-500">Guardados por usuarios</p>
@@ -89,8 +89,8 @@
                     @php
                         // Calcular la tasa de conversión para calcular el porcentaje de vistas de detalle sobre vistas de búsqueda
                         $tasaConversion =
-                            $estadisticas->vistas_busqueda > 0
-                                ? round(($estadisticas->vistas_detalle / $estadisticas->vistas_busqueda) * 100, 1)
+                            $estadisticas['vistas_busqueda'] > 0
+                                ? round(($estadisticas['vistas_detalle'] / $estadisticas['vistas_busqueda']) * 100, 1)
                                 : 0;
                     @endphp
                     <div class="flex items-center gap-4">
@@ -103,7 +103,8 @@
                         <span class="text-2xl font-bold text-primary-600">{{ $tasaConversion }}%</span>
                     </div>
                     <p class="text-sm text-gray-500 mt-2">
-                        {{ $estadisticas->vistas_detalle }} de {{ $estadisticas->vistas_busqueda }} vistas se convirtieron
+                        {{ $estadisticas['vistas_detalle'] }} de {{ $estadisticas['vistas_busqueda'] }} vistas se
+                        convirtieron
                         en clics
                     </p>
                 </div>
@@ -114,14 +115,12 @@
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
                             <span class="text-gray-600">Última actualización:</span>
-                            <span class="font-medium text-gray-900">
-                                {{ $estadisticas->actualizado_en ? \Carbon\Carbon::parse($estadisticas->actualizado_en)->diffForHumans() : 'Nunca' }}
-                            </span>
+                            <span class="font-medium text-gray-900">No disponible</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-600">Total de interacciones:</span>
                             <span class="font-medium text-gray-900">
-                                {{ number_format($estadisticas->vistas_busqueda + $estadisticas->vistas_detalle + $negocio->meGusta->count() + $negocio->favoritos->count()) }}
+                                {{ number_format($estadisticas['vistas_busqueda'] + $estadisticas['vistas_detalle'] + $estadisticas['me_gusta'] + $estadisticas['favoritos']) }}
                             </span>
                         </div>
                     </div>
@@ -146,12 +145,11 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Datos de ejemplo, reemplaza por datos reales desde el backend si lo deseas
-        const labels = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
-        const vistas = [12, 19, 8, 15, 22, 30, 25];
-        const meGusta = [2, 3, 1, 4, 5, 6, 4];
+        // datos
+        const labels = @json($labels ?? ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']);
+        const vistas = @json($vistas ?? [12, 19, 8, 15, 22, 30, 25]);
+        const meGusta = @json($meGusta ?? [2, 3, 1, 4, 5, 6, 4]);
 
         const ctx = document.getElementById('graficoEvolucion').getContext('2d');
         new Chart(ctx, {
