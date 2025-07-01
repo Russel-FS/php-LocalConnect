@@ -38,25 +38,29 @@
                 </div>
             </div>
 
-            <!-- Grid de secciones -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Información personal -->
                 <div
-                    class="bg-white rounded-2xl shadow border border-primary-100 p-6 flex flex-col gap-4 min-h-[220px] justify-between">
+                    class="bg-white rounded-2xl shadow border border-primary-100 p-8 flex flex-col gap-6 min-h-[220px] justify-between">
                     <div>
-                        <h2 class="text-lg font-semibold text-primary-700 mb-2 flex items-center gap-2">
-                            <x-icons.outline.user class="w-5 h-5 text-primary-600" /> Información personal
+                        <h2 class="text-lg font-semibold text-primary-700 mb-4 flex items-center gap-3">
+                            <x-icons.outline.user class="w-6 h-6 text-primary-600" /> Información personal
                         </h2>
-                        <div class="flex flex-col gap-1 text-sm text-slate-600">
-                            <div><b>Nombre:</b> {{ $user->name }}</div>
-                            <div><b>Email:</b> {{ $user->email }}</div>
-                            <div><b>Teléfono:</b> {{ $user->telefono ?? 'No registrado' }}</div>
-                            <div><b>Rol:</b>
-                                {{ $user->isAdmin() ? 'Admin' : ($user->isNegocio() ? 'Negocio' : 'Usuario') }}</div>
-                            <div><b>Estado:</b> <span
-                                    class="{{ $user->estado === 'activo' ? 'text-green-600' : 'text-red-600' }}">{{ ucfirst($user->estado) }}</span>
+                        <div class="flex flex-col gap-4 text-base text-slate-700">
+                            <div class="flex items-center gap-2"><span class="font-medium w-28">Nombre:</span> <span
+                                    class="flex-1">{{ $user->name }}</span></div>
+                            <div class="flex items-center gap-2"><span class="font-medium w-28">Email:</span> <span
+                                    class="flex-1">{{ $user->email }}</span></div>
+                            <div class="flex items-center gap-2"><span class="font-medium w-28">Teléfono:</span> <span
+                                    class="flex-1">{{ $user->telefono ?? 'No registrado' }}</span></div>
+                            <div class="flex items-center gap-2"><span class="font-medium w-28">Rol:</span> <span
+                                    class="flex-1">{{ $user->isAdmin() ? 'Admin' : ($user->isNegocio() ? 'Negocio' : 'Usuario') }}</span>
                             </div>
-                            <div><b>Miembro desde:</b> {{ $user->created_at->format('d/m/Y') }}</div>
+                            <div class="flex items-center gap-2"><span class="font-medium w-28">Estado:</span> <span
+                                    class="flex-1 {{ $user->estado === 'activo' ? 'text-green-600' : 'text-red-600' }}">{{ ucfirst($user->estado) }}</span>
+                            </div>
+                            <div class="flex items-center gap-2"><span class="font-medium w-28">Miembro desde:</span> <span
+                                    class="flex-1">{{ $user->created_at->format('d/m/Y') }}</span></div>
                         </div>
                     </div>
                 </div>
