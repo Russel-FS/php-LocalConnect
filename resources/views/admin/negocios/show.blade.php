@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="min-h-screen bg-gradient-to-br from-primary-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 py-8">
 
             @if (session('error'))
                 <div class="mb-8 p-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl">
@@ -16,23 +16,23 @@
                 <div class="absolute inset-0"></div>
                 <div class="relative p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 2xl:p-24">
                     <div class="max-w-6xl mx-auto">
-                        <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
-                            <div class="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
+                        <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center min-w-0">
+                            <div class="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 min-w-0">
                                 <div class="space-y-3 sm:space-y-4 md:space-y-6">
                                     <h1
-                                        class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-primary-700 leading-tight tracking-tight">
+                                        class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-primary-700 leading-tight tracking-tight">
                                         {{ $negocio->nombre_negocio }}
                                     </h1>
                                     <p
-                                        class="text-base sm:text-lg md:text-xl lg:text-2xl text-primary-500 leading-relaxed max-w-xl">
+                                        class="text-sm sm:text-base md:text-lg lg:text-xl text-primary-500 leading-relaxed max-w-xl">
                                         {{ $negocio->descripcion }}
                                     </p>
                                 </div>
 
-                                <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
+                                <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 min-w-0">
                                     @foreach ($negocio->categorias as $categoria)
                                         <span
-                                            class="px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 bg-white/90 backdrop-blur-sm border border-primary-200 text-primary-700 rounded-full text-xs sm:text-sm md:text-base font-semibold shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
+                                            class="px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 bg-white/90 backdrop-blur-sm border border-primary-200 text-primary-700 rounded-full text-xs sm:text-sm md:text-base font-semibold shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
                                             {{ $categoria->nombre_categoria }}
                                         </span>
                                     @endforeach
@@ -41,7 +41,7 @@
                                 <div class="flex items-start gap-2 sm:gap-3 md:gap-4 text-primary-500">
                                     @if ($negocio->ubicacion)
                                         <div
-                                            class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-primary-100 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
+                                            class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-primary-100 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
                                             <svg class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-primary-600"
                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-width="2"
@@ -67,9 +67,9 @@
 
                                 <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
                                     <span
-                                        class="inline-flex items-center gap-1.5 sm:gap-2 md:gap-3 px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold {{ $negocio->verificado ? 'bg-secondary-500/10 text-secondary-600 border border-secondary-200' : 'bg-yellow-500/10 text-yellow-600 border border-yellow-200' }}">
+                                        class="inline-flex items-center gap-1 sm:gap-1.5 md:gap-2 px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 rounded-full text-xs sm:text-xs md:text-sm font-semibold {{ $negocio->verificado ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200' }}">
                                         <span
-                                            class="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 rounded-full {{ $negocio->verificado ? 'bg-secondary-500' : 'bg-yellow-500' }}"></span>
+                                            class="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 lg:w-2.5 lg:h-2.5 rounded-full {{ $negocio->verificado ? 'bg-green-500' : 'bg-yellow-500' }}"></span>
                                         <span
                                             class="hidden md:inline">{{ $negocio->verificado ? 'Verificado' : 'Pendiente de verificación' }}</span>
                                         <span
@@ -119,17 +119,17 @@
                 @if ($negocio->serviciosPredefinidos->isNotEmpty() || $negocio->serviciosPersonalizados->isNotEmpty())
                     <div class="space-y-12">
                         <div class="text-center">
-                            <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Nuestros Servicios</h2>
-                            <p class="text-xl text-primary-500 max-w-3xl mx-auto leading-relaxed">Descubre todo lo que
+                            <h2 class="text-3xl font-bold text-primary-700 mb-4 tracking-tight">Nuestros Servicios</h2>
+                            <p class="text-lg text-primary-500 max-w-3xl mx-auto leading-relaxed">Descubre todo lo que
                                 tenemos para ofrecerte con la mejor calidad y atención personalizada</p>
                         </div>
 
                         <!-- Servicios predefinidos -->
                         @if ($negocio->serviciosPredefinidos->isNotEmpty())
                             <div
-                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 border border-primary-100/50 shadow-sm">
                                 <div class="flex items-center gap-6 mb-10">
-                                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center">
+                                    <div class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center">
                                         <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-width="2"
@@ -146,7 +146,7 @@
                                     @foreach ($negocio->serviciosPredefinidos as $servicio)
                                         <div class="group relative">
                                             <div
-                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-500 hover:-translate-y-1">
                                                 <div class="flex items-start gap-6">
                                                     <div
                                                         class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
@@ -175,9 +175,9 @@
                         <!-- Servicios personalizados -->
                         @if ($negocio->serviciosPersonalizados->isNotEmpty())
                             <div
-                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 border border-primary-100/50 shadow-sm">
                                 <div class="flex items-center gap-6 mb-10">
-                                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center">
+                                    <div class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center">
                                         <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-width="2"
@@ -194,7 +194,7 @@
                                     @foreach ($negocio->serviciosPersonalizados as $servicio)
                                         <div class="group relative">
                                             <div
-                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                                class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-500 hover:-translate-y-1">
                                                 <div class="flex items-start gap-6">
                                                     <div
                                                         class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
@@ -205,8 +205,8 @@
                                                         </svg>
                                                     </div>
                                                     <div class="flex-1">
-                                                        <div class="flex items-center gap-4 mb-3">
-                                                            <h4 class="font-bold text-primary-700 text-xl">
+                                                        <div class="flex flex-wrap items-center gap-4 mb-3">
+                                                            <h4 class="font-bold text-primary-700 text-xl truncate">
                                                                 {{ $servicio->nombre_servicio }}</h4>
                                                             <span
                                                                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium {{ $servicio->disponible ? 'bg-secondary-100 text-secondary-600 border border-secondary-200' : 'bg-red-100 text-red-600 border border-red-200' }}">
@@ -216,7 +216,8 @@
                                                             </span>
                                                         </div>
                                                         @if ($servicio->descripcion)
-                                                            <p class="text-primary-500 text-sm leading-relaxed mb-4">
+                                                            <p
+                                                                class="text-primary-500 text-sm leading-relaxed mb-4 truncate">
                                                                 {{ $servicio->descripcion }}</p>
                                                         @endif
                                                         @if ($servicio->precio)
@@ -242,21 +243,21 @@
                 @if ($negocio->caracteristicas->isNotEmpty())
                     <div class="space-y-12">
                         <div class="text-center">
-                            <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Lo que ofrecemos</h2>
-                            <p class="text-xl text-primary-500 max-w-3xl mx-auto leading-relaxed">Características y
+                            <h2 class="text-3xl font-bold text-primary-700 mb-4 tracking-tight">Lo que ofrecemos</h2>
+                            <p class="text-lg text-primary-500 max-w-3xl mx-auto leading-relaxed">Características y
                                 servicios que nos distinguen y hacen única tu experiencia</p>
                         </div>
 
                         <div
-                            class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                            class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 border border-primary-100/50 shadow-sm">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                                 @foreach ($negocio->caracteristicas as $caracteristica)
                                     <div class="group relative">
                                         <div
-                                            class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                                            class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-500 hover:-translate-y-1">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
-                                                    class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-3xl flex items-center justify-center mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-500 group-hover:scale-110">
+                                                    class="w-10 h-10 bg-gradient-to-br from-primary-100 to-primary-200 rounded-3xl flex items-center justify-center mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-500 group-hover:scale-110">
                                                     <svg class="w-10 h-10 text-primary-600" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-width="2"
@@ -284,19 +285,19 @@
                     @if ($negocio->horarios->isNotEmpty())
                         <div class="space-y-8">
                             <div class="text-center">
-                                <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Horario de atención
+                                <h2 class="text-3xl font-bold text-primary-700 mb-4 tracking-tight">Horario de atención
                                 </h2>
-                                <p class="text-xl text-primary-500 max-w-2xl mx-auto">Estamos aquí para ti en los horarios
+                                <p class="text-lg text-primary-500 max-w-2xl mx-auto">Estamos aquí para ti en los horarios
                                     que mejor te convengan</p>
                             </div>
 
                             <div
-                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 border border-primary-100/50 shadow-sm">
                                 <div
                                     class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                                     @foreach ($negocio->horarios as $horario)
                                         <div
-                                            class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-primary-100/50 hover:border-primary-200 hover:shadow-lg transition-all duration-300">
+                                            class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-primary-100/50 hover:shadow-sm transition-all duration-300">
                                             <div class="text-center">
                                                 <div
                                                     class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
@@ -335,21 +336,21 @@
                     @if ($contactos->isNotEmpty())
                         <div class="space-y-8">
                             <div class="text-center">
-                                <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Información de contacto
+                                <h2 class="text-3xl font-bold text-primary-700 mb-4 tracking-tight">Información de contacto
                                 </h2>
-                                <p class="text-xl text-primary-500 max-w-2xl mx-auto">Conecta con nosotros de la manera que
+                                <p class="text-lg text-primary-500 max-w-2xl mx-auto">Conecta con nosotros de la manera que
                                     prefieras</p>
                             </div>
 
                             <div
-                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 border border-primary-100/50 shadow-sm">
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                     @if ($contactos->where('tipo_contacto', 'telefono')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300 hover:-translate-y-1">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
-                                                    class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
+                                                    class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
                                                     <x-icons.outline.phone class="w-8 h-8 text-primary-600" />
                                                 </div>
                                                 <h3 class="font-bold text-primary-700 text-xl mb-2">Teléfono</h3>
@@ -362,10 +363,10 @@
 
                                     @if ($contactos->where('tipo_contacto', 'whatsapp')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300 hover:-translate-y-1">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
-                                                    class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+                                                    class="w-10 h-10 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
                                                     <x-icons.solid.whatsapp class="w-8 h-8 text-green-600" />
                                                 </div>
                                                 <h3 class="font-bold text-primary-700 text-xl mb-2">WhatsApp</h3>
@@ -378,10 +379,10 @@
 
                                     @if ($contactos->where('tipo_contacto', 'facebook')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300 hover:-translate-y-1">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
-                                                    class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
+                                                    class="w-10 h-10 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
                                                     <x-icons.solid.facebook class="w-8 h-8 text-blue-600" />
                                                 </div>
                                                 <h3 class="font-bold text-primary-700 text-xl mb-2">Facebook</h3>
@@ -394,10 +395,10 @@
 
                                     @if ($contactos->where('tipo_contacto', 'instagram')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300 hover:-translate-y-1">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
-                                                    class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-200 transition-colors">
+                                                    class="w-10 h-10 bg-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-200 transition-colors">
                                                     <x-icons.solid.instagram class="w-8 h-8 text-pink-600" />
                                                 </div>
                                                 <h3 class="font-bold text-primary-700 text-xl mb-2">Instagram</h3>
@@ -410,10 +411,10 @@
 
                                     @if ($contactos->where('tipo_contacto', 'web')->first())
                                         <div
-                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                            class="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-primary-100/50 hover:shadow-sm transition-all duration-300 hover:-translate-y-1">
                                             <div class="flex flex-col items-center text-center">
                                                 <div
-                                                    class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
+                                                    class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
                                                     <x-icons.outline.globe class="w-8 h-8 text-primary-600" />
                                                 </div>
                                                 <h3 class="font-bold text-primary-700 text-xl mb-2">Sitio web</h3>
@@ -434,18 +435,18 @@
                     @if ($negocio->ubicacion)
                         <div class="space-y-8">
                             <div class="text-center">
-                                <h2 class="text-5xl font-bold text-primary-700 mb-6 tracking-tight">Ubicación</h2>
-                                <p class="text-xl text-primary-500 max-w-2xl mx-auto">Encuentra fácilmente nuestro negocio
+                                <h2 class="text-3xl font-bold text-primary-700 mb-4 tracking-tight">Ubicación</h2>
+                                <p class="text-lg text-primary-500 max-w-2xl mx-auto">Encuentra fácilmente nuestro negocio
                                     en el mapa</p>
                             </div>
 
                             <div
-                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-12 border border-primary-100/50 shadow-sm">
+                                class="bg-gradient-to-br from-white to-primary-50/20 rounded-3xl p-6 border border-primary-100/50 shadow-sm">
                                 <div class="grid lg:grid-cols-2 gap-12 items-start">
                                     <div class="space-y-8">
                                         <div class="flex items-center gap-4">
                                             <div
-                                                class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center">
+                                                class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center">
                                                 <x-icons.outline.location-marker class="w-8 h-8 text-primary-600" />
                                             </div>
                                             <div>
