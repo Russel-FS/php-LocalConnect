@@ -198,7 +198,7 @@
                                                 <div class="flex items-start gap-6">
                                                     <div
                                                         class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
-                                                        <svg class="w-7 h-7 text-primary-600" fill="none"
+                                                        <svg class="w-5 h-5 text-primary-600" fill="none"
                                                             stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-width="2"
                                                                 d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
@@ -206,7 +206,7 @@
                                                     </div>
                                                     <div class="flex-1">
                                                         <div class="flex flex-wrap items-center gap-4 mb-3">
-                                                            <h4 class="font-bold text-primary-700 text-xl truncate">
+                                                            <h4 class="font-bold text-primary-700 text-lg truncate">
                                                                 {{ $servicio->nombre_servicio }}</h4>
                                                             <span
                                                                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium {{ $servicio->disponible ? 'bg-secondary-100 text-secondary-600 border border-secondary-200' : 'bg-red-100 text-red-600 border border-red-200' }}">
@@ -217,7 +217,7 @@
                                                         </div>
                                                         @if ($servicio->descripcion)
                                                             <p
-                                                                class="text-primary-500 text-sm leading-relaxed mb-4 truncate">
+                                                                class="text-primary-500 text-xs leading-relaxed mb-4 truncate">
                                                                 {{ $servicio->descripcion }}</p>
                                                         @endif
                                                         @if ($servicio->precio)
@@ -239,7 +239,7 @@
                     </div>
                 @endif
 
-                <!-- Características del negocio -->
+                <!-- Características del negocieeeeeeeeeeo -->
                 @if ($negocio->caracteristicas->isNotEmpty())
                     <div class="space-y-12">
                         <div class="text-center">
@@ -258,16 +258,16 @@
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-10 h-10 bg-gradient-to-br from-primary-100 to-primary-200 rounded-3xl flex items-center justify-center mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-500 group-hover:scale-110">
-                                                    <svg class="w-10 h-10 text-primary-600" fill="none"
+                                                    <svg class="w-5 h-5 text-primary-600" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-width="2"
                                                             d="M5 13l4 4L19 7" />
                                                     </svg>
                                                 </div>
-                                                <h4 class="font-bold text-primary-700 text-xl mb-3">
+                                                <h4 class="font-bold text-primary-700 text-xs sm:text-sm mb-3">
                                                     {{ $caracteristica->nombre }}</h4>
                                                 @if ($caracteristica->descripcion)
-                                                    <p class="text-primary-500 text-sm leading-relaxed">
+                                                    <p class="text-primary-500 text-xs sm:text-sm leading-relaxed">
                                                         {{ $caracteristica->descripcion }}</p>
                                                 @endif
                                             </div>
@@ -307,7 +307,7 @@
                                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
                                                 </div>
-                                                <h3 class="font-bold text-primary-700 text-sm sm:text-lg mb-2 capitalize">
+                                                <h3 class="font-bold text-primary-700 text-xs sm:text-sm mb-2 capitalize">
                                                     {{ $horario->dia_semana }}</h3>
                                                 @if ($horario->cerrado)
                                                     <span
@@ -318,7 +318,7 @@
                                                         <span class="sm:hidden">Cerrado</span>
                                                     </span>
                                                 @else
-                                                    <div class="text-primary-600 font-semibold text-sm sm:text-lg">
+                                                    <div class="text-primary-600 font-semibold text-xs sm:text-sm">
                                                         {{ \Carbon\Carbon::parse($horario->hora_apertura)->format('H:i') }}
                                                         - {{ \Carbon\Carbon::parse($horario->hora_cierre)->format('H:i') }}
                                                     </div>
@@ -351,10 +351,11 @@
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
-                                                    <x-icons.outline.phone class="w-8 h-8 text-primary-600" />
+                                                    <x-icons.outline.phone class="w-5 h-5 text-primary-600" />
                                                 </div>
-                                                <h3 class="font-bold text-primary-700 text-xl mb-2">Teléfono</h3>
-                                                <p class="text-lg text-primary-600 font-semibold">
+                                                <h3 class="font-bold text-primary-700 text-xs sm:text-sm mb-2">Teléfono
+                                                </h3>
+                                                <p class="text-base text-primary-600 font-semibold">
                                                     {{ $contactos->where('tipo_contacto', 'telefono')->first()->valor_contacto }}
                                                 </p>
                                             </div>
@@ -367,10 +368,11 @@
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-10 h-10 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
-                                                    <x-icons.solid.whatsapp class="w-8 h-8 text-green-600" />
+                                                    <x-icons.solid.whatsapp class="w-5 h-5 text-green-600" />
                                                 </div>
-                                                <h3 class="font-bold text-primary-700 text-xl mb-2">WhatsApp</h3>
-                                                <p class="text-lg text-primary-600 font-semibold">
+                                                <h3 class="font-bold text-primary-700 text-xs sm:text-sm mb-2">WhatsApp
+                                                </h3>
+                                                <p class="text-base text-primary-600 font-semibold">
                                                     {{ $contactos->where('tipo_contacto', 'whatsapp')->first()->valor_contacto }}
                                                 </p>
                                             </div>
@@ -383,10 +385,11 @@
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-10 h-10 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
-                                                    <x-icons.solid.facebook class="w-8 h-8 text-blue-600" />
+                                                    <x-icons.solid.facebook class="w-5 h-5 text-blue-600" />
                                                 </div>
-                                                <h3 class="font-bold text-primary-700 text-xl mb-2">Facebook</h3>
-                                                <p class="text-lg text-primary-600 font-semibold">
+                                                <h3 class="font-bold text-primary-700 text-xs sm:text-sm mb-2">Facebook
+                                                </h3>
+                                                <p class="text-base text-primary-600 font-semibold">
                                                     {{ $contactos->where('tipo_contacto', 'facebook')->first()->valor_contacto }}
                                                 </p>
                                             </div>
@@ -399,10 +402,11 @@
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-10 h-10 bg-pink-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-200 transition-colors">
-                                                    <x-icons.solid.instagram class="w-8 h-8 text-pink-600" />
+                                                    <x-icons.solid.instagram class="w-5 h-5 text-pink-600" />
                                                 </div>
-                                                <h3 class="font-bold text-primary-700 text-xl mb-2">Instagram</h3>
-                                                <p class="text-lg text-primary-600 font-semibold">
+                                                <h3 class="font-bold text-primary-700 text-xs sm:text-sm mb-2">Instagram
+                                                </h3>
+                                                <p class="text-base text-primary-600 font-semibold">
                                                     {{ $contactos->where('tipo_contacto', 'instagram')->first()->valor_contacto }}
                                                 </p>
                                             </div>
@@ -415,12 +419,13 @@
                                             <div class="flex flex-col items-center text-center">
                                                 <div
                                                     class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors">
-                                                    <x-icons.outline.globe class="w-8 h-8 text-primary-600" />
+                                                    <x-icons.outline.globe class="w-5 h-5 text-primary-600" />
                                                 </div>
-                                                <h3 class="font-bold text-primary-700 text-xl mb-2">Sitio web</h3>
+                                                <h3 class="font-bold text-primary-700 text-xs sm:text-sm mb-2">Sitio web
+                                                </h3>
                                                 <a href="{{ $contactos->where('tipo_contacto', 'web')->first()->valor_contacto }}"
                                                     target="_blank"
-                                                    class="text-lg text-primary-600 font-semibold hover:text-secondary-600 transition">
+                                                    class="text-base text-primary-600 font-semibold hover:text-secondary-600 transition">
                                                     {{ $contactos->where('tipo_contacto', 'web')->first()->valor_contacto }}
                                                 </a>
                                             </div>
@@ -447,7 +452,7 @@
                                         <div class="flex items-center gap-4">
                                             <div
                                                 class="w-10 h-10 bg-primary-100 rounded-2xl flex items-center justify-center">
-                                                <x-icons.outline.location-marker class="w-8 h-8 text-primary-600" />
+                                                <x-icons.outline.location-marker class="w-5 h-5 text-primary-600" />
                                             </div>
                                             <div>
                                                 <h3 class="text-3xl font-bold text-primary-700">Dirección</h3>
