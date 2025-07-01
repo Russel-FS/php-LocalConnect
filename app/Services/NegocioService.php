@@ -312,7 +312,7 @@ class NegocioService
         $negocio->caracteristicas()->sync($data['caracteristicas'] ?? []);
         $negocio->serviciosPredefinidos()->sync($request->input('servicios_predefinidos', []));
 
-        // --- Actualizar horarios de atención ---
+        // actualizacion de horarrrrrios
         if ($horarios && is_array($horarios)) {
             $negocio->horarios()->delete();
             $dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
@@ -343,7 +343,7 @@ class NegocioService
         $serviciosForm = $request->input('servicios_personalizados', []);
         $idsEnviados = [];
         foreach ($serviciosForm as $servicio) {
-            // actualizar si tiene id
+            // actaualizacion de servicios personalizados
             if (!empty($servicio['id'])) {
                 $servicioPersonalizado = $negocio->serviciosPersonalizados()->find($servicio['id']);
                 if ($servicioPersonalizado) {
@@ -356,7 +356,7 @@ class NegocioService
                     $idsEnviados[] = $servicioPersonalizado->id_servicio;
                 }
             } else {
-                // caso contrario crea uno nuevo
+                // si no existe el servicio se crea
                 $nuevo = $negocio->serviciosPersonalizados()->create([
                     'nombre_servicio' => $servicio['nombre'],
                     'descripcion' => $servicio['descripcion'] ?? null,
@@ -366,7 +366,7 @@ class NegocioService
                 $idsEnviados[] = $nuevo->id_servicio;
             }
         }
-        // eliminar lo que ya no estan
+        // eliminar lo que ya no estan 
         $negocio->serviciosPersonalizados()
             ->whereNotIn('id_servicio', $idsEnviados)
             ->delete();
