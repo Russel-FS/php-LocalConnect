@@ -36,7 +36,7 @@
                                         </button>
                                     </div>
 
-                                    <!-- Filtros principales (solo desktop) -->
+                                    <!-- Filtros principales (solo desktopw) -->
                                     <div class="hidden lg:flex flex-wrap gap-3 items-center">
                                         <!-- Categorías -->
                                         <div class="relative" x-data="{ open: false }">
