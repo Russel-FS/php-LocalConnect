@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminNegocioPanelController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NegocioPublicoController;
+use App\Http\Controllers\NegocioInteraccionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -33,6 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/negocios/comentarios/{id}/eliminar', [NegocioController::class, 'eliminarComentario'])->name('negocios.eliminar-comentario');
     Route::get('/negocios/{id}/estadisticas', [NegocioController::class, 'estadisticas'])->name('negocios.estadisticas');
     Route::get('/negocios/mis-negocios/{id}/ver', [NegocioController::class, 'verPropioNegocio'])->name('negocios.ver-propio');
+    // Favoritos
+    Route::post('/negocios/{id}/favorito', [NegocioInteraccionController::class, 'agregarFavorito'])->name('negocios.favorito.agregar');
+    Route::post('/negocios/{id}/favorito/quitar', [NegocioInteraccionController::class, 'quitarFavorito'])->name('negocios.favorito.quitar');
+    // Me gusta
+    Route::post('/negocios/{id}/megusta', [NegocioInteraccionController::class, 'agregarMeGusta'])->name('negocios.megusta.agregar');
+    Route::post('/negocios/{id}/megusta/quitar', [NegocioInteraccionController::class, 'quitarMeGusta'])->name('negocios.megusta.quitar');
 });
 
 // rutas públicas para ver negocios
