@@ -3,7 +3,7 @@
 @section('content')
     <section class="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-primary-50 to-white py-12">
         <div class="max-w-2xl w-full mx-auto flex flex-col gap-8">
-            <!-- Header de perfil profesional -->
+            <!-- Header -->
             <div
                 class="bg-white rounded-3xl shadow-[0_4px_24px_0_rgba(80,80,120,0.10)] border border-primary-100 p-8 flex flex-col sm:flex-row items-center gap-6 mb-4">
                 <div
