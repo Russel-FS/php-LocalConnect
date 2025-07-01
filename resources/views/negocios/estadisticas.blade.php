@@ -15,16 +15,25 @@
                 </div>
             </div>
 
-            <!-- leshenda de grafico xd. -->
+            <!-- leshenda del grafico, xd  -->
             <div class="flex justify-center mb-6">
                 <div
-                    class="bg-white rounded-full px-6 py-2 shadow-sm border border-gray-100 flex flex-wrap gap-4 items-center">
-                    <span><span class="inline-block w-3 h-3 rounded-full align-middle mr-1" style="background:#6366f1"></span>
-                        <b>Búsqueda</b>: aparece en resultados</span>
-                    <span><span class="inline-block w-3 h-3 rounded-full align-middle mr-1"
-                            style="background:#3b82f6"></span> <b>Detalle</b>: clics en ver detalles</span>
-                    <span><span class="inline-block w-3 h-3 rounded-full align-middle mr-1"
-                            style="background:#ef4444"></span> <b>Me gusta</b>: likes</span>
+                    class="bg-white rounded-full px-5 py-2 shadow border border-gray-100 flex gap-4 items-center text-xs text-gray-500">
+                    <span class="flex items-center gap-1">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#6366f1"></span>
+                        <b>Búsqueda</b>
+                        <span class="hidden sm:inline">= aparece en resultados</span>
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#3b82f6"></span>
+                        <b>Detalle</b>
+                        <span class="hidden sm:inline">= clics en ver detalles</span>
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#ef4444"></span>
+                        <b>Me gusta</b>
+                        <span class="hidden sm:inline">= likes</span>
+                    </span>
                 </div>
             </div>
 
@@ -189,6 +198,7 @@
                         fill: true,
                         pointRadius: 3,
                         pointBackgroundColor: '#3b82f6',
+
                     },
                     {
                         label: 'Me gusta',
