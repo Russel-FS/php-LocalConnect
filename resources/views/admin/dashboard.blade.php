@@ -49,7 +49,7 @@
                 </div>
                 <div class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center">
                     <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mb-2">
-                        <x-icons.solid.star class="w-5 h-5 text-red-600" />
+                        <x-icons.outline.heart class="w-5 h-5 text-red-600" />
                     </div>
                     <span class="text-xl font-bold text-red-600">{{ number_format($totalMeGusta) }}</span>
                     <span class="text-red-500 mt-1 text-xs font-medium">Me gusta</span>
@@ -94,19 +94,38 @@
 
             <!-- categorias mas populares -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Top categorías -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Top Categorías</h3>
                     <div class="space-y-3">
-                        @foreach ($topCategorias as $categoria)
-                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
-                                        <x-icons.outline.category class="w-4 h-4 text-primary-600" />
+                        @foreach ($topCategorias as $index => $categoria)
+                            <div
+                                class="group flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100 hover:border-primary-200 hover:shadow-md transition-all duration-300">
+                                <div class="flex items-center gap-4">
+                                    <div class="relative">
+                                        <div
+                                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+                                            <x-icons.outline.category class="w-5 h-5 text-primary-600" />
+                                        </div>
+                                        @if ($index < 3)
+                                            <div
+                                                class="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                                                <span class="text-xs font-bold text-white">{{ $index + 1 }}</span>
+                                            </div>
+                                        @endif
                                     </div>
-                                    <span class="font-medium text-gray-900">{{ $categoria->nombre_categoria }}</span>
+                                    <div>
+                                        <span
+                                            class="font-semibold text-gray-900 group-hover:text-primary-700 transition-colors">{{ $categoria->nombre_categoria }}</span>
+                                        <div class="text-xs text-gray-500 mt-0.5">{{ $categoria->negocios_count }} negocios
+                                            registrados</div>
+                                    </div>
                                 </div>
-                                <span class="text-sm font-semibold text-primary-600">{{ $categoria->negocios_count }}
-                                    negocios</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 bg-primary-400 rounded-full"></div>
+                                    <span
+                                        class="text-sm font-bold text-primary-600">{{ $categoria->negocios_count }}</span>
+                                </div>
                             </div>
                         @endforeach
                     </div>
