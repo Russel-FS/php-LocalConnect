@@ -565,6 +565,47 @@
                                 <!-- Footer y acciones -->
                                 <div
                                     class="w-full flex justify-between items-center px-6 pb-4 pt-2 mt-auto border-t border-gray-100">
+                                    <!-- Botones de favoritos y me gusta -->
+                                    <div class="flex items-center gap-4">
+                                        @php
+                                            $esFavorito =
+                                                auth()->check() &&
+                                                $negocio->favoritos->where('id_usuario', auth()->id())->count() > 0;
+                                            $esMeGusta =
+                                                auth()->check() &&
+                                                $negocio->meGusta->where('id_usuario', auth()->id())->count() > 0;
+                                        @endphp
+                                        <!-- Favorito -->
+                                        <form
+                                            action="{{ $esFavorito ? route('negocios.favorito.quitar', $negocio->id_negocio) : route('negocios.favorito.agregar', $negocio->id_negocio) }}"
+                                            method="POST" style="display:inline">
+                                            @csrf
+                                            <button type="submit"
+                                                class="group flex items-center gap-1 text-yellow-500 hover:text-yellow-600 focus:outline-none">
+                                                <svg class="w-5 h-5 {{ $esFavorito ? 'fill-yellow-400' : 'fill-none' }}"
+                                                    stroke="currentColor" viewBox="0 0 20 20">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.385 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.385-2.46a1 1 0 00-1.175 0l-3.385 2.46c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.967z" />
+                                                </svg>
+                                                <span class="text-xs">{{ $negocio->favoritos->count() }}</span>
+                                            </button>
+                                        </form>
+                                        <!-- Me gusta -->
+                                        <form
+                                            action="{{ $esMeGusta ? route('negocios.megusta.quitar', $negocio->id_negocio) : route('negocios.megusta.agregar', $negocio->id_negocio) }}"
+                                            method="POST" style="display:inline">
+                                            @csrf
+                                            <button type="submit"
+                                                class="group flex items-center gap-1 text-pink-500 hover:text-pink-600 focus:outline-none">
+                                                <svg class="w-5 h-5 {{ $esMeGusta ? 'fill-pink-400' : 'fill-none' }}"
+                                                    stroke="currentColor" viewBox="0 0 20 20">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z" />
+                                                </svg>
+                                                <span class="text-xs">{{ $negocio->meGusta->count() }}</span>
+                                            </button>
+                                        </form>
+                                    </div>
                                     <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}"
                                         class="btn-link text-sm font-semibold"
                                         aria-label="Ver detalles de {{ $negocio->nombre_negocio }}">
