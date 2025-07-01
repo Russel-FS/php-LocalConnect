@@ -37,10 +37,12 @@
                 </div>
             </div>
 
-            <!-- Gráfico de evolución -->
+            <!-- grafico -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-12">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Evolución de vistas y me gusta</h3>
-                <canvas id="graficoEvolucion" height="80"></canvas>
+                <h3 class="text-sm md:text-xl font-semibold text-gray-900 mb-4">Evolución de vistas y me gusta</h3>
+                <div class="w-full" style="height:220px;">
+                    <canvas id="graficoEvolucion" class="w-full h-full"></canvas>
+                </div>
             </div>
 
             <!-- datos de estatidisticas -->
@@ -214,14 +216,21 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         display: true,
                         labels: {
                             color: '#334155',
                             font: {
-                                size: 14
-                            }
+                                size: 15,
+                                family: 'Inter, sans-serif'
+                            },
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            boxWidth: 10,
+                            boxHeight: 10,
+                            padding: 20
                         }
                     }
                 },
