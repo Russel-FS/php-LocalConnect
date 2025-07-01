@@ -689,7 +689,7 @@
             if (ratingInput && ratingInput._x_dataStack) {
                 ratingInput._x_dataStack[0].rating = calificacion;
             }
-            // desplazar hacia el formm de edicion
+            // desplazar hacia el formm de edicionnnnnnnnnnnn
             document.getElementById('formulario-edicion').scrollIntoView({
                 behavior: 'smooth'
             });
