@@ -236,7 +236,7 @@ class NegocioController extends Controller
             'favoritos' => $negocio->favoritos()->count(),
         ];
 
-        // cambios durante los ultimos 14 diass dio tengo sueññññññññññññño revision de codigo n42
+        // cambios durante los ultimos 14 diass dio tengo sueñññññññññññño revision de codigo n42
         $dias = collect(range(0, 13))->map(function ($i) {
             return now()->subDays(13 - $i)->format('Y-m-d');
         });
@@ -264,7 +264,18 @@ class NegocioController extends Controller
         $vistas = $dias->map(fn($fecha) => $vistasPorDia[$fecha] ?? 0);
         $meGusta = $dias->map(fn($fecha) => $meGustaPorDia[$fecha] ?? 0);
 
-        return view('negocios.estadisticas', compact('negocio', 'estadisticas', 'labels', 'vistas', 'meGusta'));
+        // Asegurar arrays válidos para la vista
+        $labelsArray = $labels ? $labels->toArray() : ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+        $vistasArray = $vistas ? $vistas->toArray() : [0, 0, 0, 0, 0, 0, 0];
+        $meGustaArray = $meGusta ? $meGusta->toArray() : [0, 0, 0, 0, 0, 0, 0];
+
+        return view('negocios.estadisticas', [
+            'negocio' => $negocio,
+            'estadisticas' => $estadisticas,
+            'labels' => $labelsArray,
+            'vistas' => $vistasArray,
+            'meGusta' => $meGustaArray,
+        ]);
     }
 
     public function eliminarComentario($id)

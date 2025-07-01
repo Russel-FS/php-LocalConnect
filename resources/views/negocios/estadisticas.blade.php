@@ -147,9 +147,9 @@
 @section('scripts')
     <script>
         // datos
-        const labels = @json($labels ?? ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']);
-        const vistas = @json($vistas ?? [12, 19, 8, 15, 22, 30, 25]);
-        const meGusta = @json($meGusta ?? [2, 3, 1, 4, 5, 6, 4]);
+        const labels = @json($labels);
+        const vistas = @json($vistas);
+        const meGusta = @json($meGusta);
 
         const ctx = document.getElementById('graficoEvolucion').getContext('2d');
         new Chart(ctx, {
