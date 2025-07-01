@@ -183,7 +183,7 @@
                             <div class="p-5 sm:p-6 pt-0 mt-2 border-t border-primary-100/50">
                                 <!-- Acciones principales -->
                                 <div class="flex justify-between items-center mb-3">
-                                    <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}"
+                                    <a href="{{ route('negocios.ver-propio', $negocio->id_negocio) }}"
                                         class="flex items-center gap-2 group">
                                         <div
                                             class="w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors duration-300">

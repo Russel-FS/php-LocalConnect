@@ -246,4 +246,19 @@ class NegocioController extends Controller
 
         return back()->with('success', '¡Comentario eliminado correctamente!');
     }
+
+    /**
+     * Visualización interna del dueño del negocio (no cuenta como vista pública)
+     */
+    public function verPropioNegocio($id)
+    {
+        $negocio = $this->negocioService->obtenerNegocio($id);
+
+        // Verificar que el usuario sea el propietario del negocio
+        if ($negocio->id_usuario !== Auth::id()) {
+            abort(403, 'No tienes permisos para ver este negocio.');
+        }
+
+        return view('negocios.detalle', compact('negocio'));
+    }
 }
