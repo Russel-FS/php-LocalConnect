@@ -38,10 +38,17 @@ class UserController extends Controller
     public function actualizarPerfil(Request $request)
     {
         $user = Auth::user();
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'telefono' => 'nullable|string|max:20',
-        ]);
+        $validated = $request->validate(
+            [
+                'name' => 'required|string|max:100',
+                'telefono' => 'nullable|string|max:20',
+            ],
+            [
+                'name.required' => 'El nombre es obligatorio.',
+                'name.max' => 'El nombre no puede tener más de 100 caracteres.',
+                'telefono.max' => 'El teléfono no puede tener más de 20 caracteres.',
+            ]
+        );
         $user->update($validated);
         return back()->with('success', 'Perfil actualizado correctamente.');
     }
@@ -60,10 +67,18 @@ class UserController extends Controller
     public function actualizarPassword(Request $request)
     {
         $user = Auth::user();
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|string|min:8|confirmed',
-        ]);
+        $request->validate(
+            [
+                'current_password' => 'required',
+                'new_password' => 'required|string|min:8|confirmed',
+            ],
+            [
+                'current_password.required' => 'La contraseña actual es obligatoria.',
+                'new_password.required' => 'La nueva contraseña es obligatoria.',
+                'new_password.min' => 'La nueva contraseña debe tener al menos 8 caracteres.',
+                'new_password.confirmed' => 'Las contraseñas no coinciden.',
+            ]
+        );
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
         }
