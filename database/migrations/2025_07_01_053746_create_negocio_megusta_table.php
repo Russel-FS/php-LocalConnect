@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('negocio_megusta', function (Blueprint $table) {
             $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_negocio');
-            $table->timestamp('creado_en')->useCurrent();
             $table->primary(['id_usuario', 'id_negocio']);
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
             $table->foreign('id_negocio')->references('id_negocio')->on('negocios')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

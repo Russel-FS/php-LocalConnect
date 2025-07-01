@@ -8,14 +8,13 @@ use App\Models\User;
 class MeGusta extends Model
 {
     protected $table = 'negocio_megusta';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $primaryKey = null;
     public $incrementing = false;
 
     protected $fillable = [
         'id_usuario',
         'id_negocio',
-        'creado_en',
     ];
 
     public function negocio()

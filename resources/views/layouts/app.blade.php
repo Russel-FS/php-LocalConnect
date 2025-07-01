@@ -21,6 +21,8 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <!-- Alpine.js CDN -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Chart.js global -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="font-sans antialiased bg-slate-50 text-slate-900" style="font-family: 'Inter', sans-serif;">
@@ -172,6 +174,7 @@
     <!-- Contenido principal -->
     <main class="pt-16 lg:pt-20 min-h-screen pb-20 lg:pb-0">
         @yield('content')
+        @yield('scripts')
     </main>
 
     <!-- navagecion mobil inferior flotanteeeeee -->
@@ -235,11 +238,11 @@
         </div>
     </div>
 
-    <!-- Footer  -->
+    <!-- Footerss  -->
     <footer class="bg-white border-t border-slate-200 ">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
-                <!-- Logo y descripción -->
+                <!-- Logo y descripciónss -->
                 <div class="lg:col-span-2">
                     <div class="flex items-center gap-3 mb-4">
                         <div

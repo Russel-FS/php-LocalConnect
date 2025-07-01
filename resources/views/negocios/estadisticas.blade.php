@@ -15,6 +15,12 @@
                 </div>
             </div>
 
+            <!-- Gráfico de evolución -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-12">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Evolución de vistas y me gusta</h3>
+                <canvas id="graficoEvolucion" height="80"></canvas>
+            </div>
+
             <!-- datos de estatidisticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <!-- Vistas de búsqueda -->
@@ -137,4 +143,81 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Datos de ejemplo, reemplaza por datos reales desde el backend si lo deseas
+        const labels = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+        const vistas = [12, 19, 8, 15, 22, 30, 25];
+        const meGusta = [2, 3, 1, 4, 5, 6, 4];
+
+        const ctx = document.getElementById('graficoEvolucion').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                        label: 'Vistas',
+                        data: vistas,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59,130,246,0.08)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#3b82f6',
+                    },
+                    {
+                        label: 'Me gusta',
+                        data: meGusta,
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239,68,68,0.08)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#ef4444',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: '#334155',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#64748b',
+                            font: {
+                                size: 13
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            color: '#64748b',
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 @endsection
