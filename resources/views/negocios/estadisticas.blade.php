@@ -36,7 +36,7 @@
                     class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                            <x-icons.navigation.eye class="w-6 h-6 text-green-600" />
+                            <x-icons.outline.eye class="w-6 h-6 text-green-600" />
                         </div>
                         <span
                             class="text-2xl font-bold text-green-600">{{ number_format($estadisticas->vistas_detalle) }}</span>
