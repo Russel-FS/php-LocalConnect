@@ -52,7 +52,7 @@
                         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
                             <x-icons.solid.star class="w-6 h-6 text-red-600" />
                         </div>
-                        <span class="text-2xl font-bold text-red-600">{{ number_format($estadisticas->me_gusta) }}</span>
+                        <span class="text-2xl font-bold text-red-600">{{ number_format($negocio->meGusta->count()) }}</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Me gusta</h3>
                     <p class="text-sm text-gray-500">Reacciones positivas</p>
@@ -69,7 +69,7 @@
                             </svg>
                         </div>
                         <span
-                            class="text-2xl font-bold text-yellow-600">{{ number_format($estadisticas->favoritos) }}</span>
+                            class="text-2xl font-bold text-yellow-600">{{ number_format($negocio->favoritos->count()) }}</span>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-1">Favoritos</h3>
                     <p class="text-sm text-gray-500">Guardados por usuarios</p>
@@ -115,7 +115,7 @@
                         <div class="flex items-center justify-between">
                             <span class="text-gray-600">Total de interacciones:</span>
                             <span class="font-medium text-gray-900">
-                                {{ number_format($estadisticas->vistas_busqueda + $estadisticas->vistas_detalle + $estadisticas->me_gusta + $estadisticas->favoritos) }}
+                                {{ number_format($estadisticas->vistas_busqueda + $estadisticas->vistas_detalle + $negocio->meGusta->count() + $negocio->favoritos->count()) }}
                             </span>
                         </div>
                     </div>
