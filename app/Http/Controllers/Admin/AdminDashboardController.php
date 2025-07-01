@@ -12,6 +12,7 @@ use App\Models\Negocio\Favorito;
 use App\Models\Negocio\Valoracion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminDashboardController extends Controller
 {
@@ -119,5 +120,57 @@ class AdminDashboardController extends Controller
             'negociosPopulares',
             'estadosNegocios'
         ));
+    }
+
+    /**
+     * Generar reporte PDF del dashboard
+     */
+    public function generarReportePDF()
+    {
+        // Obtener datos para el reporte
+        $datos = $this->obtenerDatosReporte();
+
+        $pdf = Pdf::loadView('admin.reportes.dashboard-pdf', $datos);
+
+        return $pdf->download('reporte-dashboard-' . now()->format('Y-m-d') . '.pdf');
+    }
+
+
+
+    /**
+     * Generar reporte PDF de negocios
+     */
+    public function generarReporteNegociosPDF()
+    {
+        $negocios = Negocio::with(['usuario', 'ubicacion', 'categorias'])
+            ->orderByDesc('created_at')
+            ->get();
+
+        $pdf = Pdf::loadView('admin.reportes.negocios-pdf', compact('negocios'));
+
+        return $pdf->download('reporte-negocios-' . now()->format('Y-m-d') . '.pdf');
+    }
+
+
+
+    /**
+     * Obtener datos para reportes
+     */
+    private function obtenerDatosReporte()
+    {
+        return [
+            'fecha' => now()->format('d/m/Y H:i'),
+            'totalNegocios' => Negocio::count(),
+            'negociosPendientes' => Negocio::where('verificado', 0)->count(),
+            'totalUsuarios' => User::count(),
+            'totalCategorias' => Categoria::count(),
+            'totalVistas' => NegocioVista::count(),
+            'totalMeGusta' => MeGusta::count(),
+            'totalFavoritos' => Favorito::count(),
+            'totalValoraciones' => Valoracion::count(),
+            'topCategorias' => Categoria::withCount('negocios')->orderByDesc('negocios_count')->take(5)->get(),
+            'negociosPopulares' => Negocio::withCount(['vistas', 'meGusta', 'favoritos'])->orderByDesc('vistas_count')->take(5)->get(),
+            'ultimasSolicitudes' => Negocio::where('verificado', 0)->with('usuario', 'ubicacion')->orderByDesc('created_at')->take(10)->get(),
+        ];
     }
 }

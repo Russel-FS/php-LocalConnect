@@ -3,6 +3,8 @@
 @section('content')
     <div class="bg-gradient-to-br from-primary-50 to-white min-h-dvh py-15">
         <div class="max-w-7xl mx-auto px-2 sm:px-6">
+
+
             <h1 class="text-3xl md:text-4xl font-semibold text-gray-900 mb-12 text-center tracking-tight">Panel de
                 Administración</h1>
 
@@ -35,6 +37,43 @@
                     </div>
                     <span class="text-2xl font-bold text-primary-400">{{ $totalCategorias }}</span>
                     <span class="text-primary-400 mt-1 text-xs font-medium">Categorías</span>
+                </div>
+            </div>
+
+            <!-- Reportes -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-12">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6 text-center">Reportes</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Reporte Dashboard -->
+                    <div class="space-y-4">
+                        <h4 class="text-base font-semibold text-gray-800 mb-3">Reporte del Dashboard</h4>
+                        <a href="{{ route('admin.reportes.dashboard-pdf') }}"
+                            class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Descargar PDF
+                        </a>
+                        <p class="text-xs text-gray-500">Incluye métricas principales, top categorías y negocios populares
+                        </p>
+                    </div>
+
+                    <!-- Reporte Negocios -->
+                    <div class="space-y-4">
+                        <h4 class="text-base font-semibold text-gray-800 mb-3">Reporte de Negocios</h4>
+                        <a href="{{ route('admin.reportes.negocios-pdf') }}"
+                            class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Descargar PDF
+                        </a>
+                        <p class="text-xs text-gray-500">Lista completa de negocios con estadísticas detalladas</p>
+                    </div>
                 </div>
             </div>
 
@@ -117,7 +156,8 @@
                                     <div>
                                         <span
                                             class="font-semibold text-gray-900 group-hover:text-primary-700 transition-colors">{{ $categoria->nombre_categoria }}</span>
-                                        <div class="text-xs text-gray-500 mt-0.5">{{ $categoria->negocios_count }} negocios
+                                        <div class="text-xs text-gray-500 mt-0.5">{{ $categoria->negocios_count }}
+                                            negocios
                                             registrados</div>
                                     </div>
                                 </div>

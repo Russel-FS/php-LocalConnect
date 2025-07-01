@@ -53,6 +53,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/negocios/{negocio}', [AdminNegocioController::class, 'show'])->name('negocios.show');
     Route::patch('/solicitudes/{negocio}', [AdminNegocioController::class, 'update'])->name('negocios.update');
     Route::get('/negocios', [AdminNegocioPanelController::class, 'index'])->name('negocios.panel');
+
+    // Rutas de reportes
+    Route::get('/reportes/dashboard-pdf', [AdminDashboardController::class, 'generarReportePDF'])->name('reportes.dashboard-pdf');
+    Route::get('/reportes/negocios-pdf', [AdminDashboardController::class, 'generarReporteNegociosPDF'])->name('reportes.negocios-pdf');
 });
 
 // Rutas para editar perfil y cambiar contraseña
