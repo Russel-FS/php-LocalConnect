@@ -264,7 +264,7 @@
                                     class="servicio-personalizado-item group relative bg-white/80 backdrop-blur-sm rounded-3xl p-4 md:p-10 border border-primary-100 hover:shadow-sm hover:border-primary-200 transition-all duration-150 hover:-translate-y-0.5 flex flex-col gap-6 min-h-[320px]">
                                     <input type="hidden" name="servicios_personalizados[{{ $i }}][id]"
                                         value="{{ $servicio->id_servicio }}">
-                                    <div class="flex  items-center gap-4 mb-2">
+                                    <div class="flex items-center gap-4 mb-2">
                                         <span
                                             class="md:w-12 md:h-12 w-7 h-7 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
                                             <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor"
@@ -286,7 +286,8 @@
                                         class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white"
                                         placeholder="Descripción">
                                     <!--precio -->
-                                    <input type="number" name="servicios_personalizados[{{ $i }}][precio]"
+                                    <input required type="number"
+                                        name="servicios_personalizados[{{ $i }}][precio]"
                                         value="{{ old('servicios_personalizados.' . $i . '.precio', $servicio->precio) }}"
                                         class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-semibold text-lg"
                                         min="0" step="0.01" placeholder="Precio (S/)">
@@ -305,7 +306,8 @@
                                                 {{ $servicio->disponible ? 'Disponible' : 'No disponible' }}
                                             </span>
                                         </label>
-                                        <button type="button" class="text-red-500 ml-2 font-semibold"
+                                        <button type="button"
+                                            class="text-red-500 ml-2 font-semibold bg-white hover:bg-red-50 px-3 text-sm py-1 transition-colors rounded-full cursor-pointer"
                                             onclick="eliminarServicioPersonalizado(this)">Eliminar</button>
                                     </div>
                                 </div>
@@ -468,10 +470,10 @@
                         <span class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300 group-hover:scale-110">
                             <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" /></svg>
                         </span>
-                        <input type="text" name="servicios_personalizados[${index}][nombre]" class="flex-1 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-bold text-lg" required placeholder="Nombre del servicio">
+                        <input type="text" required name="servicios_personalizados[${index}][nombre]" class="flex-1 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-bold text-lg" required placeholder="Nombre del servicio">
                     </div>
-                    <input type="text" name="servicios_personalizados[${index}][descripcion]" class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white" placeholder="Descripción">
-                    <input type="number" name="servicios_personalizados[${index}][precio]" class="w-36 px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-semibold text-lg" min="0" step="0.01" placeholder="Precio (S/)">
+                    <input type="text" required name="servicios_personalizados[${index}][descripcion]" class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white" placeholder="Descripción">
+                    <input type="number" required name="servicios_personalizados[${index}][precio]" class="w-full px-4 py-3 rounded-lg border border-gray-100 focus:ring-1 focus:ring-primary-100 focus:outline-none bg-white font-semibold text-lg" min="0" step="0.01" placeholder="Precio (S/)">
                     <div class="flex items-center gap-6 mt-2">
                         <label class="inline-flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" name="servicios_personalizados[${index}][disponible]" value="1" checked>
@@ -480,7 +482,7 @@
                                 Disponible
                             </span>
                         </label>
-                        <button type="button" class="text-red-500 ml-2 font-semibold" onclick="eliminarServicioPersonalizado(this)">Eliminar</button>
+                        <button type="button" class="text-red-500 ml-2 font-semibold bg-white hover:bg-red-50 px-3 text-sm py-1 transition-colors rounded-full cursor-pointer" onclick="eliminarServicioPersonalizado(this)">Eliminar</button>
                     </div>
                 </div>
             `;
