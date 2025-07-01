@@ -52,9 +52,7 @@
                             <div class="flex items-center gap-2"><span class="font-medium w-28">Email:</span> <span
                                     class="flex-1">{{ $user->email }}</span></div>
                             <div class="flex items-center gap-2"><span class="font-medium w-28">Teléfono:</span> <span
-                                    class="flex-1">{{ $user->telefono ?? 'No registrado' }}</span></div>
-                            <div class="flex items-center gap-2"><span class="font-medium w-28">Rol:</span> <span
-                                    class="flex-1">{{ $user->isAdmin() ? 'Admin' : ($user->isNegocio() ? 'Negocio' : 'Usuario') }}</span>
+                                    class="flex-1">{{ $user->telefono ?? 'No registrado' }}</span>
                             </div>
                             <div class="flex items-center gap-2"><span class="font-medium w-28">Estado:</span> <span
                                     class="flex-1 {{ $user->estado === 'activo' ? 'text-green-600' : 'text-red-600' }}">{{ ucfirst($user->estado) }}</span>
