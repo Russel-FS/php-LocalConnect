@@ -55,5 +55,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/negocios', [AdminNegocioPanelController::class, 'index'])->name('negocios.panel');
 });
 
-// Ruta de perfil de usuario
-Route::middleware('auth')->get('/perfil', [UserController::class, 'perfil'])->name('perfil');
+// Rutas para editar perfil y cambiar contraseña
+Route::middleware('auth')->group(function () {
+    Route::get('/perfil', [UserController::class, 'perfil'])->name('perfil');
+    Route::get('/perfil/editar', [UserController::class, 'editarPerfil'])->name('perfil.editar');
+    Route::post('/perfil/editar', [UserController::class, 'actualizarPerfil'])->name('perfil.actualizar');
+    Route::get('/perfil/password', [UserController::class, 'editarPassword'])->name('perfil.password');
+    Route::post('/perfil/password', [UserController::class, 'actualizarPassword'])->name('perfil.password.actualizar');
+});
