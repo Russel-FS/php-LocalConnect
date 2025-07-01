@@ -10,7 +10,6 @@ use App\Models\Negocio\ServicioPersonalizado;
 use App\Models\Negocio\ServicioPredefinido;
 use App\Models\Negocio\Caracteristica;
 use App\Models\User;
-use App\Models\Negocio\Estadistica;
 use App\Models\Negocio\Favorito;
 use App\Models\Negocio\Valoracion;
 
@@ -109,11 +108,6 @@ class Negocio extends Model
         return $this->belongsToMany(Caracteristica::class, 'negocio_caracteristica', 'id_negocio', 'id_caracteristica');
     }
 
-    public function estadistica()
-    {
-        return $this->hasOne(Estadistica::class, 'id_negocio');
-    }
-
     public function favoritos()
     {
         return $this->hasMany(Favorito::class, 'id_negocio');
@@ -127,5 +121,10 @@ class Negocio extends Model
     public function meGusta()
     {
         return $this->hasMany(\App\Models\Negocio\MeGusta::class, 'id_negocio');
+    }
+
+    public function vistas()
+    {
+        return $this->hasMany(\App\Models\Negocio\NegocioVista::class, 'id_negocio');
     }
 }
