@@ -8,7 +8,7 @@ class Estadistica extends Model
 {
     protected $table = 'negocio_estadisticas';
     protected $primaryKey = 'id_estadistica';
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'id_negocio',
