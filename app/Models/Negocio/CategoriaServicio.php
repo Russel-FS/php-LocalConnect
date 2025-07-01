@@ -17,8 +17,6 @@ class CategoriaServicio extends Model
         'estado',
     ];
 
-    const CREATED_AT = 'creado_en';
-
     public function serviciosPredefinidos()
     {
         return $this->hasMany(ServicioPredefinido::class, 'id_categoria_servicio', 'id_categoria_servicio');
