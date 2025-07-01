@@ -94,26 +94,29 @@
                 </div>
                 <!-- Favoritos -->
                 <div
-                    class="bg-white rounded-2xl shadow border border-primary-100 p-6 flex flex-col gap-4 min-h-[220px] justify-between">
+                    class="bg-white rounded-2xl shadow border border-primary-100 p-6 flex flex-col gap-6 min-h-[220px] justify-between relative">
                     <div class="flex items-center justify-between mb-2">
                         <h2 class="text-lg font-semibold text-primary-700 flex items-center gap-2">
-                            <x-icons.outline.star class="w-5 h-5 text-yellow-500" /> Favoritos
+                            <x-icons.outline.star class="w-6 h-6" style="color: #FBBF24;" /> Favoritos
                         </h2>
                         <span
-                            class="inline-block bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full">{{ $favoritos->count() }}</span>
+                            class="absolute top-6 right-6 bg-gray-100 text-gray-500 text-xs font-bold px-2 py-0.5 rounded-full">{{ $favoritos->count() }}</span>
                     </div>
                     @if ($favoritos->count())
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-4">
                             @foreach ($favoritos as $fav)
                                 @if ($fav->negocio)
                                     <a href="{{ route('negocios.mostrar', $fav->negocio->id_negocio) }}"
-                                        class="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-yellow-50 transition cursor-pointer border border-transparent hover:border-yellow-200">
-                                        <x-icons.outline.business
-                                            class="w-5 h-5 text-yellow-400 group-hover:text-yellow-500" />
-                                        <div class="flex-1">
-                                            <div class="font-medium text-sm text-yellow-900 group-hover:text-yellow-700">
+                                        class="group flex items-center gap-5 px-4 py-4 rounded-xl bg-white border border-gray-100 hover:shadow-lg transition cursor-pointer"
+                                        style="min-height:64px;">
+                                        <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-50">
+                                            <x-icons.outline.business
+                                                class="w-7 h-7 text-gray-400 group-hover:text-yellow-400" />
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="truncate font-medium text-base text-gray-900">
                                                 {{ $fav->negocio->nombre_negocio }}</div>
-                                            <div class="text-xs text-slate-400 flex items-center gap-1">
+                                            <div class="truncate text-xs text-gray-400 flex items-center gap-1 mt-1">
                                                 <x-icons.outline.location-marker
                                                     class="w-4 h-4" />{{ $fav->negocio->ubicacion->ciudad ?? 'Sin ciudad' }}
                                             </div>
@@ -128,25 +131,32 @@
                 </div>
                 <!-- Me gusta -->
                 <div
-                    class="bg-white rounded-2xl shadow border border-primary-100 p-6 flex flex-col gap-4 min-h-[220px] justify-between">
+                    class="bg-white rounded-2xl shadow border border-primary-100 p-6 flex flex-col gap-6 min-h-[220px] justify-between relative">
                     <div class="flex items-center justify-between mb-2">
                         <h2 class="text-lg font-semibold text-primary-700 flex items-center gap-2">
-                            <x-icons.solid.star class="w-5 h-5 text-red-500" /> Me gusta
+                            <svg class="w-6 h-6" fill="#EF4444" viewBox="0 0 20 20">
+                                <path
+                                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z" />
+                            </svg> Me gusta
                         </h2>
                         <span
-                            class="inline-block bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-full">{{ $meGusta->count() }}</span>
+                            class="absolute top-6 right-6 bg-gray-100 text-gray-500 text-xs font-bold px-2 py-0.5 rounded-full">{{ $meGusta->count() }}</span>
                     </div>
                     @if ($meGusta->count())
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-4">
                             @foreach ($meGusta as $mg)
                                 @if ($mg->negocio)
                                     <a href="{{ route('negocios.mostrar', $mg->negocio->id_negocio) }}"
-                                        class="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-red-50 transition cursor-pointer border border-transparent hover:border-red-200">
-                                        <x-icons.outline.business class="w-5 h-5 text-red-400 group-hover:text-red-500" />
-                                        <div class="flex-1">
-                                            <div class="font-medium text-sm text-red-900 group-hover:text-red-700">
+                                        class="group flex items-center gap-5 px-4 py-4 rounded-xl bg-white border border-gray-100 hover:shadow-lg transition cursor-pointer"
+                                        style="min-height:64px;">
+                                        <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-50">
+                                            <x-icons.outline.business
+                                                class="w-7 h-7 text-gray-400 group-hover:text-red-400" />
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="truncate font-medium text-base text-gray-900">
                                                 {{ $mg->negocio->nombre_negocio }}</div>
-                                            <div class="text-xs text-slate-400 flex items-center gap-1">
+                                            <div class="truncate text-xs text-gray-400 flex items-center gap-1 mt-1">
                                                 <x-icons.outline.location-marker
                                                     class="w-4 h-4" />{{ $mg->negocio->ubicacion->ciudad ?? 'Sin ciudad' }}
                                             </div>
