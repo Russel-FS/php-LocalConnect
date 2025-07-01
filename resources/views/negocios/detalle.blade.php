@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            <!-- Secciones de información - Estilo Apple -->
+            <!-- Secciones de informacionnnn -->
             <div class="space-y-16">
                 <!-- Servicios -->
                 @if ($negocio->serviciosPredefinidos->isNotEmpty() || $negocio->serviciosPersonalizados->isNotEmpty())
