@@ -9,7 +9,6 @@ class CategoriaServicio extends Model
 {
     protected $table = 'categorias_servicio';
     protected $primaryKey = 'id_categoria_servicio';
-    public $timestamps = true;
 
     protected $fillable = [
         'nombre_categoria_servicio',

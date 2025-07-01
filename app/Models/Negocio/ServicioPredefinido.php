@@ -9,7 +9,6 @@ class ServicioPredefinido extends Model
 {
     protected $table = 'servicios_predefinidos';
     protected $primaryKey = 'id_servicio_predefinido';
-    public $timestamps = false;
 
     protected $fillable = [
         'id_categoria',

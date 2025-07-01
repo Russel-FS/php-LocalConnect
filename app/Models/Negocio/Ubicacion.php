@@ -9,7 +9,6 @@ class Ubicacion extends Model
 {
     protected $table = 'ubicaciones';
     protected $primaryKey = 'id_ubicacion';
-    public $timestamps = false;
 
     protected $fillable = [
         'direccion',

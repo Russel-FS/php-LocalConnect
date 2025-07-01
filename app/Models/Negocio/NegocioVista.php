@@ -8,7 +8,6 @@ use App\Models\User;
 class NegocioVista extends Model
 {
     protected $table = 'negocio_vistas';
-    public $timestamps = true;
 
     protected $fillable = [
         'id_negocio',

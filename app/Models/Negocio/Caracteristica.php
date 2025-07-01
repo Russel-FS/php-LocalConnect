@@ -8,8 +8,6 @@ class Caracteristica extends Model
 {
     protected $table = 'caracteristicas';
     protected $primaryKey = 'id_caracteristica';
-    public $timestamps = false;
-
     protected $fillable = [
         'id_categoria_caracteristica',
         'nombre',

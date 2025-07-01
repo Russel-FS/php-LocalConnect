@@ -17,7 +17,6 @@ class Negocio extends Model
 {
     protected $table = 'negocios';
     protected $primaryKey = 'id_negocio';
-    public $timestamps = false;
 
     protected $fillable = [
         'id_usuario',

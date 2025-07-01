@@ -8,7 +8,6 @@ class ServicioPersonalizado extends Model
 {
     protected $table = 'servicios_personalizados';
     protected $primaryKey = 'id_servicio';
-    public $timestamps = false;
 
     protected $fillable = [
         'id_negocio',

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('id_categoria_servicio')->constrained('categorias_servicio', 'id_categoria_servicio');
             $table->string('nombre_servicio', 100);
             $table->string('descripcion', 255)->nullable();
+            $table->timestamps();
         });
     }
 
