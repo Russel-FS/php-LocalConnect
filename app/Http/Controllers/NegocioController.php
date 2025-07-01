@@ -102,7 +102,8 @@ class NegocioController extends Controller
             'caracteristicas',
             'serviciosPredefinidos',
             'serviciosPersonalizados',
-            'ubicacion'
+            'ubicacion',
+            'valoraciones',
         ]);
 
         // Búsqueda por texto
@@ -144,7 +145,7 @@ class NegocioController extends Controller
             });
         }
 
-        // Siempre filtrar solo negocios verificados
+        // busqueda de negocios verificados
         $query->where('negocios.verificado', true);
 
         // Obtener datos para filtros
