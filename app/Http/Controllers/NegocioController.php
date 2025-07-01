@@ -241,9 +241,17 @@ class NegocioController extends Controller
             return now()->subDays(13 - $i)->format('Y-m-d');
         });
 
-        // vistas por dia
+        // vistas por dia (detalle)
         $vistasPorDia = $negocio->vistas()
             ->where('tipo_vista', 'detalle')
+            ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
+            ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
+            ->groupBy('fecha')
+            ->pluck('total', 'fecha');
+
+        // vistas por dia (busqueda)
+        $vistasBusquedaPorDia = $negocio->vistas()
+            ->where('tipo_vista', 'busqueda')
             ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
             ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
             ->groupBy('fecha')
@@ -262,11 +270,13 @@ class NegocioController extends Controller
         });
         // vsitas acorde fechas
         $vistas = $dias->map(fn($fecha) => $vistasPorDia[$fecha] ?? 0);
+        $vistasBusqueda = $dias->map(fn($fecha) => $vistasBusquedaPorDia[$fecha] ?? 0);
         $meGusta = $dias->map(fn($fecha) => $meGustaPorDia[$fecha] ?? 0);
 
         // Asegurar arrays válidos para la vista
         $labelsArray = $labels ? $labels->toArray() : ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
         $vistasArray = $vistas ? $vistas->toArray() : [0, 0, 0, 0, 0, 0, 0];
+        $vistasBusquedaArray = $vistasBusqueda ? $vistasBusqueda->toArray() : [0, 0, 0, 0, 0, 0, 0];
         $meGustaArray = $meGusta ? $meGusta->toArray() : [0, 0, 0, 0, 0, 0, 0];
 
         return view('negocios.estadisticas', [
@@ -274,6 +284,7 @@ class NegocioController extends Controller
             'estadisticas' => $estadisticas,
             'labels' => $labelsArray,
             'vistas' => $vistasArray,
+            'vistasBusqueda' => $vistasBusquedaArray,
             'meGusta' => $meGustaArray,
         ]);
     }

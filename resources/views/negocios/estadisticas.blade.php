@@ -150,6 +150,7 @@
         const labels = @json($labels);
         const vistas = @json($vistas);
         const meGusta = @json($meGusta);
+        const vistasBusqueda = @json($vistasBusqueda);
 
         const ctx = document.getElementById('graficoEvolucion').getContext('2d');
         new Chart(ctx, {
@@ -157,7 +158,17 @@
             data: {
                 labels: labels,
                 datasets: [{
-                        label: 'Vistas',
+                        label: 'Vistas en búsqueda',
+                        data: vistasBusqueda,
+                        borderColor: '#6366f1',
+                        backgroundColor: 'rgba(99,102,241,0.08)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#6366f1',
+                    },
+                    {
+                        label: 'Vistas de detalle',
                         data: vistas,
                         borderColor: '#3b82f6',
                         backgroundColor: 'rgba(59,130,246,0.08)',
