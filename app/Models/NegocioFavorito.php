@@ -9,7 +9,6 @@ use App\Models\Negocio\Negocio;
 class NegocioFavorito extends Model
 {
     protected $table = 'negocio_favoritos';
-    public $timestamps = false;
     protected $primaryKey = null;
     public $incrementing = false;
 

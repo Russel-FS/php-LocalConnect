@@ -17,10 +17,6 @@ class Rol extends Model
         'estado'
     ];
 
-    // Timestamps personalizados
-    const CREATED_AT = 'creado_en';
-    const UPDATED_AT = 'actualizado_en';
-
     /**
      * Relación uno a muchos con Usuario
      * 

@@ -8,15 +8,13 @@ class Contacto extends Model
 {
     protected $table = 'contactos';
     protected $primaryKey = 'id_contacto';
-    public $timestamps = false;
 
     protected $fillable = [
         'id_negocio',
         'tipo_contacto',
         'valor_contacto',
         'activo',
-        'creado_en',
-        'actualizado_en',
+
     ];
 
     /**
