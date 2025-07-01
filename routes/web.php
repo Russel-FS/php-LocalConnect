@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AdminNegocioController;
 use App\Http\Controllers\Admin\AdminNegocioPanelController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NegocioPublicoController;
+use App\Http\Controllers\NegocioInteraccionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -27,11 +29,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/negocios/mis-negocios', [NegocioController::class, 'misNegocios'])->name('negocios.mis-negocios');
     Route::get('/negocios/{negocio}/editar', [NegocioController::class, 'editar'])->name('negocios.editar');
     Route::put('/negocios/{negocio}', [NegocioController::class, 'actualizar'])->name('negocios.actualizar');
+    Route::post('/negocios/{id}/comentar', [NegocioController::class, 'comentarNegocio'])->name('negocios.comentar');
+    Route::put('/negocios/comentarios/{id}/editar', [NegocioController::class, 'editarComentario'])->name('negocios.editar-comentario');
+    Route::delete('/negocios/comentarios/{id}/eliminar', [NegocioController::class, 'eliminarComentario'])->name('negocios.eliminar-comentario');
+    Route::get('/negocios/{id}/estadisticas', [NegocioController::class, 'estadisticas'])->name('negocios.estadisticas');
+    Route::get('/negocios/mis-negocios/{id}/ver', [NegocioController::class, 'verPropioNegocio'])->name('negocios.ver-propio');
+    // Favoritos
+    Route::post('/negocios/{id}/favorito', [NegocioInteraccionController::class, 'agregarFavorito'])->name('negocios.favorito.agregar');
+    Route::post('/negocios/{id}/favorito/quitar', [NegocioInteraccionController::class, 'quitarFavorito'])->name('negocios.favorito.quitar');
+    // Me gusta
+    Route::post('/negocios/{id}/megusta', [NegocioInteraccionController::class, 'agregarMeGusta'])->name('negocios.megusta.agregar');
+    Route::post('/negocios/{id}/megusta/quitar', [NegocioInteraccionController::class, 'quitarMeGusta'])->name('negocios.megusta.quitar');
 });
 
 // rutas públicas para ver negocios
-Route::get('/negocios/buscar', [NegocioController::class, 'buscar'])->name('negocios.buscar');
-Route::get('/negocios/{id}', [NegocioController::class, 'mostrarNegocio'])->name('negocios.mostrar');
+Route::get('/negocios/buscar', [NegocioPublicoController::class, 'buscar'])->name('negocios.buscar');
+Route::get('/negocios/{id}', [NegocioPublicoController::class, 'mostrar'])->name('negocios.mostrar');
 
 // Rutas de administración
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

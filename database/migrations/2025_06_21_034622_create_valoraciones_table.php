@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id('id_valoracion');
             $table->foreignId('id_negocio')->constrained('negocios', 'id_negocio');
             $table->foreignId('id_usuario')->constrained('usuarios', 'id_usuario');
-            $table->integer('puntuacion');
+            $table->integer('calificacion');
             $table->text('comentario')->nullable();
-            $table->timestamp('creado_en')->useCurrent();
-            $table->timestamp('actualizado_en')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('fecha_valoracion')->useCurrent();
+            $table->timestamp('fecha_actualizacion')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

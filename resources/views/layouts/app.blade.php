@@ -21,6 +21,8 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <!-- Alpine.js CDN -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Chart.js global -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="font-sans antialiased bg-slate-50 text-slate-900" style="font-family: 'Inter', sans-serif;">
@@ -31,8 +33,8 @@
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-3 group">
                     <div
-                        class="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-700 rounded-xl flex items-center justify-center shadow-lg shadow-slate-200">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-200/50">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,7 +42,7 @@
                         </svg>
                     </div>
                     <span
-                        class="text-xl lg:text-2xl font-semibold tracking-tight text-slate-900 group-hover:text-slate-700 transition-colors duration-200">
+                        class="text-2xl lg:text-3xl font-bold tracking-tight text-primary-700 group-hover:text-primary-600 transition-colors duration-200">
                         LocalConnect
                     </span>
                 </a>
@@ -70,7 +72,6 @@
                 <!-- Acciones y usuario -->
                 <div class="flex items-center gap-2 lg:gap-4">
                     @if (Auth::check() && Auth::user()->isAdmin())
-                        <!-- Botón Panel Admin solo en móvil, elegante y minimalista -->
                         <a href="/admin"
                             class="lg:hidden inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-secondary-100 shadow transition-shadow duration-200 hover:shadow-lg mr-2"
                             style="backdrop-filter: none;">
@@ -78,15 +79,11 @@
                             <span class="text-sm font-semibold text-secondary-700">Panel Admin</span>
                         </a>
                     @endif
-                    <a href="{{ route('negocios.registro') }}"
-                        class="hidden lg:inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-600 text-white font-semibold text-sm shadow-md hover:bg-primary-700 transition-all duration-200">
-                        <x-icons.actions.plus class="w-4 h-4" />
-                        Registrar mi negocio
-                    </a>
+
                     @if (Auth::check())
                         <div x-data="{ open: false }" class="relative hidden lg:block">
                             <button @click="open = !open"
-                                class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-700 font-semibold text-sm hover:from-slate-200 hover:to-slate-300 transition-all duration-200 shadow-sm">
+                                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center text-primary-700 font-bold text-lg hover:from-primary-200 hover:to-primary-300 transition-all duration-200 shadow-sm hover:shadow-md">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                             </button>
                             <div x-show="open" @click.away="open = false"
@@ -158,13 +155,13 @@
                         </div>
                     @else
                         <!-- usuario no authenticado-->
-                        <div class="flex items-center gap-2 lg:gap-3">
+                        <div class="flex items-center gap-3">
                             <a href="{{ route('login') }}"
-                                class="px-4 py-2 rounded-xl text-slate-600 font-medium text-sm hover:bg-slate-100 hover:text-slate-900 transition-all duration-200">
+                                class="hidden lg:inline-flex px-6 py-2.5 rounded-full text-primary-600 font-medium text-sm hover:bg-primary-50 hover:text-primary-700 transition-all duration-200 border border-primary-200/50">
                                 Iniciar sesión
                             </a>
                             <a href="{{ route('register') }}"
-                                class="px-4 py-2 rounded-xl bg-slate-900 text-white font-medium text-sm hover:bg-slate-800 transition-all duration-200 shadow-sm">
+                                class="px-6 py-2.5 rounded-full bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 transition-all duration-200 shadow-sm hover:shadow-md">
                                 Registrarse
                             </a>
                         </div>
@@ -177,6 +174,7 @@
     <!-- Contenido principal -->
     <main class="pt-16 lg:pt-20 min-h-screen pb-20 lg:pb-0">
         @yield('content')
+        @yield('scripts')
     </main>
 
     <!-- navagecion mobil inferior flotanteeeeee -->
@@ -240,16 +238,16 @@
         </div>
     </div>
 
-    <!-- Footer  -->
-    <footer class="bg-white border-t border-slate-200 mt-24">
+    <!-- Footerss  -->
+    <footer class="bg-white border-t border-slate-200 ">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
-                <!-- Logo y descripción -->
+                <!-- Logo y descripciónss -->
                 <div class="lg:col-span-2">
                     <div class="flex items-center gap-3 mb-4">
                         <div
-                            class="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-700 rounded-xl flex items-center justify-center">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor"
+                            class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-200/50">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -257,7 +255,7 @@
                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
-                        <span class="text-xl font-semibold text-slate-900">LocalConnect</span>
+                        <span class="text-2xl font-bold text-primary-700">LocalConnect</span>
                     </div>
                     <p class="text-slate-600 text-sm leading-relaxed max-w-md">
                         Conectamos negocios locales con su comunidad. Encuentra y descubre los mejores servicios cerca

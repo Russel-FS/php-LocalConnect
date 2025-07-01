@@ -4,7 +4,8 @@
     <section class="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-primary-50 to-white py-12">
         <div class="max-w-2xl w-full mx-auto flex flex-col gap-8">
             <!-- Ficha de usuario -->
-            <div class="bg-white rounded-3xl shadow-xl border border-primary-100 p-8 flex flex-col items-center">
+            <div
+                class="bg-white rounded-3xl shadow-[0_4px_24px_0_rgba(80,80,120,0.10)] border border-primary-100 p-8 flex flex-col items-center mb-8">
                 <div
                     class="w-24 h-24 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-4xl mb-4 select-none shadow">
                     {{ strtoupper(substr($user->name, 0, 1)) }}
@@ -27,14 +28,14 @@
                 </div>
             </div>
             <!-- Negocios del usuario -->
-            <div class="bg-white rounded-3xl shadow-xl border border-primary-100 p-8">
+            <div class="bg-white rounded-3xl shadow-[0_4px_24px_0_rgba(80,80,120,0.10)] border border-primary-100 p-8 mt-8">
                 <h2 class="text-lg font-semibold text-primary-700 mb-6 flex items-center gap-2"><x-icons.outline.folder
                         class="w-5 h-5 text-primary-600" /> Mis negocios</h2>
                 @if ($negocios->count())
                     <div class="grid gap-4 sm:grid-cols-2">
                         @foreach ($negocios as $negocio)
                             <div
-                                class="p-4 rounded-2xl border border-primary-50 bg-primary-50/40 flex flex-col gap-1 shadow-sm">
+                                class="p-4 rounded-2xl border border-primary-50 bg-primary-50/60 flex flex-col gap-1 shadow-[0_2px_8px_0_rgba(180,180,200,0.08)]">
                                 <span
                                     class="font-semibold text-primary-700 text-base flex items-center gap-1"><x-icons.outline.business
                                         class="w-4 h-4 text-secondary-500" />{{ $negocio->nombre_negocio }}</span>
@@ -42,7 +43,10 @@
                                     class="text-xs text-slate-500 flex items-center gap-1"><x-icons.outline.location-marker
                                         class="w-4 h-4" />{{ $negocio->ubicacion->ciudad ?? 'Sin ciudad' }}</span>
                                 <span
-                                    class="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-secondary-100 text-secondary-600 mt-1">{{ ucfirst($negocio->estado ?? 'pendiente') }}</span>
+                                    class="inline-block px-2 py-0.5 rounded-full text-xs font-medium mt-1
+                                    {{ $negocio->verificado ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200' }}">
+                                    {{ $negocio->verificado ? 'Verificado' : 'Pendiente' }}
+                                </span>
                             </div>
                         @endforeach
                     </div>

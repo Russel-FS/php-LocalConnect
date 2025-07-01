@@ -134,4 +134,24 @@ class User extends Authenticatable
             $q->where('code', $rolCode);
         });
     }
+
+    /**
+     * Relación uno a muchos con Favorito
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function favoritos()
+    {
+        return $this->hasMany(\App\Models\Negocio\Favorito::class, 'id_usuario');
+    }
+
+    /**
+     * Relación uno a muchos con Valoracion
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function valoraciones()
+    {
+        return $this->hasMany(\App\Models\Negocio\Valoracion::class, 'id_usuario');
+    }
 }

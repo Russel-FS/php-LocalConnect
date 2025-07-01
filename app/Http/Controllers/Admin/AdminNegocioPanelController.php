@@ -16,7 +16,7 @@ class AdminNegocioPanelController extends Controller
         $query = Negocio::with(['usuario', 'ubicacion', 'categorias'])
             ->orderByDesc('created_at');
 
-        // Filtros opcionales
+        // fitros opcionales
         if ($request->filled('estado')) {
             if ($request->estado === 'aprobado') {
                 $query->where('verificado', 1);

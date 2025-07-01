@@ -180,26 +180,40 @@
                                 @endif
                             </div>
 
-                            <div
-                                class="p-5 sm:p-6 pt-0 mt-2 border-t border-primary-100/50 flex justify-between items-center">
-                                <a href="{{ route('negocios.mostrar', $negocio->id_negocio) }}"
-                                    class="flex items-center gap-2 group">
-                                    <div
-                                        class="w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors duration-300">
-                                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-secondary-600 transition-transform group-hover:translate-x-1 group-hover:scale-110"
-                                            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            <div class="p-5 sm:p-6 pt-0 mt-2 border-t border-primary-100/50">
+                                <!-- Acciones principales -->
+                                <div class="flex justify-between items-center mb-3">
+                                    <a href="{{ route('negocios.ver-propio', $negocio->id_negocio) }}"
+                                        class="flex items-center gap-2 group">
+                                        <div
+                                            class="w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-xl flex items-center justify-center group-hover:bg-secondary-200 transition-colors duration-300">
+                                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-secondary-600 transition-transform group-hover:translate-x-1 group-hover:scale-110"
+                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm sm:text-base font-semibold text-secondary-600">Ver
+                                            detalles</span>
+                                    </a>
+                                    <a href="{{ route('negocios.editar', $negocio->id_negocio) }}"
+                                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-primary-200 text-primary-700 text-xs font-semibold shadow-sm hover:bg-primary-50 hover:border-primary-400 transition">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.232 5.232l3.536 3.536M9 11l6 6M3 17.25V21h3.75l11.06-11.06a2.121 2.121 0 00-3-3L3 17.25z" />
                                         </svg>
-                                    </div>
-                                    <span class="text-sm sm:text-base font-semibold text-secondary-600">Ver detalles</span>
-                                </a>
-                                <a href="{{ route('negocios.editar', $negocio->id_negocio) }}"
-                                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-primary-200 text-primary-700 text-xs font-semibold shadow-sm hover:bg-primary-50 hover:border-primary-400 transition">
+                                        Editar
+                                    </a>
+                                </div>
+
+                                <!-- Botón de estadísticas -->
+                                <a href="{{ route('negocios.estadisticas', $negocio->id_negocio) }}"
+                                    class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 text-sm font-semibold shadow-sm hover:bg-blue-100 hover:border-blue-300 transition-all duration-200">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536M9 11l6 6M3 17.25V21h3.75l11.06-11.06a2.121 2.121 0 00-3-3L3 17.25z" />
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                     </svg>
-                                    Editar
+                                    Ver estadísticas
                                 </a>
                             </div>
                         </div>

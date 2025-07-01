@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Negocio\Negocio;
 use App\Models\Negocio\Caracteristica;
 use App\Models\Negocio\ServicioPredefinido;
+use App\Models\Negocio\Valoracion;
 
 class NegocioController extends Controller
 {
@@ -85,76 +86,14 @@ class NegocioController extends Controller
     {
         try {
             $negocio = $this->negocioService->obtenerNegocio($id);
+
+            // Incrementar vista de detalle
+            $this->negocioService->incrementarVistaDetalle($id);
+
             return view('negocios.detalle', compact('negocio'));
         } catch (Exception $e) {
             return back()->with('error', 'Negocio no encontrado.');
         }
-    }
-
-    /**
-     * Buscar negocios con filtros
-     */
-    public function buscar(Request $request)
-    {
-        $query = Negocio::with([
-            'categorias',
-            'caracteristicas',
-            'serviciosPredefinidos',
-            'serviciosPersonalizados',
-            'ubicacion'
-        ]);
-
-        // Búsqueda por texto
-        if ($request->filled('q')) {
-            $searchTerm = $request->q;
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('negocios.nombre_negocio', 'LIKE', "%{$searchTerm}%")
-                    ->orWhere('negocios.descripcion', 'LIKE', "%{$searchTerm}%")
-                    ->orWhereHas('categorias', function ($q) use ($searchTerm) {
-                        $q->where('categorias.nombre_categoria', 'LIKE', "%{$searchTerm}%");
-                    })
-                    ->orWhereHas('serviciosPredefinidos', function ($q) use ($searchTerm) {
-                        $q->where('servicios_predefinidos.nombre_servicio', 'LIKE', "%{$searchTerm}%");
-                    })
-                    ->orWhereHas('serviciosPersonalizados', function ($q) use ($searchTerm) {
-                        $q->where('servicios_personalizados.nombre_servicio', 'LIKE', "%{$searchTerm}%");
-                    });
-            });
-        }
-
-        // Filtro por categorías
-        if ($request->filled('categorias')) {
-            $query->whereHas('categorias', function ($q) use ($request) {
-                $q->whereIn('categorias.id_categoria', $request->categorias);
-            });
-        }
-
-        // Filtro por características
-        if ($request->filled('caracteristicas')) {
-            $query->whereHas('caracteristicas', function ($q) use ($request) {
-                $q->whereIn('caracteristicas.id_caracteristica', $request->caracteristicas);
-            });
-        }
-
-        // Filtro por servicios predefinidos
-        if ($request->filled('servicios')) {
-            $query->whereHas('serviciosPredefinidos', function ($q) use ($request) {
-                $q->whereIn('servicios_predefinidos.id_servicio_predefinido', $request->servicios);
-            });
-        }
-
-        // Siempre filtrar solo negocios verificados
-        $query->where('negocios.verificado', true);
-
-        // Obtener datos para filtros
-        $categorias = Categoria::where('estado', 'activo')->get();
-        $caracteristicas = Caracteristica::where('estado', 'activo')->get();
-        $serviciosPredefinidos = ServicioPredefinido::all();
-
-        // Paginar resultados
-        $negocios = $query->paginate(12);
-
-        return view('negocios.buscar', compact('negocios', 'categorias', 'caracteristicas', 'serviciosPredefinidos'));
     }
 
     public function editar($id)
@@ -223,5 +162,103 @@ class NegocioController extends Controller
         $this->negocioService->actualizarNegocio($negocio, $validated, $request, $request->input('horarios'));
 
         return redirect()->route('negocios.mis-negocios')->with('success', '¡Negocio actualizado correctamente!');
+    }
+
+    public function comentarNegocio(Request $request, $id)
+    {
+        $request->validate([
+            'calificacion' => 'required|integer|min:1|max:5',
+            'comentario' => 'required|string|max:1000',
+        ]);
+
+        $user = Auth::user();
+        $negocio = Negocio::findOrFail($id);
+
+        // Solo una valoración por usuario-negocio
+        $yaComentado = Valoracion::where('id_usuario', $user->id_usuario)->where('id_negocio', $id)->first();
+        if ($yaComentado) {
+            return back()->with('error', 'Ya has dejado un comentario para este negocio.');
+        }
+
+        Valoracion::create([
+            'id_usuario' => $user->id_usuario,
+            'id_negocio' => $id,
+            'calificacion' => $request->calificacion,
+            'comentario' => $request->comentario,
+            'fecha_valoracion' => now(),
+        ]);
+
+        return back()->with('success', '¡Gracias por tu comentario!');
+    }
+
+    public function editarComentario(Request $request, $id)
+    {
+        $request->validate([
+            'calificacion' => 'required|integer|min:1|max:5',
+            'comentario' => 'required|string|max:1000',
+        ]);
+
+        $user = Auth::user();
+        $valoracion = Valoracion::findOrFail($id);
+
+        // Verificar que el usuario sea el propietario del comentario
+        if ($valoracion->id_usuario !== $user->id_usuario) {
+            abort(403, 'No tienes permisos para editar este comentario.');
+        }
+
+        $valoracion->update([
+            'calificacion' => $request->calificacion,
+            'comentario' => $request->comentario,
+            'fecha_actualizacion' => now(),
+        ]);
+
+        return back()->with('success', '¡Comentario actualizado correctamente!');
+    }
+
+    /**
+     * Mostrar estadísticas de un negocio
+     */
+    public function estadisticas($id)
+    {
+        $negocio = Negocio::findOrFail($id);
+
+        // Verificar que el usuario sea el propietario del negocio
+        if ($negocio->id_usuario !== Auth::id()) {
+            abort(403, 'No tienes permisos para ver las estadísticas de este negocio.');
+        }
+
+        $estadisticas = $this->negocioService->obtenerEstadisticas($id);
+
+        return view('negocios.estadisticas', compact('negocio', 'estadisticas'));
+    }
+
+    public function eliminarComentario($id)
+    {
+        $user = Auth::user();
+        $valoracion = Valoracion::findOrFail($id);
+
+        // verificar el usaurio para eliminar si es dueño del comentario
+        if ($valoracion->id_usuario !== $user->id_usuario) {
+            abort(403, 'No tienes permisos para eliminar este comentario.');
+        }
+
+        $valoracion->delete();
+
+        return back()->with('success', '¡Comentario eliminado correctamente!');
+    }
+
+    /**
+     * Visualización interna del dueño del negocio (no cuenta como vista pública)
+     */
+    public function verPropioNegocio($id)
+    {
+        $negocio = $this->negocioService->obtenerNegocio($id);
+
+        // Verificar que el usuario sea el propietario del negocio
+        if ($negocio->id_usuario !== Auth::id()) {
+            abort(403, 'No tienes permisos para ver este negocio.');
+        }
+
+        return view('negocios.detalle', compact('negocio'));
     }
 }
