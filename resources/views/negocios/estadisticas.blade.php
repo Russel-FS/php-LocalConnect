@@ -40,7 +40,7 @@
             <!-- grafico -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-12">
                 <h3 class="text-sm md:text-xl font-semibold text-gray-900 mb-4">Evolución de vistas y me gusta</h3>
-                <div class="w-full" style="height:220px;">
+                <div class="w-full" style="height:240px;">
                     <canvas id="graficoEvolucion" class="w-full h-full"></canvas>
                 </div>
             </div>
