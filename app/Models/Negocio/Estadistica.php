@@ -14,8 +14,6 @@ class Estadistica extends Model
         'id_negocio',
         'vistas_busqueda',
         'vistas_detalle',
-        'me_gusta',
-        'favoritos',
         'actualizado_en',
     ];
 

@@ -123,4 +123,9 @@ class Negocio extends Model
     {
         return $this->hasMany(Valoracion::class, 'id_negocio');
     }
+
+    public function meGusta()
+    {
+        return $this->hasMany(\App\Models\Negocio\MeGusta::class, 'id_negocio');
+    }
 }
