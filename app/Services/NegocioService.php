@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Negocio\Estadistica;
 use App\Models\Negocio\Negocio;
 use App\Models\Negocio\Ubicacion;
 use App\Models\Negocio\HorarioAtencion;
@@ -161,6 +162,16 @@ class NegocioService
 
             // Crear contactos
             $this->crearContactos($negocio->id_negocio, $data);
+
+            // Crear estadísticas iniciales
+            Estadistica::create([
+                'id_negocio' => $negocio->id_negocio,
+                'vistas_busqueda' => 0,
+                'vistas_detalle' => 0,
+                'me_gusta' => 0,
+                'favoritos' => 0,
+                'actualizado_en' => now()
+            ]);
 
             return $negocio->load(['ubicacion', 'categorias', 'serviciosPredefinidos', 'serviciosPersonalizados', 'caracteristicas', 'horarios']);
         });
@@ -368,5 +379,37 @@ class NegocioService
         $negocio->serviciosPersonalizados()
             ->whereNotIn('id_servicio', $idsEnviados)
             ->delete();
+    }
+
+    /**
+     * Incrementar vista de búsqueda cuando aparece en resultados de busqueda
+     */
+    public function incrementarVistaBusqueda($negocioId)
+    {
+        $estadistica = Estadistica::where('id_negocio', $negocioId)->first();
+        if ($estadistica) {
+            $estadistica->increment('vistas_busqueda');
+            $estadistica->update(['actualizado_en' => now()]);
+        }
+    }
+
+    /**
+     * Incrementar vista de detalle (ccuando hacen clic en ver detalles)
+     */
+    public function incrementarVistaDetalle($negocioId)
+    {
+        $estadistica = Estadistica::where('id_negocio', $negocioId)->first();
+        if ($estadistica) {
+            $estadistica->increment('vistas_detalle');
+            $estadistica->update(['actualizado_en' => now()]);
+        }
+    }
+
+    /**
+     * Obtener estadísticas de un negocio
+     */
+    public function obtenerEstadisticas($negocioId)
+    {
+        return Estadistica::where('id_negocio', $negocioId)->first();
     }
 }

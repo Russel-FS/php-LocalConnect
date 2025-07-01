@@ -86,6 +86,10 @@ class NegocioController extends Controller
     {
         try {
             $negocio = $this->negocioService->obtenerNegocio($id);
+
+            // Incrementar vista de detalle
+            $this->negocioService->incrementarVistaDetalle($id);
+
             return view('negocios.detalle', compact('negocio'));
         } catch (Exception $e) {
             return back()->with('error', 'Negocio no encontrado.');
@@ -153,8 +157,13 @@ class NegocioController extends Controller
         $caracteristicas = Caracteristica::where('estado', 'activo')->get();
         $serviciosPredefinidos = ServicioPredefinido::all();
 
-        // Paginar resultados
+        // paginar resultados
         $negocios = $query->paginate(12);
+
+        // incrementar vistas de búsqueda de cada negocio en el resultado
+        foreach ($negocios as $negocio) {
+            $this->negocioService->incrementarVistaBusqueda($negocio->id_negocio);
+        }
 
         return view('negocios.buscar', compact('negocios', 'categorias', 'caracteristicas', 'serviciosPredefinidos'));
     }
@@ -276,6 +285,23 @@ class NegocioController extends Controller
         ]);
 
         return back()->with('success', '¡Comentario actualizado correctamente!');
+    }
+
+    /**
+     * Mostrar estadísticas de un negocio
+     */
+    public function estadisticas($id)
+    {
+        $negocio = Negocio::findOrFail($id);
+
+        // Verificar que el usuario sea el propietario del negocio
+        if ($negocio->id_usuario !== Auth::id()) {
+            abort(403, 'No tienes permisos para ver las estadísticas de este negocio.');
+        }
+
+        $estadisticas = $this->negocioService->obtenerEstadisticas($id);
+
+        return view('negocios.estadisticas', compact('negocio', 'estadisticas'));
     }
 
     public function eliminarComentario($id)

@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/negocios/{id}/comentar', [NegocioController::class, 'comentarNegocio'])->name('negocios.comentar');
     Route::put('/negocios/comentarios/{id}/editar', [NegocioController::class, 'editarComentario'])->name('negocios.editar-comentario');
     Route::delete('/negocios/comentarios/{id}/eliminar', [NegocioController::class, 'eliminarComentario'])->name('negocios.eliminar-comentario');
+    Route::get('/negocios/{id}/estadisticas', [NegocioController::class, 'estadisticas'])->name('negocios.estadisticas');
 });
 
 // rutas públicas para ver negocios
