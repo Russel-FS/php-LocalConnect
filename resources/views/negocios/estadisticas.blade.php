@@ -15,6 +15,19 @@
                 </div>
             </div>
 
+            <!-- leshenda de grafico xd. -->
+            <div class="flex justify-center mb-6">
+                <div
+                    class="bg-white rounded-full px-6 py-2 shadow-sm border border-gray-100 flex flex-wrap gap-4 items-center">
+                    <span><span class="inline-block w-3 h-3 rounded-full align-middle mr-1" style="background:#6366f1"></span>
+                        <b>Búsqueda</b>: aparece en resultados</span>
+                    <span><span class="inline-block w-3 h-3 rounded-full align-middle mr-1"
+                            style="background:#3b82f6"></span> <b>Detalle</b>: clics en ver detalles</span>
+                    <span><span class="inline-block w-3 h-3 rounded-full align-middle mr-1"
+                            style="background:#ef4444"></span> <b>Me gusta</b>: likes</span>
+                </div>
+            </div>
+
             <!-- Gráfico de evolución -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-12">
                 <h3 class="text-xl font-semibold text-gray-900 mb-4">Evolución de vistas y me gusta</h3>
