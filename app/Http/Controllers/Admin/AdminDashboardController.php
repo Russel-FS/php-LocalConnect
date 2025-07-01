@@ -56,7 +56,7 @@ class AdminDashboardController extends Controller
 
         // Interacciones por día
         $vistasPorDia = NegocioVista::whereBetween('created_at', [
-            now()->subDays(29)->startOfDay(),
+            now()->subDays(value: 29)->startOfDay(),
             now()->endOfDay()
         ])
             ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
