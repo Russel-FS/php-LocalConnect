@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamps();
 
-            // Índices y restricciones
             $table->unique('nombre');
             $table->foreign('id_categoria_caracteristica')
                 ->references('id_categoria_caracteristica')
