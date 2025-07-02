@@ -737,8 +737,11 @@
 
                     <!-- Paginación -->
                     @if ($negocios->hasPages())
-                        <div class="mt-12 sm:mt-16">
-                            {{ $negocios->appends(request()->query())->links() }}
+                        <div class="mt-12 sm:mt-16 flex justify-center">
+                            <div
+                                class="inline-flex rounded-full shadow-md overflow-hidden bg-white border border-slate-200">
+                                {{ $negocios->appends(request()->query())->links('vendor.pagination.custom-tailwind') }}
+                            </div>
                         </div>
                     @endif
                 @endif
