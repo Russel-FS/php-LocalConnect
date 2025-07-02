@@ -116,7 +116,7 @@
                                             <x-icons.outline.location-marker
                                                 class="w-4 h-4 text-gray-400 absolute left-0 top-1/2 transform -translate-y-1/2">
                                             </x-icons.outline.location-marker>
-                                            <span class="text-xs text-gray-500 ml-5"
+                                            <span class="text-xs md:text-[13px] text-gray-500 ml-5"
                                                 x-text="direccion(sugerencia.ubicacion)"></span>
                                         </div>
                                     </div>
