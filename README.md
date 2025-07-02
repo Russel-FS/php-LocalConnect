@@ -51,7 +51,7 @@ npm install
 cp .env.example .env
 ```
 
-Edita el archivo `.env` y configura la conexión a tu base de datos MySQL:
+Edita el archivo `.env.example y cambialo a solo env` y configura la conexión a tu base de datos MySQL:
 
 ```
 DB_CONNECTION=mysql
@@ -70,7 +70,7 @@ php artisan key:generate
 
 ### 7. Crear la base de datos
 
-Crea una base de datos llamada `localconnect` en MySQL (puedes usar phpMyAdmin o la terminal):
+Crea una base de datos llamada `localconnect` en mysql
 
 ```sql
 CREATE DATABASE localconnect;
