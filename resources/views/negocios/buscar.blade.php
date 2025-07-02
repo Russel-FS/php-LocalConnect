@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="min-h-screen bg-gradient-to-br from-primary-50 via-primary-50 py-8 sm:py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4">
             <!-- Header -->
@@ -11,15 +12,105 @@
                             <form action="{{ route('negocios.buscar') }}" method="GET" id="filtros-form" class="w-full">
                                 <div class="flex flex-col lg:flex-row gap-4 items-center">
                                     <!-- Buscador -->
-                                    <div class="flex-1 min-w-0">
+                                    <div class="flex-1 min-w-0" x-data="{
+                                        sugerencias: [],
+                                        timeout: null,
+                                        buscarSugerencias(e) {
+                                            clearTimeout(this.timeout);
+                                            const valor = e.target.value;
+                                            if (!valor.trim()) {
+                                                this.sugerencias = [];
+                                                return;
+                                            }
+                                            this.timeout = setTimeout(() => {
+                                                fetch(`{{ route('negocios.sugerencias.busqueda') }}?q=${valor}`)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        this.sugerencias = data;
+                                                    });
+                                            }, 400);
+                                        },
+                                        promedio(valoraciones) {
+                                            if (!valoraciones || valoraciones.length === 0) return '';
+                                            let suma = valoraciones.reduce((acc, v) => acc + (v.calificacion || 0), 0);
+                                            return (suma / valoraciones.length).toFixed(1);
+                                        },
+                                        direccion(ubicacion) {
+                                            if (!ubicacion) return '';
+                                            return `${ubicacion.direccion ?? ''}${ubicacion.distrito ? ', ' + ubicacion.distrito : ''}`;
+                                        },
+                                        urlSugerencia(s) {
+                                            return `/negocios/${s.id_negocio}`;
+                                        }
+                                    }">
                                         <div class="relative group">
+                                            <!-- Input de búsqueda -->
                                             <input type="text" name="q" placeholder="¿Qué negocio buscas hoy?"
-                                                class="w-full pl-4 pr-12 py-3 text-sm bg-white rounded-full border border-gray-200 focus:border-primary-400 focus:ring-1 focus:ring-primary-100 transition-all duration-300 placeholder-gray-400"
-                                                value="{{ request('q') }}">
+                                                class="w-full pl-4 pr-12 py-3.5 text-sm bg-white rounded-full border border-gray-200 focus:border-primary-400 focus:ring-1 focus:ring-primary-100 transition-all duration-300 placeholder-gray-400"
+                                                value="{{ request('q') }}" x-on:input="buscarSugerencias($event)">
+                                            <!-- button de búsqueda -->
                                             <button type="submit"
-                                                class="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center">
-                                                <x-icons.navigation.search class="h-4 w-4" />
+                                                class="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2.5 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors duration-200 flex items-center justify-center">
+                                                <x-icons.navigation.search class="h-5 w-5" />
                                             </button>
+                                            <!-- Sugerencias de negocios -->
+                                            <div class="absolute left-0 top-full mt-2 w-full bg-white rounded-3xl shadow-lg border border-slate-200 z-50 max-h-60 modern-scrollbar overflow-y-auto p-1"
+                                                x-show="sugerencias.length > 0" @click.away="sugerencias = []">
+                                                <template x-for="sugerencia in sugerencias" :key="sugerencia.id_negocio">
+                                                    <a :href="urlSugerencia(sugerencia)"
+                                                        @click.prevent="window.location.href = $event.currentTarget.href"
+                                                        class="flex items-center gap-3 px-3 py-3 rounded-2xl transition-all cursor-pointer group hover:bg-slate-50 hover:shadow-md">
+                                                        <!-- miniatura -->
+                                                        <span>
+                                                            <template x-if="sugerencia.imagen_portada">
+                                                                <img :src="sugerencia.imagen_portada"
+                                                                    :alt="sugerencia.nombre_negocio"
+                                                                    class="w-11 h-11 object-cover rounded-xl bg-gray-100 flex-shrink-0">
+                                                            </template>
+                                                            <template x-if="!sugerencia.imagen_portada">
+                                                                <span
+                                                                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-slate-100">
+                                                                    <svg class="w-6 h-6 text-slate-400" fill="none"
+                                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                                        <circle cx="12" cy="12" r="10"
+                                                                            stroke-width="2" />
+                                                                        <path d="M8 12h8M12 8v8" stroke-width="2"
+                                                                            stroke-linecap="round" />
+                                                                    </svg>
+                                                                </span>
+                                                            </template>
+                                                        </span>
+                                                        <div class="flex-1 min-w-0">
+                                                            <div class="flex items-center gap-2">
+                                                                <span
+                                                                    class="font-medium text-[15px] truncate text-slate-800 group-hover:text-primary-700 transition-colors"
+                                                                    x-text="sugerencia.nombre_negocio"></span>
+                                                                <template
+                                                                    x-if="sugerencia.valoraciones && sugerencia.valoraciones.length > 0">
+                                                                    <span
+                                                                        class="flex items-center gap-1 text-xs text-yellow-500 ml-1">
+                                                                        <x-icons.outline.star class="w-4 h-4">
+                                                                        </x-icons.outline.star>
+                                                                        <span x-text="promedio(sugerencia.valoraciones)">
+                                                                        </span>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                            <div class="flex items-center gap-2 relative">
+                                                                <div class="absolute left-0 top-1/2 -translate-y-1/2">
+                                                                    <x-icons.outline.location-marker
+                                                                        class="w-4 h-4 text-gray-400" />
+                                                                </div>
+                                                                <template x-if="sugerencia.ubicacion">
+                                                                    <span class="text-xs text-gray-500 ml-5 truncate"
+                                                                        x-text="direccion(sugerencia.ubicacion)">
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </template>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -95,7 +186,8 @@
                                                 <div class="p-5">
                                                     <div class="flex items-center gap-2 mb-4">
                                                         <x-icons.content.check-circle class="w-5 h-5 text-primary-600" />
-                                                        <h4 class="text-sm font-semibold text-gray-900">Características</h4>
+                                                        <h4 class="text-sm font-semibold text-gray-900">Características
+                                                        </h4>
                                                     </div>
                                                     <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar">
                                                         @foreach ($caracteristicas as $caracteristica)

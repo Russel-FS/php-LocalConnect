@@ -168,4 +168,24 @@ class NegocioPublicoController extends Controller
             return back()->with('error', 'Negocio no encontrado.');
         }
     }
+
+    /**
+     * Sugerencias de negocios para la página de búsqueda
+     */
+    public function sugerenciasBusqueda(Request $request)
+    {
+        $q = $request->q;
+        $negocios = Negocio::with(['ubicacion', 'valoraciones'])
+            ->where(function ($query) use ($q) {
+                $query->where('nombre_negocio', 'LIKE', "%$q%")
+                    ->orWhere('descripcion', 'LIKE', "%$q%");
+            })
+            ->limit(8)
+            ->get()
+            ->map(function ($n) {
+                $n->tipo = 'negocio';
+                return $n;
+            });
+        return response()->json($negocios);
+    }
 }
