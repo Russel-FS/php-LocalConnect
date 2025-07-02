@@ -498,7 +498,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                         @foreach ($negocios as $negocio)
                             <div
-                                class="fade-in-card group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex flex-col p-0">
+                                class="fade-in-card group bg-white rounded-2xl  transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex flex-col p-0">
                                 <!-- Header -->
                                 <div
                                     class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden rounded-2xl img-responsive-rappi">
@@ -535,11 +535,16 @@
                                 @endphp
                                 <div class="flex-1 flex flex-col px-6 pt-6 pb-4 relative">
                                     @if ($promoActiva)
-                                        <span class="absolute top-4 right-4 z-10">
+                                        <span class="absolute top-4 right-4 z-30" x-data="{ showTip: false }"
+                                            style="overflow:visible;">
                                             <span
-                                                class="inline-flex items-center justify-center w-9 h-9 rounded-full shadow-lg border-2 border-pink-200 bg-gradient-to-br from-pink-100 to-pink-200"
-                                                title="Este negocio tiene una promoción activa">
+                                                class="inline-flex items-center justify-center w-9 h-9 rounded-full shadow-lg border-2 border-pink-200 bg-gradient-to-br from-pink-100 to-pink-200 relative"
+                                                @mouseenter="showTip = true" @mouseleave="showTip = false">
                                                 <x-icons.content.promo class="w-6 h-6 text-pink-500" />
+                                                <span x-show="showTip" x-transition
+                                                    class="absolute left-auto right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 rounded-xl bg-gray-900 text-white text-xs font-medium shadow-lg z-[99999] min-w-max pointer-events-none">
+                                                    Este negocio tiene una promoción activa
+                                                </span>
                                             </span>
                                         </span>
                                     @endif
