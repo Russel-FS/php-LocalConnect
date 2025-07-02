@@ -4,14 +4,26 @@
     <div class="min-h-screen bg-gradient-to-br from-primary-50 via-primary-50 py-8 sm:py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4">
             <!-- Header -->
-            <div class="mb-8 sm:mb-12">
-                <div class="text-center mb-8">
+            <div class="mb-8 sm:mb-12 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div class="text-center sm:text-left mb-8 sm:mb-0">
                     <h1 class="text-3xl sm:text-4xl font-bold text-primary-800 tracking-tight mb-4">
                         Estadísticas de {{ $negocio->nombre_negocio }}
                     </h1>
-                    <p class="text-lg text-primary-600 max-w-2xl mx-auto">
+                    <p class="text-lg text-primary-600 max-w-2xl">
                         Analiza el rendimiento y la visibilidad de tu negocio en LocalConnect
                     </p>
+                </div>
+                <div class="flex justify-center sm:justify-end">
+                    <a href="{{ route('negocios.estadisticas.pdf', $negocio->id_negocio) }}"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold bg-red-600 text-white shadow hover:bg-red-700 transition-all duration-200 text-base"
+                        target="_blank">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Exportar PDF
+                    </a>
                 </div>
             </div>
 

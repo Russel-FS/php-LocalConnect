@@ -318,4 +318,62 @@ class NegocioController extends Controller
 
         return view('negocios.detalle', compact('negocio'));
     }
+
+    public function estadisticasPDF($id)
+    {
+        $negocio = Negocio::findOrFail($id);
+
+        // validacion de propietario
+        if ($negocio->id_usuario !== auth::id()) {
+            abort(403, 'No tienes permisos para exportar las estadísticas de este negocio.');
+        }
+
+        // calcular totales
+        $estadisticas = [
+            'vistas_busqueda' => $negocio->vistas()->where('tipo_vista', 'busqueda')->count(),
+            'vistas_detalle' => $negocio->vistas()->where('tipo_vista', 'detalle')->count(),
+            'me_gusta' => $negocio->meGusta()->count(),
+            'favoritos' => $negocio->favoritos()->count(),
+        ];
+
+        $dias = collect(range(0, 13))->map(function ($i) {
+            return now()->subDays(13 - $i)->format('Y-m-d');
+        });
+        $vistasPorDia = $negocio->vistas()
+            ->where('tipo_vista', 'detalle')
+            ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
+            ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
+            ->groupBy('fecha')
+            ->pluck('total', 'fecha');
+        $vistasBusquedaPorDia = $negocio->vistas()
+            ->where('tipo_vista', 'busqueda')
+            ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
+            ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
+            ->groupBy('fecha')
+            ->pluck('total', 'fecha');
+        $meGustaPorDia = $negocio->meGusta()
+            ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
+            ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
+            ->groupBy('fecha')
+            ->pluck('total', 'fecha');
+        $labels = $dias->map(function ($fecha) {
+            return Carbon::parse($fecha)->isoFormat('D MMM');
+        });
+        $vistas = $dias->map(fn($fecha) => $vistasPorDia[$fecha] ?? 0);
+        $vistasBusqueda = $dias->map(fn($fecha) => $vistasBusquedaPorDia[$fecha] ?? 0);
+        $meGusta = $dias->map(fn($fecha) => $meGustaPorDia[$fecha] ?? 0);
+
+        $data = [
+            'negocio' => $negocio,
+            'estadisticas' => $estadisticas,
+            'labels' => $labels->toArray(),
+            'vistas' => $vistas->toArray(),
+            'vistasBusqueda' => $vistasBusqueda->toArray(),
+            'meGusta' => $meGusta->toArray(),
+            'fecha' => now()->format('d/m/Y H:i'),
+        ];
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('negocios.estadisticas-pdf', $data);
+        return $pdf->download('estadisticas-negocio-' . $negocio->id_negocio . '-' . now()->format('Y-m-d') . '.pdf');
+    }
 }
