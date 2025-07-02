@@ -159,11 +159,11 @@
                                     <template x-for="sugerencia in categorias()" :key="sugerencia.id_categoria">
                                         <a :href="urlSugerencia(sugerencia)"
                                             @click.prevent="window.location.href = $event.currentTarget.href"
-                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-secondary-50">
+                                            class="flex gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-secondary-100/50">
                                             <span
-                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary-50">
-                                                <x-icons.content.category
-                                                    class="w-7 h-7 text-secondary-500"></x-icons.content.category>
+                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary-100">
+                                                <x-icons.content.category class="w-7 h-7 text-secondary-500">
+                                                </x-icons.content.category>
                                             </span>
                                             <div class="flex-1 min-w-0">
                                                 <span class="font-semibold text-secondary-700 text-sm truncate"
