@@ -3,7 +3,7 @@
 @section('title', 'Mis Promociones')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100">
+    <div class="min-h-screen bg-gradient-to-br from-primary-50 via-primary-50">
         <!-- Header  -->
         <div class="bg-white/80 backdrop-blur-sm border-b border-slate-200/60">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <!-- Contenido principal -->
+        <!-- Contenido principassfl -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Mensajes de estado -->
             @if (session('success'))
@@ -50,7 +50,7 @@
                 </div>
             @endif
 
-            <!-- Dashboard de estadísticas -->
+            <!--estadisticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                 <!-- Total Promociones -->
                 <div
