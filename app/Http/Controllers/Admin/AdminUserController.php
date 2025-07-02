@@ -96,7 +96,7 @@ class AdminUserController extends Controller
     {
         $usuario = User::findOrFail($id);
 
-        // No permitir desactivar el usuario actual
+        // No permitir desactivar el usuario actuala
         if ($usuario->id === Auth::id()) {
             return redirect()->route('admin.usuarios.index')->with('error', 'No puedes desactivar tu propia cuenta.');
         }
