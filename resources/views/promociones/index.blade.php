@@ -3,21 +3,25 @@
 @section('title', 'Mis Promociones')
 
 @section('content')
-    <div class="min-h-screen bg-gray-50">
-        <!-- Header -->
-        <div class="bg-white shadow-sm border-b border-gray-200">
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100">
+        <!-- Header  -->
+        <div class="bg-white/80 backdrop-blur-sm border-b border-slate-200/60">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center py-6">
-                    <div>
-                        <h1 class="text-2xl font-bold text-gray-900">Mis Promociones</h1>
-                        <p class="mt-1 text-sm text-gray-500">Gestiona las promociones de tus negocios</p>
+                <div class="flex justify-between items-center py-8">
+                    <div class="space-y-1">
+                        <h1
+                            class="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                            Mis Promociones
+                        </h1>
+                        <p class="text-slate-600 font-medium">Gestiona y optimiza las promociones de tus negocios</p>
                     </div>
-                    <a href="{{ route('promociones.create') }}" class="btn-primary flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        Nueva Promoción
+                    <a href="{{ route('promociones.create') }}"
+                        class="group relative inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-2xl shadow-lg shadow-primary-200/50 hover:shadow-xl hover:shadow-primary-300/50 transition-all duration-300 transform hover:-translate-y-0.5">
+                        <x-icons.actions.plus class="w-5 h-5" />
+                        <span>Nueva Promoción</span>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
                     </a>
                 </div>
             </div>
@@ -25,89 +29,94 @@
 
         <!-- Contenido principal -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Mensajes de estado -->
             @if (session('success'))
-                <div class="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
-                    {{ session('success') }}
+                <div
+                    class="mb-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/60 text-green-700 px-6 py-4 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <x-icons.content.check-circle class="w-5 h-5 text-green-600" />
+                        <span class="font-medium">{{ session('success') }}</span>
+                    </div>
                 </div>
             @endif
 
             @if (session('error'))
-                <div class="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-                    {{ session('error') }}
+                <div
+                    class="mb-8 bg-gradient-to-r from-red-50 to-pink-50 border border-red-200/60 text-red-700 px-6 py-4 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="font-medium">{{ session('error') }}</span>
+                    </div>
                 </div>
             @endif
 
-            <!-- Estadísticas rápidas -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
-                            </div>
+            <!-- Dashboard de estadísticas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <!-- Total Promociones -->
+                <div
+                    class="group relative bg-white/70 backdrop-blur-sm rounded-3xl p-6 shadow-sm border border-white/60 hover:shadow-lg hover:shadow-primary-100/50 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <div class="space-y-2">
+                            <p class="text-sm font-medium text-slate-600">Total Promociones</p>
+                            <p class="text-3xl font-bold text-slate-900">{{ $promociones->count() }}</p>
                         </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Total Promociones</p>
-                            <p class="text-2xl font-bold text-gray-900">{{ $promociones->count() }}</p>
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+                            <x-icons.content.lightning class="w-6 h-6 text-primary-600" />
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Vigentes</p>
-                            <p class="text-2xl font-bold text-gray-900">
+                <!-- Vigentes -->
+                <div
+                    class="group relative bg-white/70 backdrop-blur-sm rounded-3xl p-6 shadow-sm border border-white/60 hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <div class="space-y-2">
+                            <p class="text-sm font-medium text-slate-600">Vigentes</p>
+                            <p class="text-3xl font-bold text-slate-900">
                                 {{ $promociones->where('estado', 'vigente')->count() }}</p>
                         </div>
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-green-100 to-emerald-200 rounded-2xl flex items-center justify-center group-hover:from-green-200 group-hover:to-emerald-300 transition-all duration-300">
+                            <x-icons.content.check-circle class="w-6 h-6 text-green-600" />
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Pendientes</p>
-                            <p class="text-2xl font-bold text-gray-900">
+                <!-- Pendientes -->
+                <div
+                    class="group relative bg-white/70 backdrop-blur-sm rounded-3xl p-6 shadow-sm border border-white/60 hover:shadow-lg hover:shadow-yellow-100/50 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <div class="space-y-2">
+                            <p class="text-sm font-medium text-slate-600">Pendientes</p>
+                            <p class="text-3xl font-bold text-slate-900">
                                 {{ $promociones->where('estado', 'pendiente')->count() }}</p>
                         </div>
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-yellow-100 to-amber-200 rounded-2xl flex items-center justify-center group-hover:from-yellow-200 group-hover:to-amber-300 transition-all duration-300">
+                            <x-icons.content.clock class="w-6 h-6 text-yellow-600" />
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Expiradas</p>
-                            <p class="text-2xl font-bold text-gray-900">
+                <!-- Expiradas -->
+                <div
+                    class="group relative bg-white/70 backdrop-blur-sm rounded-3xl p-6 shadow-sm border border-white/60 hover:shadow-lg hover:shadow-red-100/50 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between">
+                        <div class="space-y-2">
+                            <p class="text-sm font-medium text-slate-600">Expiradas</p>
+                            <p class="text-3xl font-bold text-slate-900">
                                 {{ $promociones->where('estado', 'expirada')->count() }}</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-red-100 to-pink-200 rounded-2xl flex items-center justify-center group-hover:from-red-200 group-hover:to-pink-300 transition-all duration-300">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -115,81 +124,120 @@
 
             <!-- Lista de promociones -->
             @if ($promociones->count() > 0)
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="px-6 py-4 border-b border-gray-200">
-                        <h3 class="text-lg font-medium text-gray-900">Todas las Promociones</h3>
+                <div class="bg-white/70 backdrop-blur-sm rounded-3xl shadow-sm border border-white/60 overflow-hidden">
+                    <div class="px-8 py-6 border-b border-slate-200/60">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-semibold text-slate-900">Todas las Promociones</h3>
+                            <span class="text-sm text-slate-500">{{ $promociones->count() }} promociones</span>
+                        </div>
                     </div>
-                    <div class="divide-y divide-gray-200">
+                    <div class="divide-y divide-slate-200/60">
                         @foreach ($promociones as $promocion)
-                            <div class="p-6 hover:bg-gray-50 transition-colors duration-200">
+                            <div
+                                class="group p-8 hover:bg-gradient-to-r hover:from-primary-50/30 hover:to-secondary-50/30 transition-all duration-300">
                                 <div class="flex items-start justify-between">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <h4 class="text-lg font-semibold text-gray-900">{{ $promocion->titulo }}</h4>
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                            @if ($promocion->estado === 'vigente') bg-green-100 text-green-800
-                                            @elseif($promocion->estado === 'pendiente') bg-yellow-100 text-yellow-800
-                                            @elseif($promocion->estado === 'expirada') bg-red-100 text-red-800
-                                            @else bg-gray-100 text-gray-800 @endif">
-                                                {{ ucfirst($promocion->estado) }}
-                                            </span>
-                                            @if (!$promocion->activa)
+                                    <div class="flex-1 space-y-4">
+                                        <!-- Header  -->
+                                        <div class="flex items-start gap-4">
+                                            <div class="flex-1">
+                                                <h4
+                                                    class="text-xl font-bold text-slate-900 group-hover:text-primary-700 transition-colors duration-300">
+                                                    {{ $promocion->titulo }}
+                                                </h4>
+                                                <p class="text-slate-600 mt-2 leading-relaxed">{{ $promocion->descripcion }}
+                                                </p>
+                                            </div>
+                                            <div class="flex items-center gap-2">
                                                 <span
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                                    Inactiva
+                                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+                                                @if ($promocion->estado === 'vigente') bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border border-green-200/60
+                                                @elseif($promocion->estado === 'pendiente') bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-700 border border-yellow-200/60
+                                                @elseif($promocion->estado === 'expirada') bg-gradient-to-r from-red-100 to-pink-100 text-red-700 border border-red-200/60
+                                                @else bg-gradient-to-r from-slate-100 to-gray-100 text-slate-700 border border-slate-200/60 @endif">
+                                                    {{ ucfirst($promocion->estado) }}
                                                 </span>
-                                            @endif
+                                                @if (!$promocion->activa)
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-slate-100 to-gray-100 text-slate-700 border border-slate-200/60">
+                                                        Inactiva
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
 
-                                        <p class="text-gray-600 mb-3">{{ $promocion->descripcion }}</p>
-
-                                        <div class="flex items-center gap-6 text-sm text-gray-500">
-                                            <div class="flex items-center gap-2">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                                </svg>
-                                                <span class="font-medium text-green-600">{{ $promocion->descuento }}% de
-                                                    descuento</span>
+                                        <!-- Información de la promoción -->
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            <div
+                                                class="flex items-center gap-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-200/40">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-br from-green-100 to-emerald-200 rounded-xl flex items-center justify-center">
+                                                    <x-icons.content.lightning class="w-5 h-5 text-green-600" />
+                                                </div>
+                                                <div>
+                                                    <p class="text-sm font-medium text-slate-600">Descuento</p>
+                                                    <p class="text-lg font-bold text-green-700">
+                                                        {{ $promocion->descuento }}%</p>
+                                                </div>
                                             </div>
 
-                                            <div class="flex items-center gap-2">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                                </svg>
-                                                <span>{{ $promocion->negocio->nombre_negocio }}</span>
+                                            <div
+                                                class="flex items-center gap-3 p-4 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl border border-primary-200/40">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-br from-primary-100 to-secondary-200 rounded-xl flex items-center justify-center">
+                                                    <x-icons.outline.business class="w-5 h-5 text-primary-600" />
+                                                </div>
+                                                <div>
+                                                    <p class="text-sm font-medium text-slate-600">Negocio</p>
+                                                    <p class="text-lg font-bold text-primary-700">
+                                                        {{ $promocion->negocio->nombre_negocio }}</p>
+                                                </div>
                                             </div>
 
-                                            <div class="flex items-center gap-2">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                <span>{{ $promocion->fecha_inicio->format('d/m/Y') }} -
-                                                    {{ $promocion->fecha_fin->format('d/m/Y') }}</span>
+                                            <div
+                                                class="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-200/40">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-xl flex items-center justify-center">
+                                                    <x-icons.content.clock class="w-5 h-5 text-blue-600" />
+                                                </div>
+                                                <div>
+                                                    <p class="text-sm font-medium text-slate-600">Vigencia</p>
+                                                    <p class="text-sm font-bold text-blue-700">
+                                                        {{ $promocion->fecha_inicio->format('d/m/Y') }} -
+                                                        {{ $promocion->fecha_fin->format('d/m/Y') }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="flex items-center gap-2 ml-4">
+                                    <!-- Acciones -->
+                                    <div class="flex flex-col gap-3 ml-6">
                                         <a href="{{ route('promociones.show', $promocion->id_promocion) }}"
-                                            class="btn-secondary text-sm">
+                                            class="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-xl font-medium hover:bg-slate-200 transition-colors duration-200">
+                                            <x-icons.outline.eye class="w-4 h-4" />
                                             Ver
                                         </a>
                                         <a href="{{ route('promociones.edit', $promocion->id_promocion) }}"
-                                            class="btn-primary text-sm">
+                                            class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-sm hover:shadow-md">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
                                             Editar
                                         </a>
                                         <form action="{{ route('promociones.toggle-status', $promocion->id_promocion) }}"
                                             method="POST" class="inline">
                                             @csrf
                                             <button type="submit"
-                                                class="btn-{{ $promocion->activa ? 'warning' : 'success' }} text-sm">
+                                                class="w-full inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all duration-200
+                                            @if ($promocion->activa) bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:from-yellow-600 hover:to-orange-600 shadow-sm hover:shadow-md
+                                            @else 
+                                                bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 shadow-sm hover:shadow-md @endif">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 13l4 4L19 7" />
+                                                </svg>
                                                 {{ $promocion->activa ? 'Desactivar' : 'Activar' }}
                                             </button>
                                         </form>
@@ -198,7 +246,13 @@
                                             onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta promoción?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn-danger text-sm">
+                                            <button type="submit"
+                                                class="w-full inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-xl font-medium hover:from-red-600 hover:to-pink-600 transition-all duration-200 shadow-sm hover:shadow-md">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
                                                 Eliminar
                                             </button>
                                         </form>
@@ -209,19 +263,32 @@
                     </div>
                 </div>
             @else
-                <div class="text-center py-12">
-                    <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                        </svg>
+                <!-- vacio-->
+                <div class="text-center py-16">
+                    <div class="relative mx-auto w-32 h-32 mb-8">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-full opacity-60 animate-pulse">
+                        </div>
+                        <div
+                            class="relative w-full h-full bg-gradient-to-br from-primary-200 to-secondary-200 rounded-full flex items-center justify-center">
+                            <x-icons.content.lightning class="w-16 h-16 text-primary-600" />
+                        </div>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">No tienes promociones</h3>
-                    <p class="text-gray-500 mb-6">Comienza creando tu primera promoción para atraer más clientes a tus
-                        negocios.</p>
-                    <a href="{{ route('promociones.create') }}" class="btn-primary">
-                        Crear Primera Promoción
-                    </a>
+                    <div class="space-y-4 max-w-md mx-auto">
+                        <h3 class="text-2xl font-bold text-slate-900">No tienes promociones</h3>
+                        <p class="text-slate-600 leading-relaxed">Comienza creando tu primera promoción para atraer más
+                            clientes y aumentar las ventas de tus negocios.</p>
+                    </div>
+                    <div class="mt-8">
+                        <a href="{{ route('promociones.create') }}"
+                            class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-2xl shadow-lg shadow-primary-200/50 hover:shadow-xl hover:shadow-primary-300/50 transition-all duration-300 transform hover:-translate-y-1">
+                            <x-icons.actions.plus class="w-6 h-6" />
+                            <span>Crear Primera Promoción</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                        </a>
+                    </div>
                 </div>
             @endif
         </div>
