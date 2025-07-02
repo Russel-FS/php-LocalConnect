@@ -257,7 +257,7 @@
                         <span class="text-sm text-gray-500 mt-1">Administrar</span>
                     </a>
 
-                    <a href="#"
+                    <a href="{{ route('admin.usuarios.index') }}"
                         class="group flex flex-col items-center p-6 rounded-2xl bg-white border-2 border-green-400 hover:shadow-md transition-all duration-300">
                         <div
                             class="w-14 h-14 rounded-2xl bg-green-50 shadow-sm flex items-center justify-center mb-4 group-hover:shadow-md transition-all duration-300">
