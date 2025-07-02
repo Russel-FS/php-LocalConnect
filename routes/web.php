@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
 
 // rutas públicas para ver negocios
 Route::get('/negocios/buscar', [NegocioPublicoController::class, 'buscar'])->name('negocios.buscar');
-Route::get('/negocios/sugerencias', [NegocioPublicoController::class, 'sugerencias'])->name('negocios.sugerencias');
+Route::get('/negocios/sugerencias', [NegocioPublicoController::class, 'sugere   ncias'])->name('negocios.sugerencias');
 Route::get('/negocios/sugerencias-busqueda', [NegocioPublicoController::class, 'sugerenciasBusqueda'])->name('negocios.sugerencias.busqueda');
 Route::get('/negocios/{id}', [NegocioPublicoController::class, 'mostrar'])->name('negocios.mostrar');
 

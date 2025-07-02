@@ -276,6 +276,16 @@
                         <span class="text-base font-semibold text-gray-900">Servicios Predefinidos</span>
                         <span class="text-sm text-gray-500 mt-1">Gestionar</span>
                     </a>
+
+                    <a href="{{ route('admin.caracteristicas.index') }}"
+                        class="group flex flex-col items-center p-6 rounded-2xl bg-white border-2 border-purple-400 hover:shadow-md transition-all duration-300">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-purple-50 shadow-sm flex items-center justify-center mb-4 group-hover:shadow-md transition-all duration-300">
+                            <x-icons.outline.star class="w-7 h-7 text-purple-600" />
+                        </div>
+                        <span class="text-base font-semibold text-gray-900">Características</span>
+                        <span class="text-sm text-gray-500 mt-1">Gestionar</span>
+                    </a>
                 </div>
             </div>
 
