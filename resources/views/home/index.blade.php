@@ -1,8 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        #sugerencias {
+            max-height: 400px;
+            overflow-y: auto;
+            gap: 2px;
+            flex-direction: column;
+            modern-scrollbar
+        }
+
+        @keyframes sugerencias-animation {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #sugerencias a {
+            animation: sugerencias-animation 0.3s ease-in-out;
+        }
+    </style>
     <!-- Hero-->
-    <section
+    <section x-data="{
+        sugerencias: [],
+        timeout: null,
+        buscarSugerencias(e) {
+            clearTimeout(this.timeout);
+            const valor = e.target.value;
+            if (!valor.trim()) {
+                this.sugerencias = [];
+                return;
+            }
+            this.timeout = setTimeout(() => {
+                fetch(`{{ route('negocios.sugerencias') }}?q=${valor}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.sugerencias = data;
+                    });
+            }, 500);
+        },
+        promedio(valoraciones) {
+            if (!valoraciones || valoraciones.length === 0) return '';
+            let suma = valoraciones.reduce((acc, v) => acc + (v.calificacion || 0), 0);
+            return (suma / valoraciones.length).toFixed(1);
+        },
+        direccion(ubicacion) {
+            if (!ubicacion) return '';
+            return `${ubicacion.direccion ?? ''}${ubicacion.distrito ? ', ' + ubicacion.distrito : ''}`;
+        }
+    }"
         class="min-h-[340px] bg-gradient-to-br from-primary-50 to-white flex items-center justify-center py-12 sm:py-16 lg:py-20">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-primary-700 leading-tight">
@@ -15,7 +67,7 @@
             <div class="max-w-2xl mx-auto mb-4">
                 <form action="{{ route('negocios.buscar') }}" method="GET" class="relative">
                     <div class="relative flex items-center">
-                        <input type="text" name="q" oninput="Sugerencias(event)"
+                        <input type="text" name="q" x-on:input="buscarSugerencias($event)"
                             placeholder="¿Qué estás buscando? (ej: peluquería, restaurante, taller...)"
                             class="w-full pl-6 pr-32 py-4 text-lg bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm focus:border-slate-300 focus:ring-2 focus:ring-slate-100 transition-all duration-300 placeholder-slate-400"
                             value="{{ request('q') }}">
@@ -27,8 +79,49 @@
                             </button>
                         </div>
                         <!-- sugerencias -->
-                        <div id="sugerencias"
-                            class="absolute left-0 top-full mt-2 w-full bg-white rounded-2xl shadow-lg border border-slate-200">
+                        <div class="absolute left-0 top-full mt-2 w-full bg-white rounded-2xl shadow-lg border border-slate-200 z-50"
+                            x-show="sugerencias.length > 0" @click.away="sugerencias = []">
+                            <template x-for="sugerencia in sugerencias" :key="sugerencia.id_negocio">
+                                <a :href="`/negocios/${sugerencia.id_negocio}`"
+                                    class="flex items-center gap-3 px-4 py-3 hover:bg-primary-50 transition-colors rounded-2xl cursor-pointer group">
+                                    <template x-if="sugerencia.imagen_portada">
+                                        <img :src="sugerencia.imagen_portada" :alt="sugerencia.nombre_negocio"
+                                            class="w-12 h-12 object-cover rounded-xl bg-gray-100 flex-shrink-0">
+                                    </template>
+                                    <template x-if="!sugerencia.imagen_portada">
+                                        <span class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-50">
+                                            <svg class="w-7 h-7 text-primary-400" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <rect x="3" y="10" width="18" height="8" rx="2"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M7 10V6a5 5 0 0110 0v4" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M9 18v-2a2 2 0 114 0v2" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </template>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-semibold text-primary-800 text-sm truncate"
+                                                x-text="sugerencia.nombre_negocio"></span>
+                                            <template x-if="sugerencia.valoraciones && sugerencia.valoraciones.length > 0">
+                                                <span class="flex items-center gap-1 text-xs text-yellow-500 ml-2">
+                                                    <x-icons.outline.star class="w-4 h-4"></x-icons.outline.star>
+                                                    <span x-text="promedio(sugerencia.valoraciones)"></span>
+                                                </span>
+                                            </template>
+                                        </div>
+                                        <div class="flex gap-2 justify-baseline text-xs text-gray-500 mt-1 relative">
+                                            <x-icons.outline.location-marker
+                                                class="w-4 h-4 text-gray-400 absolute left-0 top-1/2 transform -translate-y-1/2">
+                                            </x-icons.outline.location-marker>
+                                            <span class="text-xs text-gray-500 ml-5"
+                                                x-text="direccion(sugerencia.ubicacion)"></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </template>
                         </div>
                     </div>
                 </form>
@@ -126,13 +219,15 @@
                 <div class="card-testimonial">
                     <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" class="avatar">
                     <h4 class="font-semibold mb-4 text-primary-700 text-lg">Canaquiri Susy</h4>
-                    <p class="text-primary-500 leading-relaxed">"Encontré el mejor taller mecánico a dos cuadras de mi casa.
+                    <p class="text-primary-500 leading-relaxed">"Encontré el mejor taller mecánico a dos cuadras de mi
+                        casa.
                         ¡Súper fácil y rápido!"</p>
                 </div>
                 <div class="card-testimonial">
                     <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar" class="avatar">
                     <h4 class="font-semibold mb-4 text-primary-700 text-lg">Palacios Sahel</h4>
-                    <p class="text-primary-500 leading-relaxed">"Gracias a LocalConnect, mi cafetería recibe nuevos clientes
+                    <p class="text-primary-500 leading-relaxed">"Gracias a LocalConnect, mi cafetería recibe nuevos
+                        clientes
                         cada semana."</p>
                 </div>
                 <div class="card-testimonial">
@@ -185,27 +280,4 @@
             </div>
         </div>
     </section>
-
-    <script>
-        let timeout;
-        let sugerencias = [];
-        let sugerenciasContainer = document.getElementById('sugerencias');
-
-        function Sugerencias(e) {
-
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                fetch(`{{ route('negocios.sugerencias') }}?q=${e.target.value}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        sugerencias = data;
-                        sugerenciasContainer.innerHTML = '';
-                        sugerencias.forEach(sugerencia => {
-                            sugerenciasContainer.innerHTML +=
-                                `<li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">${sugerencia.nombre_negocio}</li>`;
-                        });
-                    });
-            }, 1000);
-        }
-    </script>
 @endsection

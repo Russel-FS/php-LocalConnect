@@ -262,7 +262,7 @@
                                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
                         @endif
-                        <span class="text-xs font-medium">Promociones</span>
+                        <span class="text-xs font-medium">Proms</span>
                     </a>
                 @endif
 
