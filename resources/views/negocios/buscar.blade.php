@@ -464,7 +464,7 @@
                 </div>
 
                 <!-- Título-->
-                <div class="text-center mb-8">
+                <div class="text-center mb-5    ">
                     <h1 class="text-2xl sm:text-3xl font-bold text-primary-800 tracking-tight">
                         Resultados de búsqueda
                     </h1>
@@ -532,8 +532,7 @@
                                     @if ($promoActiva)
                                         <span class="absolute top-4 right-4 z-30" x-data="{ showTip: false }"
                                             style="overflow:visible;">
-                                            <span
-                                                class="inline-flex items-center justify-center w-9 h-9 rounded-full shadow-lg border-2 border-pink-200 bg-gradient-to-br from-pink-100 to-pink-200 relative"
+                                            <span class="inline-flex items-center justify-center w-9 h-9 "
                                                 @mouseenter="showTip = true" @mouseleave="showTip = false">
                                                 <x-icons.content.promo class="w-6 h-6 text-pink-500" />
                                                 <span x-show="showTip" x-transition
@@ -543,15 +542,6 @@
                                             </span>
                                         </span>
                                     @endif
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <!-- Avatar inicial usuario -->
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-base select-none">
-                                            {{ strtoupper(substr($negocio->usuario->name ?? $negocio->usuario->email, 0, 1)) }}
-                                        </div>
-                                        <span
-                                            class="text-xs text-gray-500 font-medium truncate">{{ $negocio->usuario->name ?? $negocio->usuario->email }}</span>
-                                    </div>
                                     <h3 class="text-lg font-semibold text-gray-900 leading-snug truncate mb-1"
                                         title="{{ $negocio->nombre_negocio }}">
                                         {{ $negocio->nombre_negocio }}
