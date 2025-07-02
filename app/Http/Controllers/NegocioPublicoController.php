@@ -93,33 +93,65 @@ class NegocioPublicoController extends Controller
 
     public function sugerencias(Request $request)
     {
-        $query = Negocio::with([
-            'categorias',
-            'caracteristicas',
-            'serviciosPredefinidos',
-            'serviciosPersonalizados',
-            'ubicacion',
-            'valoraciones',
-        ]);
+        $q = $request->q;
+        $sugerencias = [];
 
-        // Búsqueda por texto
-        if ($request->filled('q')) {
-            $searchTerm = $request->q;
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('negocios.nombre_negocio', 'LIKE', "%{$searchTerm}%")
-                    ->orWhere('negocios.descripcion', 'LIKE', "%{$searchTerm}%")
-                    ->orWhereHas('categorias', function ($q) use ($searchTerm) {
-                        $q->where('categorias.nombre_categoria', 'LIKE', "%{$searchTerm}%");
-                    })
-                    ->orWhereHas('serviciosPredefinidos', function ($q) use ($searchTerm) {
-                        $q->where('servicios_predefinidos.nombre_servicio', 'LIKE', "%{$searchTerm}%");
-                    })
-                    ->orWhereHas('serviciosPersonalizados', function ($q) use ($searchTerm) {
-                        $q->where('servicios_personalizados.nombre_servicio', 'LIKE', "%{$searchTerm}%");
-                    });
+        // Negocios
+        $negocios = Negocio::with(['ubicacion', 'valoraciones'])
+            ->where(function ($query) use ($q) {
+                $query->where('nombre_negocio', 'LIKE', "%$q%")
+                    ->orWhere('descripcion', 'LIKE', "%$q%");
+            })
+            ->limit(5)
+            ->get()
+            ->map(function ($n) {
+                $n->tipo = 'negocio';
+                return $n;
             });
-        }
-        return response()->json($query->get());
+
+        // Categorías
+        $categorias = Categoria::where('nombre_categoria', 'LIKE', "%$q%")
+            ->where('estado', 'activo')
+            ->limit(5)
+            ->get()
+            ->map(function ($c) {
+                return [
+                    'id_categoria' => $c->id_categoria,
+                    'nombre_categoria' => $c->nombre_categoria,
+                    'tipo' => 'categoria',
+                ];
+            });
+
+        // Características
+        $caracteristicas = Caracteristica::where('nombre', 'LIKE', "%$q%")
+            ->where('estado', 'activo')
+            ->limit(5)
+            ->get()
+            ->map(function ($c) {
+                return [
+                    'id_caracteristica' => $c->id_caracteristica,
+                    'nombre' => $c->nombre,
+                    'tipo' => 'caracteristica',
+                ];
+            });
+
+        // Servicios predefinidoss
+        $servicios = ServicioPredefinido::where('nombre_servicio', 'LIKE', "%$q%")
+            ->limit(5)
+            ->get()
+            ->map(function ($s) {
+                return [
+                    'id_servicio_predefinido' => $s->id_servicio_predefinido,
+                    'nombre_servicio' => $s->nombre_servicio,
+                    'tipo' => 'servicio',
+                ];
+            });
+
+        // Unir todas las sugerencias
+        $sugerencias = $negocios->toArray();
+        $sugerencias = array_merge($sugerencias, $categorias->toArray(), $caracteristicas->toArray(), $servicios->toArray());
+
+        return response()->json($sugerencias);
     }
 
     /**

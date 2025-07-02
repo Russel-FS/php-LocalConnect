@@ -53,7 +53,25 @@
         direccion(ubicacion) {
             if (!ubicacion) return '';
             return `${ubicacion.direccion ?? ''}${ubicacion.distrito ? ', ' + ubicacion.distrito : ''}`;
-        }
+        },
+        urlSugerencia(s) {
+            switch (s.tipo) {
+                case 'negocio':
+                    return `/negocios/${s.id_negocio}`;
+                case 'categoria':
+                    return `/negocios/buscar?categorias[]=${s.id_categoria}`;
+                case 'caracteristica':
+                    return `/negocios/buscar?caracteristicas[]=${s.id_caracteristica}`;
+                case 'servicio':
+                    return `/negocios/buscar?servicios[]=${s.id_servicio_predefinido}`;
+                default:
+                    return '#';
+            }
+        },
+        negocios() { return this.sugerencias.filter(s => s.tipo === 'negocio'); },
+        categorias() { return this.sugerencias.filter(s => s.tipo === 'categoria'); },
+        caracteristicas() { return this.sugerencias.filter(s => s.tipo === 'caracteristica'); },
+        servicios() { return this.sugerencias.filter(s => s.tipo === 'servicio'); },
     }"
         class="min-h-[340px] bg-gradient-to-br from-primary-50 to-white flex items-center justify-center py-12 sm:py-16 lg:py-20">
         <div class="max-w-4xl mx-auto px-4 text-center">
@@ -79,48 +97,123 @@
                             </button>
                         </div>
                         <!-- sugerencias -->
-                        <div class="absolute left-0 top-full mt-2 w-full bg-white rounded-2xl shadow-lg border border-slate-200 z-50"
+                        <div class="absolute left-0 top-full mt-2 w-full bg-white rounded-2xl shadow-lg border border-slate-200 z-50 max-h-60 modern-scrollbar overflow-y-auto"
                             x-show="sugerencias.length > 0" @click.away="sugerencias = []">
-                            <template x-for="sugerencia in sugerencias" :key="sugerencia.id_negocio">
-                                <a :href="`/negocios/${sugerencia.id_negocio}`"
-                                    class="flex items-center gap-3 px-4 py-3 hover:bg-primary-50 transition-colors rounded-2xl cursor-pointer group">
-                                    <template x-if="sugerencia.imagen_portada">
-                                        <img :src="sugerencia.imagen_portada" :alt="sugerencia.nombre_negocio"
-                                            class="w-12 h-12 object-cover rounded-xl bg-gray-100 flex-shrink-0">
+                            <!-- Negocios -->
+                            <template x-if="negocios().length">
+                                <div>
+                                    <template x-for="sugerencia in negocios()" :key="sugerencia.id_negocio">
+                                        <a :href="urlSugerencia(sugerencia)"
+                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-primary-50">
+                                            <span>
+                                                <template x-if="sugerencia.imagen_portada">
+                                                    <img :src="sugerencia.imagen_portada" :alt="sugerencia.nombre_negocio"
+                                                        class="w-12 h-12 object-cover rounded-xl bg-gray-100 flex-shrink-0">
+                                                </template>
+                                                <template x-if="!sugerencia.imagen_portada">
+                                                    <span
+                                                        class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-50">
+                                                        <svg class="w-7 h-7 text-primary-400" fill="none"
+                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                            <rect x="3" y="10" width="18" height="8" rx="2"
+                                                                stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M7 10V6a5 5 0 0110 0v4" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M9 18v-2a2 2 0 114 0v2" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </span>
+                                                </template>
+                                            </span>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex">
+                                                    <span class="font-semibold text-sm truncate text-primary-800"
+                                                        x-text="sugerencia.nombre_negocio">
+                                                    </span>
+                                                    <template
+                                                        x-if="sugerencia.valoraciones && sugerencia.valoraciones.length > 0">
+                                                        <span class="flex items-center gap-1 text-xs text-yellow-500 ml-2">
+                                                            <x-icons.outline.star class="w-4 h-4"></x-icons.outline.star>
+                                                            <span x-text="promedio(sugerencia.valoraciones)"></span>
+                                                        </span>
+                                                    </template>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <div
+                                                        class="flex gap-2 justify-baseline text-xs text-gray-500 mt-1 relative">
+                                                        <x-icons.outline.location-marker
+                                                            class="w-4 h-4 text-gray-400 absolute left-0 top-1/2 transform -translate-y-1/2"></x-icons.outline.location-marker>
+                                                        <span class="text-xs md:text-[13px] text-gray-500 ml-5"
+                                                            x-text="direccion(sugerencia.ubicacion)"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </template>
-                                    <template x-if="!sugerencia.imagen_portada">
-                                        <span class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-50">
-                                            <svg class="w-7 h-7 text-primary-400" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <rect x="3" y="10" width="18" height="8" rx="2"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7 10V6a5 5 0 0110 0v4" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M9 18v-2a2 2 0 114 0v2" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
+                                </div>
+                            </template>
+                            <!-- Categorías -->
+                            <template x-if="categorias().length">
+                                <div>
+                                    <template x-for="sugerencia in categorias()" :key="sugerencia.id_categoria">
+                                        <a :href="urlSugerencia(sugerencia)"
+                                            @click.prevent="window.location.href = $event.currentTarget.href"
+                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-secondary-50">
+                                            <span
+                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary-50">
+                                                <x-icons.content.category
+                                                    class="w-7 h-7 text-secondary-500"></x-icons.content.category>
+                                            </span>
+                                            <div class="flex-1 min-w-0">
+                                                <span class="font-semibold text-secondary-700 text-sm truncate"
+                                                    x-text="sugerencia.nombre_categoria"></span>
+                                                <span class="block text-xs text-gray-400 mt-0.5">Categoría</span>
+                                            </div>
+                                        </a>
                                     </template>
-                                    <div class="flex-1 min-w-0">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-semibold text-primary-800 text-sm truncate"
-                                                x-text="sugerencia.nombre_negocio"></span>
-                                            <template x-if="sugerencia.valoraciones && sugerencia.valoraciones.length > 0">
-                                                <span class="flex items-center gap-1 text-xs text-yellow-500 ml-2">
-                                                    <x-icons.outline.star class="w-4 h-4"></x-icons.outline.star>
-                                                    <span x-text="promedio(sugerencia.valoraciones)"></span>
-                                                </span>
-                                            </template>
-                                        </div>
-                                        <div class="flex gap-2 justify-baseline text-xs text-gray-500 mt-1 relative">
-                                            <x-icons.outline.location-marker
-                                                class="w-4 h-4 text-gray-400 absolute left-0 top-1/2 transform -translate-y-1/2">
-                                            </x-icons.outline.location-marker>
-                                            <span class="text-xs md:text-[13px] text-gray-500 ml-5"
-                                                x-text="direccion(sugerencia.ubicacion)"></span>
-                                        </div>
-                                    </div>
-                                </a>
+                                </div>
+                            </template>
+                            <!-- Características -->
+                            <template x-if="caracteristicas().length">
+                                <div>
+                                    <template x-for="sugerencia in caracteristicas()" :key="sugerencia.id_caracteristica">
+                                        <a :href="urlSugerencia(sugerencia)"
+                                            @click.prevent="window.location.href = $event.currentTarget.href"
+                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-green-50">
+                                            <span class="w-12 h-12 flex items-center justify-center rounded-xl bg-green-50">
+                                                <x-icons.content.check-circle
+                                                    class="w-7 h-7 text-green-500"></x-icons.content.check-circle>
+                                            </span>
+                                            <div class="flex-1 min-w-0">
+                                                <span class="font-semibold text-green-700 text-sm truncate"
+                                                    x-text="sugerencia.nombre"></span>
+                                                <span class="block text-xs text-gray-400 mt-0.5">Característica</span>
+                                            </div>
+                                        </a>
+                                    </template>
+                                </div>
+                            </template>
+                            <!-- Servicios -->
+                            <template x-if="servicios().length">
+                                <div>
+                                    <template x-for="sugerencia in servicios()" :key="sugerencia.id_servicio_predefinido">
+                                        <a :href="urlSugerencia(sugerencia)"
+                                            @click.prevent="window.location.href = $event.currentTarget.href"
+                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-yellow-50">
+                                            <span
+                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-yellow-50">
+                                                <x-icons.content.lightning
+                                                    class="w-7 h-7 text-yellow-500"></x-icons.content.lightning>
+                                            </span>
+                                            <div class="flex-1 min-w-0">
+                                                <span class="font-semibold text-yellow-700 text-sm truncate"
+                                                    x-text="sugerencia.nombre_servicio"></span>
+                                                <span class="block text-xs text-gray-400 mt-0.5">Servicio</span>
+                                            </div>
+                                        </a>
+                                    </template>
+                                </div>
                             </template>
                         </div>
                     </div>
