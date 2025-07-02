@@ -75,7 +75,6 @@ class AdminUserController extends Controller
 
         $data = [
             'name' => $request->name,
-            'email' => $request->email,
             'id_rol' => $request->id_rol,
             'estado' => $request->estado,
         ];
