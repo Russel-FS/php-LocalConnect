@@ -81,7 +81,7 @@ class NegocioPublicoController extends Controller
         $serviciosPredefinidos = ServicioPredefinido::all();
 
         // Paginar resultados
-        $negocios = $query->paginate(1);
+        $negocios = $query->paginate(15);
 
         // Incrementar vistas de búsqueda para cada negocio en los resultados
         foreach ($negocios as $negocio) {
