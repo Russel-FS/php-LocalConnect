@@ -70,6 +70,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Rutas de servicios predefinidos
     Route::resource('servicios-predefinidos', AdminServicioPredefinidoController::class);
+    Route::patch('servicios-predefinidos/{id}/activate', [AdminServicioPredefinidoController::class, 'activate'])->name('servicios-predefinidos.activate');
     // Rutas de categorías
     Route::resource('categorias', \App\Http\Controllers\Admin\AdminCategoriaController::class);
     // Rutas de características

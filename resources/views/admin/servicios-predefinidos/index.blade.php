@@ -55,14 +55,25 @@
                             <td class="py-3 px-2 flex gap-2">
                                 <a href="{{ route('admin.servicios-predefinidos.edit', $servicio->id_servicio_predefinido) }}"
                                     class="px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 text-xs font-semibold">Editar</a>
-                                <form
-                                    action="{{ route('admin.servicios-predefinidos.destroy', $servicio->id_servicio_predefinido) }}"
-                                    method="POST" onsubmit="return confirm('¿Eliminar este servicio?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 text-xs font-semibold">Eliminar</button>
-                                </form>
+                                @if ($servicio->estado === 'activo')
+                                    <form
+                                        action="{{ route('admin.servicios-predefinidos.destroy', $servicio->id_servicio_predefinido) }}"
+                                        method="POST" onsubmit="return confirm('¿Desactivar este servicio?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="px-3 py-1 rounded bg-yellow-100 text-yellow-700 hover:bg-yellow-200 text-xs font-semibold">Desactivar</button>
+                                    </form>
+                                @else
+                                    <form
+                                        action="{{ route('admin.servicios-predefinidos.activate', $servicio->id_servicio_predefinido) }}"
+                                        method="POST" onsubmit="return confirm('¿Activar este servicio?')">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit"
+                                            class="px-3 py-1 rounded bg-green-100 text-green-700 hover:bg-green-200 text-xs font-semibold">Activar</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @empty

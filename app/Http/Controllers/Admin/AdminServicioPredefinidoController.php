@@ -56,7 +56,14 @@ class AdminServicioPredefinidoController extends Controller
     public function destroy($id)
     {
         $servicio = ServicioPredefinido::findOrFail($id);
-        $servicio->delete();
-        return redirect()->route('admin.servicios-predefinidos.index')->with('success', 'Servicio eliminado correctamente.');
+        $servicio->update(['estado' => 'inactivo']);
+        return redirect()->route('admin.servicios-predefinidos.index')->with('success', 'Servicio desactivado correctamente.');
+    }
+
+    public function activate($id)
+    {
+        $servicio = ServicioPredefinido::findOrFail($id);
+        $servicio->update(['estado' => 'activo']);
+        return redirect()->route('admin.servicios-predefinidos.index')->with('success', 'Servicio activado correctamente.');
     }
 }
