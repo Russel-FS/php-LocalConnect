@@ -27,18 +27,8 @@
                             </button>
                         </div>
                         <!-- sugerencias -->
-                        <div
+                        <div id="sugerencias"
                             class="absolute left-0 top-full mt-2 w-full bg-white rounded-2xl shadow-lg border border-slate-200">
-                            <ul class="max-h-48 overflow-y-auto gap-2 flex flex-col modern-scrollbar">
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 1</li>
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 2</li>
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 3</li>
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 4</li>
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 5</li>
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 6</li>
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 7</li>
-                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 8</li>
-                            </ul>
                         </div>
                     </div>
                 </form>
@@ -198,12 +188,23 @@
 
     <script>
         let timeout;
+        let sugerencias = [];
+        let sugerenciasContainer = document.getElementById('sugerencias');
 
         function Sugerencias(e) {
 
             clearTimeout(timeout);
             timeout = setTimeout(() => {
-                console.log(e.target.value);
+                fetch(`{{ route('negocios.sugerencias') }}?q=${e.target.value}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        sugerencias = data;
+                        sugerenciasContainer.innerHTML = '';
+                        sugerencias.forEach(sugerencia => {
+                            sugerenciasContainer.innerHTML +=
+                                `<li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">${sugerencia.nombre_negocio}</li>`;
+                        });
+                    });
             }, 1000);
         }
     </script>

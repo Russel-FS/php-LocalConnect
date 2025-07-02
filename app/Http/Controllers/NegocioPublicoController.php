@@ -91,6 +91,37 @@ class NegocioPublicoController extends Controller
         return view('negocios.buscar', compact('negocios', 'categorias', 'caracteristicas', 'serviciosPredefinidos'));
     }
 
+    public function sugerencias(Request $request)
+    {
+        $query = Negocio::with([
+            'categorias',
+            'caracteristicas',
+            'serviciosPredefinidos',
+            'serviciosPersonalizados',
+            'ubicacion',
+            'valoraciones',
+        ]);
+
+        // Búsqueda por texto
+        if ($request->filled('q')) {
+            $searchTerm = $request->q;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('negocios.nombre_negocio', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('negocios.descripcion', 'LIKE', "%{$searchTerm}%")
+                    ->orWhereHas('categorias', function ($q) use ($searchTerm) {
+                        $q->where('categorias.nombre_categoria', 'LIKE', "%{$searchTerm}%");
+                    })
+                    ->orWhereHas('serviciosPredefinidos', function ($q) use ($searchTerm) {
+                        $q->where('servicios_predefinidos.nombre_servicio', 'LIKE', "%{$searchTerm}%");
+                    })
+                    ->orWhereHas('serviciosPersonalizados', function ($q) use ($searchTerm) {
+                        $q->where('servicios_personalizados.nombre_servicio', 'LIKE', "%{$searchTerm}%");
+                    });
+            });
+        }
+        return response()->json($query->get());
+    }
+
     /**
      * Mostrar detalles de un negocio específico 
      */
