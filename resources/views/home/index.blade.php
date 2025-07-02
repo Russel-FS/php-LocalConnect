@@ -97,14 +97,14 @@
                             </button>
                         </div>
                         <!-- sugerencias -->
-                        <div class="absolute left-0 top-full mt-2 w-full bg-white rounded-2xl shadow-lg border border-slate-200 z-50 max-h-60 modern-scrollbar overflow-y-auto"
+                        <div class="absolute left-0 top-full mt-2 w-full bg-white rounded-3xl shadow-lg border border-slate-200 z-50 max-h-60 modern-scrollbar overflow-y-auto p-1"
                             x-show="sugerencias.length > 0" @click.away="sugerencias = []">
                             <!-- Negocios -->
                             <template x-if="negocios().length">
                                 <div>
                                     <template x-for="sugerencia in negocios()" :key="sugerencia.id_negocio">
                                         <a :href="urlSugerencia(sugerencia)"
-                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-primary-50">
+                                            class="flex items-center gap-3 px-3 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-primary-50">
                                             <span>
                                                 <template x-if="sugerencia.imagen_portada">
                                                     <img :src="sugerencia.imagen_portada" :alt="sugerencia.nombre_negocio"
@@ -159,9 +159,9 @@
                                     <template x-for="sugerencia in categorias()" :key="sugerencia.id_categoria">
                                         <a :href="urlSugerencia(sugerencia)"
                                             @click.prevent="window.location.href = $event.currentTarget.href"
-                                            class="flex gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-secondary-100/50">
+                                            class="flex gap-3 px-3 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-secondary-100">
                                             <span
-                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary-100">
+                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary-200">
                                                 <x-icons.content.category class="w-7 h-7 text-secondary-500">
                                                 </x-icons.content.category>
                                             </span>
@@ -180,10 +180,11 @@
                                     <template x-for="sugerencia in caracteristicas()" :key="sugerencia.id_caracteristica">
                                         <a :href="urlSugerencia(sugerencia)"
                                             @click.prevent="window.location.href = $event.currentTarget.href"
-                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-green-50">
-                                            <span class="w-12 h-12 flex items-center justify-center rounded-xl bg-green-50">
-                                                <x-icons.content.check-circle
-                                                    class="w-7 h-7 text-green-500"></x-icons.content.check-circle>
+                                            class="flex items-center gap-3 px-3 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-green-50/50">
+                                            <span
+                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-green-100">
+                                                <x-icons.content.check-circle class="w-7 h-7 text-green-500">
+                                                </x-icons.content.check-circle>
                                             </span>
                                             <div class="flex-1 min-w-0">
                                                 <span class="font-semibold text-green-700 text-sm truncate"
@@ -200,9 +201,9 @@
                                     <template x-for="sugerencia in servicios()" :key="sugerencia.id_servicio_predefinido">
                                         <a :href="urlSugerencia(sugerencia)"
                                             @click.prevent="window.location.href = $event.currentTarget.href"
-                                            class="flex items-center gap-3 px-4 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-yellow-50">
+                                            class="flex items-center gap-3 px-3 py-3 transition-colors rounded-2xl cursor-pointer group hover:bg-yellow-50/20">
                                             <span
-                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-yellow-50">
+                                                class="w-12 h-12 flex items-center justify-center rounded-xl bg-yellow-100">
                                                 <x-icons.content.lightning
                                                     class="w-7 h-7 text-yellow-500"></x-icons.content.lightning>
                                             </span>
