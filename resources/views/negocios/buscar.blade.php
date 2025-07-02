@@ -657,7 +657,7 @@
                                             @endforeach
                                         </div>
                                     @endif
-                                    <!-- valoreaciones-->
+                                    <!-- valoraciones-->
                                     @if ($negocio->valoraciones->count() > 0)
                                         @php
                                             $promedio = round($negocio->valoraciones->avg('calificacion'), 1);
