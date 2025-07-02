@@ -25,6 +25,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
+<style>
+    .modern-scrollbar::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .modern-scrollbar::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .modern-scrollbar::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    .modern-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .modern-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+    }
+</style>
+
 <body class="font-sans antialiased bg-slate-50 text-slate-900" style="font-family: 'Inter', sans-serif;">
     <!-- Navbar Rediseñado -->
     <nav class="bg-white/90 backdrop-blur-lg w-full fixed z-50 border-b border-slate-200/60">

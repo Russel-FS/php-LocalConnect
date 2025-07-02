@@ -15,7 +15,7 @@
             <div class="max-w-2xl mx-auto mb-4">
                 <form action="{{ route('negocios.buscar') }}" method="GET" class="relative">
                     <div class="relative flex items-center">
-                        <input type="text" name="q"
+                        <input type="text" name="q" oninput="Sugerencias(event)"
                             placeholder="¿Qué estás buscando? (ej: peluquería, restaurante, taller...)"
                             class="w-full pl-6 pr-32 py-4 text-lg bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm focus:border-slate-300 focus:ring-2 focus:ring-slate-100 transition-all duration-300 placeholder-slate-400"
                             value="{{ request('q') }}">
@@ -25,6 +25,20 @@
                                 <x-icons.navigation.search class="h-5 w-5 text-white" />
                                 Buscar
                             </button>
+                        </div>
+                        <!-- sugerencias -->
+                        <div
+                            class="absolute left-0 top-full mt-2 w-full bg-white rounded-2xl shadow-lg border border-slate-200">
+                            <ul class="max-h-48 overflow-y-auto gap-2 flex flex-col modern-scrollbar">
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 1</li>
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 2</li>
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 3</li>
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 4</li>
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 5</li>
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 6</li>
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 7</li>
+                                <li class="px-4 py-2 hover:bg-slate-100 cursor-pointer">Sugerencia 8</li>
+                            </ul>
                         </div>
                     </div>
                 </form>
@@ -181,4 +195,16 @@
             </div>
         </div>
     </section>
+
+    <script>
+        let timeout;
+
+        function Sugerencias(e) {
+
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                console.log(e.target.value);
+            }, 1000);
+        }
+    </script>
 @endsection
