@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NegocioPublicoController;
 use App\Http\Controllers\NegocioInteraccionController;
+use App\Http\Controllers\PromocionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -40,6 +41,10 @@ Route::middleware('auth')->group(function () {
     // Me gusta
     Route::post('/negocios/{id}/megusta', [NegocioInteraccionController::class, 'agregarMeGusta'])->name('negocios.megusta.agregar');
     Route::post('/negocios/{id}/megusta/quitar', [NegocioInteraccionController::class, 'quitarMeGusta'])->name('negocios.megusta.quitar');
+
+    // Rutass para promociones
+    Route::resource('promociones', PromocionController::class);
+    Route::post('/promociones/{id}/toggle-status', [PromocionController::class, 'toggleStatus'])->name('promociones.toggle-status');
 });
 
 // rutas públicas para ver negocios

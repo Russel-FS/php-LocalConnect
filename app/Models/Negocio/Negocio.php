@@ -126,4 +126,14 @@ class Negocio extends Model
     {
         return $this->hasMany(\App\Models\Negocio\NegocioVista::class, 'id_negocio');
     }
+
+    /**
+     * Relación uno a muchos con Promocion
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function promociones()
+    {
+        return $this->hasMany(\App\Models\Negocio\Promocion::class, 'id_negocio');
+    }
 }
