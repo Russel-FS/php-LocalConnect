@@ -51,7 +51,14 @@ class AdminCategoriaController extends Controller
     public function destroy($id)
     {
         $categoria = Categoria::findOrFail($id);
-        $categoria->delete();
-        return redirect()->route('admin.categorias.index')->with('success', 'Categoría eliminada correctamente.');
+        $categoria->update(['estado' => 'inactivo']);
+        return redirect()->route('admin.categorias.index')->with('success', 'Categoría desactivada correctamente.');
+    }
+
+    public function activate($id)
+    {
+        $categoria = Categoria::findOrFail($id);
+        $categoria->update(['estado' => 'activo']);
+        return redirect()->route('admin.categorias.index')->with('success', 'Categoría activada correctamente.');
     }
 }

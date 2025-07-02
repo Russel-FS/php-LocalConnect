@@ -73,9 +73,14 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::patch('servicios-predefinidos/{id}/activate', [AdminServicioPredefinidoController::class, 'activate'])->name('servicios-predefinidos.activate');
     // Rutas de categorías
     Route::resource('categorias', \App\Http\Controllers\Admin\AdminCategoriaController::class);
+    Route::patch('categorias/{id}/activate', [\App\Http\Controllers\Admin\AdminCategoriaController::class, 'activate'])->name('categorias.activate');
     // Rutas de características
     Route::resource('caracteristicas', \App\Http\Controllers\Admin\AdminCaracteristicaController::class);
     Route::patch('caracteristicas/{id}/activate', [\App\Http\Controllers\Admin\AdminCaracteristicaController::class, 'activate'])->name('caracteristicas.activate');
+
+    // Rutas de categorías de características
+    Route::resource('categorias-caracteristica', \App\Http\Controllers\Admin\AdminCategoriaCaracteristicaController::class)->names('categorias-caracteristica');
+    Route::patch('categorias-caracteristica/{id}/activate', [\App\Http\Controllers\Admin\AdminCategoriaCaracteristicaController::class, 'activate'])->name('categorias-caracteristica.activate');
 });
 
 // Rutas para editar perfil y cambiar contraseña

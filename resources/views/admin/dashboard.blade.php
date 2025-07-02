@@ -247,7 +247,7 @@
                         <span class="text-sm text-gray-500 mt-1">Revisar pendientes</span>
                     </a>
 
-                    <a href="#"
+                    <a href="{{ route('admin.categorias.index') }}"
                         class="group flex flex-col items-center p-6 rounded-2xl bg-white border-2 border-blue-400 hover:shadow-md transition-all duration-300">
                         <div
                             class="w-14 h-14 rounded-2xl bg-blue-50 shadow-sm flex items-center justify-center mb-4 group-hover:shadow-md transition-all duration-300">
@@ -284,6 +284,16 @@
                             <x-icons.outline.star class="w-7 h-7 text-purple-600" />
                         </div>
                         <span class="text-base font-semibold text-gray-900">Características</span>
+                        <span class="text-sm text-gray-500 mt-1">Gestionar</span>
+                    </a>
+
+                    <a href="{{ route('admin.categorias-caracteristica.index') }}"
+                        class="group flex flex-col items-center p-6 rounded-2xl bg-white border-2 border-pink-400 hover:shadow-md transition-all duration-300">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-pink-50 shadow-sm flex items-center justify-center mb-4 group-hover:shadow-md transition-all duration-300">
+                            <x-icons.outline.folder class="w-7 h-7 text-pink-600" />
+                        </div>
+                        <span class="text-base font-semibold text-gray-900">Categorías de Características</span>
                         <span class="text-sm text-gray-500 mt-1">Gestionar</span>
                     </a>
                 </div>

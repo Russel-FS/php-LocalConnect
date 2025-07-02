@@ -4,8 +4,8 @@
     <div class="container mx-auto px-4 py-8">
         <div class="max-w-2xl mx-auto">
             <div class="flex items-center justify-between mb-6">
-                <h1 class="text-3xl font-bold text-gray-800">Editar Característica</h1>
-                <a href="{{ route('admin.caracteristicas.index') }}"
+                <h1 class="text-3xl font-bold text-gray-800">Editar Categoría</h1>
+                <a href="{{ route('admin.categorias.index') }}"
                     class="text-gray-600 hover:text-gray-800 flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -16,38 +16,19 @@
             </div>
 
             <div class="bg-white rounded-lg shadow p-6">
-                <form action="{{ route('admin.caracteristicas.update', $caracteristica->id_caracteristica) }}"
-                    method="POST">
+                <form action="{{ route('admin.categorias.update', $categoria->id_categoria) }}" method="POST">
                     @csrf
                     @method('PUT')
 
                     <div class="mb-6">
-                        <label for="id_categoria_caracteristica" class="block text-sm font-medium text-gray-700 mb-2">
-                            Categoría de Característica
+                        <label for="nombre_categoria" class="block text-sm font-medium text-gray-700 mb-2">
+                            Nombre de la Categoría *
                         </label>
-                        <select name="id_categoria_caracteristica" id="id_categoria_caracteristica"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('id_categoria_caracteristica') border-red-500 @enderror">
-                            <option value="">Seleccionar categoría (opcional)</option>
-                            @foreach ($categoriasCaracteristica as $categoria)
-                                <option value="{{ $categoria->id_categoria_caracteristica }}"
-                                    {{ old('id_categoria_caracteristica', $caracteristica->id_categoria_caracteristica) == $categoria->id_categoria_caracteristica ? 'selected' : '' }}>
-                                    {{ $categoria->nombre_categoria }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('id_categoria_caracteristica')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="mb-6">
-                        <label for="nombre" class="block text-sm font-medium text-gray-700 mb-2">
-                            Nombre *
-                        </label>
-                        <input type="text" name="nombre" id="nombre"
-                            value="{{ old('nombre', $caracteristica->nombre) }}"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nombre') border-red-500 @enderror"
-                            placeholder="Ej: WiFi gratuito, Estacionamiento, Accesible para discapacitados" required>
-                        @error('nombre')
+                        <input type="text" name="nombre_categoria" id="nombre_categoria"
+                            value="{{ old('nombre_categoria', $categoria->nombre_categoria) }}"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nombre_categoria') border-red-500 @enderror"
+                            placeholder="Ej: Restaurantes, Servicios de Salud, Talleres Mecánicos" required>
+                        @error('nombre_categoria')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
@@ -58,7 +39,7 @@
                         </label>
                         <textarea name="descripcion" id="descripcion" rows="3"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('descripcion') border-red-500 @enderror"
-                            placeholder="Descripción opcional de la característica">{{ old('descripcion', $caracteristica->descripcion) }}</textarea>
+                            placeholder="Descripción opcional de la categoría">{{ old('descripcion', $categoria->descripcion) }}</textarea>
                         @error('descripcion')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -72,11 +53,10 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('estado') border-red-500 @enderror"
                             required>
                             <option value="">Seleccionar estado</option>
-                            <option value="activo"
-                                {{ old('estado', $caracteristica->estado) === 'activo' ? 'selected' : '' }}>Activo</option>
+                            <option value="activo" {{ old('estado', $categoria->estado) === 'activo' ? 'selected' : '' }}>
+                                Activo</option>
                             <option value="inactivo"
-                                {{ old('estado', $caracteristica->estado) === 'inactivo' ? 'selected' : '' }}>Inactivo
-                            </option>
+                                {{ old('estado', $categoria->estado) === 'inactivo' ? 'selected' : '' }}>Inactivo</option>
                         </select>
                         @error('estado')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -84,13 +64,13 @@
                     </div>
 
                     <div class="flex justify-end space-x-4">
-                        <a href="{{ route('admin.caracteristicas.index') }}"
+                        <a href="{{ route('admin.categorias.index') }}"
                             class="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors">
                             Cancelar
                         </a>
                         <button type="submit"
                             class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                            Actualizar Característica
+                            Actualizar Categoría
                         </button>
                     </div>
                 </form>
