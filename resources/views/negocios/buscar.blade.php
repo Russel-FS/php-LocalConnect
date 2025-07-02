@@ -3,7 +3,7 @@
 @section('content')
     <div class="min-h-screen bg-gradient-to-br from-primary-50 via-primary-50 py-8 sm:py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4">
-            <!-- Header con buscador -->
+            <!-- Header -->
             <div class="mb-8 sm:mb-12" x-data="{ menuMobil: false }">
                 <div class="mx-auto">
                     <div class="bg-white rounded-2xl p-6 mb-6">
