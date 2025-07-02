@@ -13,7 +13,7 @@
                         Analiza el rendimiento y la visibilidad de tu negocio en LocalConnect
                     </p>
                 </div>
-                <div class="flex justify-center sm:justify-end">
+                <div class="flex justify-center sm:justify-end gap-3">
                     <a href="{{ route('negocios.estadisticas.pdf', $negocio->id_negocio) }}"
                         class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold bg-red-600 text-white shadow hover:bg-red-700 transition-all duration-200 text-base"
                         target="_blank">
@@ -23,6 +23,17 @@
                                 clip-rule="evenodd" />
                         </svg>
                         Exportar PDF
+                    </a>
+                    <a href="{{ route('negocios.estadisticas.excel', $negocio->id_negocio) }}"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold bg-green-600 text-white shadow hover:bg-green-700 transition-all duration-200 text-base"
+                        target="_blank">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M21 15l-5-5M21 15v6M21 21h-6" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        Exportar Excel
                     </a>
                 </div>
             </div>
