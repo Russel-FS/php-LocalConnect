@@ -39,10 +39,23 @@ class AdminUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:usuarios,email',
             'password' => ['required', 'confirmed', Password::defaults()],
             'id_rol' => 'required|exists:roles,id_rol',
             'estado' => 'required|in:activo,suspendido,eliminado',
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'email.required' => 'El email es obligatorio.',
+            'email.email' => 'El formato del email no es válido.',
+            'email.unique' => 'Este email ya está registrado.',
+            'email.max' => 'El email no puede tener más de 255 caracteres.',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
+            'id_rol.required' => 'Debe seleccionar un rol.',
+            'id_rol.exists' => 'El rol seleccionado no es válido.',
+            'estado.required' => 'Debe seleccionar un estado.',
+            'estado.in' => 'El estado seleccionado no es válido.',
         ]);
 
         User::create([
@@ -71,6 +84,13 @@ class AdminUserController extends Controller
             'name' => 'required|string|max:255',
             'id_rol' => 'required|exists:roles,id_rol',
             'estado' => 'required|in:activo,suspendido,eliminado',
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'id_rol.required' => 'Debe seleccionar un rol.',
+            'id_rol.exists' => 'El rol seleccionado no es válido.',
+            'estado.required' => 'Debe seleccionar un estado.',
+            'estado.in' => 'El estado seleccionado no es válido.',
         ]);
 
         $data = [
@@ -83,6 +103,8 @@ class AdminUserController extends Controller
         if ($request->filled('password')) {
             $request->validate([
                 'password' => ['confirmed', Password::defaults()],
+            ], [
+                'password.confirmed' => 'Las contraseñas no coinciden.',
             ]);
             $data['password'] = Hash::make($request->password);
         }

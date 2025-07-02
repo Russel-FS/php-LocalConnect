@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code', 50)->unique();
             $table->string('name', 100);
             $table->text('descripcion')->nullable();
-            $table->enum('estado', ['activo', 'inactivo'])->default('activo');
+            $table->enum('estado', ['activo', 'suspendido', 'eliminado'])->default('activo');
             $table->timestamps();
         });
 
