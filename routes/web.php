@@ -7,6 +7,7 @@ use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\Admin\AdminNegocioController;
 use App\Http\Controllers\Admin\AdminNegocioPanelController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminServicioPredefinidoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NegocioPublicoController;
 use App\Http\Controllers\NegocioInteraccionController;
@@ -66,6 +67,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Rutas de reportes
     Route::get('/reportes/dashboard-pdf', [AdminDashboardController::class, 'generarReportePDF'])->name('reportes.dashboard-pdf');
     Route::get('/reportes/negocios-pdf', [AdminDashboardController::class, 'generarReporteNegociosPDF'])->name('reportes.negocios-pdf');
+
+    // Rutas de servicios predefinidos
+    Route::resource('servicios-predefinidos', AdminServicioPredefinidoController::class);
+    // Rutas de categorías
+    Route::resource('categorias', \App\Http\Controllers\Admin\AdminCategoriaController::class);
+    // Rutas de características
+    Route::resource('caracteristicas', \App\Http\Controllers\Admin\AdminCaracteristicaController::class);
 });
 
 // Rutas para editar perfil y cambiar contraseña
