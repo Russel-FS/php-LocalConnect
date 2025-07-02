@@ -542,8 +542,8 @@
                                                 @mouseenter="showTip = true" @mouseleave="showTip = false">
                                                 <x-icons.content.promo class="w-6 h-6 text-pink-500" />
                                                 <span x-show="showTip" x-transition
-                                                    class="absolute left-auto right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 rounded-xl bg-gray-900 text-white text-xs font-medium shadow-lg z-[99999] min-w-max pointer-events-none">
-                                                    Este negocio tiene una promoción activa
+                                                    class="absolute left-auto right-full top-1/2 -translate-y-1/2 mr-3 px-4 py-1.5 rounded-full bg-gray-900/90 text-white/90 text-[13px] font-semibold shadow-md z-[99999] min-w-max pointer-events-none transition-all duration-200">
+                                                    ¡Promoción activa en este negocio!
                                                 </span>
                                             </span>
                                         </span>
