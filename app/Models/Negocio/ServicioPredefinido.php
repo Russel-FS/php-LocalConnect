@@ -11,7 +11,7 @@ class ServicioPredefinido extends Model
     protected $primaryKey = 'id_servicio_predefinido';
 
     protected $fillable = [
-        'id_categoria',
+        'id_categoria_servicio',
         'nombre_servicio',
         'descripcion',
     ];
