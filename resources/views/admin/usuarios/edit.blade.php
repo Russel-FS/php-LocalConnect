@@ -15,7 +15,7 @@
                 </a>
             </div>
             <div class="bg-white rounded-lg shadow p-6">
-                <form action="{{ route('admin.usuarios.update', $usuario->id) }}" method="POST">
+                <form action="{{ route('admin.usuarios.update', $usuario) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="mb-6">

@@ -73,21 +73,19 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex space-x-2">
-                                        <a href="{{ route('admin.usuarios.edit', $usuario->id) }}"
+                                        <a href="{{ route('admin.usuarios.edit', $usuario) }}"
                                             class="text-indigo-600 hover:text-indigo-900">Editar</a>
                                         @if ($usuario->estado === 'activo')
-                                            <form action="{{ route('admin.usuarios.destroy', $usuario->id) }}"
-                                                method="POST" class="inline"
-                                                onsubmit="return confirm('¿Desactivar este usuario?')">
+                                            <form action="{{ route('admin.usuarios.destroy', $usuario) }}" method="POST"
+                                                class="inline" onsubmit="return confirm('¿Desactivar este usuario?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
                                                     class="text-yellow-600 hover:text-yellow-900">Desactivar</button>
                                             </form>
                                         @else
-                                            <form action="{{ route('admin.usuarios.activate', $usuario->id) }}"
-                                                method="POST" class="inline"
-                                                onsubmit="return confirm('¿Activar este usuario?')">
+                                            <form action="{{ route('admin.usuarios.activate', $usuario) }}" method="POST"
+                                                class="inline" onsubmit="return confirm('¿Activar este usuario?')">
                                                 @csrf
                                                 @method('PATCH')
                                                 <button type="submit"
