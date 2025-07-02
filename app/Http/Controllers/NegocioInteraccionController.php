@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Negocio\Favorito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NegocioFavorito;
@@ -14,8 +15,8 @@ class NegocioInteraccionController extends Controller
     public function agregarFavorito($id)
     {
         $user = Auth::user();
-        if (!NegocioFavorito::where('id_usuario', $user->id_usuario)->where('id_negocio', $id)->exists()) {
-            NegocioFavorito::create([
+        if (!Favorito::where('id_usuario', $user->id_usuario)->where('id_negocio', $id)->exists()) {
+            Favorito::create([
                 'id_usuario' => $user->id_usuario,
                 'id_negocio' => $id,
             ]);
@@ -26,7 +27,7 @@ class NegocioInteraccionController extends Controller
     public function quitarFavorito($id)
     {
         $user = Auth::user();
-        NegocioFavorito::where('id_usuario', $user->id_usuario)->where('id_negocio', $id)->delete();
+        Favorito::where('id_usuario', $user->id_usuario)->where('id_negocio', $id)->delete();
         return back();
     }
 

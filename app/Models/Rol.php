@@ -8,7 +8,6 @@ class Rol extends Model
 {
     protected $table = 'roles';
     protected $primaryKey = 'id_rol';
-    public $timestamps = false;
 
     protected $fillable = [
         'code',
@@ -16,10 +15,6 @@ class Rol extends Model
         'descripcion',
         'estado'
     ];
-
-    // Timestamps personalizados
-    const CREATED_AT = 'creado_en';
-    const UPDATED_AT = 'actualizado_en';
 
     /**
      * Relación uno a muchos con Usuario

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('hora_apertura')->nullable();
             $table->time('hora_cierre')->nullable();
             $table->boolean('cerrado')->default(false);
+            $table->timestamps();
         });
     }
 

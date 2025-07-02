@@ -15,6 +15,7 @@ use App\Models\Negocio\Negocio;
 use App\Models\Negocio\Caracteristica;
 use App\Models\Negocio\ServicioPredefinido;
 use App\Models\Negocio\Valoracion;
+use Carbon\Carbon;
 
 class NegocioController extends Controller
 {
@@ -227,9 +228,65 @@ class NegocioController extends Controller
             abort(403, 'No tienes permisos para ver las estadísticas de este negocio.');
         }
 
-        $estadisticas = $this->negocioService->obtenerEstadisticas($id);
+        // Calcular totales dinámicamente de datos de negocio
+        $estadisticas = [
+            'vistas_busqueda' => $negocio->vistas()->where('tipo_vista', 'busqueda')->count(),
+            'vistas_detalle' => $negocio->vistas()->where('tipo_vista', 'detalle')->count(),
+            'me_gusta' => $negocio->meGusta()->count(),
+            'favoritos' => $negocio->favoritos()->count(),
+        ];
 
-        return view('negocios.estadisticas', compact('negocio', 'estadisticas'));
+        // cambios durante los ultimos 14 diass dio tengo sueñññññññññññño revision de codigo n42
+        $dias = collect(range(0, 13))->map(function ($i) {
+            return now()->subDays(13 - $i)->format('Y-m-d');
+        });
+
+        // vistas por dia (detalle)
+        $vistasPorDia = $negocio->vistas()
+            ->where('tipo_vista', 'detalle')
+            ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
+            ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
+            ->groupBy('fecha')
+            ->pluck('total', 'fecha');
+
+        // vistas por dia (busqueda)
+        $vistasBusquedaPorDia = $negocio->vistas()
+            ->where('tipo_vista', 'busqueda')
+            ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
+            ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
+            ->groupBy('fecha')
+            ->pluck('total', 'fecha');
+
+        // me gustas por dia
+        $meGustaPorDia = $negocio->meGusta()
+            ->whereBetween('created_at', [now()->subDays(13)->startOfDay(), now()->endOfDay()])
+            ->selectRaw('DATE(created_at) as fecha, COUNT(*) as total')
+            ->groupBy('fecha')
+            ->pluck('total', 'fecha');
+
+        // etiquetas para el graficoooooooooo
+        $labels = $dias->map(function ($fecha) {
+            return Carbon::parse($fecha)->isoFormat('D MMM');
+        });
+        // vsitas acorde fechas
+        $vistas = $dias->map(fn($fecha) => $vistasPorDia[$fecha] ?? 0);
+        $vistasBusqueda = $dias->map(fn($fecha) => $vistasBusquedaPorDia[$fecha] ?? 0);
+        $meGusta = $dias->map(fn($fecha) => $meGustaPorDia[$fecha] ?? 0);
+
+        // Asegurar arrays válidos para la vista
+        $labelsArray = $labels ? $labels->toArray() : ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+        $vistasArray = $vistas ? $vistas->toArray() : [0, 0, 0, 0, 0, 0, 0];
+        $vistasBusquedaArray = $vistasBusqueda ? $vistasBusqueda->toArray() : [0, 0, 0, 0, 0, 0, 0];
+        $meGustaArray = $meGusta ? $meGusta->toArray() : [0, 0, 0, 0, 0, 0, 0];
+
+        return view('negocios.estadisticas', [
+            'negocio' => $negocio,
+            'estadisticas' => $estadisticas,
+            'labels' => $labelsArray,
+            'vistas' => $vistasArray,
+            'vistasBusqueda' => $vistasBusquedaArray,
+            'meGusta' => $meGustaArray,
+        ]);
     }
 
     public function eliminarComentario($id)

@@ -140,6 +140,14 @@
                                         <x-icons.outline.folder class="w-4 h-4" />
                                         Mis Negocios
                                     </a>
+                                    <a href="{{ route('promociones.index') }}"
+                                        class="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-700 hover:bg-secondary-50 hover:text-secondary-600 transition-colors duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                        </svg>
+                                        Mis Promociones
+                                    </a>
                                 </div>
                                 <div class="mt-4 pt-3 border-t border-secondary-100 px-2">
                                     <form method="POST" action="{{ route('logout') }}">
@@ -213,6 +221,24 @@
                             <x-icons.outline.folder class="w-5 h-5" />
                         @endif
                         <span class="text-xs font-medium">Mis Negocios</span>
+                    </a>
+
+                    <!-- Mis Promociones -->
+                    <a href="{{ route('promociones.index') }}"
+                        class="flex flex-col items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 {{ request()->routeIs('promociones.*') ? 'bg-primary-50 text-primary-700' : 'text-slate-600 hover:text-primary-700 hover:bg-primary-50' }}">
+                        @if (request()->routeIs('promociones.*'))
+                            <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        @else
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        @endif
+                        <span class="text-xs font-medium">Promociones</span>
                     </a>
                 @endif
 

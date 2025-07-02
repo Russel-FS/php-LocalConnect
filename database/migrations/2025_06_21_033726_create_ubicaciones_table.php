@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('pais', 100)->default('Perú');
             $table->decimal('latitud', 10, 8)->nullable();
             $table->decimal('longitud', 11, 8)->nullable();
-            $table->timestamp('creado_en')->useCurrent();
-            $table->timestamp('actualizado_en')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamps();
         });
     }
 

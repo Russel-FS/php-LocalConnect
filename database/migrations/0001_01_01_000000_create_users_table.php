@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->text('descripcion')->nullable();
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
-            $table->timestamp('creado_en')->useCurrent();
-            $table->timestamp('actualizado_en')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamps();
         });
 
         // Crear tabla de usuarios

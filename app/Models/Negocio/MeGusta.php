@@ -8,7 +8,6 @@ use App\Models\User;
 class MeGusta extends Model
 {
     protected $table = 'negocio_megusta';
-    public $timestamps = true;
     protected $primaryKey = null;
     public $incrementing = false;
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NegocioPublicoController;
 use App\Http\Controllers\NegocioInteraccionController;
+use App\Http\Controllers\PromocionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -40,6 +41,10 @@ Route::middleware('auth')->group(function () {
     // Me gusta
     Route::post('/negocios/{id}/megusta', [NegocioInteraccionController::class, 'agregarMeGusta'])->name('negocios.megusta.agregar');
     Route::post('/negocios/{id}/megusta/quitar', [NegocioInteraccionController::class, 'quitarMeGusta'])->name('negocios.megusta.quitar');
+
+    // Rutass para promociones
+    Route::resource('promociones', PromocionController::class);
+    Route::post('/promociones/{id}/toggle-status', [PromocionController::class, 'toggleStatus'])->name('promociones.toggle-status');
 });
 
 // rutas públicas para ver negocios
@@ -53,7 +58,17 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/negocios/{negocio}', [AdminNegocioController::class, 'show'])->name('negocios.show');
     Route::patch('/solicitudes/{negocio}', [AdminNegocioController::class, 'update'])->name('negocios.update');
     Route::get('/negocios', [AdminNegocioPanelController::class, 'index'])->name('negocios.panel');
+
+    // Rutas de reportes
+    Route::get('/reportes/dashboard-pdf', [AdminDashboardController::class, 'generarReportePDF'])->name('reportes.dashboard-pdf');
+    Route::get('/reportes/negocios-pdf', [AdminDashboardController::class, 'generarReporteNegociosPDF'])->name('reportes.negocios-pdf');
 });
 
-// Ruta de perfil de usuario
-Route::middleware('auth')->get('/perfil', [UserController::class, 'perfil'])->name('perfil');
+// Rutas para editar perfil y cambiar contraseña
+Route::middleware('auth')->group(function () {
+    Route::get('/perfil', [UserController::class, 'perfil'])->name('perfil');
+    Route::get('/perfil/editar', [UserController::class, 'editarPerfil'])->name('perfil.editar');
+    Route::post('/perfil/editar', [UserController::class, 'actualizarPerfil'])->name('perfil.actualizar');
+    Route::get('/perfil/password', [UserController::class, 'editarPassword'])->name('perfil.password');
+    Route::post('/perfil/password', [UserController::class, 'actualizarPassword'])->name('perfil.password.actualizar');
+});

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Negocio\Estadistica;
 use App\Models\Negocio\Negocio;
 use App\Models\Negocio\Ubicacion;
 use App\Models\Negocio\HorarioAtencion;
@@ -13,6 +12,8 @@ use Exception;
 use App\Services\CloudinaryService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\Negocio\NegocioVista;
+use Illuminate\Support\Facades\Auth;
 
 class NegocioService
 {
@@ -163,16 +164,6 @@ class NegocioService
             // Crear contactos
             $this->crearContactos($negocio->id_negocio, $data);
 
-            // Crear estadísticas iniciales
-            Estadistica::create([
-                'id_negocio' => $negocio->id_negocio,
-                'vistas_busqueda' => 0,
-                'vistas_detalle' => 0,
-                'me_gusta' => 0,
-                'favoritos' => 0,
-                'actualizado_en' => now()
-            ]);
-
             return $negocio->load(['ubicacion', 'categorias', 'serviciosPredefinidos', 'serviciosPersonalizados', 'caracteristicas', 'horarios']);
         });
     }
@@ -321,7 +312,7 @@ class NegocioService
         $negocio->caracteristicas()->sync($data['caracteristicas'] ?? []);
         $negocio->serviciosPredefinidos()->sync($request->input('servicios_predefinidos', []));
 
-        // --- Actualizar horarios de atención ---
+        // actualizacion de horarrrrrios
         if ($horarios && is_array($horarios)) {
             $negocio->horarios()->delete();
             $dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
@@ -352,7 +343,7 @@ class NegocioService
         $serviciosForm = $request->input('servicios_personalizados', []);
         $idsEnviados = [];
         foreach ($serviciosForm as $servicio) {
-            // actualizar si tiene id
+            // actaualizacion de servicios personalizados
             if (!empty($servicio['id'])) {
                 $servicioPersonalizado = $negocio->serviciosPersonalizados()->find($servicio['id']);
                 if ($servicioPersonalizado) {
@@ -365,7 +356,7 @@ class NegocioService
                     $idsEnviados[] = $servicioPersonalizado->id_servicio;
                 }
             } else {
-                // caso contrario crea uno nuevo
+                // si no existe el servicio se crea
                 $nuevo = $negocio->serviciosPersonalizados()->create([
                     'nombre_servicio' => $servicio['nombre'],
                     'descripcion' => $servicio['descripcion'] ?? null,
@@ -375,7 +366,7 @@ class NegocioService
                 $idsEnviados[] = $nuevo->id_servicio;
             }
         }
-        // eliminar lo que ya no estan
+        // eliminar lo que ya no estan 
         $negocio->serviciosPersonalizados()
             ->whereNotIn('id_servicio', $idsEnviados)
             ->delete();
@@ -386,30 +377,22 @@ class NegocioService
      */
     public function incrementarVistaBusqueda($negocioId)
     {
-        $estadistica = Estadistica::where('id_negocio', $negocioId)->first();
-        if ($estadistica) {
-            $estadistica->increment('vistas_busqueda');
-            $estadistica->update(['actualizado_en' => now()]);
-        }
+        NegocioVista::create([
+            'id_negocio' => $negocioId,
+            'tipo_vista' => 'busqueda',
+            'id_usuario' => Auth::id(),
+        ]);
     }
 
     /**
-     * Incrementar vista de detalle (ccuando hacen clic en ver detalles)
+     * Incrementar vista de detalle (cuando hacen clic en ver detalles)
      */
     public function incrementarVistaDetalle($negocioId)
     {
-        $estadistica = Estadistica::where('id_negocio', $negocioId)->first();
-        if ($estadistica) {
-            $estadistica->increment('vistas_detalle');
-            $estadistica->update(['actualizado_en' => now()]);
-        }
-    }
-
-    /**
-     * Obtener estadísticas de un negocio
-     */
-    public function obtenerEstadisticas($negocioId)
-    {
-        return Estadistica::where('id_negocio', $negocioId)->first();
+        NegocioVista::create([
+            'id_negocio' => $negocioId,
+            'tipo_vista' => 'detalle',
+            'id_usuario' => Auth::id(),
+        ]);
     }
 }

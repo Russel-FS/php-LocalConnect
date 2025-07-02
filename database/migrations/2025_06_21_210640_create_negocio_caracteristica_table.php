@@ -15,10 +15,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_negocio');
             $table->unsignedBigInteger('id_caracteristica');
 
-            // Clave primaria compuesta
             $table->primary(['id_negocio', 'id_caracteristica']);
 
-            // Claves foráneas
             $table->foreign('id_negocio')
                 ->references('id_negocio')
                 ->on('negocios')
