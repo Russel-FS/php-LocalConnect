@@ -60,7 +60,7 @@
                             @foreach ($roles as $rol)
                                 <option value="{{ $rol->id_rol }}"
                                     {{ old('id_rol', $usuario->id_rol) == $rol->id_rol ? 'selected' : '' }}>
-                                    {{ $rol->nombre_rol }}</option>
+                                    {{ $rol->name }}</option>
                             @endforeach
                         </select>
                         @error('id_rol')
@@ -75,8 +75,11 @@
                             <option value="">Seleccionar estado</option>
                             <option value="activo" {{ old('estado', $usuario->estado) === 'activo' ? 'selected' : '' }}>
                                 Activo</option>
-                            <option value="inactivo"
-                                {{ old('estado', $usuario->estado) === 'inactivo' ? 'selected' : '' }}>Inactivo</option>
+                            <option value="suspendido"
+                                {{ old('estado', $usuario->estado) === 'suspendido' ? 'selected' : '' }}>Suspendido
+                            </option>
+                            <option value="eliminado"
+                                {{ old('estado', $usuario->estado) === 'eliminado' ? 'selected' : '' }}>Eliminado</option>
                         </select>
                         @error('estado')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

@@ -42,7 +42,7 @@ class AdminUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Password::defaults()],
             'id_rol' => 'required|exists:roles,id_rol',
-            'estado' => 'required|in:activo,inactivo',
+            'estado' => 'required|in:activo,suspendido,eliminado',
         ]);
 
         User::create([
@@ -69,9 +69,8 @@ class AdminUserController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id . ',id',
             'id_rol' => 'required|exists:roles,id_rol',
-            'estado' => 'required|in:activo,inactivo',
+            'estado' => 'required|in:activo,suspendido,eliminado',
         ]);
 
         $data = [
@@ -103,7 +102,7 @@ class AdminUserController extends Controller
             return redirect()->route('admin.usuarios.index')->with('error', 'No puedes desactivar tu propia cuenta.');
         }
 
-        $usuario->update(['estado' => 'inactivo']);
+        $usuario->update(['estado' => 'suspendido']);
         return redirect()->route('admin.usuarios.index')->with('success', 'Usuario desactivado correctamente.');
     }
 

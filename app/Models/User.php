@@ -118,11 +118,47 @@ class User extends Authenticatable
     }
 
     /**
+     * Verificar si el usuario está suspendido
+     * 
+     * @return bool
+     */
+    public function isSuspendido()
+    {
+        return $this->estado === 'suspendido';
+    }
+
+    /**
+     * Verificar si el usuario está eliminado
+     * 
+     * @return bool
+     */
+    public function isEliminado()
+    {
+        return $this->estado === 'eliminado';
+    }
+
+    /**
      * Scope para usuarios activos
      */
     public function scopeActivos($query)
     {
         return $query->where('estado', 'activo');
+    }
+
+    /**
+     * Scope para usuarios suspendidos
+     */
+    public function scopeSuspendidos($query)
+    {
+        return $query->where('estado', 'suspendido');
+    }
+
+    /**
+     * Scope para usuarios eliminados
+     */
+    public function scopeEliminados($query)
+    {
+        return $query->where('estado', 'eliminado');
     }
 
     /**

@@ -62,12 +62,17 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
                                         class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
-                                        {{ $usuario->rol->nombre_rol ?? '-' }}
+                                        {{ $usuario->rol->name ?? '-' }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $usuario->estado === 'activo' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                        class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
+                                        {{ $usuario->estado === 'activo'
+                                            ? 'bg-green-100 text-green-800'
+                                            : ($usuario->estado === 'suspendido'
+                                                ? 'bg-yellow-100 text-yellow-800'
+                                                : 'bg-red-100 text-red-800') }}">
                                         {{ ucfirst($usuario->estado) }}
                                     </span>
                                 </td>
@@ -77,13 +82,13 @@
                                             class="text-indigo-600 hover:text-indigo-900">Editar</a>
                                         @if ($usuario->estado === 'activo')
                                             <form action="{{ route('admin.usuarios.destroy', $usuario) }}" method="POST"
-                                                class="inline" onsubmit="return confirm('¿Desactivar este usuario?')">
+                                                class="inline" onsubmit="return confirm('¿Suspender este usuario?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="text-yellow-600 hover:text-yellow-900">Desactivar</button>
+                                                    class="text-yellow-600 hover:text-yellow-900">Suspender</button>
                                             </form>
-                                        @else
+                                        @elseif ($usuario->estado === 'suspendido')
                                             <form action="{{ route('admin.usuarios.activate', $usuario) }}" method="POST"
                                                 class="inline" onsubmit="return confirm('¿Activar este usuario?')">
                                                 @csrf
