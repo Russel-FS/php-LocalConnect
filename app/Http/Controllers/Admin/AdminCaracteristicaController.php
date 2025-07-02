@@ -51,7 +51,14 @@ class AdminCaracteristicaController extends Controller
     public function destroy($id)
     {
         $caracteristica = Caracteristica::findOrFail($id);
-        $caracteristica->delete();
-        return redirect()->route('admin.caracteristicas.index')->with('success', 'Característica eliminada correctamente.');
+        $caracteristica->update(['estado' => 'inactivo']);
+        return redirect()->route('admin.caracteristicas.index')->with('success', 'Característica desactivada correctamente.');
+    }
+
+    public function activate($id)
+    {
+        $caracteristica = Caracteristica::findOrFail($id);
+        $caracteristica->update(['estado' => 'activo']);
+        return redirect()->route('admin.caracteristicas.index')->with('success', 'Característica activada correctamente.');
     }
 }

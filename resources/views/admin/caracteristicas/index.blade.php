@@ -77,16 +77,29 @@
                                             class="text-indigo-600 hover:text-indigo-900">
                                             Editar
                                         </a>
-                                        <form
-                                            action="{{ route('admin.caracteristicas.destroy', $caracteristica->id_caracteristica) }}"
-                                            method="POST" class="inline"
-                                            onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta característica?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900">
-                                                Eliminar
-                                            </button>
-                                        </form>
+                                        @if ($caracteristica->estado === 'activo')
+                                            <form
+                                                action="{{ route('admin.caracteristicas.destroy', $caracteristica->id_caracteristica) }}"
+                                                method="POST" class="inline"
+                                                onsubmit="return confirm('¿Desactivar esta característica?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-yellow-600 hover:text-yellow-900">
+                                                    Desactivar
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form
+                                                action="{{ route('admin.caracteristicas.activate', $caracteristica->id_caracteristica) }}"
+                                                method="POST" class="inline"
+                                                onsubmit="return confirm('¿Activar esta característica?')">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="text-green-600 hover:text-green-900">
+                                                    Activar
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

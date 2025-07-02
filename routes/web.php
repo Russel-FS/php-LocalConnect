@@ -75,6 +75,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('categorias', \App\Http\Controllers\Admin\AdminCategoriaController::class);
     // Rutas de características
     Route::resource('caracteristicas', \App\Http\Controllers\Admin\AdminCaracteristicaController::class);
+    Route::patch('caracteristicas/{id}/activate', [\App\Http\Controllers\Admin\AdminCaracteristicaController::class, 'activate'])->name('caracteristicas.activate');
 });
 
 // Rutas para editar perfil y cambiar contraseña
