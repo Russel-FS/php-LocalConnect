@@ -27,8 +27,9 @@ class AdminServicioPredefinidoController extends Controller
             'id_categoria_servicio' => 'required|exists:categorias_servicio,id_categoria_servicio',
             'nombre_servicio' => 'required|string|max:100',
             'descripcion' => 'nullable|string|max:255',
+            'estado' => 'required|in:activo,inactivo',
         ]);
-        ServicioPredefinido::create($request->only('id_categoria_servicio', 'nombre_servicio', 'descripcion'));
+        ServicioPredefinido::create($request->only('id_categoria_servicio', 'nombre_servicio', 'descripcion', 'estado'));
         return redirect()->route('admin.servicios-predefinidos.index')->with('success', 'Servicio creado correctamente.');
     }
 
@@ -46,8 +47,9 @@ class AdminServicioPredefinidoController extends Controller
             'id_categoria_servicio' => 'required|exists:categorias_servicio,id_categoria_servicio',
             'nombre_servicio' => 'required|string|max:100',
             'descripcion' => 'nullable|string|max:255',
+            'estado' => 'required|in:activo,inactivo',
         ]);
-        $servicio->update($request->only('id_categoria_servicio', 'nombre_servicio', 'descripcion'));
+        $servicio->update($request->only('id_categoria_servicio', 'nombre_servicio', 'descripcion', 'estado'));
         return redirect()->route('admin.servicios-predefinidos.index')->with('success', 'Servicio actualizado correctamente.');
     }
 

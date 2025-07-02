@@ -27,6 +27,7 @@
                         <th class="py-3 px-2 font-normal">Nombre</th>
                         <th class="py-3 px-2 font-normal">Categoría</th>
                         <th class="py-3 px-2 font-normal">Descripción</th>
+                        <th class="py-3 px-2 font-normal">Estado</th>
                         <th class="py-3 px-2 font-normal">Acciones</th>
                     </tr>
                 </thead>
@@ -45,6 +46,12 @@
                                 @endif
                             </td>
                             <td class="py-3 px-2 text-slate-700">{{ $servicio->descripcion }}</td>
+                            <td class="py-3 px-2 text-xs">
+                                <span
+                                    class="inline-block px-3 py-1 rounded-full {{ $servicio->estado === 'activo' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
+                                    {{ ucfirst($servicio->estado) }}
+                                </span>
+                            </td>
                             <td class="py-3 px-2 flex gap-2">
                                 <a href="{{ route('admin.servicios-predefinidos.edit', $servicio->id_servicio_predefinido) }}"
                                     class="px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 text-xs font-semibold">Editar</a>
@@ -60,7 +67,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="py-8 text-center text-slate-400">No hay servicios registrados.</td>
+                            <td colspan="5" class="py-8 text-center text-slate-400">No hay servicios registrados.</td>
                         </tr>
                     @endforelse
                 </tbody>

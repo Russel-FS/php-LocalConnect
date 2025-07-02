@@ -14,6 +14,7 @@ class ServicioPredefinido extends Model
         'id_categoria_servicio',
         'nombre_servicio',
         'descripcion',
+        'estado',
     ];
 
     /**

@@ -36,6 +36,16 @@
                     <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
                 @enderror
             </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Estado</label>
+                <select name="estado" class="w-full border rounded-lg px-4 py-2" required>
+                    <option value="activo" {{ old('estado') == 'activo' ? 'selected' : '' }}>Activo</option>
+                    <option value="inactivo" {{ old('estado') == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
+                </select>
+                @error('estado')
+                    <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 
             <div class="flex justify-end gap-2">
                 <a href="{{ route('admin.servicios-predefinidos.index') }}"
