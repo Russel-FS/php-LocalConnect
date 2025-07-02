@@ -490,7 +490,7 @@
                         </a>
                     </div>
                 @else
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 py-10">
                         @foreach ($negocios as $negocio)
                             <div
                                 class="fade-in-card group bg-white rounded-2xl  transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex flex-col p-0">
