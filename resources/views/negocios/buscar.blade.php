@@ -512,11 +512,6 @@
                                                 class="h-12 w-12 text-primary-400 group-hover:text-primary-500 transition-colors duration-300" />
                                         </div>
                                     @endif
-                                    <!-- Badge Promo -->
-                                    @if ($negocio->promociones && $negocio->promociones->count() > 0)
-                                        <span
-                                            class="absolute top-4 left-4 bg-pink-100 text-pink-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">Promo</span>
-                                    @endif
                                     <!-- Estado de verificación -->
                                     <span
                                         class="absolute top-4 right-4 badge-minimal {{ $negocio->verificado ? 'badge-aprobado' : '' }} bg-white/80 backdrop-blur-sm shadow-sm">
@@ -524,7 +519,29 @@
                                     </span>
                                 </div>
                                 <!-- Contenido principal -->
-                                <div class="flex-1 flex flex-col px-6 pt-6 pb-4">
+                                @php
+                                    $promoActiva = false;
+                                    if ($negocio->promociones && $negocio->promociones->count() > 0) {
+                                        $hoy = \Carbon\Carbon::now();
+                                        foreach ($negocio->promociones as $promo) {
+                                            $inicio = \Carbon\Carbon::parse($promo->fecha_inicio);
+                                            $fin = \Carbon\Carbon::parse($promo->fecha_fin);
+                                            if ($hoy->between($inicio, $fin)) {
+                                                $promoActiva = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                @endphp
+                                <div class="flex-1 flex flex-col px-6 pt-6 pb-4 relative">
+                                    @if ($promoActiva)
+                                        <span class="absolute top-4 right-4 z-10">
+                                            <span
+                                                class="inline-flex items-center justify-center w-9 h-9 rounded-full shadow-lg border-2 border-pink-200 bg-gradient-to-br from-pink-50 to-pink-100">
+                                                <x-icons.content.promo class="w-6 h-6 text-red-500" />
+                                            </span>
+                                        </span>
+                                    @endif
                                     <div class="flex items-center gap-2 mb-2">
                                         <!-- Avatar inicial usuario -->
                                         <div
