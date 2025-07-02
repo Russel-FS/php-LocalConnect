@@ -166,7 +166,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!-- Características -->
                                         <div class="relative" x-data="{ open: false }">
                                             <button type="button"
@@ -205,7 +204,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!-- Servicios -->
                                         <div class="relative" x-data="{ open: false }">
                                             <button type="button"
@@ -243,17 +241,16 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!-- Botones de acción -->
-                                        <div class="flex gap-2">
+                                        <div class="flex gap-2 ml-2">
                                             <button type="submit"
-                                                class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors duration-200 rounded-lg hover:bg-primary-50">
-                                                <x-icons.actions.filter class="w-4 h-4" />
+                                                class="flex items-center gap-2 px-6 py-2.5 text-base font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-full shadow transition-all duration-200">
+                                                <x-icons.actions.filter class="w-5 h-5" />
                                                 Aplicar
                                             </button>
                                             <a href="{{ route('negocios.buscar') }}"
-                                                class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200 rounded-lg hover:bg-gray-50">
-                                                <x-icons.actions.refresh class="w-4 h-4" />
+                                                class="flex items-center gap-2 px-6 py-2.5 text-base font-semibold text-primary-600 bg-white border border-primary-200 hover:bg-primary-50 rounded-full shadow transition-all duration-200">
+                                                <x-icons.actions.refresh class="w-5 h-5" />
                                                 Limpiar
                                             </a>
                                         </div>
@@ -278,9 +275,9 @@
                             </span>
                         </div>
 
-                        <!-- Filtros activos -->
+                        <!-- Chips de filtros activos -->
                         @if (request('categorias') || request('caracteristicas') || request('servicios'))
-                            <div class="flex flex-wrap gap-2 justify-start pt-4 border-t border-gray-100">
+                            <div class="flex flex-wrap gap-2 justify-start pt-4">
                                 @if (request('categorias'))
                                     @foreach (request('categorias') as $categoriaId)
                                         @php
@@ -288,8 +285,8 @@
                                         @endphp
                                         @if ($categoria)
                                             <span
-                                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-primary-100 text-primary-700 text-xs font-medium rounded-full border border-primary-200">
-                                                <x-icons.content.category class="w-3 h-3" />
+                                                class="inline-flex items-center gap-1 px-4 py-1.5 bg-primary-100 text-primary-700 text-sm font-medium rounded-full border border-primary-200 shadow-sm">
+                                                <x-icons.content.category class="w-4 h-4" />
                                                 {{ $categoria->nombre_categoria }}
                                                 <a href="{{ route('negocios.buscar', array_merge(request()->except('categorias'), ['categorias' => array_diff(request('categorias', []), [$categoriaId])])) }}"
                                                     class="ml-1 hover:text-primary-900 transition-colors duration-200">×</a>
@@ -297,7 +294,6 @@
                                         @endif
                                     @endforeach
                                 @endif
-
                                 @if (request('caracteristicas'))
                                     @foreach (request('caracteristicas') as $caracteristicaId)
                                         @php
@@ -305,8 +301,8 @@
                                         @endphp
                                         @if ($caracteristica)
                                             <span
-                                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary-100 text-secondary-700 text-xs font-medium rounded-full border border-secondary-200">
-                                                <x-icons.content.check-circle class="w-3 h-3" />
+                                                class="inline-flex items-center gap-1 px-4 py-1.5 bg-secondary-100 text-secondary-700 text-sm font-medium rounded-full border border-secondary-200 shadow-sm">
+                                                <x-icons.content.check-circle class="w-4 h-4" />
                                                 {{ $caracteristica->nombre }}
                                                 <a href="{{ route('negocios.buscar', array_merge(request()->except('caracteristicas'), ['caracteristicas' => array_diff(request('caracteristicas', []), [$caracteristicaId])])) }}"
                                                     class="ml-1 hover:text-secondary-900 transition-colors duration-200">×</a>
@@ -314,7 +310,6 @@
                                         @endif
                                     @endforeach
                                 @endif
-
                                 @if (request('servicios'))
                                     @foreach (request('servicios') as $servicioId)
                                         @php
@@ -322,8 +317,8 @@
                                         @endphp
                                         @if ($servicio)
                                             <span
-                                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary-100 text-secondary-700 text-xs font-medium rounded-full border border-secondary-200">
-                                                <x-icons.content.lightning class="w-3 h-3" />
+                                                class="inline-flex items-center gap-1 px-4 py-1.5 bg-secondary-100 text-secondary-700 text-sm font-medium rounded-full border border-secondary-200 shadow-sm">
+                                                <x-icons.content.lightning class="w-4 h-4" />
                                                 {{ $servicio->nombre_servicio }}
                                                 <a href="{{ route('negocios.buscar', array_merge(request()->except('servicios'), ['servicios' => array_diff(request('servicios', []), [$servicioId])])) }}"
                                                     class="ml-1 hover:text-secondary-900 transition-colors duration-200">×</a>
