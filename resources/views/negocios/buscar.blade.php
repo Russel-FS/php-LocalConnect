@@ -537,8 +537,9 @@
                                     @if ($promoActiva)
                                         <span class="absolute top-4 right-4 z-10">
                                             <span
-                                                class="inline-flex items-center justify-center w-9 h-9 rounded-full shadow-lg border-2 border-pink-200 bg-gradient-to-br from-pink-50 to-pink-100">
-                                                <x-icons.content.promo class="w-6 h-6 text-red-500" />
+                                                class="inline-flex items-center justify-center w-9 h-9 rounded-full shadow-lg border-2 border-pink-200 bg-gradient-to-br from-pink-100 to-pink-200"
+                                                title="Este negocio tiene una promoción activa">
+                                                <x-icons.content.promo class="w-6 h-6 text-pink-500" />
                                             </span>
                                         </span>
                                     @endif
