@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
 
 // rutas públicas para ver negocios
 Route::get('/negocios/buscar', [NegocioPublicoController::class, 'buscar'])->name('negocios.buscar');
-Route::get('/negocios/sugerencias', [NegocioPublicoController::class, 'sugere   ncias'])->name('negocios.sugerencias');
+Route::get('/negocios/sugerencias', [NegocioPublicoController::class, 'sugerencias'])->name('negocios.sugerencias');
 Route::get('/negocios/sugerencias-busqueda', [NegocioPublicoController::class, 'sugerenciasBusqueda'])->name('negocios.sugerencias.busqueda');
 Route::get('/negocios/{id}', [NegocioPublicoController::class, 'mostrar'])->name('negocios.mostrar');
 
@@ -81,6 +81,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Rutas de categorías de características
     Route::resource('categorias-caracteristica', \App\Http\Controllers\Admin\AdminCategoriaCaracteristicaController::class)->names('categorias-caracteristica');
     Route::patch('categorias-caracteristica/{id}/activate', [\App\Http\Controllers\Admin\AdminCategoriaCaracteristicaController::class, 'activate'])->name('categorias-caracteristica.activate');
+
+    // Rutas de usuarios
+    Route::resource('usuarios', \App\Http\Controllers\Admin\AdminUserController::class);
+    Route::patch('usuarios/{id}/activate', [\App\Http\Controllers\Admin\AdminUserController::class, 'activate'])->name('usuarios.activate');
 });
 
 // Rutas para editar perfil y cambiar contraseña
