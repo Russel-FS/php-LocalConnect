@@ -33,7 +33,7 @@ class NegocioService
         $validator = Validator::make($data, [
             'nombre_negocio' => 'required|string|max:100',
             'descripcion_negocio' => 'required|string|max:500',
-            'imagen_portada' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'imagen_portada' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
 
             // Ubicación
             'direccion' => 'required|string|max:255',

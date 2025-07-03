@@ -16,7 +16,7 @@
             </div>
 
             <div class="bg-white rounded-lg shadow p-6">
-                <form action="{{ route('admin.categorias.store') }}" method="POST">
+                <form action="{{ route('admin.categorias.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-6">
@@ -45,6 +45,19 @@
                     </div>
 
                     <div class="mb-6">
+                        <label for="img_url" class="block text-sm font-medium text-gray-700 mb-2">
+                            Imagen de la Categoría
+                        </label>
+                        <input type="file" name="img_url" id="img_url" accept="image/*"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('img_url') border-red-500 @enderror">
+                        <p class="mt-1 text-sm text-gray-500">Formatos permitidos: JPEG, PNG, JPG, GIF, WEBP. Máximo 2MB.
+                        </p>
+                        @error('img_url')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="mb-6">
                         <label for="estado" class="block text-sm font-medium text-gray-700 mb-2">
                             Estado *
                         </label>
@@ -53,7 +66,10 @@
                             required>
                             <option value="">Seleccionar estado</option>
                             <option value="activo" {{ old('estado') === 'activo' ? 'selected' : '' }}>Activo</option>
-                            <option value="inactivo" {{ old('estado') === 'inactivo' ? 'selected' : '' }}>Inactivo</option>
+                            <option value="suspendido" {{ old('estado') === 'suspendido' ? 'selected' : '' }}>Suspendido
+                            </option>
+                            <option value="eliminado" {{ old('estado') === 'eliminado' ? 'selected' : '' }}>Eliminado
+                            </option>
                         </select>
                         @error('estado')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
