@@ -199,41 +199,57 @@
 
     <!-- Sección de Categorías -->
     @if ($categorias->count() > 0)
-        <section class="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-secondary-50 to-white">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12 sm:mb-16">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-700 mb-4">
-                        Explora por Categorías
+        <section class="py-20 sm:py-24 lg:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 sm:mb-20">
+                    <h2 class="text-4xl sm:text-5xl lg:text-6xl font-light text-gray-900 mb-6 tracking-tight">
+                        Explora por <span class="font-medium text-primary-600">Categorías</span>
                     </h2>
-                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         Descubre negocios organizados por categorías para encontrar exactamente lo que necesitas
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
                     @foreach ($categorias as $categoria)
                         <a href="{{ route('negocios.buscar', ['categorias[]' => $categoria->id_categoria]) }}"
-                            class="group block">
+                            class="group relative block">
                             <div
-                                class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 hover:border-secondary-200">
-                                <div class="aspect-square overflow-hidden">
+                                class="relative overflow-hidden rounded-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 ease-out group-hover:-translate-y-2">
+                                <!-- Imagen con overlay sutil -->
+                                <div class="aspect-[4/3] overflow-hidden">
                                     <img src="{{ $categoria->img_url }}" alt="{{ $categoria->nombre_categoria }}"
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                        class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110">
+                                    <!-- Overlay sutil -->
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    </div>
                                 </div>
-                                <div class="p-4 text-center">
+
+                                <!-- Contenido -->
+                                <div class="p-6">
                                     <h3
-                                        class="font-semibold text-primary-700 group-hover:text-secondary-600 transition-colors">
+                                        class="text-xl font-medium text-gray-900 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
                                         {{ $categoria->nombre_categoria }}
                                     </h3>
+                                    <div
+                                        class="mt-3 flex items-center text-gray-500 group-hover:text-primary-500 transition-colors duration-300">
+                                        <span class="text-sm">Explorar negocios</span>
+                                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </a>
                     @endforeach
                 </div>
 
-                <div class="text-center mt-8">
+                <div class="text-center mt-16">
                     <a href="{{ route('negocios.buscar') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-secondary-600 text-white rounded-full font-medium hover:bg-secondary-700 transition-colors">
+                        class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-2xl font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg">
                         <x-icons.navigation.search class="w-5 h-5" />
                         Ver todas las categorías
                     </a>
