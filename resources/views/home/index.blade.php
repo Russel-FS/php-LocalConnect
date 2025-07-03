@@ -409,7 +409,7 @@
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar"
                             class="w-16 h-16 rounded-2xl object-cover mr-4">
                         <div>
-                            <h4 class="font-semibold text-gray-900 text-lg">Palacios Sahel</h4>
+                            <h4 class="font-semibold text-gray-900 text-lg">Fuertes Betzabet</h4>
                             <div class="flex items-center mt-1">
                                 <div class="flex text-yellow-400">
                                     <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -450,7 +450,7 @@
                         <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Avatar"
                             class="w-16 h-16 rounded-2xl object-cover mr-4">
                         <div>
-                            <h4 class="font-semibold text-gray-900 text-lg">Fuertes Betzabet</h4>
+                            <h4 class="font-semibold text-gray-900 text-lg">Guillermo Mallca</h4>
                             <div class="flex items-center mt-1">
                                 <div class="flex text-yellow-400">
                                     <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
