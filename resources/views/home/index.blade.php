@@ -197,6 +197,51 @@
         </div>
     </section>
 
+    <!-- Sección de Categorías -->
+    @if ($categorias->count() > 0)
+        <section class="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-secondary-50 to-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-700 mb-4">
+                        Explora por Categorías
+                    </h2>
+                    <p class="text-lg text-primary-500 max-w-2xl mx-auto">
+                        Descubre negocios organizados por categorías para encontrar exactamente lo que necesitas
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                    @foreach ($categorias as $categoria)
+                        <a href="{{ route('negocios.buscar', ['categorias[]' => $categoria->id_categoria]) }}"
+                            class="group block">
+                            <div
+                                class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 hover:border-secondary-200">
+                                <div class="aspect-square overflow-hidden">
+                                    <img src="{{ $categoria->img_url }}" alt="{{ $categoria->nombre_categoria }}"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div class="p-4 text-center">
+                                    <h3
+                                        class="font-semibold text-primary-700 group-hover:text-secondary-600 transition-colors">
+                                        {{ $categoria->nombre_categoria }}
+                                    </h3>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+
+                <div class="text-center mt-8">
+                    <a href="{{ route('negocios.buscar') }}"
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-secondary-600 text-white rounded-full font-medium hover:bg-secondary-700 transition-colors">
+                        <x-icons.navigation.search class="w-5 h-5" />
+                        Ver todas las categorías
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
+
     <!-- Sección de beneficios -->
     <section id="por-que" class="py-16 sm:py-20 lg:py-24 bg-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
